@@ -1,0 +1,30 @@
+name: research-checks
+
+on:
+  push:
+    branches:
+      - main
+      - agent/frontier-program-v0
+  pull_request:
+
+jobs:
+  python-oracles:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: ABA type-space oracle
+        run: python experiments/aba_types.py
+      - name: ABA ocLTL projection fibers
+        run: python experiments/aba_ocltl_fibers.py
+      - name: ABA atomic group testing
+        run: python experiments/aba_group_testing.py
+      - name: ABA support ROBDD projection
+        run: python experiments/aba_support_bdd.py
+      - name: ABA ocLTL feasibility ROBDD
+        run: python experiments/aba_ocltl_feasibility_bdd.py
+      - name: ABA closed-form clause projection
+        run: python experiments/aba_clause_projection.py
