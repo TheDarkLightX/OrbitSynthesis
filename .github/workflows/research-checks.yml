@@ -28,3 +28,5 @@ jobs:
         run: python experiments/aba_ocltl_feasibility_bdd.py
       - name: ABA closed-form clause projection
         run: python experiments/aba_clause_projection.py
+      - name: ABA alternating clause quantifier elimination
+        run: python experiments/aba_alternating_clause_qe.py
