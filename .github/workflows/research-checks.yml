@@ -26,3 +26,14 @@ jobs:
         run: python experiments/aba_clause_projection.py
       - name: ABA alternating clause quantifier elimination
         run: python experiments/aba_alternating_clause_qe.py
+
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          test: false
+          use-mathlib-cache: true
+          build-args: "--wfail"
