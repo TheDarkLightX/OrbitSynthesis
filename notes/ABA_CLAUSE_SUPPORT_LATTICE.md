@@ -1,32 +1,25 @@
 # ABA clause regions as canonical upward-closed support families
 
-**Status:** DERIVED finite support characterization; standard monotone-Boolean / hypergraph blocker duality is used and not claimed novel. The relevance is to identify the exact semantic carrier preserved by the ABA clause safety recurrence.
+**Status:** DERIVED finite support characterization; corrected after whole-fixed-point differential testing exposed the special role of the forbidden empty support. Standard monotone-Boolean / hypergraph blocker duality is used and not claimed novel.
 
-## 1. Support universe
+## 1. Support universe and implicit nonemptiness
 
 Fix k Boolean-algebra variables and let
 
-`U={0,1}^k`
+`U={0,1}^k`, `|U|=2^k`.
 
-be their n=`2^k` Venn-cell labels.
+A complete ABA k-type is a **nonempty** support `S subseteq U`.
 
-A complete ABA k-type is a nonempty support
-
-`S subseteq U`.
-
-A normalized ABA clause
+A normalized clause
 
 `f=0 AND AND_i g_i!=0`
 
 has support semantics
 
 `R(A;H)
- = { nonempty S subseteq A : S intersects H for every H in H }`,
+ = { empty != S subseteq A : S intersects H for every H in H }`.
 
-where
-
-- A is the complement of the minterm support of f;
-- H is the family of minterm supports of the inequation terms, restricted to A.
+The nonemptiness condition is part of complete-type semantics, not normally stored as an inequation. This matters for canonicalization and hypergraph duality.
 
 ## 2. Exact semantic characterization
 
@@ -44,49 +37,53 @@ it is upward closed inside A:
 
 `S in F and S subseteq T subseteq A  ==>  T in F`.
 
-### Proof: clause to upset
+### Clause to upset
 
-If `S in R(A;H)` and `S subseteq T subseteq A`, then every hit witnessed by S is also witnessed by T. Thus T satisfies the same clause.
+Adding allowed cells cannot destroy an already witnessed inequation, so every clause region is upward closed within A.
 
-### Proof: upset to clause
+### Upset to clause
 
-Let
+Consider only **valid nonempty supports**. Let
 
-`L := P(A) \ F`
+`L_valid := (P(A) \ {empty}) \ F`.
 
-be the losing support family. Because F is upward closed, L is downward closed.
+This is downward closed inside the nonempty support poset.
 
-Let
+Let `MaxLose(F)` be its inclusion-maximal elements. For every M in MaxLose(F), define
 
-`MaxLose(F)`
+`H_M := A \ M`.
 
-be the inclusion-maximal elements of L. Since F is nonempty, A itself is winning and no maximal losing set equals A.
+Because M is nonempty and M!=A, each H_M is a proper nonempty subset of A.
 
-For each maximal losing set M define
+A valid support S is winning iff it is not contained in any maximal losing support, equivalently iff
 
-`H_M := A \ M`,
+`S intersects H_M != empty`
 
-which is nonempty.
-
-Then a nonempty support S contained in A is winning iff it is not contained in any losing maximal set M, iff
-
-`S intersects (A\M) != empty`
-
-for every M in `MaxLose(F)`.
-
-Thus
+for every M. Hence
 
 `F = R(A; {A\M : M in MaxLose(F)}).`
 
-Every subset of U is the minterm support of some Boolean term, so these hit sets are represented by ordinary ABA inequations.
+If there are no valid losing supports, F is simply every nonempty subset of A and no explicit hit is needed.
 
-## 3. Unique prime hit antichain
+## 3. The tautological full hit
 
-The maximal losing supports form an antichain. Taking complements inside A reverses inclusion, so
+A candidate hit
 
-`PrimeHit(F) := { A\M : M in MaxLose(F) }`
+`H=A`
 
-is also an antichain.
+is always true on the semantic domain because every valid S is nonempty and contained in A.
+
+Therefore it is **not** a prime explicit inequation constraint and must be deleted during canonicalization.
+
+This is the bug found by the end-to-end fixed-point checker: retaining H=A preserves the denoted region but makes the representation noncanonical and can delay syntactic fixed-point equality.
+
+## 4. Unique explicit prime-hit antichain
+
+Define
+
+`PrimeHit(F) := {A\M : M in MaxLose(F)}`.
+
+These are proper nonempty subsets of A and form an antichain.
 
 ### Theorem 2
 
@@ -94,129 +91,121 @@ For nonempty F, the pair
 
 `(A, PrimeHit(F))`
 
-is the unique irredundant equation-plus-positive-hit CNF representation of F at the support level.
+is the unique irredundant **nontrivial explicit** positive-hit CNF representation on the domain of complete supports.
 
 Equivalently:
 
-- A is uniquely recovered as `union F`;
-- each prime hit set is uniquely the complement of one maximal losing support.
+- `A=union F`;
+- maximal valid losing supports are unique;
+- each explicit prime hit is their complement inside A.
 
-This justifies canonical equality testing of clause regions by comparing A and the sorted inclusion-minimal hit antichain.
+## 5. Restoring ordinary hypergraph duality with one implicit edge
 
-## 4. Dual minimal-winning representation
+Standard hypergraph blocker/transversal duality works over all subsets, including the empty set. Our semantic domain excludes empty support.
 
-Let
+To use the standard theory without distortion, define the **augmented hit hypergraph**
 
-`MinWin(F)`
+`Hbar(F) := PrimeHit(F) union {A}`.
 
-be the inclusion-minimal supports in F.
+The added edge A is not an explicit inequation: it encodes the implicit axiom `S!=empty`.
 
-Because F is upward closed, it is also uniquely determined by this antichain:
+Now the inclusion-minimal winning supports are exactly the ordinary minimal transversals:
 
-`F = { T subseteq A : exists W in MinWin(F), W subseteq T }.`
+`MinWin(F) = Tr(Hbar(F)).`
 
-The two canonical antichains are transversal/blocker duals:
+Conversely, for the Sperner clutter Hbar,
 
-`MinWin(F) = Tr(PrimeHit(F))`
+`Hbar(F) = Tr(MinWin(F))`.
 
-and, for the Sperner hypergraph `PrimeHit(F)`,
+Recover the explicit prime-hit representation by deleting the distinguished implicit edge A.
 
-`PrimeHit(F) = Tr(MinWin(F))`.
+### Top-region example
 
-Here `Tr(H)` denotes the family of inclusion-minimal hitting sets (minimal transversals) of H.
+If F is every nonempty subset of A, then
 
-Thus every clause region has two dual extremal descriptions:
+`PrimeHit(F)=empty`
 
-1. **prime-hit CNF:** what every support must hit;
-2. **minimal-winning DNF:** which minimal supports suffice to win.
+but
 
-## 5. Maximal-losing representation
+`Hbar(F)={A}`.
 
-A third equivalent antichain is
+Its minimal transversals are exactly the singleton subsets of A, which are indeed the minimal complete supports in the top region.
 
-`MaxLose(F) = { A\H : H in PrimeHit(F) }`.
+This is why applying blocker duality directly to the empty explicit hit family was incorrect.
 
-This can be useful when losing supports are structurally simpler than hit sets.
+## 6. Three equivalent extremal views
 
-The semantic test is
+Every nonempty clause region therefore has:
 
-`S in F iff S subseteq A and for every M in MaxLose(F), S not subseteq M`.
+1. **PrimeHit(F):** nontrivial support sets every winning type must hit;
+2. **MaxLose(F):** maximal valid losing supports, with `MaxLose={A\H : H in PrimeHit}`;
+3. **MinWin(F):** minimal winning supports, the transversals of `PrimeHit union {A}`.
 
-## 6. Representation portfolio
+These antichains can differ greatly in size.
 
-The three canonical antichains can have very different sizes.
+## 7. Representation portfolio
 
-A solver should not assume one is always best:
+- Prime hits are natural for `ABA_CLAUSE_SAFETY_RECURRENCE.md`, because each hit propagates independently under P.
+- Maximal losers are natural for falsifiers and exclusion witnesses.
+- Minimal winners may be useful for concrete witness enumeration.
 
-- prime hits are natural for `ABA_CLAUSE_SAFETY_RECURRENCE.md` because predecessor transports each hit independently;
-- minimal winners may be better for witness search or enumeration;
-- maximal losers may be better for counterexample generation and exclusion checks.
+Switching from prime hits to minimal winners is hypergraph transversal/dualization and can be expensive, so a portfolio solver needs a cost model rather than unconditional conversion.
 
-Converting prime hits to minimal winners is the classical hypergraph transversal/dualization problem and can itself be expensive. Representation switching therefore needs a cost model; it is not a free optimization.
+## 8. Monotone Boolean function view
 
-## 7. Relation to monotone Boolean functions
+Fix A and introduce support variables z_a.
 
-Fix A. Introduce support variables `z_a` for `a in A`.
+The explicit clause is
 
-The region is the monotone CNF
+`AND_{H in PrimeHit(F)} OR_{a in H} z_a`,
 
-`AND_{H in PrimeHit(F)} OR_{a in H} z_a`.
+but it is interpreted together with the implicit nonemptiness clause
 
-Its minimal true assignments are `MinWin(F)`.
+`OR_{a in A} z_a`.
 
-Therefore clause regions over a fixed A are exactly monotone Boolean functions on the support bits, excluding the all-zero support when necessary.
+Thus clause regions are exactly monotone Boolean functions on the **nonzero** support assignments, together with the allowed-variable restriction A.
 
-This explains both:
+This explains both the antichain representation and its worst-case size.
 
-- why antichains are the correct finite representation; and
-- why worst-case compression cannot be guaranteed: arbitrary monotone Boolean functions can have very large prime or minimal-model antichains.
+## 9. Dedekind/Sperner warning
 
-## 8. Dedekind/Sperner warning
-
-For n=|A| support bits, the number of possible upward-closed families is the Dedekind-number scale: the same combinatorial universe as monotone Boolean functions.
-
-A largest single antichain has size
+For n=|A|, upward-closed support families live at the Dedekind-number scale. A largest antichain has
 
 `binom(n, floor(n/2))`
 
-by Sperner's theorem.
+members by Sperner's theorem.
 
-Since n=`2^k`, this can already be enormous as a function of BA arity k.
+Since n=`2^k`, exact clause representations can be enormous in k. The direct backend is a structural/parameterized method, not a universal succinctness theorem.
 
-Thus the hypergraph carrier is semantically exact but not universally succinct.
+## 10. Why the reactive recurrence is still special
 
-## 9. Why the safety recurrence is special despite this worst case
-
-`ABA_CLAUSE_SAFETY_RECURRENCE.md` does not manipulate an arbitrary monotone Boolean function by generic Boolean operations.
-
-Its prime-hit recurrence is structured:
+The safety backend does not apply arbitrary monotone-Boolean transformations. It has the structured recurrence
 
 `A_(t+1)=P(A_t)`
 
 and
 
-`H_(t+1)=Min( J(A_t) union P[H_t] )`.
+`H_(t+1)=CanonHits(P(A_t), J(A_t) union P[H_t]).`
 
-Each old prime hit is transported independently by the same finite cube predecessor P; transition inequations inject only q new candidate hits per iteration before subsumption.
+Each old prime hit is transported independently by one finite cube predecessor P; q transition inequations inject only q candidates per iteration before tautology deletion and subsumption.
 
-That additional dynamical structure is the place to seek parameterized bounds beyond generic Dedekind/Sperner worst cases.
+That dynamical restriction is the right place to seek practical or parameterized bounds.
 
-## 10. Connection to established antichain algorithms
+## 11. Established antichain methods
 
-Antichain representations are standard in verification, automata, and games when winning/configuration sets are monotone under a partial order. Recent work also combines antichains with SAT and efficient subset/subsumption data structures.
+Antichains are standard in monotone verification/games, and modern implementations combine them with SAT, tries, and subsumption. OrbitSynthesis should reuse those techniques.
 
-OrbitSynthesis should import those implementation techniques rather than claim antichains themselves as a contribution.
+The candidate contribution here is not antichains themselves but the ABA-specific support semantics and predecessor transform that land exactly in this lattice.
 
-The ABA-specific contribution candidate is the derivation that normalized ABA clauses land exactly in this support-upset lattice and that the reactive predecessor has the closed support-hypergraph transform proved in the companion notes.
+## 12. Useful canonical operations
 
-## 11. Useful implementation operations
+For explicit PrimeHit:
 
-For the prime-hit representation:
+- restrict every hit to A;
+- empty hit => empty region;
+- hit equal to A => delete as implicit-nonemptiness tautology;
+- remove duplicates;
+- remove supersets of smaller hits;
+- compare canonical A and sorted hit antichain for semantic equality.
 
-- membership: subset-of-A plus one intersection test per hit;
-- implication/inclusion between regions: monotone-CNF subsumption tests;
-- canonicalization: remove duplicate and inclusion-nonminimal hits;
-- counterexample support: use a maximal losing set A\H when one prime clause is violated;
-- witness minimization: compute minimal transversals only on demand.
-
-For large antichains, import trie/SAT/ZDD techniques rather than storing naive Python/C++ vectors.
+When hypergraph duality is needed, temporarily add the implicit edge A, perform standard blocker/transversal operations, then remove A again from the explicit prime-hit side.
