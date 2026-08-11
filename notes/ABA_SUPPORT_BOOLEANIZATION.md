@@ -1,6 +1,6 @@
 # Support Booleanization of atomless Boolean algebra
 
-**Status:** DERIVED semantic translation for the pure ABA signature `{0,1,meet,join,complement}`; prototype implementation pending in this branch; Lean pending.
+**Status:** DERIVED semantic translation; dependency-free ROBDD prototype implemented and differentially checked for small arities; interpreted-constant extension derived in `ABA_INTERPRETED_CONSTANTS.md`; Lean pending.
 
 This note gives a symbolic alternative to explicit complete-type enumeration and to DNF-first quantifier elimination.
 
@@ -117,46 +117,59 @@ Equivalently use negation plus existential abstraction.
 
 ## 5. Consequence: an alternative quantifier-elimination engine
 
-For the pure ABA theory:
+For atomless Boolean algebra:
 
 1. compile a quantifier-free matrix to a Boolean DAG over support bits;
 2. eliminate an innermost BA variable by conjoining the local `Ext_k` relation and existentially abstracting the fine bits;
 3. repeat outward;
 4. retain the resulting Boolean DAG instead of expanding it into a BA formula unless a textual formula is required.
 
-This is exact because every nonzero support assignment is realizable and every extension satisfying the local OR constraints is realizable.
+This is exact because every valid support assignment is realizable and every extension satisfying the local OR constraints is realizable.
 
 Asor's GS presentation eliminates an existential after first converting the formula under that quantifier to logical DNF and then processing clauses (`Guarded Successor`, §2.2). The support-Booleanization route is therefore a genuinely different **representation strategy**, even though it computes the same first-order semantics.
 
 It should be compared experimentally rather than assumed superior.
 
-## 6. Why BDD/ZDD style representations are natural here
+## 6. The extension relation is provably compact as an ROBDD
 
-The support translation has unusually local structure:
+Under the local interleaved variable order
 
-- an atomic equation is a conjunction of negated support bits;
-- an atomic inequation is a disjunction of support bits;
-- the extension relation factors as one three-variable constraint per coarse cell;
-- Boolean connectives are native symbolic operations;
-- quantification is Boolean existential abstraction;
-- equality of reduced canonical Boolean representations gives a direct fixed-point stopping test.
+`z_1,w_10,w_11,z_2,w_20,w_21,...`,
 
-Classical symbolic model checking uses BDDs precisely to avoid explicit state enumeration and to compute temporal fixed points symbolically. Burch-Clarke-McMillan-Dill-Hwang (LICS 1990 / Information and Computation 1992) established this paradigm for finite-state systems.
+the reduced ordered BDD for an extension relation with `n` coarse cells has exactly
 
-OrbitSynthesis's new question is whether the ABA support translation produces BDD variable orderings and transition relations compact enough to make that technology effective for Tau-style infinite-data synthesis.
+`5n`
+
+nonterminal nodes. For `k` retained BA variables, `n=2^k`, so this is exactly
+
+`5*2^k`.
+
+See `ABA_EXTENSION_ROBDD.md` for the structural proof.
+
+This is significant because the support translation has the same primitives used in classical symbolic fixed-point algorithms:
+
+- Boolean connectives;
+- a compact relation;
+- existential abstraction;
+- canonical equality for fixed-point stopping.
+
+Classical symbolic model checking uses BDDs precisely to avoid explicit state enumeration and compute temporal fixed points symbolically. Burch-Clarke-McMillan-Dill-Hwang (LICS 1990) is the classical reference.
+
+The theorem only proves compactness of **the ABA extension relation**. It does not imply that an arbitrary specification or fixed-point iterate has a small BDD.
 
 ## 7. State-space comparison
 
 For `k` BA variables:
 
 - explicit complete types: `2^(2^k)-1` states;
-- support-symbolic representation: `2^k` Boolean support variables.
+- support-symbolic representation: `2^k` Boolean support variables;
+- one-variable extension ROBDD: exactly `5*2^k` nonterminal nodes.
 
 Examples:
 
-- `k=3`: 255 types versus 8 support variables;
-- `k=4`: 65,535 types versus 16 support variables;
-- `k=5`: 4,294,967,295 types versus 32 support variables.
+- `k=3`: 255 types versus 8 support variables and a 40-node extension ROBDD;
+- `k=4`: 65,535 types versus 16 support variables and an 80-node extension ROBDD;
+- `k=5`: 4,294,967,295 types versus 32 support variables and a 160-node extension ROBDD.
 
 A Boolean function of 32 variables can of course still require an enormous BDD in the worst case. The comparison is a representation opportunity, not a polynomial-time theorem.
 
@@ -166,7 +179,7 @@ Suppose a safety winning region is represented by a support-level Boolean functi
 
 `CPre(W)(state) = forall input. exists output,next. Step(...) AND W(next)`.
 
-Under support Booleanization, the BA quantifiers can be compiled into repeated local extension relations and propositional abstraction. The next winning approximation is therefore another Boolean function over state-support bits.
+Under support Booleanization, BA quantifiers can be compiled into repeated local extension relations and propositional abstraction. The next winning approximation is therefore another Boolean function over state-support bits.
 
 The greatest fixed point can be computed symbolically until the canonical representation stops changing.
 
@@ -179,13 +192,48 @@ It avoids both:
 - explicit enumeration of all complete types; and
 - mandatory materialization of logical DNF at each ABA quantifier.
 
-## 9. What must be tested before promotion
+## 9. Interpreted constants: the extension is now derived
+
+Asor's fixed-BA setting equips the signature with interpreted constants. For any finite set `C` of constants actually occurring in a formula, let `rho(C)` be the number of nonzero atoms of the **finite subalgebra generated by C**.
+
+Then the support universe has
+
+`rho(C) * 2^k`
+
+bits, one for every `(constant-region, variable-minterm)` pair, with the validity rule that each nonzero constant region contains at least one active variable minterm.
+
+`ABA_INTERPRETED_CONSTANTS.md` proves:
+
+`|T_k(C)| = (2^(2^k)-1)^rho(C)`
+
+and shows that atomic Boolean functions with coefficients from the constants translate to conjunctions/disjunctions of these refined support bits. The one-variable extension relation remains local and has an ROBDD with exactly
+
+`5 rho(C) 2^k`
+
+nonterminal nodes under the analogous interleaved ordering.
+
+Thus interpreted constants do not break support Booleanization; they multiply the support dimension by the semantic constant-partition rank `rho(C)`.
+
+## 10. Prototype validation completed so far
+
+`experiments/aba_support_bdd.py` is a small dependency-free ROBDD reference implementation. It currently checks:
+
+- the exact `5n` extension-node count for `n=1,2,4,8,16`;
+- `exists y. y=0` on every valid coarse support;
+- existence of a nontrivial `y` split in an atomless BA;
+- `exists y. y=x_0`;
+- an inconsistent `y=0 and y=1` case;
+- 200 randomized Boolean-formula comparisons at each of `k=1,2`, where ROBDD existential projection is checked against exhaustive enumeration of every ternary refinement of every coarse support.
+
+These are strong bounded checks, not substitutes for the general proof or differential testing against Tau.
+
+## 11. What must be tested before algorithmic promotion
 
 ### Correctness
 
-- exhaustive comparison with support enumeration for small arities;
-- differential comparison with Tau QE for generated pure-ABA formulas;
-- formal proof of the support-extension theorem.
+- differential comparison with Tau QE on generated ABA formulas;
+- Lean formalization of the support-extension theorem;
+- interpreted-constant differential tests using known constant partitions.
 
 ### Representation size
 
@@ -193,21 +241,21 @@ Compare at least:
 
 - ROBDD with several variable orderings;
 - ZDD for sparse support families;
-- CNF/SAT-style quantified elimination;
+- CNF/SAT/QBF-style quantified elimination;
 - explicit type bitsets;
 - Tau's current normalized formula representation.
 
-The classical symbolic-model-checking literature warns that BDD variable ordering can make or break the method, and SAT/CNF representations can outperform BDDs on some fixed-point problems. The project should benchmark representations rather than canonize one.
+BDD variable ordering can make or break symbolic representations. The project should benchmark representations rather than canonize one.
 
-### Scope
+### Formula classes
 
-This note is for the pure ABA signature. Asor's interpreted-constant setting contains additional structure. Extending support Booleanization to finitely many interpreted constants requires refining the support invariant to record the relevant constant regions / atom information; do not assume the pure-ABA proof transfers unchanged.
+The most important theorem target is no longer merely correctness. It is to find nontrivial classes of Tau/ABA formulas for which support-level symbolic projection has provably controlled representation growth.
 
-## 10. Next mathematical questions
+## 12. Next mathematical questions
 
-1. What is the smallest support-bit invariant sufficient in the presence of finitely many interpreted constants?
-2. Can Asor's Hall-marriage QE conditions be recovered as a compact projection rule on the refined support representation?
-3. Which variable ordering minimizes the BDD for `Ext_k` and for common Tau predecessor operators?
-4. Which formula classes have provably polynomial-size BDDs under the natural minterm-cell order?
-5. Do ZDDs exploit the sparse-support regime better than BDDs while preserving efficient quantifier projection?
-6. Can support Booleanization be generalized from ABA to other omega-categorical structures using orbit-incidence bits and effective extension relations?
+1. Which Tau predicate/recurrence classes have polynomial-size ROBDDs in the number of support bits under a computable ordering?
+2. Can the semantic parameter `rho(C)` be bounded from specification syntax without enumerating all constant Venn regions?
+3. Can Asor's Hall-marriage QE conditions be re-derived as compressed operations on refined support families, explaining when DNF and support projection coincide efficiently?
+4. Do ZDDs exploit sparse support families better than ROBDDs while preserving efficient abstraction?
+5. Can support Booleanization be generalized from ABA to other omega-categorical structures using orbit-incidence bits and effective extension relations?
+6. Which synthesis predecessor operators preserve a compact support representation across fixed-point iteration?
