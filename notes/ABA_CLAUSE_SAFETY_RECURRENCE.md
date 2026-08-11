@@ -1,8 +1,6 @@
 # Direct fixed-point recurrence for ABA clause safety games
 
-**Status:** DERIVED from `ABA_CLAUSE_SAFETY_HYPERGRAPH.md`; bounded differential checks support the one-step theorem; end-to-end fixed-point checker pending. Literature novelty is under review.
-
-This note makes the hypergraph predecessor theorem algorithmic by isolating the ordinary finite cube predecessor that transports both the allowed region and every inequation obligation.
+**Status:** DERIVED from `ABA_CLAUSE_SAFETY_HYPERGRAPH.md`; one-step and end-to-end bounded differential checks completed; Lean pending; literature novelty under review.
 
 ## 1. Finite transition data
 
@@ -14,265 +12,219 @@ Let
 
 A normalized ABA safety transition clause is represented by:
 
-- an allowed triple set `L subseteq S x I x V`, coming from the transition equation;
-- transition hit sets `G_1,...,G_q subseteq S x I x V`, coming from transition inequations.
+- an allowed triple set `L subseteq S x I x V`, from the transition equation;
+- transition hit sets `G_1,...,G_q`, from transition inequations.
 
-A state-region approximation is represented canonically as
-
-`R(A; H)`
-
-where
+A nonempty state-region approximation is represented canonically as `R(A;H)` where:
 
 - `A subseteq S` is the allowed state-cell set;
-- `H` is an inclusion-minimal antichain of nonempty subsets of A;
-- an ABA state support `T` belongs to the region iff `T subseteq A` and `T intersects H` for every `H in H`.
+- H is an inclusion antichain of **proper nonempty** subsets of A;
+- support T belongs iff `empty != T subseteq A` and T hits every H in H.
 
-## 2. The ordinary cube predecessor P
+The restriction to proper hits is important: `H=A` is tautological on nonempty supports and is not stored.
+
+## 2. Ordinary cube predecessor P
 
 Define
 
-`P(B)
- := { a in S : for every u in I, exists v in B with (a,u,v) in L }.`
+`P(B) := {a : for every u, exists v in B with (a,u,v) in L}.`
 
-This is exactly the controllable predecessor of the finite Boolean-cube game determined by the transition equation alone.
-
-It is monotone in B.
+This is the controllable predecessor of the finite Boolean-cube game determined by the transition equation alone. P is monotone.
 
 ## 3. Transition-hit injection J_i
 
-For each transition inequation hit set `G_i`, define
+For each transition hit G_i define
 
 `J_i(B)
- := { a in S : for every u in I,
-        exists v in B with (a,u,v) in L intersect G_i }.`
+ := {a : for every u,
+        exists v in B with (a,u,v) in L intersect G_i}.`
 
-A state cell belongs to `J_i(B)` precisely when, no matter which Boolean input label the environment selects in that region, the controller has an allowed next-state label in B that also witnesses transition inequation i.
-
-Since `L intersect G_i subseteq L`,
+Always
 
 `J_i(B) subseteq P(B)`.
 
-## 4. Existing target hits propagate by the same P
+## 4. Target hits propagate by the same P
 
-Let `H subseteq A` be one target hit set.
+For a target hit `H subseteq A`, lifting it to the output coordinate and applying the support-hypergraph predecessor produces
 
-The lifted target requirement says that the next-state support must intersect H.
+`{a : forall u exists v in H . (a,u,v) in L}`,
 
-The hypergraph predecessor construction gives the new hit set
+which is exactly `P(H)`.
 
-`{a : for every u, exists v in H with (a,u,v) in L}`,
-
-which is exactly
-
-`P(H)`.
-
-Because H is contained in A and P is monotone,
+Since H⊆A,
 
 `P(H) subseteq P(A)`.
 
-This is the key decoupling.
+This is the central decoupling.
 
-## 5. Exact predecessor recurrence
+## 5. Canon operator
+
+For allowed set B and candidate hit family K, define `Canon(B,K)`:
+
+1. replace each K by `K intersect B`;
+2. if B is empty or any K is empty, return the empty semantic region;
+3. delete every K equal to B (implicit-nonemptiness tautology);
+4. remove duplicates;
+5. remove every hit that strictly contains another retained hit.
+
+This correction was discovered by whole-fixed-point differential testing: keeping the tautological hit B preserves one-step semantics but breaks structural canonical equality and can delay a fixed-point stopping test.
+
+## 6. Exact predecessor recurrence
 
 ### Theorem 1
 
-Let `Min(.)` delete duplicate hit sets and every hit set that strictly contains another one. If any hit set is empty, the represented region is empty.
+`CPre(R(A;H))
+ = Canon(
+     P(A),
+     {J_i(A) : 1<=i<=q} union {P(H) : H in H}
+   ).`
 
-Then
+Thus equations and inequation obligations evolve through one finite monotone transformer P plus q injection maps J_i. No complete ABA type is enumerated.
 
-`CPre( R(A; H) )
- = R(
-      P(A),
-      Min( {J_i(A) : 1<=i<=q} union {P(H) : H in H} )
-     ).`
-
-Thus the equation part and inequation obligations evolve by one finite monotone set transformer P plus q finite injection maps J_i.
-
-No complete ABA type is enumerated.
-
-## 6. Kleene iteration from the top
+## 7. Kleene iteration
 
 Initialize
 
-`A_0=S`
+`A_0=S`, `H_0=empty`.
 
-and
-
-`H_0=empty`.
-
-The descending safety iteration is
+Then
 
 `A_(t+1)=P(A_t)`
 
 and
 
-`H_(t+1)
- = Min(
-     {J_i(A_t) : 1<=i<=q}
-     union
-     {P(H) : H in H_t}
+`(A_(t+1),H_(t+1))
+ = Canon(
+     P(A_t),
+     {J_i(A_t)}_i union {P(H) : H in H_t}
    ).`
 
-Stop when the canonical pair `(A_t,H_t)` stops changing.
+Stop when the canonical pair stops changing.
 
-Because the canonical pair denotes exactly the current winning approximation, this is exactly the ordinary greatest-fixed-point iteration restricted to the clause-representable sublattice.
+Because the representation is now semantically canonical on the nonempty support domain, pair equality is a sound fixed-point stopping test.
 
-## 7. The allowed component converges independently
+## 8. Allowed cells converge independently
 
-The sequence A_t does not depend on any inequation.
+The sequence A_t is independent of all inequations and equals the equation-only finite cube safety iteration.
 
-It is exactly the equation-only finite cube safety iteration from `EQUATIONAL_SAFETY_CUBE_GAME.md`.
+It reaches its greatest fixed point A_* after at most
 
-Therefore:
+`|S|=2^k`
 
-- `A_t` descends monotonically;
-- it reaches the equation-only greatest fixed point `A_*` after at most `|S|=2^k` strict cell removals.
+strict cell removals.
 
-Inequations can continue to strengthen the hit antichain after A has stabilized, but they never change which individual Boolean state cells are equation-safe.
+Inequations may continue to strengthen the nontrivial hit antichain after A stabilizes, but they do not change which individual Boolean state labels are equation-safe.
 
-## 8. Expanded obligation history
+## 9. Expanded obligation history
 
-Ignoring antichain minimization for notation, the recurrence expands as
+Before canonical subsumption, the time-t candidate hits are
 
-`H_t
- = { P^(t-1-r)( J_i(A_r) )
-     : 0 <= r < t, 1 <= i <= q }.`
+`{ P^(t-1-r)(J_i(A_r)) : 0<=r<t, 1<=i<=q }`.
 
-Thus every transition inequation injects a new obligation at every time layer, and older obligations are transported one step backward by the same cube predecessor P.
+This follows by induction from the recurrence: each transition inequation injects a new one-step obligation, while every older obligation is transported by P.
 
-This is a finite-horizon interpretation:
+Canonicalization can delete:
 
-`P^d(J_i(A_r))`
+- empty => whole region empty;
+- full allowed set => tautological due nonempty support;
+- duplicates;
+- supersets of stronger hits.
 
-is the set of Boolean state labels from which the controller can force an i-witness d predecessor steps later while respecting the equation-safe transition relation encoded by the relevant target set.
+## 10. Maximal-response controller
 
-Antichain minimization removes semantically weaker supersets.
+Suppose the fixed point is nonempty `(A_*,H_*)`.
 
-## 9. Maximal-response controller
+For every Boolean state/input label `(a,u)` define
 
-Suppose the fixed point is the nonempty canonical pair
+`V_(a,u) := {v in A_* : (a,u,v) in L}.`
 
-`(A_*, H_*)`.
-
-For an actual current ABA state s in this winning region and an actual input tuple x, consider each nonzero joint `(s,x)` Venn region with Boolean label `(a,u)`.
-
-Define the allowed output-label set
-
-`V_(a,u)
- := { v in A_* : (a,u,v) in L }`.
-
-Since `a in A_*=P(A_*)`, every such set is nonempty.
+For winning state cells a, every V_(a,u) is nonempty because `A_*=P(A_*)`.
 
 ### Theorem 2 — maximal response is winning
 
-A controller may, inside every nonzero joint `(a,u)` region, realize **every** label in `V_(a,u)` as a nonzero output refinement.
+Inside every nonzero actual `(s,x)` region labeled `(a,u)`, let the controller realize **every** output label in V_(a,u) as a nonzero refinement.
 
-The union of all these local maximal refinements:
+Then the resulting output:
 
 1. satisfies the transition equation;
-2. makes the next-state support a subset of A_*;
-3. witnesses every transition inequation;
-4. makes the next-state support hit every H in H_*.
+2. remains inside A_*;
+3. satisfies every transition inequation;
+4. makes the next support satisfy every H in H_*.
 
-Hence it is a memoryless winning support policy.
+### Proof sketch
 
-### Proof
+For transition inequation i, winning support hits `J_i(A_*)`; on such a state cell, every input label has an allowed G_i-witness v, which maximal response includes.
 
-The first two items hold by construction.
+For target hit H, fixed-point recurrence requires the current support to hit P(H); on such a state cell, every input label has an allowed output in H, which maximal response includes.
 
-For a transition hit G_i, the fixed-point state support must hit `J_i(A_*)`. Choose an active state label a in that hit. By definition of J_i, for every input label u there is some v in `V_(a,u)` whose full cell lies in G_i. Whatever nonempty input refinement the environment realizes inside cell a, the maximal controller includes such a v, so G_i is hit.
+Atomlessness realizes all required finite output refinements simultaneously.
 
-For a target hit H in H_*, fixed-point closure contains the predecessor requirement P(H). The current state support therefore hits P(H). On such an active state label a, every input label u has an allowed v in H. The maximal response includes it, so the next support hits H.
+## 11. Separation of responsibilities
 
-All hit requirements are satisfied simultaneously because atomlessness realizes all finitely many allowed local output labels at once.
+The maximal response relation depends only on:
 
-## 10. A striking separation of responsibilities
+- transition equation L;
+- final equation-safe set A_*.
 
-The **response relation** of the maximal controller depends only on:
+Inequations determine **which supports are winning** through H_*, but the controller need not choose a delicate subset of equation-safe output labels: realizing all of them is sufficient.
 
-- the transition equation L; and
-- the final allowed cell set A_*.
+So structurally:
 
-The inequations do not require the controller to choose a special subset of allowed labels. They determine which support states are winning through H_*, while the controller simply realizes all equation-safe output labels.
-
-In short:
-
-- equations determine the safe local move relation;
+- equations determine safe local moves;
 - inequations determine global support obligations;
-- atomlessness lets the maximal local move realize all obligations simultaneously.
+- atomlessness lets maximal local moves satisfy all obligations simultaneously.
 
-This is the inner structural reason the clause game remains tractable symbolically.
+## 12. Concrete split witness
 
-## 11. Concrete witness realization
+If V_(a,u) has d labels, an actual nonzero BA region b must be split into d disjoint nonzero pieces whose join is b, one per output label. Atomlessness guarantees every finite such split.
 
-Unlike the equation-only fragment, the maximal policy may need several distinct output labels to be nonzero inside the same joint `(s,x)` region.
+An executable backend therefore needs an effective split-witness routine in addition to the finite hypergraph solver.
 
-For a region b and a finite nonempty label set V of size d, the concrete controller needs a finite partition
+## 13. Representation-independent algorithm
 
-`b = b_1 OR ... OR b_d`
+For moderate k:
 
-into pairwise disjoint nonzero pieces and assigns one output label to each piece.
+- A and each H are `2^k`-bit masks;
+- P/J are `forall input / exists output` projections over the finite Boolean cell relation;
+- H is kept as an inclusion antichain.
 
-Atomlessness guarantees such a partition for every finite d.
+For larger instances, the same recurrence can use ZDD/ROBDD/SAT-backed set representations. The theorem does not privilege one data structure.
 
-An effective Tau backend therefore needs a deterministic/effective split-witness routine. The abstract synthesis problem and the concrete witness-construction problem should be kept separate in the implementation and in correctness proofs.
+## 14. Worst-case warning
 
-## 12. Fixed-point implementation
+The hit antichain can have Sperner size
 
-For moderate k, use machine-word / bitset masks:
+`binom(2^k, 2^(k-1))`.
 
-- A and every H are n-bit masks, `n=2^k`;
-- L and G_i are masks/circuits on `2^(2k+p)` Boolean triple labels;
-- P and J_i are repeated `forall input / exists output` projections;
-- H is maintained as an inclusion antichain.
-
-For larger n, switch representations only when measured structure demands it:
-
-- ZDD for large sparse antichains;
-- ROBDD for dense symbolic set maps;
-- SAT/QBF projection for compact transition circuits.
-
-The mathematical recurrence is representation-independent.
-
-## 13. Worst-case warning
-
-The antichain H can be very large. By Sperner's theorem it can contain
-
-`binom(2^k, 2^(k-1))`
-
-minimal hit sets in the worst case, and such a static clause is expressible with ordinary ABA inequations.
-
-Moreover, P is a general monotone Boolean set transformer of the form
+Moreover, coordinate membership in P has positive-CNF form
 
 `a in P(B) iff AND_u OR_{v in B} L(a,u,v)`.
 
-With enough input labels, coordinate functions of this form can express arbitrary positive CNF conditions on B. Therefore no small-orbit or polynomial-antichain bound should be assumed for unrestricted clause games.
+With enough input labels, this is expressive enough that no generic polynomial antichain/orbit bound should be assumed.
 
-The research target is parameterized structure, not universal compression.
+## 15. Favorable subclasses
 
-## 14. Favorable subclasses to test
+Attack these by exhaustive small-case search before general proof attempts:
 
-The recurrence exposes concrete structure that may control H growth:
+1. no inequations;
+2. laminar/nested hit families;
+3. deterministic/functional equation-safe transitions;
+4. input-free systems;
+5. bounded transition-inequation count q;
+6. P-invariant laminar families;
+7. symmetries reducing hit orbits.
 
-1. no inequations: H stays empty, giving the `2^k`-state cube theorem;
-2. nested/laminar transition hit sets;
-3. deterministic or functional equation-safe transitions;
-4. input-free systems, where P is ordinary existential graph predecessor;
-5. bounded number q of transition inequations;
-6. transition relations preserving a laminar family under P;
-7. symmetric predicates whose hit orbits collapse under cell automorphisms.
+## 16. Validation
 
-These should be attacked by small exhaustive search before theorem building.
+`experiments/aba_clause_safety_hypergraph.py` now compares the entire canonical recurrence against explicit complete-support safety iteration in the one-state/one-input/one-output-bit universe.
 
-## 15. Next validation target
+Repository defaults perform:
 
-Implement end-to-end canonical iteration and compare its entire sequence, not only one predecessor, against explicit complete-support safety iteration for all small transition clauses where feasible.
+- 5,000 randomized one-step checks;
+- 2,000 randomized whole fixed-point trajectory checks.
 
-Then measure:
+A larger private run of 10,000 random trajectories also matched at every iteration after the `H=A` canonicalization correction. Examples with up to four iterations occur in this tiny three-state-support universe.
 
-- number of iterations;
-- allowed-cell removals;
-- raw hit count before minimization;
-- canonical antichain width;
-- number of distinct P-orbit masks;
-- concrete maximal-response split arity.
+## 17. Next target
+
+Measure canonical hit growth and P-orbits on generated Tau clauses, then prove bounds for whichever structural subclass actually occurs frequently rather than choosing a fashionable subclass in advance.
