@@ -6,7 +6,7 @@ on:
 jobs:
   python-oracles:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,6 +32,10 @@ jobs:
         run: python experiments/aba_safety_bekic.py
       - name: ABA compact LFSR lower bound
         run: python experiments/aba_lfsr_lower_bound.py
+      - name: ABA symmetric histogram quotient
+        run: python experiments/aba_symmetry_quotient.py
+      - name: ABA positive reachability and Buchi calculus
+        run: python experiments/aba_positive_mu_calculus.py
       - name: Dyadic ABA constructive witnesses
         run: python experiments/dyadic_aba_witness.py
 
