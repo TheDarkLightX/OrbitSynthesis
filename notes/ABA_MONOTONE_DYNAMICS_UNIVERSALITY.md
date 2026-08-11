@@ -4,7 +4,7 @@
 
 This note supplies the adversarial counterpart to `ABA_CELL_GAME.md` and `ABA_SAFETY_BEKIC.md`.
 
-The positive obligation transformer of the ABA safety fragment is not merely capable of small cycles seen in random tests. With enough environment coordinates it can implement **any monotone Boolean self-map** of the state-cell powerset that preserves the top element.
+The positive obligation transformer of the ABA safety fragment is not merely capable of small cycles seen in random tests. With enough environment coordinates it can implement **any monotone Boolean self-map** of the state-cell powerset that preserves both bottom and top.
 
 Therefore no representation trick can make the unrestricted fragment uniformly easy.
 
@@ -12,7 +12,7 @@ Therefore no representation trick can make the unrestricted fragment uniformly e
 
 Let V be a finite state-cell set, `|V|=N`.
 
-For each current cell `v in V`, let `I_v` be its possible environment refinements. For every environment refinement `i in I_v`, let
+For each current cell `v in V`, let `I_v` be its nonempty set of possible environment refinements. For every environment refinement `i in I_v`, let
 
 `R_(v,i) subseteq V`
 
@@ -28,13 +28,29 @@ Each output coordinate `1[v in Pre(G)]` is a monotone positive CNF in the member
 
 `AND_{i in I_v} OR_{w in R_(v,i)} 1[w in G].`
 
-## 2. Every monotone coordinate predicate has this form
+Because every I_v and every R_(v,i) is nonempty,
+
+`Pre(empty)=empty`
+
+and
+
+`Pre(V)=V`.
+
+Thus ABA obligation dynamics are automatically **bottom- and top-preserving** on the final zero-safe arena.
+
+## 2. Every nonconstant monotone coordinate predicate has this form
 
 Let
 
 `phi : P(V) -> {0,1}`
 
-be monotone and satisfy `phi(V)=1`.
+be monotone and satisfy
+
+`phi(empty)=0`
+
+and
+
+`phi(V)=1`.
 
 Take the inclusion-maximal false sets
 
@@ -56,13 +72,15 @@ iff
 
 ### Proof
 
-If G is false, extend it to a maximal false set X. Then `G subseteq X`, so `G` misses `V\X=C_X`.
+If G is false, extend it to a maximal false set X. Then `G subseteq X`, so G misses `V\X=C_X`.
 
 Conversely, if G misses C_X for some maximal false X, then `G subseteq X`; monotonicity implies G is false.
 
 Since `phi(V)=1`, no maximal false set is V, so every C_X is nonempty.
 
-Thus every top-preserving monotone Boolean predicate is exactly a robust-intersection condition of the ABA cell-predecessor form.
+Since `phi(empty)=0`, the false-set family is nonempty and hence there is at least one clause; this matches the fact that every state cell has at least one environment refinement.
+
+Thus every bottom/top-preserving monotone Boolean predicate is exactly a robust-intersection condition of the ABA cell-predecessor form.
 
 ## 3. Universality theorem
 
@@ -70,7 +88,11 @@ Let
 
 `F : P(V) -> P(V)`
 
-be any monotone map with
+be any monotone map satisfying
+
+`F(empty)=empty`
+
+and
 
 `F(V)=V`.
 
@@ -78,7 +100,15 @@ For each output cell v, define
 
 `phi_v(G)=1 iff v in F(G)`.
 
-By Lemma 1, choose a positive CNF
+The two global preservation assumptions imply every coordinate predicate satisfies
+
+`phi_v(empty)=0`
+
+and
+
+`phi_v(V)=1`.
+
+By Lemma 1, choose a nonempty positive CNF
 
 `phi_v(G)=AND_j [G intersect C_(v,j) != empty]`.
 
@@ -130,15 +160,21 @@ iff `phi_v(G)=1`
 
 iff `v in F(G)`.
 
-## 4. Consequence: ABA obligation dynamics contain arbitrary monotone Boolean networks
+## 4. Consequence: ABA obligation dynamics contain all bounded monotone Boolean networks
 
 For the resulting zero-safe game, the OrbitSynthesis obligation transformer is simply
 
 `barL=Pre=F`.
 
-Thus any phenomenon possible for a synchronous monotone Boolean network on N bits can occur as positive-obligation dynamics inside a pure-ABA one-equation safety Step, subject only to the top-preserving condition `F(V)=V` (which is natural for a zero-safe arena).
+Thus any phenomenon possible for a synchronous monotone Boolean network on N bits whose global map fixes the all-zero and all-one vectors can occur as positive-obligation dynamics inside a pure-ABA one-equation safety Step.
 
 This sharply limits what can be proved for the unrestricted fragment.
+
+### Correction retained as negative knowledge
+
+An earlier version of this note claimed universality for every top-preserving monotone map. That was too broad: a genuine cell predecessor always maps the empty target to empty because every environment refinement demands a nonempty intersection with the target. The correct class is **bottom-and-top preserving**.
+
+The worst-case cycle construction below already has both properties, so the main lower bound is unaffected.
 
 ## 5. Periodic orbits are antichains
 
@@ -202,7 +238,7 @@ Let
 
 `m=floor(N/2)`
 
-and let
+for `N>=2`, and let
 
 `A = {X subseteq V : |X|=m}`
 
@@ -218,7 +254,13 @@ Define F by
 
 ### Lemma 4
 
-F is monotone and `F(V)=V`.
+F is monotone,
+
+`F(empty)=empty`,
+
+and
+
+`F(V)=V`.
 
 The only comparable distinct cardinality cases go from below the middle layer to the middle/upper layers or from the middle layer to above it; the images `empty`, a middle-layer set, and V preserve inclusion. Distinct middle-layer sets are incomparable, so pi is unconstrained there.
 
@@ -294,14 +336,14 @@ Therefore the correct OrbitSynthesis objective is structural classification:
 
 ## 11. Literature positioning
 
-The antichain bound and existence of long periodic orbits in monotone/cooperative Boolean networks are classical; modern reviews explicitly note that periodic orbits of monotone Boolean systems are antichains and appeal to Sperner's theorem.
+The antichain bound and existence of long periodic orbits in monotone/cooperative Boolean networks are classical. Modern discussions explicitly note that periodic orbits of monotone Boolean systems are antichains and appeal to Sperner's theorem; this is traced back in that literature to classical switching-function work.
 
-Relevant modern sources include work on cooperative/monotone Boolean networks and the interaction-graph literature. The exact reduction of arbitrary top-preserving monotone dynamics to the ABA cell predecessor is the part that must be compared against prior Tau/Boolean-algebra synthesis literature before any novelty claim.
+The exact reduction of every bottom/top-preserving monotone Boolean map to the ABA cell predecessor is the part that must be compared against prior Tau/Boolean-algebra synthesis literature before any novelty claim.
 
 ## 12. Next targets
 
 1. Find compact Tau/ABA Step formulas with provably superpolynomial obligation periods.
-2. Characterize Step syntax that makes barL extensive or contractive, forcing <=N-step convergence.
+2. Characterize Step syntax that makes barL extensive or contractive, forcing simple orbit behavior.
 3. Use monotone-network interaction graphs to bound period/orbit complexity from transition locality.
 4. Determine transient-length bounds in addition to periodic-length bounds.
 5. Compare interaction-graph parameters with support-CNF crossing width from `SUPPORT_OBDD_WIDTH.md`.
