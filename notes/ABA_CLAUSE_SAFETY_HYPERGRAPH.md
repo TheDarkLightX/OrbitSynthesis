@@ -1,8 +1,8 @@
 # Direct safety synthesis for ABA clauses via support hypergraphs
 
-**Status:** DERIVED one-step closure theorem and canonical representation; randomized bounded explicit-game differential checks completed; fixed-point/strategy implementation pending; Lean pending; novelty not established.
+**Status:** DERIVED one-step closure theorem and canonical representation; randomized bounded one-step and fixed-point differential checks completed; Lean pending; novelty not established.
 
-This extends `EQUATIONAL_SAFETY_CUBE_GAME.md` from pure equations to the normalized atomless-Boolean-algebra clause class
+This extends `EQUATIONAL_SAFETY_CUBE_GAME.md` from pure equations to normalized atomless-Boolean-algebra clauses
 
 `f=0 AND AND_i g_i!=0`.
 
@@ -10,22 +10,22 @@ Unlike the equation-only theorem, **atomlessness matters here** because several 
 
 ## 1. Clause regions are allowed sets plus hitting hypergraphs
 
-Fix `k` BA state variables and let
+Fix k BA state variables and let
 
-`U = {0,1}^k`
+`U={0,1}^k`
 
 be their Venn-cell labels.
 
-A normalized quantifier-free ABA clause
+A normalized clause
 
-`f(s)=0 AND AND_{i=1}^m g_i(s)!=0`
+`f(s)=0 AND AND_i g_i(s)!=0`
 
 corresponds to:
 
-- an allowed cell set `A subseteq U`, namely the complement of the minterm support of `f`;
-- hit sets `H_i subseteq U`, namely the minterm supports of the `g_i`.
+- an allowed cell set `A subseteq U`, the complement of the minterm support of f;
+- hit sets `H_i subseteq U`, the minterm supports of the g_i.
 
-The clause holds on a complete support `S` exactly when
+It holds on a complete support S exactly when
 
 `empty != S subseteq A`
 
@@ -33,34 +33,42 @@ and
 
 `S intersect H_i != empty` for every i.
 
-Write this region as
+Write this region as `R(A;H)`.
 
-`R(A; H_1,...,H_m)`.
+First replace every H_i by `H_i intersect A`. If any becomes empty, the region is empty.
 
-After replacing each `H_i` by `H_i intersect A`, an empty hit set makes the region empty.
+## 2. Canonical antichain representation: nonemptiness matters
 
-## 2. Canonical antichain representation
+If `H_i subseteq H_j`, then hitting H_i implies hitting H_j, so H_j is redundant.
 
-If
+There is one additional redundancy specific to complete ABA types:
 
-`H_i subseteq H_j`,
+`H_i=A`
 
-then hitting `H_i` implies hitting `H_j`, so `H_j` is redundant.
+is tautological, because every realized support is already required to be **nonempty** and contained in A. Thus it must be deleted even when no smaller hit set is present.
 
-Therefore retain only the inclusion-minimal nonempty hit sets. They form an antichain in `P(A)`.
+Define `Canon(A,H)` by:
 
-### Proposition — canonical form
+1. intersect every hit with A;
+2. if A is empty or some hit is empty, return the empty region;
+3. delete every hit equal to A;
+4. delete duplicates;
+5. delete every hit that strictly contains another retained hit.
 
-For every nonempty region of the form `R(A;H)`, the pair
+The result is an inclusion antichain of proper nonempty subsets of A.
 
-`(A, Min(H))`
+### Proposition — semantic canonical form
 
-where `Min(H)` is the inclusion-minimal hit-set antichain, is semantically canonical:
+For every nonempty clause region, the pair
 
-- `A` is the union of all supports in the region;
-- `Min(H)` is the unique prime monotone-CNF clause family over the support bits.
+`(A, CanonHits(A,H))`
 
-Thus equality of canonical clause regions reduces to equality of one allowed-set mask and one antichain of hit-set masks.
+is semantically canonical over the domain of **nonempty** supports:
+
+- A is the union of all supports in the region;
+- the retained hits are the unique nontrivial prime positive support clauses.
+
+`ABA_CLAUSE_SUPPORT_LATTICE.md` gives the precise maximal-loser/blocker proof and treats nonemptiness as an implicit hit on A when standard hypergraph duality is desired.
 
 ## 3. Transition clause
 
@@ -68,14 +76,14 @@ Let:
 
 - state labels `a in S={0,1}^k`;
 - input labels `u in I={0,1}^p`;
-- output/next-state labels `v in Y={0,1}^k`.
+- output/next-state labels `v in V={0,1}^k`.
 
-A normalized ABA transition/safety clause on `(s,x,y)` is represented by:
+Represent the normalized transition clause by:
 
-- allowed full cells `L subseteq S x I x Y`;
-- transition hit sets `G_1,...,G_q subseteq S x I x Y`.
+- allowed full cells `L subseteq S x I x V`;
+- transition hit sets `G_1,...,G_q subseteq S x I x V`.
 
-A full support `Q` satisfies the transition clause iff
+A full support Q satisfies it iff
 
 `Q subseteq L`
 
@@ -83,47 +91,35 @@ and
 
 `Q intersect G_j != empty` for every j.
 
-Let the target winning approximation be
-
-`R(A; H_1,...,H_m)`
-
-on the y/next-state support.
+Let the target winning approximation be `R(A;H)` on the next-state support.
 
 ## 4. Lift the target to full cells
 
-The target equation `Supp(y) subseteq A` restricts full cells to
+The target allowed condition restricts full cells to
 
-`L_A := S x I x A`.
+`L* := L intersect preimage_y(A)`.
 
-So the full allowed set becomes
-
-`L* := L intersect L_A`.
-
-Each target hit set `H_t subseteq Y` lifts to
-
-`G^target_t := S x I x H_t`.
+Each target hit H_t lifts to `preimage_y(H_t)`.
 
 Collect all full hit sets
 
-`K = {G_1,...,G_q} union {G^target_1,...,G^target_m}`.
+`K = {G_1,...,G_q} union {preimage_y(H_t) : H_t in H}`.
 
-The inner controller problem for a fixed `(s,x)` support is now exactly one ABA clause with allowed full cells `L*` and hit family `K`.
+The inner controller problem for a fixed `(s,x)` support is exactly one ABA clause with allowed full cells L* and hit family K.
 
 ## 5. Existential controller projection
 
-Project away the output label `v`.
+Define
 
-Define an allowed `(state,input)` cell set
+`E := { (a,u) : exists v . (a,u,v) in L* }`
 
-`E := { (a,u) : exists v . (a,u,v) in L* }`.
-
-For every full hit set `K_j`, define
+and, for every K_j,
 
 `E_j := { (a,u) : exists v . (a,u,v) in L* intersect K_j }`.
 
 ### Lemma — existential projection
 
-For an actual `(s,x)` support `P`, there exists a controller output y satisfying the transition clause and target region iff
+For an actual `(s,x)` support P, there exists a controller output satisfying the transition clause and target region iff
 
 `P subseteq E`
 
@@ -133,182 +129,142 @@ and
 
 ### Proof
 
-This is `ABA_BLOCK_QE.md` in support form.
+Necessity is immediate. For sufficiency, inside every active `(a,u)` region realize **all allowed output labels** v with `(a,u,v) in L*`. Atomlessness realizes every such finite nonempty refinement. If P hits E_j, the maximal allowed refinement automatically includes a K_j witness. Hence all hit constraints hold simultaneously.
 
-Necessity is immediate.
-
-For sufficiency, within every active coarse `(a,u)` region choose **all allowed output labels** `v` with `(a,u,v) in L*`. Atomlessness realizes every such nonempty local refinement. If P hits `E_j`, then at some active `(a,u)` there is an allowed output label also lying in `K_j`, and the maximal allowed refinement includes it. Hence every hit requirement is satisfied simultaneously.
+This is the support form of `ABA_BLOCK_QE.md`.
 
 ## 6. Universal environment projection
 
-We need the existential controller clause above to hold for **every** actual input extension of a state support.
+Define
 
-Define the new allowed state-cell set
+`A' := { a : for every u, (a,u) in E }`
 
-`A' := { a : for every u, (a,u) in E }`.
-
-For every projected hit set `E_j`, define
+and
 
 `H'_j := { a : for every u, (a,u) in E_j }`.
 
 ### Theorem 1 — controllable predecessor closure
 
-For countable ABA (indeed any sufficiently atomless BA supporting the finite refinements used above),
+For atomless BA,
 
-`CPre( R(A;H) ) = R( A'; H'_1,...,H'_(q+m) ).`
+`CPre(R(A;H)) = Canon( A'; {H'_j}_j ).`
 
 ### Proof
 
-A state support `S0` passes the universal equation/allowed condition iff every possible input refinement P of S0 is contained in E. This happens exactly when every active state label `a in S0` has **all** input labels `(a,u)` in E, i.e. `S0 subseteq A'`.
+Every input extension P of state support S0 is contained in E iff each active state cell a has **all** input labels `(a,u)` in E, i.e. `S0 subseteq A'`.
 
-For a fixed hit set `E_j`, every input refinement P of S0 must intersect `E_j`. This holds iff at least one active state label `a in S0` has its entire input fiber inside `E_j`; otherwise the environment chooses, independently in every active state cell, one input label outside `E_j` and constructs a support avoiding it. Thus the condition is
+For a fixed E_j, every input extension P must intersect E_j iff at least one active state cell a has its entire input fiber inside E_j. Otherwise the environment independently picks, in every active state region, one input label outside E_j and constructs an extension avoiding E_j. Thus the universal hit condition is exactly
 
 `S0 intersect H'_j != empty`.
 
-Applying this independently to every hit constraint yields the displayed clause region.
+Canonicalization then removes semantic redundancies, including the implicit-nonemptiness tautology H'=A'.
 
-## 7. Direct hypergraph CPre algorithm
+## 7. Direct CPre algorithm
 
 One predecessor step on canonical `(A,H)` is:
 
-1. **target restrict:** `L* = L intersect preimage_y(A)`;
-2. **target hits:** append `preimage_y(H_t)` to the transition hit family;
-3. **exists-y allowed projection:** `E = exists_y L*`;
-4. **exists-y hit projection:** `E_j = exists_y (L* intersect K_j)`;
-5. **forall-x allowed projection:** `A' = forall_x E`;
-6. **forall-x hit projection:** `H'_j = forall_x E_j`;
-7. restrict each `H'_j` to `A'`;
-8. if any hit set is empty, return the empty region;
-9. delete duplicates and inclusion-nonminimal hit sets.
+1. `L* = L intersect preimage_y(A)`;
+2. append `preimage_y(H_t)` to the transition hit family;
+3. `E = exists_y L*`;
+4. `E_j = exists_y(L* intersect K_j)`;
+5. `A' = forall_x E`;
+6. `H'_j = forall_x E_j`;
+7. canonicalize on nonempty supports:
+   - restrict hits to A';
+   - empty hit => empty region;
+   - hit equal to A' => delete as tautological;
+   - remove duplicates and inclusion-nonminimal hits.
 
-All operations are finite set projection, intersection, and antichain minimization on Boolean-cell masks.
+All operations are finite set projection/intersection and antichain minimization on Boolean-cell masks. No complete ABA type is enumerated.
 
-No complete ABA type is enumerated.
+## 8. Equation-only fragment
 
-## 8. Equation-only fragment is the zero-hyperedge case
-
-If the transition has no inequations and the target has no hit constraints, the hypergraph family is empty.
-
-Then the operator reduces to
+If there are no transition inequations and no target hits, the operator reduces to
 
 `A -> {a : forall u exists v in A . (a,u,v) in L}`,
 
-which is exactly the Boolean-cube game operator in `EQUATIONAL_SAFETY_CUBE_GAME.md`.
+exactly the Boolean-cube predecessor of `EQUATIONAL_SAFETY_CUBE_GAME.md`.
 
-So the cube-game theorem is the `H=empty` special case of this more general representation.
+Thus the cube theorem is the zero-hyperedge special case.
 
-## 9. Why one inequation breaks the principal-ideal theorem
+## 9. Smallest inequation counterexample to principal ideals
 
-The smallest counterexample is static.
-
-Take one BA state variable s and the safety condition
+Take one BA state variable s and static condition
 
 `s != 0`.
 
-Its support region is
+Its accepted complete supports are
 
-`{ {1}, {0,1} }`
+`{{1},{0,1}}`,
 
-inside the three nonempty one-variable ABA types.
+while `{0}` is rejected. This is not a principal ideal `Supp(s) subseteq A`.
 
-This is not a principal ideal `Supp(s) subseteq A`: the support `{0,1}` is accepted even though its sub-support `{0}` is rejected.
+It is represented by
 
-Thus equation-only cube collapse cannot extend unchanged even to one inequation.
+`A={0,1}` and `H={1}`.
 
-The hypergraph representation captures it with
+So one inequation already forces the larger upward-closed/hypergraph carrier.
 
-`A={0,1}`
+## 10. Strategy reconstruction
 
-and one hit set
+For equations alone, one finite output label per `(a,u)` cell suffices and glues into ordinary Boolean terms.
 
-`H={1}`.
+With inequations, one nonzero `(a,u)` region may need several output labels simultaneously. The maximal-witness proof splits that region into finitely many nonzero pieces and assigns the allowed y-labels.
 
-## 10. Strategy reconstruction changes qualitatively
+Therefore concrete synthesis has two layers:
 
-For equation-only games, one finite output label per `(a,u)` cell suffices and glues into ordinary Boolean terms of `(s,x)`.
+1. a finite support policy;
+2. an effective atomless split/witness procedure realizing requested refinements.
 
-With multiple inequations, the same nonzero `(a,u)` region may need **several output labels simultaneously** to witness different hit constraints. The maximal-witness proof can split that region into several nonzero pieces and assign different y-labels.
+`ABA_CLAUSE_SAFETY_RECURRENCE.md` proves that the **maximal allowed response** is a memoryless winning support policy at the fixed point.
 
-That split is available in an atomless BA but need not be term-definable from the current `(s,x)` tuple alone.
+## 11. Worst-case antichain size
 
-Therefore synthesis has two layers:
+Let `n=|U|=2^k`.
 
-1. finite hypergraph policy chooses the allowed output-label subset/refinement pattern;
-2. an effective ABA extension-witness procedure realizes the requested finite split in the concrete algebra.
-
-This is exactly where Asor's effective-presentation / witness-computation assumption becomes operationally important.
-
-## 11. Worst-case canonical hypergraph size
-
-Let
-
-`n=|U|=2^k`
-
-be the number of state Venn-cell labels.
-
-The canonical hit family is an antichain in `P(U)`. By Sperner's theorem, its size is at most
+The nontrivial canonical hit family is an antichain of proper subsets of A. By Sperner's theorem its size is at most
 
 `binom(n, floor(n/2))`.
 
-This upper bound is attainable as a static ABA clause: for every set H in a maximum Sperner antichain, choose a Boolean term whose minterm support is H and require it to be nonzero.
+This scale is attainable by static clauses for n large enough: choose one inequation term for every set in a maximum Sperner antichain (none of which equals A at the middle level).
 
-Hence the clause representation can still be doubly exponential in k in the worst case:
+Hence the hypergraph representation can still be doubly exponential in k. It is structural/parameterized, not a universal polynomial compression theorem.
 
-`binom(2^k, 2^(k-1))`.
+## 12. Practical parameters
 
-So direct hypergraph synthesis is a structural/parameterized algorithm, not a universal polynomial compression theorem.
+Measure:
 
-## 12. A natural practical parameter
-
-The relevant dynamic parameter is not raw complete-type count but
-
-`h = |Min(H)|`,
-
-the number of inclusion-minimal active hit constraints in the current winning approximation.
-
-A direct engine should measure:
-
-- allowed-cell count `|A|`;
-- canonical hit count h;
+- allowed-cell count |A|;
+- nontrivial prime-hit count h;
 - hit-set density;
-- inclusion pruning after every predecessor step;
-- number of fixed-point iterations.
+- subsumption eliminated per step;
+- fixed-point iterations;
+- predecessor-orbit repetition;
+- maximal response split arity.
 
-This is a falsifiable candidate predictor of practical complexity.
+These are better candidates than raw `|T_k|` for predicting the clause backend's actual cost.
 
-## 13. Comparison with generic symbolic-game work
+## 13. Relation to established symbolic/antichain methods
 
-General first-order safety games and recent symbolic infinite-state synthesis retain formulas and use solver/QE machinery. The ABA clause theorem identifies a much smaller domain-specific carrier for one fragment: a finite cell set plus a hit-set antichain.
+Generic antichain representations are established in verification and games. That is not claimed as a contribution.
 
-This follows the same broad principle emphasized in recent infinite-state synthesis work—preserve the semantic structure of first-order constraints rather than flattening them to Boolean state IDs—but the concrete hypergraph transform here is specific to atomless Boolean support geometry.
+The ABA-specific result candidate is the derivation that normalized ABA clauses are support-upsets of this precise form and that `forall input / exists output` predecessor has the closed projection transform above.
 
-## 14. Validation completed
+## 14. Validation
 
-A private randomized differential checker used the bounded instance:
+`experiments/aba_clause_safety_hypergraph.py` now checks:
 
-- one state BA variable;
-- one environment BA input;
-- one output/next-state BA variable;
-- arbitrary transition allowed mask on the 8 full cells;
-- zero, one, or two random transition hit sets;
-- arbitrary target allowed set on the two state cells;
-- zero, one, or two target hit sets.
+- 5,000 randomized one-step instances against explicit enumeration of all relevant complete supports in the one-state/one-input/one-output-bit universe;
+- 2,000 randomized **whole fixed-point trajectories**, comparing the canonical hypergraph pair with the explicit complete-support winning approximation at every iteration;
+- edge cases including the tautological `H=A` canonicalization bug found by the end-to-end test.
 
-For each instance it compared:
-
-1. explicit `forall (s,x)-type / exists (s,x,y)-type` enumeration; and
-2. the closed-form hypergraph predecessor transform above.
-
-Two thousand randomized instances showed no divergence.
-
-A reproducible checker should be committed next.
+A larger private run of 10,000 random whole trajectories also found no divergence after the canonicalization correction.
 
 ## 15. Next research directions
 
-1. Prove and implement canonical antichain fixed-point iteration end-to-end.
-2. Benchmark hit-family growth on generated Tau safety clauses.
-3. Identify syntactic classes where hit antichains remain polynomially bounded.
-4. Use BDD/ZDD only when the explicit antichain itself becomes large; ZDDs are especially plausible for sparse set families.
-5. Formalize the boundary between term-definable equation strategies and atomless-splitting strategies required by inequations.
-6. Extend the transform to interpreted constants by product with the `rho(C)` constant regions.
-7. Compare the direct hypergraph backend against Tau's current atom-level Boole decomposition and against generic support-BDD projection.
+1. Search for structural subclasses with provably small prime-hit antichains.
+2. Import trie/SAT/ZDD antichain machinery rather than implement naive subsumption at scale.
+3. Formalize the atomless split strategy construction.
+4. Extend the transform to interpreted constants via `rho(C)` regions.
+5. Compare direct hypergraph synthesis with Tau's atom-level Boole decomposition and the general support-BDD backend.
+6. Continue novelty search against older negative-set-constraint and algebraic-control literature.
