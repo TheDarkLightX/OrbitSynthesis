@@ -6,7 +6,7 @@ on:
 jobs:
   python-oracles:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,6 +26,14 @@ jobs:
         run: python experiments/aba_clause_projection.py
       - name: ABA alternating clause quantifier elimination
         run: python experiments/aba_alternating_clause_qe.py
+      - name: ABA safety clause game
+        run: python experiments/aba_safety_clause_game.py
+      - name: ABA Bekić safety decomposition
+        run: python experiments/aba_safety_bekic.py
+      - name: ABA compact LFSR lower bound
+        run: python experiments/aba_lfsr_lower_bound.py
+      - name: Dyadic ABA constructive witnesses
+        run: python experiments/dyadic_aba_witness.py
 
   lean:
     runs-on: ubuntu-latest
