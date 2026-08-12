@@ -1,8 +1,25 @@
-# Patent-aware research boundary for OrbitSynthesis
+# Patent-aware boundary for independent OrbitSynthesis R&D
 
-**Purpose:** Keep academic novelty, mathematical independence, and commercial freedom-to-operate as three separate questions. This file is a research-management aid, **not legal advice** and not a substitute for patent counsel.
+**Purpose:** Keep four questions separate:
 
-## 1. Known Ohad/IDNI patent family relevant to this program
+1. what mathematics we are free to study;
+2. what is academically novel;
+3. what we can build as the independent core;
+4. what claim-adjacent commercial use an eventual license / legal review permits.
+
+This file is a research-management aid, **not legal advice**.
+
+## 0. Foundational rule
+
+Patents do **not** define the boundary of mathematical inquiry for this project.
+
+OrbitSynthesis may study, prove, falsify, generalize, compare, and publish mathematics that intersects Ohad/IDNI's research area, subject to ordinary confidentiality/contract obligations if any arise later.
+
+The patent/licensing boundary matters when choosing a product implementation, distribution model, or commercial method—not when deciding whether a mathematical theorem is worth understanding.
+
+At present no Tau developer license has been executed for this program. Therefore the independent core assumes **zero licensed Tau rights**. If a license is later supplied, analyze it first and add permissions as an overlay; do not retroactively make the independent core depend on it.
+
+## 1. Public patent family relevant to comparison
 
 As of Aug 11 2026, public patent records show at least:
 
@@ -10,225 +27,236 @@ As of Aug 11 2026, public patent records show at least:
 
 US 12,254,082 B1, **Using first-order theories of Boolean algebras to provide safe artificial intelligence (AI) systems and a novel software specification logic**.
 
-Public claim 1 is specifically directed to a computer-implemented symbolic-AI method that:
+Its published claims include a computer-implemented atomless-BA / extended-language workflow involving quantified expressions, equation/inequation normalization and closed-form quantifier-elimination steps in software-validation settings.
 
-- identifies an atomless Boolean algebra and extended first-order BA language;
-- receives a quantified expression in that language for software-update acceptance;
-- views the innermost quantified subexpression in DNF with positive equations and negative inequations;
-- combines positive equations;
-- constructs one of specified closed-form output clauses using 0/1 cofactors;
-- eliminates the innermost quantifier;
-- evaluates the result and conditionally installs the update.
+### Continuation/application family
 
-The patent is assigned to IDNI AG and publicly listed as active.
+The public patent family also identifies continuation application US19/083,375 / publication US2025/0252179 A1. Public application claims/descriptions should be treated as prosecution-sensitive and rechecked before any legal decision.
 
-### Continuation application
+Public patent databases themselves caution that listed legal status is not a legal conclusion.
 
-US 2025/0252179 A1, application 19/083,375, **Using First-Order Theories of Boolean Algebras to Provide Safe AI Systems and a Novel Software Specification Logic**.
+## 2. Research-overlap zones are NOT research prohibitions
 
-Public claim 1 is much closer to program synthesis. It describes a computer-implemented method that:
+The following topics are mathematically legitimate research subjects for OrbitSynthesis:
 
-- receives a software specification over a sliding time window in a decidable base language with finitely many equivalence classes for fixed finite symbol sets (weak omega-categoricity style condition);
-- constructs a recurrence `phi_t` using alternating input/output quantification;
-- determines a fixed point up to logical equivalence;
-- evaluates an alternating-quantifier formula at the fixed point;
-- outputs whether a program satisfying the specification exists.
+- atomless-BA quantifier elimination;
+- complete-type/orbit reductions;
+- weakly omega-categorical synthesis;
+- recurrence/fixed-point methods;
+- ocLTL translations;
+- support encodings;
+- Tau implementation comparisons.
 
-This application is not the same legal object as the granted claim and may change during prosecution.
+We can understand them deeply, find stronger theorems, counterexamples, lower bounds, alternate proofs, and generalizations.
 
-## 2. Red-zone research/implementation topics
+What changes by zone is how we treat **independent product implementation**, not whether we study the mathematics.
 
-Treat these as **overlap-risk** and do not frame them as independent commercial inventions without a claim chart / license review:
+## 3. Claim-adjacent implementation zone
 
-### R1. Tau-style atomless-BA DNF quantifier elimination
+Treat these as requiring license/claim review before they become the independent commercial engine:
 
-Especially:
+### I1. Tau-style atomless-BA QE implementation
 
-- positive-equation squeezing;
-- negative-inequation transformation;
-- 0/1 cofactor closed forms;
-- repeated innermost quantifier elimination in the patented software-validation context.
+Especially workflows closely tracking the published DNF equation/inequation cofactor-elimination recipe.
 
-`ABA_BLOCK_QE.md` is therefore retained as explanatory mathematics / implementation comparison, not as a proposed new core invention.
+`ABA_BLOCK_QE.md` therefore remains valuable mathematics and comparison material. `TAU_SUPPORT_FASTPATH_INTEGRATION.md` is a potential licensed/partner engineering project unless later legal analysis says otherwise.
 
-### R2. General weakly-omega-categorical fixed-point program-synthesis recurrence
+### I2. Reimplementation of a claimed Tau/NSO/ocLTL synthesis workflow
 
-The continuation application's public claim is broad enough that any commercial system whose central method is:
+Do not assume that changing BDDs to support masks, antichains, SAT, or another data structure automatically changes the patent analysis.
 
-`specification -> phi_t recurrence with forall-input/exists-output -> fixed point -> realizability decision`
+### I3. Product features whose method substantially follows a public patent claim
 
-should be treated as potentially overlapping until counsel/license analysis says otherwise.
+Independent source code authorship does not by itself establish freedom to operate. If commercial relevance appears, do a claim chart / legal review.
 
-### R3. Merely reimplementing ocLTL/Tau type reductions with different data structures
+## 4. Independent-core rule
 
-A support code, BDD, bitset, or antichain may be mathematically useful but changing representation alone does not establish freedom to operate if the claimed method steps remain present.
+The standalone OrbitSynthesis engine should not need any claim-adjacent Tau method for correctness.
 
-## 3. Green-field / independence-favored mathematics
+It must pass the deletion test in `INDEPENDENT_RND_CHARTER.md`:
 
-These directions are intentionally framed around mathematical objects not sourced as mere restatements of Ohad's patented algorithms.
+> remove Tau entirely; the theorem, IR, solver, controller semantics, and implementation still work.
 
-### G1. Boolean-power causal lifting theorem
+This is both good research design and a strong practical independence discipline, while still not constituting a legal noninfringement opinion.
 
-`FINITE_BOOLEAN_POWER_SAFETY.md` studies when causal safety predecessor commutes with Boolean-power patchwork for arbitrary finite local algebras.
+## 5. Independence-favored mathematics and software
 
-The core object is a universal-algebraic lifting theorem:
+### G1. Boolean-power causal lifting
 
-`CPre_(M[B])(Lift(W)) = Lift(Pre_M(W))`.
+`FINITE_BOOLEAN_POWER_SAFETY.md` studies causal safety over Boolean powers of arbitrary finite algebras:
 
-Historical prior art must still be checked (Wang, Even-Meyer, Boolean-product/Feferman-Vaught literature), but this is not being positioned as "Ohad's recurrence with a faster implementation."
+`CPre_(M[B])(Lift(W)) = Lift(Pre_M(W)).`
+
+The theorem and standalone local-game solver require no Tau implementation.
 
 ### G2. Clone-constrained controller synthesis
 
-The primal / semi-primal / demi-semi-primal / quasi-primal hierarchy studies **which finite positional strategy tables are original-signature term operations**.
+The primal / semi-primal / demi-semi-primal / quasi-primal hierarchy studies which finite strategy tables are terms of the original algebra.
 
 Objects include:
 
 - generated-subalgebra action filters;
-- automorphism stabilizers/orbit games;
+- automorphism orbit/stabilizer games;
 - internal-isomorphism groupoid CSPs;
-- explicit Quackenbush counterexamples.
+- strict separation counterexamples.
 
-This is universal algebra + game synthesis, not a restatement of BA QE.
+This is universal algebra + game synthesis and can be built independently.
 
-### G3. Support/type/extension geometry as pure mathematics
+### G3. Boolean-power support geometry
 
 Examples:
 
-- exact support type counts;
-- projection-fiber hypergraphs;
-- extension relation circuit/ROBDD complexity;
-- group-testing lower bounds;
-- orbit/type geometry of atomless Boolean powers.
+- support/type counts;
+- extension geometry;
+- extension relation circuits;
+- support hypergraph clause semantics;
+- prime-hit/maximal-loser/minimal-winner duality.
 
-These are mathematical structural results. Implementing them inside a patented application can still raise separate FTO questions.
+These are standalone mathematical objects.
 
 ### G4. Negative results / lower bounds
 
 Examples:
 
-- Sperner-width fixed-point lower bound;
-- Landau-period lower bound;
-- primitive-digraph unrealizability criteria;
-- failure of local admissibility for quasi-primal term synthesis.
+- group-testing/co-atom lower bounds;
+- Sperner-width fixed-point lower bounds;
+- Landau-period lower bounds;
+- primitive graph impossibility criteria;
+- quasi-primal local-vs-global controller separation.
 
-Negative/structural theorems are especially useful for academic independence because they do not amount to reproducing the claimed implementation recipe.
+### G5. Finite-algebra safety synthesizer
 
-### G5. New finite-algebra/Tau representation layer
+A standalone engine whose input is finite algebraic/local-game data and whose output distinguishes controller semantics remains independent of Tau.
 
-Encoding Boolean powers of arbitrary finite local algebras inside Tau's existing BA substrate is a distinct engineering direction, but FTO still depends on how the resulting synthesis engine decides realizability. Keep the representation theorem separate from any patented recurrence/QE pipeline.
+### G6. Boolean-power finite-algebra representation compiler
 
-## 4. Yellow-zone topics
+`TAU_FINITE_BOOLEAN_POWER_ENCODING.md` is mathematically a finite-algebra-to-Boolean-skeleton encoding. Its independent implementation should target our own IR/runtime first. Tau can become an adapter only if/when appropriate.
 
-These may be mathematically distinct but can become claim-adjacent depending on implementation.
+## 6. Capability-delta discipline
 
-### Y1. Direct safety fixed points over support hypergraphs
+We should actively seek things that the inspected **public** Tau surface does not currently document, while avoiding claims about private/internal work.
 
-The carrier `(allowed cells, prime-hit antichain)` and its closed predecessor transform are mathematically different from explicit complete-type recurrence. But a product implementation that still receives a weakly omega-categorical software spec, constructs a forall/exists temporal recurrence, finds its fixed point, and returns realizability could potentially implicate the continuation claim.
+Current high-value seams include:
 
-Academic theorem: continue.
+- original-signature term-controller synthesis;
+- clone-aware synthesis hierarchy;
+- quasi-primal internal-isomorphism groupoid constraints;
+- algebraic impossibility explanations;
+- arbitrary finite-algebra Boolean-power synthesis;
+- graph/semigroup structural diagnostics;
+- Boolean-product/sheaf generalizations.
 
-Commercial implementation: license/counsel gate.
+See `CAPABILITY_DELTA.md`.
 
-### Y2. Support-symbolic ocLTL compiler
+## 7. Research-paper positioning
 
-Structure-preserving support codes and closed atomic-feasibility circuits are worth researching. But if used merely as a replacement implementation of patented Tau/ocLTL synthesis steps, representation novelty alone is not an FTO conclusion.
-
-### Y3. Tau quantifier fast path
-
-A simultaneous support-mask implementation may be an optimization, but the granted patent expressly claims particular BA QE workflows. Treat this as Tau collaboration / licensed implementation work, not an independent product line, unless counsel concludes otherwise.
-
-## 5. Research-paper positioning rule
-
-Separate three claims in every draft:
+Keep three independent labels:
 
 ### Mathematical novelty
 
-"We prove theorem X, which was not found in prior mathematical literature after searches A/B/C."
+Did prior literature already prove the theorem or combination?
 
-This is a scholarship question.
+### Patent/legal status
 
-### Patent novelty
+Could a product implementation fall within an enforceable claim in the relevant jurisdiction?
 
-Do not infer patentability from academic novelty. Patent novelty/nonobviousness uses different law and prior-art rules.
+### Tau relationship
 
-### Freedom to operate
+Would a future license/partnership expressly permit a Tau-integrated implementation?
 
-Do not infer FTO from either of the above. A new theorem/implementation can still practice an older patent claim.
+Never substitute one label for another.
 
-## 6. License boundary
+## 8. Future developer-license overlay
 
-The user reports that the Tau team has offered an official license to build on Tau.
+If the Tau team sends a developer license, do not sign or architect around it before reviewing at least:
 
-Before commercializing anything close to the red/yellow zones, inspect the executed license for at least:
-
-- patents/patent-family coverage;
+- exact licensed software and patents;
+- patent-family / continuation coverage;
 - field of use;
-- territory;
-- sublicensing/deployment rights;
-- rights to continuations/divisionals/future claims;
-- ownership/license-back of improvements;
+- commercial and noncommercial rights;
+- deployment / hosted-service rights;
+- redistribution / sublicensing;
+- source modification / derivative work rights;
+- confidentiality;
 - publication rights;
-- confidentiality constraints;
-- termination consequences.
+- rights in pre-existing independent IP;
+- ownership of improvements / feedback;
+- license-back provisions;
+- patent grants and defensive termination;
+- termination and post-termination rights.
 
-Do not assume "license to Tau" automatically covers every continuation patent or independent improvement.
+Especially protect **background IP**: the independent OrbitSynthesis mathematics, code, notes, and inventions that predate or sit outside the license should not silently become assigned "improvements" merely because they can interoperate with Tau.
 
-## 7. Practical project split
+If terms are favorable, define the resulting architecture as:
 
-Maintain two conceptual tracks:
+`independent OrbitSynthesis core + license-permitted Tau adapter/integration`.
 
-### Track A — independent mathematics
+## 9. Two engineering tracks
 
-Focus:
+### Track A — independent engine
 
-- Boolean powers of finite algebras;
-- clone-constrained safety synthesis;
-- support geometry;
-- lower bounds;
-- graph/semigroup dynamics;
-- generalizations outside Tau's exact patented method.
-
-Publishability is evaluated by mathematical novelty/prior art.
-
-### Track B — Tau-licensed engineering
+No Tau dependency.
 
 Focus:
 
-- support-mask QE fast path;
+- finite algebra IR;
+- finite local safety games;
+- clone-constrained strategy synthesis;
+- Boolean-power realization;
+- hypergraph/orbit/groupoid algorithms;
+- our own symbolic backends.
+
+### Track B — optional Tau integration
+
+Only after a favorable license or other adequate legal basis.
+
+Possible work:
+
+- Tau frontend/backend adapter;
+- support-mask QE experiments;
 - ocLTL support compiler;
-- direct backend integration;
-- differential benchmarks against Tau.
+- reuse of Tau parsing/normalization/execution;
+- comparative optimization.
 
-Treat patent use as governed by the Tau/IDNI relationship and executed license, not as an attempt to route around their claims.
+Track B should be deletable without damaging Track A.
 
-This separation protects both collaboration and independent authorship.
+## 10. Research directions may deliberately cross the patent mathematics
 
-## 8. Claim-chart trigger
+We should continue exploring Ohad's mathematics even when it is claim-adjacent because it can:
 
-Before any of the following, stop and perform a real legal review / claim chart:
+- reveal why the method works;
+- prove better bounds;
+- expose limitations;
+- generate counterexamples;
+- suggest generalizations beyond its assumptions;
+- identify completely different mathematical carriers;
+- tell us which problems to solve independently.
 
-- commercial launch;
-- paid licensing to third parties;
-- filing our own patent close to Tau synthesis/QE;
-- publishing implementation details that the Tau agreement may treat as confidential/improvements;
-- deciding that an algorithm "does not infringe" based only on technical differences.
+The project should **not** contort its mathematical questions merely to avoid reading or understanding patented material.
 
-## 9. Current safest independent frontier
+The design rule is instead:
 
-The strongest independence-favored direction currently is:
+> understand everything; copy nothing blindly; make the independent core stand on its own; obtain permission before using claim-adjacent implementation paths where permission is needed.
 
-> **universal-algebraic structure of causal safety synthesis over Boolean powers, especially the controller-term hierarchy from primal through quasi-primal algebras, with exact counterexamples and orbit/groupoid algorithms.**
+## 11. Claim-chart trigger
 
-Why this is attractive:
+Before any of the following, stop and perform an actual legal/license review:
 
-- it arose by abstracting the mechanism, not copying Tau syntax;
-- it has classical universal-algebra foundations but a distinct synthesis question;
-- it produces both positive and negative theorems;
-- it generalizes beyond Boolean algebra and beyond weak-omega-categorical type enumeration as the central presentation;
-- it can still later inform a Tau implementation under license.
+- commercial launch of a claim-adjacent method;
+- paid third-party licensing;
+- patent filing close to the Tau family;
+- relying on a developer license for production rights;
+- publication of material potentially covered by future confidentiality/improvement clauses;
+- categorical statements that an implementation "does not infringe."
 
-Novelty still requires full prior-art search.
+## 12. Current independent frontier
 
-## 10. Caveat
+The leading independent research thesis is now broader than the earlier ABA optimization program:
 
-This file summarizes public patent records and research-management choices. Claim interpretation, validity, infringement, territorial effect, prosecution status, and license scope are legal questions and should be handled by qualified patent counsel when they become decision-relevant.
+> **Understand causal safety synthesis through the algebra of allowable controller functions and through Boolean-power patchwork, then build standalone solvers whose complexity and controller expressibility are controlled by finite-algebra symmetries, clones, support geometry, and transition dynamics.**
+
+Tau/Ohad mathematics remains an important source of problems and comparison, but not a dependency or a ceiling.
+
+## 13. Caveat
+
+Patent scope, validity, infringement, territorial effect, prosecution history, and license interpretation are legal questions. Public-source technical comparison can inform counsel but cannot replace it.
