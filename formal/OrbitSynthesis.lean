@@ -1,5 +1,6 @@
 import Mathlib.Data.Set.Image
 import OrbitSynthesis.Extremal
+import OrbitSynthesis.ParameterClosure
 
 open Set
 

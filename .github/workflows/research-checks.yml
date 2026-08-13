@@ -42,6 +42,26 @@ jobs:
         run: python experiments/quasiprimal_pointed_orbit_factorization.py
       - name: Quasi-primal parameter-closure abstraction
         run: python experiments/quasiprimal_parameter_closure.py
+      - name: Parameter-core and winning-domain frontier
+        run: >-
+          python experiments/quasiprimal_parameter_domain_frontier.py
+          --out-root /tmp/zag_parameter_domain_frontier
+          --repeats 3
+      - name: Research Kernel replay packet
+        run: >-
+          python experiments/research_kernel_parameter_domain_frontier.py
+          --repo-root .
+          --out-root /tmp/research_kernel_parameter_domain_frontier
+      - name: Optimized semantic replay
+        run: |
+          python experiments/quasiprimal_parameter_domain_frontier.py --repeats 0 > /tmp/frontier.normal.json
+          python -O experiments/quasiprimal_parameter_domain_frontier.py --repeats 0 > /tmp/frontier.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/frontier.normal.json'))
+          optimized = json.load(open('/tmp/frontier.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
 
   lean:
     runs-on: ubuntu-latest
