@@ -40,6 +40,8 @@ jobs:
         run: python experiments/dyadic_aba_witness.py
       - name: Quasi-primal pointed-orbit factorization
         run: python experiments/quasiprimal_pointed_orbit_factorization.py
+      - name: Quasi-primal parameter-closure abstraction
+        run: python experiments/quasiprimal_parameter_closure.py
 
   lean:
     runs-on: ubuntu-latest
