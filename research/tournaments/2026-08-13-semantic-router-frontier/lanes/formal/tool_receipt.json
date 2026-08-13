@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2026-08-13T17:35:13.378794+00:00",
+  "assistant": "lean",
+  "cwd": "/home/trevormoc/Downloads/OrbitSynthesis",
+  "repo_root": "/home/trevormoc/Downloads/OrbitSynthesis",
+  "git_commit": "",
+  "git_status_porcelain": [],
+  "files": [
+    "/home/trevormoc/Downloads/OrbitSynthesis/research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean"
+  ],
+  "theorems": [
+    "OrbitSynthesis.StrongSignedRouter.eval_router"
+  ],
+  "checker_command": "cd /home/trevormoc/Downloads/OrbitSynthesis && lake env lean research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean",
+  "checker_status": "pass",
+  "checker_exit_code": null,
+  "imports": {
+    "/home/trevormoc/Downloads/OrbitSynthesis/research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean": [
+      "Mathlib.Data.Fintype.Card",
+      "Mathlib.Tactic"
+    ]
+  },
+  "placeholders": {
+    "blocked": false,
+    "match_count": 0,
+    "matches": [],
+    "scan_exit_code": 0
+  },
+  "proof_idea": "",
+  "key_lemmas": [],
+  "risks": [],
+  "notes": []
+}

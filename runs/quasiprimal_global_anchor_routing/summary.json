@@ -1,0 +1,305 @@
+{
+  "absorbing_depth_closure": {
+    "candidate_distinct_nodes": 6,
+    "candidate_operation_depth": 3,
+    "depth_at_most_function_counts": [
+      2,
+      4,
+      20,
+      270
+    ],
+    "domain_rows_checked": 9,
+    "first_target_depth": 3
+  },
+  "algebra": "Quackenbush Q=({0,1,2};d,u)",
+  "bounded_random_tuples_checked": 3279,
+  "bounded_rows": [
+    {
+      "arity": 1,
+      "global_anchor_cap": 1,
+      "global_anchor_depth": 8,
+      "global_anchor_nodes": 14,
+      "local_subcube_cap": 1,
+      "local_subcube_depth": 5,
+      "local_subcube_nodes": 6,
+      "tuples_checked": 3
+    },
+    {
+      "arity": 2,
+      "global_anchor_cap": 1,
+      "global_anchor_depth": 14,
+      "global_anchor_nodes": 43,
+      "local_subcube_cap": 1,
+      "local_subcube_depth": 9,
+      "local_subcube_nodes": 29,
+      "tuples_checked": 9
+    },
+    {
+      "arity": 3,
+      "global_anchor_cap": 1,
+      "global_anchor_depth": 19,
+      "global_anchor_nodes": 117,
+      "local_subcube_cap": 1,
+      "local_subcube_depth": 13,
+      "local_subcube_nodes": 84,
+      "tuples_checked": 27
+    },
+    {
+      "arity": 4,
+      "global_anchor_cap": 3,
+      "global_anchor_depth": 23,
+      "global_anchor_nodes": 232,
+      "local_subcube_cap": 2,
+      "local_subcube_depth": 17,
+      "local_subcube_nodes": 219,
+      "tuples_checked": 81
+    },
+    {
+      "arity": 5,
+      "global_anchor_cap": 3,
+      "global_anchor_depth": 27,
+      "global_anchor_nodes": 499,
+      "local_subcube_cap": 4,
+      "local_subcube_depth": 21,
+      "local_subcube_nodes": 519,
+      "tuples_checked": 243
+    },
+    {
+      "arity": 6,
+      "global_anchor_cap": 3,
+      "global_anchor_depth": 31,
+      "global_anchor_nodes": 1161,
+      "local_subcube_cap": 4,
+      "local_subcube_depth": 25,
+      "local_subcube_nodes": 1284,
+      "tuples_checked": 729
+    },
+    {
+      "arity": 7,
+      "global_anchor_cap": 3,
+      "global_anchor_depth": 34,
+      "global_anchor_nodes": 2963,
+      "local_subcube_cap": 4,
+      "local_subcube_depth": 29,
+      "local_subcube_nodes": 2958,
+      "tuples_checked": 2187
+    }
+  ],
+  "claim_boundary": "The finite primitive lower bound concerns selector-only routing skeletons, not arbitrary global Q-term depth. Compiler evaluations and structural arithmetic are bounded evidence; the generic same-DAG O(3^r/r) size and 3r+O(log r) depth claim rests on a separate manuscript proof. Novelty and coefficient optimality remain unknown.",
+  "exhaustive_arity_two_selector_tables": 128,
+  "fold_rows": [
+    {
+      "arity": 1,
+      "distinct_nodes": 1,
+      "operation_depth": 0,
+      "tuples_checked": 3
+    },
+    {
+      "arity": 2,
+      "distinct_nodes": 6,
+      "operation_depth": 3,
+      "tuples_checked": 9
+    },
+    {
+      "arity": 3,
+      "distinct_nodes": 11,
+      "operation_depth": 5,
+      "tuples_checked": 27
+    },
+    {
+      "arity": 4,
+      "distinct_nodes": 16,
+      "operation_depth": 6,
+      "tuples_checked": 81
+    },
+    {
+      "arity": 5,
+      "distinct_nodes": 21,
+      "operation_depth": 7,
+      "tuples_checked": 243
+    },
+    {
+      "arity": 6,
+      "distinct_nodes": 26,
+      "operation_depth": 8,
+      "tuples_checked": 729
+    },
+    {
+      "arity": 7,
+      "distinct_nodes": 31,
+      "operation_depth": 8,
+      "tuples_checked": 2187
+    }
+  ],
+  "mutation_checks": {
+    "invalid_table_rejected": true,
+    "wrong_absorber_rejected": true
+  },
+  "reduction_row": {
+    "arity": 9,
+    "global_anchor_cap": 3,
+    "global_anchor_depth": 41,
+    "global_anchor_nodes": 23807,
+    "local_subcube_cap": 4,
+    "local_subcube_depth": 37,
+    "local_subcube_nodes": 18135,
+    "tuples_checked": 19683
+  },
+  "schema": "orbit-synthesis/quasiprimal-global-anchor-routing/v1",
+  "semantic_sha256": "fb5ca7bf56d9aba9fdb0f69d1f1355c92d56d4f9306ee08a922bfc770ef60501",
+  "shallow_mux": {
+    "anchor_two_rows_checked": 81,
+    "binary_anchor_out_of_scope_mismatches": 90,
+    "branch_depth": 3,
+    "constant_swap_mutation_mismatches": 36,
+    "distinct_nodes": 15,
+    "operation_depth_with_dynamic_anchor": 5
+  },
+  "structural_rows": [
+    {
+      "arity": 8,
+      "block_assignment_cap": 6,
+      "block_assignments": 3,
+      "block_positions": 1,
+      "depth_bound_improvement": -5,
+      "global_anchor_executable_depth_bound": 38,
+      "global_anchor_operation_depth_bound": 37,
+      "library_functions": 27,
+      "local_subcube_operation_depth_bound": 32,
+      "prefix_leaves": 2187
+    },
+    {
+      "arity": 12,
+      "block_assignment_cap": 9,
+      "block_assignments": 9,
+      "block_positions": 2,
+      "depth_bound_improvement": -4,
+      "global_anchor_executable_depth_bound": 53,
+      "global_anchor_operation_depth_bound": 52,
+      "library_functions": 19683,
+      "local_subcube_operation_depth_bound": 48,
+      "prefix_leaves": 59049
+    },
+    {
+      "arity": 16,
+      "block_assignment_cap": 13,
+      "block_assignments": 9,
+      "block_positions": 2,
+      "depth_bound_improvement": 0,
+      "global_anchor_executable_depth_bound": 65,
+      "global_anchor_operation_depth_bound": 64,
+      "library_functions": 19683,
+      "local_subcube_operation_depth_bound": 64,
+      "prefix_leaves": 4782969
+    },
+    {
+      "arity": 20,
+      "block_assignment_cap": 17,
+      "block_assignments": 9,
+      "block_positions": 2,
+      "depth_bound_improvement": 1,
+      "global_anchor_executable_depth_bound": 80,
+      "global_anchor_operation_depth_bound": 79,
+      "library_functions": 19683,
+      "local_subcube_operation_depth_bound": 80,
+      "prefix_leaves": 387420489
+    },
+    {
+      "arity": 24,
+      "block_assignment_cap": 21,
+      "block_assignments": 9,
+      "block_positions": 2,
+      "depth_bound_improvement": 5,
+      "global_anchor_executable_depth_bound": 92,
+      "global_anchor_operation_depth_bound": 91,
+      "library_functions": 19683,
+      "local_subcube_operation_depth_bound": 96,
+      "prefix_leaves": 31381059609
+    },
+    {
+      "arity": 32,
+      "block_assignment_cap": 28,
+      "block_assignments": 27,
+      "block_positions": 3,
+      "depth_bound_improvement": 13,
+      "global_anchor_executable_depth_bound": 116,
+      "global_anchor_operation_depth_bound": 115,
+      "library_functions": 7625597484987,
+      "local_subcube_operation_depth_bound": 128,
+      "prefix_leaves": 68630377364883
+    },
+    {
+      "arity": 48,
+      "block_assignment_cap": 44,
+      "block_assignments": 27,
+      "block_positions": 3,
+      "depth_bound_improvement": 26,
+      "global_anchor_executable_depth_bound": 167,
+      "global_anchor_operation_depth_bound": 166,
+      "library_functions": 7625597484987,
+      "local_subcube_operation_depth_bound": 192,
+      "prefix_leaves": 2954312706550833698643
+    },
+    {
+      "arity": 64,
+      "block_assignment_cap": 60,
+      "block_assignments": 27,
+      "block_positions": 3,
+      "depth_bound_improvement": 42,
+      "global_anchor_executable_depth_bound": 215,
+      "global_anchor_operation_depth_bound": 214,
+      "library_functions": 7625597484987,
+      "local_subcube_operation_depth_bound": 256,
+      "prefix_leaves": 127173474825648610542883299603
+    },
+    {
+      "arity": 96,
+      "block_assignment_cap": 91,
+      "block_assignments": 81,
+      "block_positions": 4,
+      "depth_bound_improvement": 71,
+      "global_anchor_executable_depth_bound": 314,
+      "global_anchor_operation_depth_bound": 313,
+      "library_functions": 443426488243037769948249630619149892803,
+      "local_subcube_operation_depth_bound": 384,
+      "prefix_leaves": 78551672112789411833022577315290546060373041
+    },
+    {
+      "arity": 128,
+      "block_assignment_cap": 123,
+      "block_assignments": 81,
+      "block_positions": 4,
+      "depth_bound_improvement": 103,
+      "global_anchor_executable_depth_bound": 410,
+      "global_anchor_operation_depth_bound": 409,
+      "library_functions": 443426488243037769948249630619149892803,
+      "local_subcube_operation_depth_bound": 512,
+      "prefix_leaves": 145557834293068928043467566190278008218249525830565939618481
+    },
+    {
+      "arity": 256,
+      "block_assignment_cap": 250,
+      "block_assignments": 243,
+      "block_positions": 5,
+      "depth_bound_improvement": 228,
+      "global_anchor_executable_depth_bound": 797,
+      "global_anchor_operation_depth_bound": 796,
+      "library_functions": 87189642485960958202911070585860771696964072404731750085525219437990967093723439943475549906831683116791055225665627,
+      "local_subcube_operation_depth_bound": 1024,
+      "prefix_leaves": 572051244350389846769299534113832523103781279047445012311130964732658735101919489469143082938722672929266113335592178747
+    }
+  ],
+  "weighted_depth_two_search": {
+    "branch_terminals": 3,
+    "grammar_nodes": 13,
+    "result": "unsat",
+    "selector_only_terminal_functions": 27,
+    "solver": "Z3 QF_BV",
+    "solver_version": "4.15.4",
+    "valuations_checked": 81
+  },
+  "experiment_source_sha256": "8097f2ddc4ef5c86fe3b6028dd1befd347ac20afe7b33e80d1851583667639e1",
+  "compiler_module_sha256": "d1f9035d2764b0de8fa2dd51a44ec31e7f517d0b84e8ad96afbba1efa5f7e2fb",
+  "manuscript_note_sha256": "b7028c1fe26c01d4acaeb074526496b98b92ab09032a6fb7ed167a5e4321dbfd",
+  "optimized_replay_semantic_sha256": "fb5ca7bf56d9aba9fdb0f69d1f1355c92d56d4f9306ee08a922bfc770ef60501"
+}

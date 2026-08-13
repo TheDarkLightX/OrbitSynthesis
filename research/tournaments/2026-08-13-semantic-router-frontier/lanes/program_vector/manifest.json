@@ -1,0 +1,46 @@
+{
+  "schema": "orbit-synthesis/parallel-program-vector-manifest/v1",
+  "date": "2026-08-13",
+  "status": "PASS_EXACT_VECTOR_CONDITIONAL_COMPILER",
+  "environment": {
+    "python": "3.12.3"
+  },
+  "commands": {
+    "normal": "python3 research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/check_parallel_program_vector.py --out research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt.json",
+    "optimized": "python3 -O research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/check_parallel_program_vector.py --out research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt_optimized.json",
+    "equality": "cmp -s research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt.json research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt_optimized.json"
+  },
+  "artifacts": {
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/check_parallel_program_vector.py": "2ba586a1ef97822aebbbcf692d29cd5bd3f8bbc8e785ddce43aff2180df3c350",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt.json": "c9e8b1ad9c57f4ef55ea458b2573f20578a137a6c7b5fb1a66707bb7ee68b632",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt_optimized.json": "c9e8b1ad9c57f4ef55ea458b2573f20578a137a6c7b5fb1a66707bb7ee68b632",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/REPORT.md": "d4a4a6e8c512b915c35129b7158da5a841456c26acc569e677fda8a965f30834"
+  },
+  "frozen_subjects": {
+    "research/tournaments/2026-08-13-semantic-router-frontier/STATE.md": "5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/check_strong_router_family.py": "07fb1d8d322e57a7af666bae5b699c072805ff1d15eef1f1e7c2d87208729ef8",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/summary.json": "6042127fd9f214e63bc38aa8e6367d1db7580c24b2b2e7a3aeba16625279aff0",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/r27_witness.json": "6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/REPORT.md": "5ed37d98357eb03a2f6ded9f741c9fb52d8f5ad821585c81be544f201945f8c6",
+    "research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/REPORT.md": "174a8fdf32e47fcce650298df5554a9f7c101fc67cc7be4ab4d2acb14bc5c661"
+  },
+  "receipt": {
+    "normal_equals_optimized": true,
+    "semantic_sha256": "9699a3fe058369ac22a4a4d8050d07825cc80112cbc4c601a85914100db13f88",
+    "semantic_pair_checks": 1200114,
+    "dependency_checks": 18,
+    "concrete_router_checks": 11356,
+    "direct_ternary_robdd_mode_checks": 262,
+    "padding_robdd_checks": 232,
+    "exact_compiler_arities": 4033,
+    "exact_compiler_arity_range": [
+      64,
+      4096
+    ]
+  },
+  "claims": {
+    "exact": "Parallel E/G program vector for every signed P/N router, including projection and constant modes, with at most 7q same-DAG d/u nodes and logarithmic preprocessing depth.",
+    "conditional": "Composed nonbinary giant-router compiler has size O(3^r/r) and depth r+O(log r), with the retained binary branch below depth r eventually.",
+    "nonclaims": "No novelty, prior-art clearance, patent freedom to operate, license right, Lean proof, practical performance, ordinary-tree bound, or publication-readiness claim."
+  }
+}

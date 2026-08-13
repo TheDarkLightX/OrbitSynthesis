@@ -1,0 +1,232 @@
+{
+  "algebra": "Quackenbush Q=({0,1,2};d,u)",
+  "bounded_random_tuples_checked": 3279,
+  "bounded_rows": [
+    {
+      "arity": 1,
+      "depth_saved_vs_gray": 0,
+      "gray_cap": 1,
+      "gray_dag_nodes": 6,
+      "gray_depth": 5,
+      "layered_cap": 1,
+      "layered_dag_nodes": 6,
+      "layered_depth": 5,
+      "nodes_saved_vs_gray": 0,
+      "tuples_checked": 3
+    },
+    {
+      "arity": 2,
+      "depth_saved_vs_gray": 0,
+      "gray_cap": 1,
+      "gray_dag_nodes": 29,
+      "gray_depth": 9,
+      "layered_cap": 1,
+      "layered_dag_nodes": 29,
+      "layered_depth": 9,
+      "nodes_saved_vs_gray": 0,
+      "tuples_checked": 9
+    },
+    {
+      "arity": 3,
+      "depth_saved_vs_gray": 0,
+      "gray_cap": 1,
+      "gray_dag_nodes": 84,
+      "gray_depth": 13,
+      "layered_cap": 1,
+      "layered_dag_nodes": 84,
+      "layered_depth": 13,
+      "nodes_saved_vs_gray": 0,
+      "tuples_checked": 27
+    },
+    {
+      "arity": 4,
+      "depth_saved_vs_gray": 0,
+      "gray_cap": 1,
+      "gray_dag_nodes": 240,
+      "gray_depth": 17,
+      "layered_cap": 1,
+      "layered_dag_nodes": 240,
+      "layered_depth": 17,
+      "nodes_saved_vs_gray": 0,
+      "tuples_checked": 81
+    },
+    {
+      "arity": 5,
+      "depth_saved_vs_gray": 12,
+      "gray_cap": 2,
+      "gray_dag_nodes": 630,
+      "gray_depth": 37,
+      "layered_cap": 3,
+      "layered_dag_nodes": 525,
+      "layered_depth": 25,
+      "nodes_saved_vs_gray": 105,
+      "tuples_checked": 243
+    },
+    {
+      "arity": 6,
+      "depth_saved_vs_gray": 46,
+      "gray_cap": 3,
+      "gray_dag_nodes": 1251,
+      "gray_depth": 75,
+      "layered_cap": 3,
+      "layered_dag_nodes": 1176,
+      "layered_depth": 29,
+      "nodes_saved_vs_gray": 75,
+      "tuples_checked": 729
+    },
+    {
+      "arity": 7,
+      "depth_saved_vs_gray": 46,
+      "gray_cap": 3,
+      "gray_dag_nodes": 2868,
+      "gray_depth": 79,
+      "layered_cap": 3,
+      "layered_dag_nodes": 2826,
+      "layered_depth": 33,
+      "nodes_saved_vs_gray": 42,
+      "tuples_checked": 2187
+    }
+  ],
+  "claim_boundary": "Finite schedule and compiler calibration only. The generic simultaneous O(3^r/r) size and O(r) depth theorem rests on the separate manuscript proof; classical local coding and finite-basis depth theory are prior art.",
+  "compiler_module_sha256": "d1f9035d2764b0de8fa2dd51a44ec31e7f517d0b84e8ad96afbba1efa5f7e2fb",
+  "construction": "zero-reusing layered prefix library over first-2 dynamic constants",
+  "depth_count_rows": [
+    {
+      "arity": 8,
+      "log10_fraction_upper": -2864.0751398392977,
+      "semantic_log": 6807.70528477593,
+      "shallow_operation_depth": 4,
+      "shallow_term_log_upper": 212.92856256712514
+    },
+    {
+      "arity": 12,
+      "log10_fraction_upper": -242135.69968943563,
+      "semantic_log": 577445.5227288123,
+      "shallow_operation_depth": 8,
+      "shallow_term_log_upper": 19907.470142234804
+    },
+    {
+      "arity": 16,
+      "log10_fraction_upper": -19727320.734075308,
+      "semantic_log": 47189225.77678102,
+      "shallow_operation_depth": 12,
+      "shallow_term_log_upper": 1765391.129786866
+    },
+    {
+      "arity": 24,
+      "log10_fraction_upper": -132860310462.45178,
+      "semantic_log": 310254337193.61334,
+      "shallow_operation_depth": 19,
+      "shallow_term_log_upper": 4332166872.210985
+    },
+    {
+      "arity": 32,
+      "log10_fraction_upper": -870815566941050.0,
+      "semantic_log": 2035744037722361.0,
+      "shallow_operation_depth": 27,
+      "shallow_term_log_upper": 30617094536740.42
+    },
+    {
+      "arity": 48,
+      "log10_fraction_upper": -3.742807687618346e+22,
+      "semantic_log": 8.763239414766078e+22,
+      "shallow_operation_depth": 43,
+      "shallow_term_log_upper": 1.4510622731255732e+21
+    },
+    {
+      "arity": 64,
+      "log10_fraction_upper": -1.6093905584816054e+30,
+      "semantic_log": 3.7722872403453844e+30,
+      "shallow_operation_depth": 59,
+      "shallow_term_log_upper": 6.652853158027757e+28
+    }
+  ],
+  "exhaustive_arity_two_selector_tables": 128,
+  "experiment_source_sha256": "b0bf6a9c80f0bf80ccf26ddf84b0a3fc2e17860e9b383263a5ec21f7c02403e4",
+  "manuscript_note_sha256": "a5509e8c1ac8f38d5a35085f840d25109fac04a10ae851718a4b177cdff4f76a",
+  "mutation_checks": {
+    "dropping_loglog_depth_correction_rejected": true,
+    "invalid_schedule_rejected": true,
+    "wrong_binary_selector_recurrence_rejected": true
+  },
+  "optimized_replay_semantic_sha256": "b42fa56c1e78e670e2a436181337957309a0b2a658b6f539486b85cedc482d54",
+  "reduction_row": {
+    "arity": 9,
+    "depth_saved_vs_gray": 134,
+    "gray_cap": 4,
+    "gray_dag_nodes": 19329,
+    "gray_depth": 179,
+    "layered_cap": 4,
+    "layered_dag_nodes": 18327,
+    "layered_depth": 45,
+    "nodes_saved_vs_gray": 1002,
+    "tuples_checked": 19683
+  },
+  "schema": "orbit-synthesis/quasiprimal-layered-local-coding/v1",
+  "selector_census_rows": [
+    {
+      "block_assignments": 0,
+      "gray_dependency_edges": 0,
+      "gray_selectors": 0,
+      "layered_dependency_levels": 0,
+      "layered_selectors": 0
+    },
+    {
+      "block_assignments": 1,
+      "gray_dependency_edges": 2,
+      "gray_selectors": 2,
+      "layered_dependency_levels": 1,
+      "layered_selectors": 2
+    },
+    {
+      "block_assignments": 2,
+      "gray_dependency_edges": 8,
+      "gray_selectors": 8,
+      "layered_dependency_levels": 2,
+      "layered_selectors": 8
+    },
+    {
+      "block_assignments": 3,
+      "gray_dependency_edges": 26,
+      "gray_selectors": 26,
+      "layered_dependency_levels": 3,
+      "layered_selectors": 26
+    },
+    {
+      "block_assignments": 4,
+      "gray_dependency_edges": 80,
+      "gray_selectors": 80,
+      "layered_dependency_levels": 4,
+      "layered_selectors": 80
+    },
+    {
+      "block_assignments": 5,
+      "gray_dependency_edges": 242,
+      "gray_selectors": 242,
+      "layered_dependency_levels": 5,
+      "layered_selectors": 242
+    },
+    {
+      "block_assignments": 6,
+      "gray_dependency_edges": 728,
+      "gray_selectors": 728,
+      "layered_dependency_levels": 6,
+      "layered_selectors": 728
+    },
+    {
+      "block_assignments": 7,
+      "gray_dependency_edges": 2186,
+      "gray_selectors": 2186,
+      "layered_dependency_levels": 7,
+      "layered_selectors": 2186
+    },
+    {
+      "block_assignments": 8,
+      "gray_dependency_edges": 6560,
+      "gray_selectors": 6560,
+      "layered_dependency_levels": 8,
+      "layered_selectors": 6560
+    }
+  ],
+  "semantic_sha256": "b42fa56c1e78e670e2a436181337957309a0b2a658b6f539486b85cedc482d54"
+}

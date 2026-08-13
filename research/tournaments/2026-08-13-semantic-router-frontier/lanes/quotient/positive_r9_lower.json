@@ -1,0 +1,108 @@
+{
+  "all_branch_positions_positive": true,
+  "branch_positions": [
+    [
+      2,
+      7
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      6,
+      4
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      16,
+      0
+    ],
+    [
+      20,
+      8
+    ],
+    [
+      22,
+      2
+    ],
+    [
+      26,
+      6
+    ]
+  ],
+  "checks": 4608,
+  "claim_boundary": "Exact finite lower bound P_pos(3)>=9 only; generic compiler and novelty are separate.",
+  "depth": 3,
+  "effective_mutations": [
+    {
+      "matches_after_flip": 384,
+      "position": 3,
+      "target": 0
+    },
+    {
+      "matches_after_flip": 448,
+      "position": 0,
+      "target": 1
+    },
+    {
+      "matches_after_flip": 384,
+      "position": 3,
+      "target": 2
+    },
+    {
+      "matches_after_flip": 448,
+      "position": 0,
+      "target": 3
+    },
+    {
+      "matches_after_flip": 384,
+      "position": 0,
+      "target": 4
+    },
+    {
+      "matches_after_flip": 384,
+      "position": 0,
+      "target": 5
+    },
+    {
+      "matches_after_flip": 384,
+      "position": 0,
+      "target": 6
+    },
+    {
+      "matches_after_flip": 256,
+      "position": 0,
+      "target": 7
+    },
+    {
+      "matches_after_flip": 448,
+      "position": 3,
+      "target": 8
+    }
+  ],
+  "matches_per_target": [
+    512,
+    512,
+    512,
+    512,
+    512,
+    512,
+    512,
+    512,
+    512
+  ],
+  "negative_leaf_count": 13,
+  "positive_leaf_count": 14,
+  "q": 9,
+  "schema": "orbitsynthesis/positive-r9-lower/v1",
+  "semantic_sha256": "b9a29db8cbc4eed66514f4f1b1d3c0eeb75d6560167aa148556eb2e0ce563453",
+  "witness_sha256": "d3c25e47ce671d8a5d484d6c50cc0b3fccf7f6bb5507097ef8bff6bcbbbe529c"
+}

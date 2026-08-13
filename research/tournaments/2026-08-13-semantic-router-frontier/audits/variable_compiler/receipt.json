@@ -1,0 +1,24 @@
+{
+  "schema": "orbit-synthesis/variable-router-compiler-audit-receipt/v1",
+  "status": "CONDITIONAL_PASS_AFTER_RESIDUAL_FIRST_REPAIR",
+  "checker": "research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/check_variable_compiler.py",
+  "checker_sha256": "d88cd24a6f324dfe84d3972cd65fa8061770991ff060eb0d4587d66750d1eb4e",
+  "commands": [
+    "python3 research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/check_variable_compiler.py",
+    "python3 -O research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/check_variable_compiler.py"
+  ],
+  "outputs_semantically_identical": true,
+  "semantic_sha256": "d81d0bd6b979ec0df4270fd60f04468884de6e286aea450ba28eed9897e51870",
+  "arities_checked": 9937,
+  "finite_inequalities": [
+    "size_upper <= 11*3^r/r for 64<=r<=10000",
+    "depth_upper <= r+10*floor(sqrt(r))+50 for 64<=r<=10000"
+  ],
+  "counterexample": {
+    "arity": 512,
+    "residual_last_size_times_r_over_3r": 66119763457.40466,
+    "residual_first_size_times_r_over_3r": 6.320987654455272
+  },
+  "result": "Conditional on the exact router family and alphabet lift, residual-first or balanced chunking yields same-DAG O(3^r/r) size and r+O(sqrt(r)) depth. Residual-last sequential chunking fails the size accounting.",
+  "claim_boundary": "Independent compiler accounting only; the router family is a premise. No novelty, optimality of lower-order terms, patent/FTO, practical-performance, or Tau claim follows."
+}
