@@ -1,0 +1,36 @@
+name: discriminator-core-family-realizability
+
+on:
+  pull_request:
+
+jobs:
+  exact-constructor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exact constructor campaign
+        run: >-
+          python experiments/discriminator_core_family_realizability.py
+          --exact-max-carrier 6
+          --out-root runs/zag_discriminator_core_family
+      - name: Research Kernel replay
+        run: >-
+          python experiments/research_kernel_discriminator_core_family.py
+          --repo-root .
+          --out-root /tmp/research_kernel_discriminator_core_family
+      - name: Optimized semantic replay
+        run: |
+          python experiments/discriminator_core_family_realizability.py --exact-max-carrier 6 > /tmp/family.normal.json
+          python -O experiments/discriminator_core_family_realizability.py --exact-max-carrier 6 > /tmp/family.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/family.normal.json'))
+          optimized = json.load(open('/tmp/family.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Python compile gate
+        run: python -m compileall -q src/orbitsynthesis experiments
