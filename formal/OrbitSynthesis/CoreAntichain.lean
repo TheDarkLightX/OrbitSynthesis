@@ -38,8 +38,9 @@ theorem no_two_singleton_minimal
   have hempty : Allowed ∅ target := pairCollapse hne ha.1 hb.1
   have hback : ({a} : Set α) ⊆ ∅ :=
     ha.2 ∅ hempty (Set.empty_subset {a})
-  have haempty : a ∈ (∅ : Set α) := hback (Set.mem_singleton a)
-  simpa using haempty
+  have haSingleton : a ∈ ({a} : Set α) := by simp
+  have haEmpty : a ∈ (∅ : Set α) := hback haSingleton
+  simpa using haEmpty
 
 /-- Equivalently, under pair collapse a minimal-core family contains at most one
 singleton core. -/
