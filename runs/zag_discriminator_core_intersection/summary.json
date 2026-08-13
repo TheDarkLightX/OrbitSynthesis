@@ -1,0 +1,38 @@
+{
+  "D3_census": {
+    "maximum_family_size": 3,
+    "multi_member_table_count": 1550,
+    "pairwise_cover_failures": 0,
+    "realized_family_count": 15,
+    "table_count": 19683
+  },
+  "D3_cover_extra_over_meet": 552,
+  "D3_cover_intersection": 576,
+  "D4_disjoint_cover_extra_over_meet": 14,
+  "D4_disjoint_cover_intersection": 16,
+  "D4_noncover_intersection": 24,
+  "candidate_statuses": {
+    "all_pairwise_cover_families_are_realizable": "UNDER_TEST",
+    "collapse_except_incomparable_full_covers": "TESTED_ONLY",
+    "collapse_for_every_core_pair": "FAILED",
+    "cover_block_intersection_count": "TESTED_ONLY",
+    "minimum_core_multiplicity_exceeds_carrier": "FAILED"
+  },
+  "collapse_pair_count": 78548,
+  "count_formula_failures": 0,
+  "cover_profile_count": 84,
+  "exact_checks": {
+    "D3_singleton_pair_intersection": 2,
+    "D4_singleton_pair_intersection": 2,
+    "D5_singleton_pair_intersection": 2,
+    "D6_singleton_pair_intersection": 2,
+    "D7_singleton_pair_intersection": 2
+  },
+  "graph_mismatches": 0,
+  "incomparable_cover_pair_count": 8828,
+  "maximum_minimal_family_bound_at_max_carrier": 8,
+  "pair_count": 87376,
+  "schema": "orbit-synthesis/zag-discriminator-core-intersection/v1",
+  "semantic_sha256": "3f2fd8392938d4ee828bd3595ff4c5c684811f18525880d358369102a981bbfb",
+  "witness_failures": 0
+}
