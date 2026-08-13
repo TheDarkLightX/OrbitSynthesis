@@ -61,6 +61,11 @@ from .patchability import (
     patchability_obstruction_hypergraph,
     patchability_residual_automaton,
 )
+from .patchability_learning import (
+    PatchabilityLearningResult,
+    PatchabilityLearningStep,
+    learn_minimum_patchability_parameters,
+)
 from .patchability_residual import (
     PatchabilityResidualAutomaton,
     build_patchability_residual_automaton,
@@ -95,6 +100,8 @@ __all__ = [
     "ParameterCoreInfo",
     "ParameterDomainFrontier",
     "ParameterDomainPoint",
+    "PatchabilityLearningResult",
+    "PatchabilityLearningStep",
     "PatchabilityResidualAutomaton",
     "PatchabilityResult",
     "PointedClass",
@@ -116,6 +123,7 @@ __all__ = [
     "has_pointed_extension_property",
     "hits_all",
     "incidence_masks",
+    "learn_minimum_patchability_parameters",
     "maximal_domains_bitset_nogood",
     "maximal_domains_for_allowed_parameters",
     "maximal_domains_nogood",
