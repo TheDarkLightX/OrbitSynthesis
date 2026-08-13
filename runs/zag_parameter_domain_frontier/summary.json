@@ -1,0 +1,275 @@
+{
+  "algebra": "Quackenbush Q=({0,1,2};d,u)",
+  "all_maximal_points": 4,
+  "candidate_statuses": {
+    "compiled_pointed_core_seed": "TESTED_ONLY",
+    "naive_local": "FAILED",
+    "pointed_rebuild_each_domain": "TESTED_ONLY",
+    "raw_groupoid_reference": "TESTED_ONLY"
+  },
+  "domain_count": 512,
+  "environment": {
+    "platform": "Linux-6.18.35-x86_64-with-glibc2.41",
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]"
+  },
+  "feasibility_counts": {
+    "()": 128,
+    "(0, 1)": 160,
+    "(0, 1, 2)": 253
+  },
+  "lean_source_gate": {
+    "compiler_status": "BLOCKED_NO_LOCAL_LEAN_AND_GITHUB_ACTIONS_BILLING",
+    "forbidden_tokens": [],
+    "path": "formal/OrbitSynthesis/ParameterClosure.lean",
+    "present": true,
+    "theorem_count": 8
+  },
+  "minimum_core_for_paired_initials": [
+    0,
+    1
+  ],
+  "minimum_rank_for_paired_initials": 1,
+  "naive_false_positive_count": 32,
+  "naive_minimized_false_positive": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "nondominated_points": [
+    {
+      "core": [],
+      "domain": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rank": 0
+    },
+    {
+      "core": [],
+      "domain": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rank": 0
+    },
+    {
+      "core": [
+        0,
+        1
+      ],
+      "domain": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "rank": 1
+    }
+  ],
+  "parameter_cores": [
+    {
+      "core": [],
+      "rank": 0,
+      "witnesses": [
+        []
+      ]
+    },
+    {
+      "core": [
+        0,
+        1
+      ],
+      "rank": 1,
+      "witnesses": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ]
+    },
+    {
+      "core": [
+        0,
+        1,
+        2
+      ],
+      "rank": 1,
+      "witnesses": [
+        [
+          2
+        ]
+      ]
+    }
+  ],
+  "random_differential_instances": 24576,
+  "random_differential_mismatches": 0,
+  "random_game_count": 16,
+  "reference_pointed_mismatches": 0,
+  "reference_rebuild_mismatches": 0,
+  "schema": "orbit-synthesis/zag-parameter-domain-frontier/v1",
+  "seed": 1,
+  "semantic_sha256": "97f0a4d729bdd551e9efb7511ff5b5a5e08cd05f31dc364f706e0596051a6370",
+  "state_count": 9,
+  "timings": {
+    "compiled_pointed_core_seed_ns": [
+      32215715,
+      31430344,
+      31615162,
+      31929954,
+      30653506,
+      33529104,
+      31902342,
+      31183148,
+      33718288,
+      34545639,
+      33426322,
+      31037381,
+      32105670,
+      30704102,
+      30912550,
+      32324780,
+      31134348,
+      32371246,
+      31671928,
+      33570417,
+      31532729,
+      31151256,
+      42324042,
+      35517404,
+      31920125,
+      30940850,
+      31316487,
+      32481757,
+      31088299,
+      32747325
+    ],
+    "pointed_rebuild_each_domain_ns": [
+      1375249552,
+      1411544392,
+      1425453169
+    ],
+    "raw_groupoid_reference_ns": [
+      46249802,
+      47390012,
+      46589419,
+      49124331,
+      59736488,
+      47208886,
+      45859104,
+      46282357,
+      47009218,
+      43809084,
+      46350701,
+      46095251,
+      46889575,
+      47467366,
+      47400735,
+      47286341,
+      58085785,
+      44162228,
+      44440602,
+      45235700,
+      43606485,
+      45532173,
+      43910523,
+      48029073,
+      45264863,
+      49141211,
+      50384739,
+      44935882,
+      43394960,
+      44874972
+    ]
+  }
+}

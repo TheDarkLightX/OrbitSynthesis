@@ -1,0 +1,10 @@
+{
+  "compiler_status": "BLOCKED_NO_LOCAL_LEAN_AND_GITHUB_ACTIONS_BILLING",
+  "forbidden_tokens": [],
+  "nonclaim": "No Lean compilation occurred in this runtime.",
+  "path": "formal/OrbitSynthesis/ParameterClosure.lean",
+  "present": true,
+  "schema": "zag/lean-source/v1",
+  "status": "TESTED_ONLY",
+  "theorem_count": 8
+}
