@@ -1,0 +1,31 @@
+{
+  "compiler": {
+    "analytic_side_checks": 96762,
+    "analytic_tail_start": 258,
+    "depth": "<=r+4*ceil(log2 r)+9",
+    "finite_arities": [
+      64,
+      16384
+    ],
+    "finite_checks": 48963,
+    "inclusive_with_existing_binary_allowance": "<15*3\z/r",
+    "nonbinary": "<14*3\z/r",
+    "worst_arity": 93,
+    "worst_decimal": "13.777777777777779"
+  },
+  "reusable_vector": {
+    "asymptotic": "V_root(w) = 2*3^w + O(3^ceil(w/2))",
+    "checks": 1024,
+    "exact_bound": "V_root(w) <= 3*3^w",
+    "widths": [
+      1,
+      256
+    ],
+    "worst_ratio": "3",
+    "worst_root": "negative",
+    "worst_width": 2
+  },
+  "semantic_sha256": "875173cffc0becde9f96d431d071d7007ac293efd3a90812b5395e54214a5220",
+  "status": "exact recurrences plus finite replay; analytic proof in note",
+  "theorem": "sharpened reusable vector and conditional compiler constants"
+}
