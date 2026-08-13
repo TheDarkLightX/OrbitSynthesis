@@ -1,6 +1,8 @@
 import Mathlib.Data.Set.Image
 import OrbitSynthesis.Extremal
 import OrbitSynthesis.ParameterClosure
+import OrbitSynthesis.PointedProduct
+import OrbitSynthesis.DomainNogood
 
 open Set
 

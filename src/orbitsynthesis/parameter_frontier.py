@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Hashable, Iterable, Sequence
 from .parameter_closure import parameter_core, parameter_core_catalog
-from .pointed_kernel import CompiledParameterizedKernel
+from .domain_api import CompiledParameterizedKernel
 Value = Hashable
 State = tuple[Value, ...]
 Output = tuple[Value, ...]
@@ -35,6 +35,7 @@ def maximal_parameterized_domains(
     core: Iterable[Value],
     *,
     solver: str = "pointed",
+    search: str = "exhaustive",
     exhaustive_state_limit: int = 16,
     internal_isomorphisms: Sequence[Any] | None = None,
 ) -> tuple[tuple[frozenset[State], tuple[tuple[Observation, Output], ...]], ...]:
@@ -47,6 +48,7 @@ def maximal_parameterized_domains(
     )
     return kernel.maximal_domains(
         solver=solver,
+        search=search,
         exhaustive_state_limit=exhaustive_state_limit,
     )
 
@@ -72,6 +74,7 @@ def parameter_domain_frontier(
     game: Any,
     *,
     solver: str = "pointed",
+    search: str = "exhaustive",
     exhaustive_state_limit: int = 16,
 ) -> ParameterDomainFrontier:
     """Compute the exact joint closed-core / winning-domain antichain."""
@@ -86,6 +89,7 @@ def parameter_domain_frontier(
         )
         for domain, strategy_items in kernel.maximal_domains(
             solver=solver,
+            search=search,
             exhaustive_state_limit=exhaustive_state_limit,
         ):
             points.append(
@@ -118,6 +122,7 @@ def parameter_budget_frontier(
     *,
     required_initial_states: Iterable[State] = (),
     solver: str = "pointed",
+    search: str = "exhaustive",
     exhaustive_state_limit: int = 16,
 ) -> ParameterDomainFrontier:
     """Exact nondominated frontier subject to a raw-parameter budget.
@@ -142,7 +147,9 @@ def parameter_budget_frontier(
         )
         for domain, strategy_items in kernel.maximal_domains(
             solver=solver,
+            search=search,
             exhaustive_state_limit=exhaustive_state_limit,
+            required_states=required,
         ):
             if not required <= domain:
                 continue
@@ -172,6 +179,7 @@ def minimum_parameter_solutions(
     *,
     max_budget: int | None = None,
     solver: str = "pointed",
+    search: str = "exhaustive",
     exhaustive_state_limit: int = 16,
 ) -> tuple[ParameterDomainPoint, ...]:
     """Return every minimum-rank semantic solution containing ``initial_states``.
@@ -193,6 +201,7 @@ def minimum_parameter_solutions(
             budget,
             required_initial_states=required,
             solver=solver,
+            search=search,
             exhaustive_state_limit=exhaustive_state_limit,
         )
         feasible = tuple(point for point in frontier.nondominated if point.rank == budget)

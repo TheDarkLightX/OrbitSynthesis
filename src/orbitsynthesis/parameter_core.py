@@ -8,9 +8,15 @@ from .parameter_closure import (
     generated_at_observation, parameter_core, parameter_core_catalog,
 )
 from .pointed_kernel import (
-    CompiledParameterizedKernel, PointedClass, maximal_domains_for_allowed_parameters,
+    PointedClass,
     naive_local_domain_feasible, parameterized_strategy_for_allowed_parameters,
     parameterized_strategy_pointed, parameterized_strategy_reference, pointed_classes,
+)
+from .domain_api import CompiledParameterizedKernel, maximal_domains_for_allowed_parameters
+from .domain_search import (
+    BitsetNogoodDomainSearch, CompiledNogoodDomainSearch, DomainNogood,
+    DomainSearchResult, DomainSearchStats, PointedClassRules, SeedRule,
+    maximal_domains_bitset_nogood, maximal_domains_nogood,
 )
 from .parameter_frontier import (
     ParameterDomainFrontier, ParameterDomainPoint, maximal_parameterized_domains,

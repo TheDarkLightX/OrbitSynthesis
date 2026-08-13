@@ -62,6 +62,29 @@ jobs:
           optimized = json.load(open('/tmp/frontier.optimized.json'))
           assert normal['semantic_sha256'] == optimized['semantic_sha256']
           PY
+      - name: Pointed domain-nogood ZAG campaign
+        run: >-
+          python experiments/quasiprimal_nogood_domain_search.py
+          --out-root runs/zag_nogood_domain_search
+          --repeats 3
+          --random-games 8
+      - name: Pointed domain-nogood Research Kernel replay
+        run: >-
+          python experiments/research_kernel_nogood_domain_search.py
+          --repo-root .
+          --out-root /tmp/research_kernel_nogood_domain_search
+      - name: Pointed domain-nogood optimized replay
+        run: |
+          python experiments/quasiprimal_nogood_domain_search.py --repeats 0 --random-games 8 > /tmp/nogood.normal.json
+          python -O experiments/quasiprimal_nogood_domain_search.py --repeats 0 --random-games 8 > /tmp/nogood.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/nogood.normal.json'))
+          optimized = json.load(open('/tmp/nogood.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Python compile gate
+        run: python -m compileall -q src/orbitsynthesis experiments
 
   lean:
     runs-on: ubuntu-latest
