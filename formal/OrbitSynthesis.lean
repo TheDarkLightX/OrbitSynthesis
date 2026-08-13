@@ -3,6 +3,7 @@ import OrbitSynthesis.Extremal
 import OrbitSynthesis.ParameterClosure
 import OrbitSynthesis.PointedProduct
 import OrbitSynthesis.DomainNogood
+import OrbitSynthesis.TableSafetyReduction
 
 open Set
 

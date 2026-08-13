@@ -6,7 +6,7 @@ on:
 jobs:
   python-oracles:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -81,6 +81,25 @@ jobs:
           import json
           normal = json.load(open('/tmp/nogood.normal.json'))
           optimized = json.load(open('/tmp/nogood.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Fixed-domain minimum-core antichain campaign
+        run: >-
+          python experiments/quasiprimal_fixed_domain_core_antichain.py
+          --out-root runs/zag_fixed_domain_core_antichain
+      - name: Fixed-domain antichain Research Kernel replay
+        run: >-
+          python experiments/research_kernel_fixed_domain_core_antichain.py
+          --repo-root .
+          --out-root /tmp/research_kernel_fixed_domain_core_antichain
+      - name: Fixed-domain antichain optimized replay
+        run: |
+          python experiments/quasiprimal_fixed_domain_core_antichain.py > /tmp/core-antichain.normal.json
+          python -O experiments/quasiprimal_fixed_domain_core_antichain.py > /tmp/core-antichain.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/core-antichain.normal.json'))
+          optimized = json.load(open('/tmp/core-antichain.optimized.json'))
           assert normal['semantic_sha256'] == optimized['semantic_sha256']
           PY
       - name: Python compile gate
