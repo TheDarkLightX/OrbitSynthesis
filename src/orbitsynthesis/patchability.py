@@ -1,19 +1,17 @@
 """Exact small-carrier oracles for partial-symmetry patchability.
 
 The routines are structural: they do not assert that an input algebra is
-quasi-primal.  When quasi-primality is known independently, the extension
+quasi-primal. When quasi-primality is known independently, the extension
 property computed here is exactly the demi-semi-primal condition used by
 OrbitSynthesis' original-signature term-controller theorems.
 
 The key factorization is:
 
-1. enumerate nonextendable *unpointed* internal isomorphisms once;
+1. enumerate nonextendable unpointed internal isomorphisms once;
 2. turn each one into the hyperedge ``carrier - Fix(phi)``;
-3. choose named parameters as a hitting set of those edges.
-
-Thus the provisional ``kappa_patch`` value is exactly the transversal number
-of the obstruction hypergraph.  The implementation remains exponential /
-factorial and is intended as a reference oracle and falsifier backend.
+3. minimize the edge family to a clutter;
+4. solve the resulting parameter problem either by direct combinations or by
+   the exact residual automaton over unhit minimal edges.
 """
 
 from __future__ import annotations
@@ -23,6 +21,11 @@ from itertools import combinations
 from typing import Hashable, Iterable, Sequence
 
 from .finite_algebra import FiniteAlgebra, InternalIsomorphism
+from .patchability_residual import (
+    PatchabilityResidualAutomaton,
+    build_patchability_residual_automaton,
+    shortest_accepting_parameters,
+)
 
 Value = Hashable
 
@@ -148,7 +151,7 @@ def patchability_obstruction_hypergraph(
     """Compile nonextendable internal symmetries to parameter hitting-set edges.
 
     For a nonextendable ``phi``, naming ``C`` leaves that obstruction eligible
-    iff every named value belongs to ``Fix(phi)``.  Hence ``C`` kills ``phi``
+    iff every named value belongs to ``Fix(phi)``. Hence ``C`` kills ``phi``
     exactly when it intersects ``carrier - Fix(phi)``.
     """
 
@@ -171,6 +174,30 @@ def patchability_obstruction_hypergraph(
         raw_nonextendable_count=len(nonextendable),
         distinct_edges=distinct,
         minimal_edges=_minimal_edges(distinct),
+    )
+
+
+def patchability_residual_automaton(
+    algebra: FiniteAlgebra,
+    *,
+    nontrivial_only: bool = True,
+    internal_isomorphisms: Sequence[InternalIsomorphism] | None = None,
+) -> PatchabilityResidualAutomaton:
+    """Compile one algebra directly to its exact future-patchability automaton."""
+
+    all_isos = tuple(
+        internal_isomorphisms
+        if internal_isomorphisms is not None
+        else algebra.internal_isomorphisms()
+    )
+    hypergraph = patchability_obstruction_hypergraph(
+        algebra,
+        nontrivial_only=nontrivial_only,
+        internal_isomorphisms=all_isos,
+    )
+    return build_patchability_residual_automaton(
+        algebra.values,
+        hypergraph.minimal_edges,
     )
 
 
@@ -243,11 +270,7 @@ def parameter_patchability_number(
     nontrivial_only: bool = True,
     max_parameters: int | None = None,
 ) -> PatchabilityResult:
-    """Find a smallest named set restoring the extension property exactly.
-
-    The algebraic obstruction set is enumerated only once.  Parameter search is
-    then an exact minimum hitting-set search over inclusion-minimal hyperedges.
-    """
+    """Reference minimum search by carrier-subset cardinality."""
 
     all_isos = algebra.internal_isomorphisms()
     hypergraph = patchability_obstruction_hypergraph(
@@ -267,6 +290,32 @@ def parameter_patchability_number(
                 )
 
     raise ValueError(
-        "no hitting parameter set found within max_parameters; "
-        "increase the search limit"
+        "no hitting parameter set found within max_parameters; increase the search limit"
+    )
+
+
+def parameter_patchability_number_via_residual(
+    algebra: FiniteAlgebra,
+    *,
+    nontrivial_only: bool = True,
+    max_parameters: int | None = None,
+) -> PatchabilityResult:
+    """Find a minimum parameter set by BFS on the minimal residual automaton.
+
+    Equal-incidence carrier values are searched once as one parameter role, and
+    future-equivalent partial parameter sets share one residual state.
+    """
+
+    automaton = patchability_residual_automaton(
+        algebra,
+        nontrivial_only=nontrivial_only,
+    )
+    parameters = shortest_accepting_parameters(automaton)
+    if max_parameters is not None and len(parameters) > max_parameters:
+        raise ValueError(
+            "no hitting parameter set found within max_parameters; increase the search limit"
+        )
+    return PatchabilityResult(
+        size=len(parameters),
+        parameters=frozenset(parameters),
     )
