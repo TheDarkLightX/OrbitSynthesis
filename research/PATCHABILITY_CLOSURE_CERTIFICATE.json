@@ -1,0 +1,62 @@
+{
+  "schema": "orbit-synthesis/minimum-sufficient-abstraction-certificate/v1",
+  "certificate_id": "orbit-synthesis/patchability-closure-lattice/v1",
+  "date": "2026-08-13",
+  "skill_provenance": {
+    "repository": "TheDarkLightX/Morph",
+    "pull_request": 10,
+    "skill": "minimum-sufficient-abstraction"
+  },
+  "claim": {
+    "raw_domain": "parameter sets C subseteq V",
+    "query_family": "all future parameter-extension patchability questions",
+    "retained_operations": "add_v(C)=C union {v}",
+    "abstraction": "P(C)=V minus the union of all minimal obstruction edges not hit by C",
+    "losslessness_tier": "semantic_lossless",
+    "canonical_representative": "P(C) is the unique largest raw parameter set with the same future behavior as C",
+    "scope": "finite carrier and inclusion-minimal nonempty obstruction clutter"
+  },
+  "theorems": {
+    "extensive": "C subseteq P(C)",
+    "monotone": "C subseteq D implies P(C) subseteq P(D)",
+    "idempotent": "P(P(C))=P(C)",
+    "full_abstraction": "P(C)=P(D) iff every future extension has the same patchability answer",
+    "unique_maximal_representative": "every D future-equivalent to C satisfies D subseteq P(C)",
+    "good_state": "C is patchable iff P(C)=V",
+    "residual_duality": "P(C)=V minus union(U_C), and U_C is recovered from P(C)",
+    "closed_state_form": "closed sets are exactly complements of unions of minimal obstruction edges",
+    "lattice": "closed sets form a Moore family with meet intersection and join P(C union D)",
+    "fixed_core_form": "for algebraic obstruction edges A minus F, P(C) is the intersection of all maximal closed fixed cores F containing C",
+    "language_factorization": "C subseteq K(C) subseteq P(C), where K preserves the full polynomial language and P preserves future patchability"
+  },
+  "hard_gates": {
+    "clutter_minimization_required": true,
+    "generic_false_merge_count": 0,
+    "generic_false_split_count": 0,
+    "generic_operation_descent_failure_count": 0,
+    "generic_reconstruction_failure_count": 0
+  },
+  "bounded_validation": {
+    "clutters_exhausted": 193,
+    "raw_closure_and_idempotence_checks": 2848,
+    "transition_descent_checks": 11188,
+    "monotonicity_checks": 14091,
+    "unique_maximal_representative_checks": 2848,
+    "rooted_star_closed_state_sizes": [0, 1, 2, 3, 6],
+    "rigid_chain_closed_state_sizes": [0, 1, 2, 3, 6],
+    "normal_python_status": "PASS",
+    "optimized_python_status": "PASS",
+    "source_compile_status": "PASS",
+    "validation_runtime_seconds": 1.73
+  },
+  "implementation": {
+    "module": "src/orbitsynthesis/patchability_closure.py",
+    "dependency": "src/orbitsynthesis/patchability_residual.py"
+  },
+  "limitations": [
+    "the committed CI compile step is currently blocked from running by the repository account billing or spending limit",
+    "the number of closed states may still be exponential",
+    "publication novelty is unverified",
+    "Lean formalization is pending"
+  ]
+}
