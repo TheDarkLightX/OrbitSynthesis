@@ -1,0 +1,14 @@
+{
+  "schema": "orbit-synthesis/zag-discriminator-core-family-multiplicity/v1",
+  "status": "GENERATED_BY_REPLAY",
+  "source": "experiments/discriminator_core_family_multiplicity.py",
+  "validation_scope": {
+    "exhaustive_carriers": [1, 2, 3],
+    "cycle_compression_max_carrier": 8,
+    "global_mass_max_carrier": 8
+  },
+  "non_claims": [
+    "The exact semantic hash is emitted by the replay script and compared between normal and optimized Python.",
+    "This manifest does not replace the generated replay summary."
+  ]
+}
