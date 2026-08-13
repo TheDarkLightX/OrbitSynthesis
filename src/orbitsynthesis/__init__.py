@@ -14,10 +14,14 @@ from .discriminator_compile import (
 from .finite_algebra import FiniteAlgebra, FiniteOperation, InternalIsomorphism
 from .patchability import (
     ExtensionFailure,
+    ObstructionHypergraph,
     PatchabilityResult,
     first_extension_failure,
     has_pointed_extension_property,
+    hits_all,
+    nonextendable_internal_isomorphisms,
     parameter_patchability_number,
+    patchability_obstruction_hypergraph,
 )
 from .safety import FiniteSafetyGame, SafetySolution
 
@@ -30,6 +34,7 @@ __all__ = [
     "FiniteOperation",
     "FiniteSafetyGame",
     "InternalIsomorphism",
+    "ObstructionHypergraph",
     "PatchabilityResult",
     "SafetySolution",
     "Var",
@@ -39,6 +44,9 @@ __all__ = [
     "evaluate",
     "first_extension_failure",
     "has_pointed_extension_property",
+    "hits_all",
+    "nonextendable_internal_isomorphisms",
     "parameter_patchability_number",
+    "patchability_obstruction_hypergraph",
     "selector",
 ]
