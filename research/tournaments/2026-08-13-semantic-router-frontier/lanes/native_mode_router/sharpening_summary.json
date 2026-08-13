@@ -1,0 +1,20 @@
+{
+  "compiler": {
+    "arities_checked": [64, 16384],
+    "checks": 48963,
+    "nonbinary_bound": "<14*3^r/r",
+    "inclusive_bound": "<15*3^r/r",
+    "depth_bound": "<=r+4*ceil(log2 r)+9",
+    "worst_arity": 93,
+    "worst_decimal": "13.777777777777779"
+  },
+  "reusable_vector": {
+    "widths_checked": [1, 256],
+    "checks": 1024,
+    "bound": "<=3*3^w",
+    "asymptotic": "2*3^w+O(3^ceil(w/2))",
+    "worst_width": 2,
+    "worst_root": "negative"
+  },
+  "semantic_sha256": "bf749f2d347dd659f5c7ff9f43ffc969de500fb7e15b985ce9d7019168986208"
+}
