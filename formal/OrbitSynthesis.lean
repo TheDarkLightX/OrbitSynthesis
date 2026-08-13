@@ -4,6 +4,7 @@ import OrbitSynthesis.ParameterClosure
 import OrbitSynthesis.PointedProduct
 import OrbitSynthesis.DomainNogood
 import OrbitSynthesis.TableSafetyReduction
+import OrbitSynthesis.CoreAntichain
 
 open Set
 
