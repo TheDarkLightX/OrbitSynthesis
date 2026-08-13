@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import sys
-from itertools import combinations
+from itertools import combinations, product
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,9 +12,14 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from orbitsynthesis.finite_algebra import FiniteAlgebra  # noqa: E402
 from orbitsynthesis.patchability import (  # noqa: E402
+    has_pointed_extension_property,
     parameter_patchability_number,
     parameter_patchability_number_via_residual,
+    patchability_obstruction_hypergraph,
     patchability_residual_automaton,
+)
+from orbitsynthesis.patchability_learning import (  # noqa: E402
+    learn_minimum_patchability_parameters,
 )
 from orbitsynthesis.patchability_residual import (  # noqa: E402
     build_patchability_residual_automaton,
@@ -129,19 +134,20 @@ def check_witnesses() -> tuple[int, int, int, int]:
     return 3, 5, 3, 5
 
 
+def discriminator(x: int, y: int, z: int) -> int:
+    return z if x == y else x
+
+
+def unary_algebra(table: tuple[int, int, int]) -> FiniteAlgebra:
+    return FiniteAlgebra.from_callables(
+        (0, 1, 2),
+        {"d": (3, discriminator), "u": (1, lambda x: table[x])},
+    )
+
+
 def check_algebra_integration() -> tuple[int, int, int, int]:
     carrier = (0, 1, 2)
-
-    def disc(x: int, y: int, z: int) -> int:
-        return z if x == y else x
-
-    def unary(x: int) -> int:
-        return {0: 1, 1: 0, 2: 1}[x]
-
-    quackenbush = FiniteAlgebra.from_callables(
-        carrier,
-        {"d": (3, disc), "u": (1, unary)},
-    )
+    quackenbush = unary_algebra((1, 0, 1))
     reference = parameter_patchability_number(quackenbush)
     residual = parameter_patchability_number_via_residual(quackenbush)
     machine = patchability_residual_automaton(quackenbush)
@@ -153,7 +159,7 @@ def check_algebra_integration() -> tuple[int, int, int, int]:
 
     pure_discriminator = FiniteAlgebra.from_callables(
         carrier,
-        {"d": (3, disc)},
+        {"d": (3, discriminator)},
     )
     pure_reference = parameter_patchability_number(pure_discriminator)
     pure_residual = parameter_patchability_number_via_residual(pure_discriminator)
@@ -163,6 +169,49 @@ def check_algebra_integration() -> tuple[int, int, int, int]:
     assert not pure_machine.edges and len(pure_machine.states) == 1
 
     return reference.size, len(machine.states), pure_reference.size, len(pure_machine.states)
+
+
+def check_learning_integration() -> tuple[list[tuple[int, int]], int, int]:
+    distribution: dict[int, int] = {}
+    learned_witnesses = 0
+    verification_rounds = 0
+
+    for table in product((0, 1, 2), repeat=3):
+        algebra = unary_algebra(table)
+        reference = parameter_patchability_number(algebra)
+        learned = learn_minimum_patchability_parameters(algebra)
+        hypergraph = patchability_obstruction_hypergraph(algebra)
+
+        assert learned.solution.size == reference.size
+        assert has_pointed_extension_property(algebra, learned.solution.parameters)
+        assert learned.steps and learned.steps[-1].failure is None
+        assert learned.steps[-1].candidate == learned.solution.parameters
+
+        prior = ()
+        for step in learned.steps:
+            assert all(step.candidate & edge for edge in prior)
+            if step.failure is None:
+                assert step.learned_edge is None
+                assert step.minimal_edges_after == prior
+            else:
+                learned_witnesses += 1
+                assert step.learned_edge in hypergraph.distinct_edges
+                assert not (step.candidate & step.learned_edge)
+                assert step.minimal_edges_after != prior
+                prior = step.minimal_edges_after
+        assert learned.learned_minimal_edges == prior
+
+        distribution[reference.size] = distribution.get(reference.size, 0) + 1
+        verification_rounds += len(learned.steps)
+
+    quackenbush = learn_minimum_patchability_parameters(unary_algebra((1, 0, 1)))
+    assert tuple(step.candidate for step in quackenbush.steps) == (
+        frozenset(),
+        frozenset((0,)),
+    )
+    assert quackenbush.steps[0].learned_edge == frozenset((0, 1, 2))
+
+    return sorted(distribution.items()), learned_witnesses, verification_rounds
 
 
 def main() -> None:
@@ -182,6 +231,7 @@ def main() -> None:
     check_nonclutter()
     star_roles, star_states, chain_roles, chain_states = check_witnesses()
     q_budget, q_states, d_budget, d_states = check_algebra_integration()
+    distribution, learned_witnesses, verification_rounds = check_learning_integration()
     print("PASS patchability residual automaton")
     print("clutters exhausted for n=1..4:", clutter_count)
     print("reachable residual states checked:", state_count)
@@ -193,6 +243,8 @@ def main() -> None:
     print("six-element rigid-chain role classes / minimal states:", chain_roles, chain_states)
     print("Quackenbush budget / residual states:", q_budget, q_states)
     print("pure discriminator budget / residual states:", d_budget, d_states)
+    print("three-element unary budget distribution:", distribution)
+    print("learned verifier witnesses / rounds:", learned_witnesses, verification_rounds)
 
 
 if __name__ == "__main__":
