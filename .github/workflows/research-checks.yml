@@ -121,6 +121,11 @@ jobs:
           optimized = json.load(open('/tmp/discriminator-antichain.optimized.json'))
           assert normal['semantic_sha256'] == optimized['semantic_sha256']
           PY
+      - name: Patchability residual automaton
+        run: |
+          python experiments/patchability_residual_automaton.py > /tmp/patchability-residual.normal.txt
+          python -O experiments/patchability_residual_automaton.py > /tmp/patchability-residual.optimized.txt
+          diff -u /tmp/patchability-residual.normal.txt /tmp/patchability-residual.optimized.txt
       - name: Python compile gate
         run: python -m compileall -q src/orbitsynthesis experiments
 
