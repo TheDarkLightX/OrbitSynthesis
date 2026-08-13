@@ -1,0 +1,40 @@
+{
+  "analytic_tail": {
+    "checks": 109508,
+    "end": 16384,
+    "proof_note": "ADAPTIVE_BLOCK_CONSTANT_14.md",
+    "start": 741
+  },
+  "binary_allowance": {
+    "arities": [
+      64,
+      16384
+    ],
+    "checks": 65284,
+    "components": [
+      "<1/4",
+      "<6/r^2<1/4",
+      "<1/4"
+    ],
+    "sum": "<3/4"
+  },
+  "finite": {
+    "arities": [
+      64,
+      16384
+    ],
+    "binary_allowance": "<3/4*3^r/r",
+    "checks": 130568,
+    "depth": "<=r+4*ceil(log2 r)+9",
+    "minimum_depth_slack": 4,
+    "nonbinary": "<53/4*3^r/r",
+    "parameter_rule": "H=r+1-ceil(log_3(r^2)); M=largest power of 3 <=H",
+    "total": "<14*3^r/r",
+    "worst_arity": 88,
+    "worst_decimal": "13.037037037037036",
+    "worst_exact": "12642976032785492896803009006077223549063112/969773729787523602876821942164080815560161"
+  },
+  "semantic_sha256": "7c37621644109f7fd7c9d08508d814b09de490adc891bc36ac27964385ffa6bd",
+  "status": "exact finite replay plus analytic-tail certificate",
+  "theorem": "adaptive native-mode compiler constant below fourteen"
+}
