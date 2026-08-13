@@ -57,7 +57,9 @@ from .patchability import (
     hits_all,
     nonextendable_internal_isomorphisms,
     parameter_patchability_number,
+    parameter_patchability_number_via_residual,
     patchability_obstruction_hypergraph,
+    patchability_residual_automaton,
 )
 from .patchability_residual import (
     PatchabilityResidualAutomaton,
@@ -128,10 +130,12 @@ __all__ = [
     "parameter_core_catalog",
     "parameter_domain_frontier",
     "parameter_patchability_number",
+    "parameter_patchability_number_via_residual",
     "parameterized_strategy_for_allowed_parameters",
     "parameterized_strategy_pointed",
     "parameterized_strategy_reference",
     "patchability_obstruction_hypergraph",
+    "patchability_residual_automaton",
     "pointed_classes",
     "residual_mask",
     "selector",
