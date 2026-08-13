@@ -8,6 +8,7 @@ vector_source="$repo_dir/research/tournaments/2026-08-13-semantic-router-frontie
 cost_source="$repo_dir/research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.lean"
 native_source="$lane_dir/NativeFirstMismatch.lean"
 bridge_source="$lane_dir/NativeModeBridge.lean"
+native_cost_source="$lane_dir/NativeModeCost.lean"
 
 expected_router_hash="687a77ed1f3b0bfe2a540bc670f6db942e15bddc339ccfbceffba9699766227a"
 expected_vector_hash="c2f477edd110c4df96f3c30f31f02de09af93045720babfd38dd2dd79a5573dd"
@@ -31,8 +32,10 @@ lake env lean -t 0 -EwarningAsError=true \
   -o "$lane_dir/NativeFirstMismatch.olean" "$native_source"
 LEAN_PATH="$lane_dir" lake env lean -t 0 -EwarningAsError=true \
   -o "$lane_dir/NativeModeBridge.olean" "$bridge_source"
+LEAN_PATH="$lane_dir" lake env lean -t 0 -EwarningAsError=true \
+  -o "$lane_dir/NativeModeCost.olean" "$native_cost_source"
 
-for source_file in "$native_source" "$bridge_source"; do
+for source_file in "$native_source" "$bridge_source" "$native_cost_source"; do
   if grep -nE '\b(sorry|admit|axiom)\b' "$source_file"; then
     echo "proof placeholder or axiom detected in $source_file" >&2
     exit 1
