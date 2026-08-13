@@ -38,6 +38,8 @@ jobs:
         run: python experiments/aba_positive_mu_calculus.py
       - name: Dyadic ABA constructive witnesses
         run: python experiments/dyadic_aba_witness.py
+      - name: Quasi-primal pointed-orbit factorization
+        run: python experiments/quasiprimal_pointed_orbit_factorization.py
 
   lean:
     runs-on: ubuntu-latest
