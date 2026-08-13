@@ -22,13 +22,31 @@ The native mode vector is leading-coefficient optimal: its `q` output functions 
 
 ## Evidence
 
+Repository-portable files:
+
 ```text
-checker SHA-256: 41d0f2b0d08b651d9e2e3158192eaab8728f956a2c577b76bf183fd6dcb505ed
-receipt SHA-256: b08c3e4de3bf42a662c8597b4ffb20ee77a07a7e87cd38d3536a13cf932718d7
-semantic SHA-256: 2acaa8c187bb2bd530eba2ae80c89ad157a18ae9b7d40600da7efd0e2c3458a4
+native_mode_model.py SHA-256:
+  b239a7581266a53310286a682c5d429066737c0fd7885fc0685b06e4218456c2
+
+check_native_mode_router.py SHA-256:
+  5e2eb7782834d496cf78342e2f0161e5daf74fce83af15c1c319d76f5725c631
+
+receipt.json SHA-256:
+  216710173c1583607d3677a861e6561bb26f497d3fb4bef4d40ead3cc8d9d3eb
+
+semantic SHA-256:
+  60bce0041f7a185af491666f2252f4c5867480a1171ff8dc0fed72bd4e74a8f7
 ```
 
-Normal and optimized executions are byte-identical. The independent oracle records 18 one-digit checks, 132,858 mode checks, 132,858 frozen-program comparisons, 9,268 exhaustive complete-router checks, 270 larger structured tests, and 195,852 conditional arithmetic checks.
+Replay from the lane directory:
+
+```text
+python3 check_native_mode_router.py > /tmp/native-normal.json
+python3 -O check_native_mode_router.py > /tmp/native-optimized.json
+cmp /tmp/native-normal.json /tmp/native-optimized.json
+```
+
+The checked normal and optimized outputs are byte-identical. The independent oracle records 18 one-digit checks, 132,858 mode checks, 132,858 frozen-program comparisons, 1,641 address-support checks, 9,268 exhaustive complete-router checks, 270 larger structured tests, and 195,852 conditional arithmetic checks. It also checks the exact finite extrema through width 256, local one-digit minima, and effective mutations.
 
 ## Boundary
 
