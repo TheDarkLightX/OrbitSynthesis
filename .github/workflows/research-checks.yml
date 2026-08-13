@@ -6,7 +6,7 @@ on:
 jobs:
   python-oracles:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -100,6 +100,25 @@ jobs:
           import json
           normal = json.load(open('/tmp/core-antichain.normal.json'))
           optimized = json.load(open('/tmp/core-antichain.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Discriminator minimal-core antichain classification
+        run: >-
+          python experiments/discriminator_minimal_core_antichains.py
+          --out-root runs/zag_discriminator_minimal_core_antichains
+      - name: Discriminator antichain Research Kernel replay
+        run: >-
+          python experiments/research_kernel_discriminator_minimal_core_antichains.py
+          --repo-root .
+          --out-root /tmp/research_kernel_discriminator_minimal_core_antichains
+      - name: Discriminator antichain optimized replay
+        run: |
+          python experiments/discriminator_minimal_core_antichains.py > /tmp/discriminator-antichain.normal.json
+          python -O experiments/discriminator_minimal_core_antichains.py > /tmp/discriminator-antichain.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/discriminator-antichain.normal.json'))
+          optimized = json.load(open('/tmp/discriminator-antichain.optimized.json'))
           assert normal['semantic_sha256'] == optimized['semantic_sha256']
           PY
       - name: Python compile gate
