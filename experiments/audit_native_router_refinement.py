@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Portable fail-closed gate for the native first-mismatch refinement.
 
-The gate replays the independent semantic oracle and quantitative sharpening
-under normal and optimized Python, compares both outputs with committed
-version-independent receipts, scans the new Lean sources for placeholders, and
-runs the complete six-layer Lean compilation script.
+The gate replays the independent semantic oracle, quantitative sharpening, and
+adaptive block schedule under normal and optimized Python, compares every
+output with a committed version-independent receipt, scans the new Lean sources
+for placeholders, and runs the complete six-layer Lean compilation script.
 
 It does not promote the integrated compiler beyond its stated frozen premises
 and makes no novelty, patent, license, or practical-performance finding.
@@ -110,19 +110,25 @@ def main() -> None:
                 LANE / "portable_sharpening_receipt.json",
                 temporary,
             ),
+            "adaptive_block_constant": replay(
+                "adaptive-block",
+                LANE / "check_adaptive_block_compiler.py",
+                LANE / "adaptive_block_receipt.json",
+                temporary,
+            ),
             "lean": check_formal_sources(),
         }
 
     output = {
-        "schema": "orbit-synthesis/native-first-mismatch-gate/v1",
+        "schema": "orbit-synthesis/native-first-mismatch-gate/v2",
         "status": "PASS",
         "claim_boundary": (
             "Exact PASS for the native first-mismatch algebra, original-signature "
             "bridge, fused signed-router semantics, recurrence-level cost bounds, "
-            "and bounded compiler arithmetic. The end-to-end compiler remains "
-            "conditional on the frozen interfaces inherited from the base paper. "
-            "Novelty, FTO, serialized DAG extraction, practical performance, and "
-            "global optimality are not established by this gate."
+            "and bounded/adaptive compiler arithmetic. The end-to-end compiler "
+            "remains conditional on the frozen interfaces inherited from the base "
+            "paper. Novelty, FTO, serialized DAG extraction, practical performance, "
+            "and global optimality are not established by this gate."
         ),
         "results": results,
     }
