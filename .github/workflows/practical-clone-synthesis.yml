@@ -1,0 +1,27 @@
+name: practical-clone-synthesis
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/practical-clone-synthesis.yml'
+      - 'src/orbitsynthesis/practical.py'
+      - 'src/orbitsynthesis/practical_examples.py'
+      - 'tools/orbit_synthesize.py'
+      - 'notes/PRACTICAL_CLONE_SYNTHESIS_MVP.md'
+      - 'research/tournaments/2026-08-14-practical-clone-synthesis-mvp/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  practical-pipeline-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Replay primary and independent certificates
+        run: bash research/tournaments/2026-08-14-practical-clone-synthesis-mvp/check.sh
