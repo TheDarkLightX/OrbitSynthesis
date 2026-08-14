@@ -1,0 +1,37 @@
+{
+  "cross_checks": {
+    "bitset_equals_exhaustive": true,
+    "compiled_dag_mutation_rejected": true,
+    "model_roundtrip": true
+  },
+  "negative": {
+    "certificate_verified": true,
+    "diagnostic_kind": "groupoid_component_unsatisfiable",
+    "model_sha256": "1002719b85c39385bdfe287d34a318685fd6fb80a5d984ea3c33309d184ac27a",
+    "quasi_realizable": false,
+    "relaxation_winning_counts": {
+      "demi_semi_primal": 3,
+      "ordinary": 3,
+      "semi_primal": 3
+    },
+    "transported_output_conflict": true
+  },
+  "positive": {
+    "backend": [
+      "single_discriminator"
+    ],
+    "certificate_verified": true,
+    "depth": 1,
+    "mode_winning_counts": {
+      "demi_semi_primal": 3,
+      "ordinary": 3,
+      "quasi_primal": 3,
+      "semi_primal": 3
+    },
+    "model_sha256": "58ac500f0e65c3e2cc656ec68b19892436223aa60c82bbc8cf93d76378536eb4",
+    "operation_count": 1,
+    "semantic_rows": 27
+  },
+  "schema": "orbit-synthesis/practical-clone-synthesis-gate/v1",
+  "semantic_sha256": "11e7d5a7161e852c63f77ff646b7ae2ecb4987f28b24aa7b9b4e3224225a4807"
+}
