@@ -1,0 +1,47 @@
+name: structural-backend-benchmarks
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/structural-backend-benchmarks.yml'
+      - 'notes/STRUCTURAL_OPTIMIZATION_AUTHORITIES.md'
+      - 'src/orbitsynthesis/__init__.py'
+      - 'src/orbitsynthesis/optimization_authority.py'
+      - 'src/orbitsynthesis/structural_benchmarks.py'
+      - 'src/orbitsynthesis/domain_model.py'
+      - 'src/orbitsynthesis/domain_optimization.py'
+      - 'src/orbitsynthesis/external_optimization.py'
+      - 'src/orbitsynthesis/greatest_region_boundary.py'
+      - 'src/orbitsynthesis/principal_greatest_region.py'
+      - 'research/tournaments/2026-08-14-structural-backend-benchmarks/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-structural-backends:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact optional backends
+        run: python -m pip install --upgrade scipy python-sat
+      - name: Replay structural authorities and backends
+        run: |
+          bash research/tournaments/2026-08-14-structural-backend-benchmarks/check.sh \
+            --require-pysat
+      - name: Run diagnostic theorem-family benchmark
+        run: |
+          PYTHONPATH=src python \
+            research/tournaments/2026-08-14-structural-backend-benchmarks/benchmark_structural_backends.py \
+            --repeat 3 \
+            --require-pysat \
+            --out structural-backend-benchmark.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: structural-backend-benchmark
+          path: structural-backend-benchmark.json
