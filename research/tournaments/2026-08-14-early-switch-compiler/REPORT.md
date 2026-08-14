@@ -81,12 +81,15 @@ an all-arity theorem.
 
 ```text
 checker SHA-256
-  8ae7196dc7225ed76695e330ecdb9848b15c7deb61ed9d8d9cc08f74fcb6a8f4
+  8e71e11406b966d7ba07764e4d4fefaf4c8f4b5b36d1e0f5736c78855b3dd0ba
 receipt/stdout SHA-256
-  0116a82f167cbee162b49ef452ee6b50659adcaa00f080d9e87dd97575dbb56c
+  ab379cce34b34693a384e9cb4a567b0f6e869e06f2072cbd46f03951a11e4915
 semantic SHA-256
   70d90f1d3b408565eb6602789320d6075ce3144393d75d4a3cf72c6697659140
 ```
+
+The receipt binds the exact checker source hash, both replay commands, and the
+required equality of normal output, optimized output, and committed receipt.
 
 The exact replay ratio is maximal at `r=171`:
 

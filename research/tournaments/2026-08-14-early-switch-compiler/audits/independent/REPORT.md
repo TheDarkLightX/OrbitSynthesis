@@ -34,12 +34,15 @@ five base inequalities used to control lower-order terms.
 
 ```text
 audit_early_switch_arithmetic.py SHA-256
-  3db0467715990f1269934da416de9dca02af61e6470b9d0ff55110c57db59a15
+  8075699a955380152ce146ab56a5147445f34f5ff3fc05b4f88d111c704bcbb9
 receipt/stdout SHA-256
-  36776e149d298e3b6a7e6d0864a2480e1b7be374c5b3a2fce3ff6921f0b5ccd9
+  7e9b407e4e85b9db7b7a05f5028966366f59ee342ec228a65e4c566ea729ee8e
 semantic SHA-256
   cfda24e43cdecd950d61cf1cf0dbbac6818f82722b4edae37aa01022ebe923a0
 ```
+
+The receipt binds the exact audit-source hash, both replay commands, and the
+required equality of normal output, optimized output, and committed receipt.
 
 The audit is bounded executable evidence for the generic proof recorded in
 the source note. It is not a Lean proof, external peer review, novelty result,

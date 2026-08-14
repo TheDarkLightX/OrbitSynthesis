@@ -220,6 +220,16 @@
       }
     ]
   },
+  "provenance": {
+    "replay_commands": [
+      "python3 research/tournaments/2026-08-14-early-switch-compiler/audits/independent/audit_early_switch_arithmetic.py --expected research/tournaments/2026-08-14-early-switch-compiler/audits/independent/receipt.json",
+      "python3 -O research/tournaments/2026-08-14-early-switch-compiler/audits/independent/audit_early_switch_arithmetic.py --expected research/tournaments/2026-08-14-early-switch-compiler/audits/independent/receipt.json"
+    ],
+    "required_equality": "normal_stdout == optimized_stdout == receipt_bytes",
+    "schema": "orbit-synthesis/source-bound-replay/v1",
+    "source": "research/tournaments/2026-08-14-early-switch-compiler/audits/independent/audit_early_switch_arithmetic.py",
+    "source_sha256": "8075699a955380152ce146ab56a5147445f34f5ff3fc05b4f88d111c704bcbb9"
+  },
   "schema": "orbit-synthesis/early-switch-independent-arithmetic/v1",
   "semantic_sha256": "cfda24e43cdecd950d61cf1cf0dbbac6818f82722b4edae37aa01022ebe923a0"
 }

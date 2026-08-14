@@ -114,6 +114,29 @@ def result():
          "bases":bases(),"ledger":audit()}
     raw=json.dumps(out,sort_keys=True,separators=(",",":"))
     out["semantic_sha256"]=hashlib.sha256(raw.encode()).hexdigest()
+    out["provenance"]={
+        "schema":"orbit-synthesis/source-bound-replay/v1",
+        "source":(
+            "research/tournaments/2026-08-14-early-switch-compiler/"
+            "audits/independent/audit_early_switch_arithmetic.py"
+        ),
+        "source_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "replay_commands":[
+            (
+                "python3 research/tournaments/2026-08-14-early-switch-compiler/"
+                "audits/independent/audit_early_switch_arithmetic.py --expected "
+                "research/tournaments/2026-08-14-early-switch-compiler/"
+                "audits/independent/receipt.json"
+            ),
+            (
+                "python3 -O research/tournaments/2026-08-14-early-switch-compiler/"
+                "audits/independent/audit_early_switch_arithmetic.py --expected "
+                "research/tournaments/2026-08-14-early-switch-compiler/"
+                "audits/independent/receipt.json"
+            ),
+        ],
+        "required_equality":"normal_stdout == optimized_stdout == receipt_bytes",
+    }
     return out
 
 def main():

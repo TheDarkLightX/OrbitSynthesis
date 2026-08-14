@@ -483,6 +483,27 @@ def make_receipt() -> dict[str, object]:
     }
     canonical = json.dumps(result, sort_keys=True, separators=(",", ":"))
     result["semantic_sha256"] = hashlib.sha256(canonical.encode()).hexdigest()
+    result["provenance"] = {
+        "schema": "orbit-synthesis/source-bound-replay/v1",
+        "source": (
+            "research/tournaments/2026-08-14-early-switch-compiler/"
+            "check_early_switch_compiler.py"
+        ),
+        "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "replay_commands": [
+            (
+                "python3 research/tournaments/2026-08-14-early-switch-compiler/"
+                "check_early_switch_compiler.py --expected "
+                "research/tournaments/2026-08-14-early-switch-compiler/receipt.json"
+            ),
+            (
+                "python3 -O research/tournaments/2026-08-14-early-switch-compiler/"
+                "check_early_switch_compiler.py --expected "
+                "research/tournaments/2026-08-14-early-switch-compiler/receipt.json"
+            ),
+        ],
+        "required_equality": "normal_stdout == optimized_stdout == receipt_bytes",
+    }
     return result
 
 
