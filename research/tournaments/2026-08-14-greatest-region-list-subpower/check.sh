@@ -8,6 +8,7 @@ independent="$lane_dir/audits/independent/audit_frontiers_independent.py"
 principal="$lane_dir/check_principal_equation.py"
 principal_independent="$lane_dir/audits/independent/audit_principal_equation_independent.py"
 component_backend="$lane_dir/check_component_backend.py"
+domain_model="$lane_dir/check_domain_model.py"
 primary_normal="$(mktemp)"
 primary_optimized="$(mktemp)"
 independent_normal="$(mktemp)"
@@ -18,7 +19,9 @@ principal_independent_normal="$(mktemp)"
 principal_independent_optimized="$(mktemp)"
 component_normal="$(mktemp)"
 component_optimized="$(mktemp)"
-trap 'rm -f "$primary_normal" "$primary_optimized" "$independent_normal" "$independent_optimized" "$principal_normal" "$principal_optimized" "$principal_independent_normal" "$principal_independent_optimized" "$component_normal" "$component_optimized"' EXIT
+domain_normal="$(mktemp)"
+domain_optimized="$(mktemp)"
+trap 'rm -f "$primary_normal" "$primary_optimized" "$independent_normal" "$independent_optimized" "$principal_normal" "$principal_optimized" "$principal_independent_normal" "$principal_independent_optimized" "$component_normal" "$component_optimized" "$domain_normal" "$domain_optimized"' EXIT
 
 cd "$repo_dir"
 python3 -m py_compile \
@@ -29,11 +32,13 @@ python3 -m py_compile \
   src/orbitsynthesis/greatest_region_boundary.py \
   src/orbitsynthesis/principal_greatest_region.py \
   src/orbitsynthesis/safety_components.py \
+  src/orbitsynthesis/domain_model.py \
   "$primary" \
   "$independent" \
   "$principal" \
   "$principal_independent" \
-  "$component_backend"
+  "$component_backend" \
+  "$domain_model"
 
 python3 "$primary" > "$primary_normal"
 python3 -O "$primary" > "$primary_optimized"
@@ -55,10 +60,14 @@ python3 "$component_backend" > "$component_normal"
 python3 -O "$component_backend" > "$component_optimized"
 cmp "$component_normal" "$component_optimized"
 
+python3 "$domain_model" > "$domain_normal"
+python3 -O "$domain_model" > "$domain_optimized"
+cmp "$domain_normal" "$domain_optimized"
+
 python3 - \
   "$primary_normal" "$independent_normal" \
   "$principal_normal" "$principal_independent_normal" \
-  "$component_normal" <<'PY'
+  "$component_normal" "$domain_normal" <<'PY'
 import json
 import sys
 
@@ -67,6 +76,7 @@ independent = json.load(open(sys.argv[2], encoding="utf-8"))
 principal = json.load(open(sys.argv[3], encoding="utf-8"))
 principal_independent = json.load(open(sys.argv[4], encoding="utf-8"))
 component = json.load(open(sys.argv[5], encoding="utf-8"))
+domain = json.load(open(sys.argv[6], encoding="utf-8"))
 
 assert primary["list_subpower"]["exact_instances"] == 27510
 assert primary["greatest_region"]["demi_semi_primal_count"] == 15
@@ -103,6 +113,22 @@ assert [
     row["feasible"] for row in component["principal_differential"]
 ] == [True, True, False]
 assert component["targeted"]["component_size"] == 2
+
+assert domain["targeted"]["components"] == 2
+assert domain["targeted"]["candidate_rules"] == 4
+assert domain["targeted"]["variables"] == 7
+assert domain["targeted"]["clauses"] == 7
+assert domain["targeted"]["weighted_top"] == 10
+assert domain["random_differential"]["domain_instances"] == 768
+assert domain["random_differential"]["cnf_checks"] == 768
+assert domain["random_differential"]["feasible"] == 145
+assert domain["random_differential"]["infeasible"] == 623
+assert [
+    row["feasible"] for row in domain["principal_differential"]["rows"]
+] == [True, True, False]
+assert domain["semantic_sha256"] == (
+    "d12b80867b60303ba80b079800f8ca8ff36aedf0a20637776fcdae10f9c18a46"
+)
 PY
 
 sha256sum \
@@ -111,7 +137,9 @@ sha256sum \
   "$principal" "$principal_normal" \
   "$principal_independent" "$principal_independent_normal" \
   "$component_backend" "$component_normal" \
+  "$domain_model" "$domain_normal" \
   src/orbitsynthesis/subpower_lists.py \
   src/orbitsynthesis/greatest_region_boundary.py \
   src/orbitsynthesis/principal_greatest_region.py \
-  src/orbitsynthesis/safety_components.py
+  src/orbitsynthesis/safety_components.py \
+  src/orbitsynthesis/domain_model.py
