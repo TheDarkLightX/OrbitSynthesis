@@ -1,0 +1,53 @@
+{
+  "antichain": [
+    {
+      "maximal_domain_size": 24,
+      "maximal_domains": 4,
+      "orientation_variables": 2,
+      "preferred_domain_sha256": "3b717730249567939096cccff0b778e1d943a5c728497aeed69cac00041e006e",
+      "preferred_score": 30,
+      "state_arity": 3,
+      "states": 27
+    },
+    {
+      "maximal_domain_size": 74,
+      "maximal_domains": 64,
+      "orientation_variables": 6,
+      "preferred_domain_sha256": "a43a0ee97df8cb63c489327f141a597469d0180349b790e92868afc397dc082b",
+      "preferred_score": 200,
+      "state_arity": 4,
+      "states": 81
+    }
+  ],
+  "principal": {
+    "allowed_states": 4,
+    "assignments_checked": 16,
+    "feasible_domains": 8,
+    "left_feasible": true,
+    "optimum_domain": [
+      [
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0,
+        1
+      ],
+      [
+        1,
+        0,
+        1,
+        0
+      ]
+    ],
+    "optimum_score": 13,
+    "right_feasible": true,
+    "union_feasible": false
+  },
+  "schema": "orbit-synthesis/structural-families-independent/v1",
+  "semantic_sha256": "cd26a2b1b9576957615028aa44dfc1e7eb4debe4b3b33b81080bc4ddb73a23bf"
+}
