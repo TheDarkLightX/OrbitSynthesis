@@ -1,9 +1,9 @@
 # Greatest-region and list-subpower frontier
 
 Date: 2026-08-14  
-Verdict: **two source-grounded frontiers advanced, the main converse holds in
-the one-equation fragment, and the component mechanism now has a practical
-fixed-domain safety API.**
+Verdict: **the greatest-region conjecture is closed in the one-equation
+fragment, list-constrained quasi-primal subpowers are tractable, and the same
+component structure now compiles domain optimization to CNF/MaxSAT.**
 
 ## Results
 
@@ -25,9 +25,8 @@ nonextendable internal isomorphism.
 
 The generic witness has two term-winning domains, an infeasible union, and no
 term-winning common upper bound. Two partial-symmetry images are made dead
-outside the source/codomain subalgebras; maximal nonextendability guarantees
-that those dead observations cannot propagate back into the one-sided winning
-domains.
+outside the source/codomain subalgebras; maximal nonextendability prevents
+those dead observations from propagating back into either one-sided winner.
 
 The relation is principal. Flatten a transition to `x`, let `p(x)` be its
 first coordinate, and define
@@ -67,26 +66,53 @@ value failed.
 ### 3. Practical fixed-domain safety backend
 
 `src/orbitsynthesis/safety_components.py` exposes the same component solver for
-vector-valued safety outputs. It returns either
-
-```text
-QuasiPrimalDomainResult(feasible=True, strategy_items=...)
-```
-
-or one
-
-```text
-StrategyComponentObstruction
-```
-
-containing:
+vector-valued safety outputs. It returns either a complete compatible strategy
+table or one `StrategyComponentObstruction` containing:
 
 - the failing groupoid component;
 - any locally empty observations; and
 - the first transport/cycle reason rejecting every representative output.
 
-This turns the theorem into a reusable nogood source for maximal-domain and
-initial-set search instead of returning only `None`.
+This turns fixed-domain infeasibility into a reusable nogood rather than only a
+Boolean verdict.
+
+### 4. Exact CNF and weighted-MaxSAT compilation
+
+For each observation component and each compatible transported output table,
+compile:
+
+```text
+F = states forbidden by an unsafe forced transition,
+E = safe closure implications source -> selected successor.
+```
+
+Introduce state variables `X_s` and component-rule selectors `Y_(C,tau)`.
+The hard clauses are
+
+```text
+OR_tau Y_(C,tau),
+not Y_(C,tau) or not X_s                   for s in F,
+not Y_(C,tau) or not X_s or X_t            for (s,t) in E.
+```
+
+Required initial states are hard unit clauses. A state assignment extends to a
+satisfying selector assignment exactly when it is a term-winning domain.
+Selected rules reconstruct the controller table.
+
+Adding soft units `(X_s,w_s)` gives an exact weighted partial-MaxSAT model for
+a maximum-value term-winning domain. The direct explicit encoding has
+polynomial size in the game table and internal groupoid; it is an exact
+reduction to an NP optimization backend, not a polynomial algorithm for the
+NP-hard variable-domain problem.
+
+Implementation:
+
+```text
+src/orbitsynthesis/domain_model.py
+notes/QUASIPRIMAL_DOMAIN_MAXSAT_COMPILATION.md
+```
+
+It emits DIMACS CNF and weighted DIMACS without requiring a SAT package.
 
 ## Deterministic evidence
 
@@ -104,10 +130,11 @@ check_principal_equation.py
 audits/independent/audit_principal_equation_independent.py
 ```
 
-Practical backend differential:
+Practical component and domain compilation:
 
 ```text
 check_component_backend.py
+check_domain_model.py
 ```
 
 Together they check:
@@ -123,13 +150,25 @@ Together they check:
   reconstruction;
 - exact `safe iff p=g`, generated-subalgebra preservation, and groupoid
   equivariance for every one-equation separator;
-- `768` randomized fixed-domain safety comparisons against the established
-  quasi-primal reference solver: `165` feasible and `603` infeasible;
-- the principal witness pattern `left/right/union = feasible/feasible/false`;
-- a two-observation complement-coupling obstruction with an explicit forced
-  target-output rejection;
-- effective groupoid-edge, dead-state, and equation-branch mutations; and
-- byte-identical normal and optimized output for all five implementations.
+- `768` randomized fixed-domain safety comparisons for the obstruction API;
+- `768` independently seeded randomized domain/CNF comparisons: `145`
+  feasible and `623` infeasible;
+- exact maximal-domain agreement on every three-state random game;
+- direct replay of satisfying CNF witnesses and failing component clauses;
+- DIMACS and WCNF format/weight checks;
+- the principal witness pattern `left/right/union = true/true/false`; and
+- byte-identical normal and optimized output for all six implementations.
+
+For the principal one-equation witness the compiled domain model has
+
+```text
+81 states,
+243 observations,
+227 groupoid components,
+17,174 deduplicated candidate rules,
+17,255 CNF variables,
+17,405 hard clauses.
+```
 
 Semantic SHA-256 values:
 
@@ -140,31 +179,34 @@ principal independent
   a7ce96dc6a723c905a8725b98498bd4aa8c52138e50919006623f7948ee0cbdd
 component backend
   81adf6174b06191b96a03bd42a70c692eb79162792dfc88a7a04dbf95e555498
+domain CNF/MaxSAT
+  d12b80867b60303ba80b079800f8ca8ff36aedf0a20637776fcdae10f9c18a46
 ```
 
-The lane gate compiles every involved Python module, runs all five
+The lane gate compiles every involved Python module, runs all six
 reconstructions under ordinary Python and `python -O`, compares their bytes,
-asserts the exact censuses and load-bearing Quackenbush-Q verdicts, and prints
-source/output SHA-256 values from the checked tree. No stale precomputed
-receipt is accepted as a substitute for replay.
+asserts the exact censuses and load-bearing verdicts, and prints source/output
+SHA-256 values from the checked tree. No stale precomputed receipt is accepted
+as a substitute for replay.
 
 ## Boundaries
 
-- The list and safety backends assume quasi-primality is established
-  independently.
+- The list, safety, and domain-model backends assume quasi-primality is
+  established independently.
 - The broader cube-term/Mal'cev list-intersection frontier remains open.
 - The universal state-arity cost of the converse has not been minimized.
-- Obstruction minimization and learned maximal-domain search are not yet
-  implemented.
+- An external SAT/MaxSAT solver has not yet been integrated or benchmarked.
+- Incremental rule generation and obstruction minimization remain open.
 - Neither theorem is yet Lean-formalized or externally peer reviewed.
 - No novelty, patent/FTO, or legal conclusion is asserted.
 
 ## Next actions
 
 1. Formalize the groupoid-component interpolation lemma once in Lean; it
-   supports the converse, list solver, and safety backend.
+   supports the converse, list solver, safety backend, and domain encoding.
 2. Formalize the maximal-nonextendable orbit separation and principal
    equation.
-3. Learn and minimize component obstructions during maximal-domain search.
-4. Benchmark nogood learning against exhaustive domain enumeration and generic
-   CSP/MaxSAT baselines.
+3. Add external MaxSAT adapters and model-to-controller certificate decoding.
+4. Benchmark eager CNF, incremental component learning, exhaustive search,
+   BDD/MDD, and generic CSP baselines.
+5. Minimize and reuse component obstructions across specification updates.
