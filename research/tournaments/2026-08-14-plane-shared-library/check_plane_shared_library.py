@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Standalone audit for the plane-shared local-library fixed-Q compiler."""
+"""Standalone audit for the portfolio plane-shared fixed-Q compiler."""
 
 from __future__ import annotations
-
 import hashlib
 import itertools
 import json
@@ -15,548 +14,297 @@ from pathlib import Path
 if hasattr(sys, "set_int_max_str_digits"):
     sys.set_int_max_str_digits(0)
 
-Q = (0, 1, 2)
-B = (0, 1)
+Q=(0,1,2)
+B=(0,1)
+OFFSETS=(2,3,4,5)
 
-
-def require(condition: bool, message: str) -> None:
-    if not condition:
+def require(ok: bool, message: str) -> None:
+    if not ok:
         raise RuntimeError(message)
 
+def clog2(n: int) -> int:
+    require(n>=1,"clog2 domain")
+    return (n-1).bit_length()
 
-def ceil_log2(value: int) -> int:
-    require(value >= 1, "ceil_log2 domain")
-    return (value - 1).bit_length()
+def floor3(n: int) -> tuple[int,int]:
+    require(n>=1,"floor3 domain")
+    p=1; b=0
+    while 3*p<=n:
+        p*=3; b+=1
+    return b,p
 
-
-def floor_power3(value: int) -> tuple[int, int]:
-    require(value >= 1, "floor_power3 domain")
-    exponent = 0
-    power = 1
-    while 3 * power <= value:
-        power *= 3
-        exponent += 1
-    return exponent, power
-
-
-def ratio_decimal(numerator: int, denominator: int, digits: int = 18) -> str:
-    whole, remainder = divmod(numerator, denominator)
-    tail = []
+def decimal(n: int,d: int,digits: int=18)->str:
+    q,r=divmod(n,d); out=[]
     for _ in range(digits):
-        remainder *= 10
-        digit, remainder = divmod(remainder, denominator)
-        tail.append(str(digit))
-    return f"{whole}." + "".join(tail)
+        r*=10; x,r=divmod(r,d); out.append(str(x))
+    return f"{q}."+''.join(out)
 
+def code(v:int)->tuple[int,int]:
+    return ((0,0),(0,1),(1,0))[v]
 
-def code_planes(value: int) -> tuple[int, int]:
-    require(value in Q, "code domain")
-    return ((0, 0), (0, 1), (1, 0))[value]
+def decode(h:int,l:int)->int:
+    require((h,l) in ((0,0),(0,1),(1,0)),"legal code")
+    return {(0,0):0,(0,1):1,(1,0):2}[(h,l)]
 
+def semantic_factorization()->dict[str,object]:
+    rows=0; widths={}
+    for n in range(1,7):
+        boolean=set(itertools.product(B,repeat=n))
+        seen=set()
+        for table in itertools.product(Q,repeat=n):
+            high=tuple(code(v)[0] for v in table)
+            low=tuple(code(v)[1] for v in table)
+            rebuilt=tuple(decode(high[i],low[i]) for i in range(n))
+            require(rebuilt==table,"plane factorization")
+            seen.add(high);seen.add(low);rows+=n
+        require(seen==boolean,"Boolean library saturation")
+        widths[str(n)]={"q_tables":3**n,"boolean_roots":2**n}
+    require(decode(0,0)!=2,"plane mutation")
+    return {"rows":rows,"widths":widths,"mutation":{"input":2,"mutated":0}}
 
-def decode_planes(high: int, low: int) -> int:
-    require(high in B and low in B and (high, low) != (1, 1), "legal code")
-    return {(0, 0): 0, (0, 1): 1, (1, 0): 2}[(high, low)]
-
-
-def plane_factorization_audit() -> dict[str, object]:
-    rows = 0
-    plane_sets = {}
-    for width in range(1, 6):
-        domain = list(range(width))
-        boolean_tables = set(itertools.product(B, repeat=width))
-        observed_planes = set()
-        q_tables = 0
-        for values in itertools.product(Q, repeat=width):
-            high = tuple(code_planes(value)[0] for value in values)
-            low = tuple(code_planes(value)[1] for value in values)
-            require(high in boolean_tables and low in boolean_tables, "plane outside library")
-            reconstructed = tuple(
-                decode_planes(high[index], low[index]) for index in domain
-            )
-            require(reconstructed == values, "plane decode mismatch")
-            observed_planes.add(high)
-            observed_planes.add(low)
-            q_tables += 1
-            rows += width
-        require(observed_planes == boolean_tables, "Boolean plane library not saturated")
-        plane_sets[str(width)] = {
-            "q_tables": q_tables,
-            "boolean_plane_roots": len(boolean_tables),
-            "naive_plane_occurrences": 2 * q_tables,
-        }
-
-    high, low = code_planes(2)
-    mutation = decode_planes(low, 0)
-    require(mutation != 2, "plane mutation ineffective")
-    return {
-        "rows": rows,
-        "widths": plane_sets,
-        "mutation_value_2_low_as_high": mutation,
-    }
-
-
-def local_words(width: int) -> list[tuple[int, ...]]:
-    return list(itertools.product(Q, repeat=width))
-
-
-def balanced_partition(items: list[tuple[int, ...]], groups: int) -> list[list[tuple[int, ...]]]:
-    require(1 <= groups <= len(items), "partition group count")
-    quotient, remainder = divmod(len(items), groups)
-    out = []
-    cursor = 0
-    for index in range(groups):
-        size = quotient + (1 if index < remainder else 0)
-        out.append(items[cursor : cursor + size])
-        cursor += size
-    require(cursor == len(items), "partition coverage")
-    return out
-
-
-def selector_reconstruction_audit() -> dict[str, object]:
-    """Reconstruct x_sigma(x) from group-specific references to shared planes."""
-    local = local_words(2)
-    groups = balanced_partition(local, 4)
-    group_of = {
-        point: index for index, group in enumerate(groups) for point in group
-    }
-    points = list(itertools.product(Q, repeat=3))
-    selectors = [
-        ("projection-0", lambda point: 0),
-        ("projection-1", lambda point: 1),
-        ("projection-2", lambda point: 2),
+def reconstruction_audit()->dict[str,object]:
+    local=list(itertools.product(Q,repeat=2))
+    groups=[local[0:3],local[3:5],local[5:7],local[7:9]]
+    owner={p:i for i,g in enumerate(groups) for p in g}
+    points=list(itertools.product(Q,repeat=3))
+    selectors=[
+        ("p0",lambda x:0),("p1",lambda x:1),("p2",lambda x:2)
     ]
     for seed in range(61):
-        rng = random.Random(0xB001EA + seed)
-        table = {point: rng.randrange(3) for point in points}
-        selectors.append((f"seed-{seed}", lambda point, table=table: table[point]))
-
-    rows = 0
-    references = 0
-    labels = []
-    for label, sigma in selectors:
-        labels.append(label)
-        refs: dict[tuple[int, int], tuple[tuple[int, ...], tuple[int, ...]]] = {}
+        rng=random.Random(0xC0DEC0+seed)
+        table={x:rng.randrange(3) for x in points}
+        selectors.append((f"s{seed}",lambda x,table=table:table[x]))
+    rows=0; refs=0; labels=[]
+    for label,sigma in selectors:
+        labels.append(label); libraries={}
         for prefix in Q:
-            for group_index, group in enumerate(groups):
-                high = []
-                low = []
-                for local_point in group:
-                    point = (prefix,) + local_point
-                    value = point[sigma(point)]
-                    h, l = code_planes(value)
-                    high.append(h)
-                    low.append(l)
-                refs[(prefix, group_index)] = (tuple(high), tuple(low))
-                references += 2
-
+            for gi,g in enumerate(groups):
+                hi=[];lo=[]
+                for lp in g:
+                    point=(prefix,)+lp
+                    h,l=code(point[sigma(point)])
+                    hi.append(h);lo.append(l)
+                libraries[(prefix,gi)]=(tuple(hi),tuple(lo));refs+=2
         for point in points:
-            prefix = point[0]
-            local_point = point[1:]
-            group_index = group_of[local_point]
-            group = groups[group_index]
-            row_index = group.index(local_point)
-            high, low = refs[(prefix, group_index)]
-            got = decode_planes(high[row_index], low[row_index])
-            expected = point[sigma(point)]
-            require(got == expected, "selector reconstruction mismatch")
-            rows += 1
-
-    witness = None
-    sigma = lambda point: 2
+            prefix=point[0]; lp=point[1:]; gi=owner[lp]
+            index=groups[gi].index(lp)
+            hi,lo=libraries[(prefix,gi)]
+            require(decode(hi[index],lo[index])==point[sigma(point)],
+                    "selector reconstruction")
+            rows+=1
+    mutation=None
     for point in points:
-        prefix = point[0]
-        local_point = point[1:]
-        good_group = group_of[local_point]
-        bad_group = (good_group + 1) % len(groups)
-        bad_local = groups[bad_group][0]
-        bad_point = (prefix,) + bad_local
-        bad_value = bad_point[sigma(bad_point)]
-        expected = point[sigma(point)]
-        if bad_value != expected:
-            witness = {
-                "point": list(point),
-                "good_group": good_group,
-                "bad_group": bad_group,
-                "mutated": bad_value,
-                "expected": expected,
-            }
+        gi=owner[point[1:]]
+        bad=(gi+1)%len(groups)
+        bad_point=(point[0],)+groups[bad][0]
+        if bad_point[2]!=point[2]:
+            mutation={"point":list(point),"good":gi,"bad":bad,
+                      "mutated":bad_point[2],"expected":point[2]}
             break
-    require(witness is not None, "group mutation ineffective")
-    return {
-        "selectors": len(selectors),
-        "rows": rows,
-        "plane_references": references,
-        "group_sizes": [len(group) for group in groups],
-        "labels_sha256": hashlib.sha256("\n".join(labels).encode()).hexdigest(),
-        "mutation_wrong_group": witness,
-    }
+    require(mutation is not None,"group mutation")
+    return {"selectors":len(selectors),"rows":rows,"plane_references":refs,
+            "group_sizes":[len(x) for x in groups],
+            "labels_sha256":hashlib.sha256('\n'.join(labels).encode()).hexdigest(),
+            "mutation":mutation}
 
-
-def split_width(width: int) -> tuple[int, int]:
-    return (width + 1) // 2, width // 2
-
+def split(w:int)->tuple[int,int]:
+    return (w+1)//2,w//2
 
 @cache
-def generic_count(width: int) -> int:
-    if width == 0:
-        return 0
-    if width == 1:
-        return 4
-    left, right = split_width(width)
-    return (
-        generic_count(left)
-        + generic_count(right)
-        + 3**width
-        + 3**left * (3**right - 1) // 2
-    )
-
+def generic(w:int)->int:
+    if w==0:return 0
+    if w==1:return 4
+    a,b=split(w)
+    return generic(a)+generic(b)+3**w+3**a*(3**b-1)//2
 
 @cache
-def extended_count(width: int) -> int:
-    if width == 0:
-        return 0
-    if width == 1:
-        return 4
-    left, right = split_width(width)
-    return (
-        generic_count(left)
-        + extended_count(right)
-        + 2 * 3**width
-        - 3 ** (width - 1)
-        + 3**left * (3**right - 1) // 2
-    )
-
+def extended(w:int)->int:
+    if w==0:return 0
+    if w==1:return 4
+    a,b=split(w)
+    return generic(a)+extended(b)+2*3**w-3**(w-1)+3**a*(3**b-1)//2
 
 @cache
-def vector_count(width: int) -> int:
-    if width == 0:
-        return 2
-    if width == 1:
-        return 5
-    left, right = split_width(width)
-    return (
-        2
-        + generic_count(left)
-        + extended_count(right)
-        + 3**left * (3**right - 1) // 2
-        + 3**width
-        - (3 ** (width - 1) + 1) // 2
-    )
+def vector(w:int)->int:
+    if w==0:return 2
+    if w==1:return 5
+    a,b=split(w)
+    return (2+generic(a)+extended(b)+3**a*(3**b-1)//2
+            +3**w-(3**(w-1)+1)//2)
 
+def vdepth(w:int)->int:
+    return 2 if w==0 else 3+clog2(w)
 
-def vector_depth(width: int) -> int:
-    return 2 if width == 0 else 3 + ceil_log2(width)
+@cache
+def binary(r:int)->dict[str,int]:
+    k=math.isqrt(r);q=3**k;w=q.bit_length()-1
+    n=r-1;sizes=([n%w] if n%w else [])+[w]*(n//w)
+    live=1;instances=controls=0
+    for c in sizes:
+        instances+=live;controls+=6*q*(2**c-1);live*=2**c
+    require(live==2**(r-1),"binary leaves")
+    return {"router":((3*q-1)//2)*instances,"control":controls,
+            "depth":(k+1)*len(sizes)+2*w+1}
 
+@cache
+def budget(r:int)->tuple[int,int,int,int]:
+    J=(3**r//(9*r**3)).bit_length()-1
+    K=J-3
+    b,m=floor3(K)
+    return J,K,b,m
 
-def binary_ledger(arity: int) -> dict[str, int]:
-    k = math.isqrt(arity)
-    capacity = 3**k
-    chunk_width = capacity.bit_length() - 1
-    remaining = arity - 1
-    residual = remaining % chunk_width
-    chunks = ([residual] if residual else []) + [chunk_width] * (
-        remaining // chunk_width
-    )
-    live = 1
-    instances = 0
-    controls = 0
-    for chunk in chunks:
-        instances += live
-        controls += 6 * capacity * (2**chunk - 1)
-        live *= 2**chunk
-    require(live == 2 ** (arity - 1), "binary partition")
-    return {
-        "router": (3 * capacity - 1) // 2 * instances,
-        "control": controls,
-        "depth": (k + 1) * len(chunks) + 2 * chunk_width + 1,
-    }
+def candidate(r:int,c:int)->dict[str,object]:
+    J,K,b,m=budget(r)
+    t=b+c
+    d=min(7,t)
+    u=3**(t-d)
+    h=K//u
+    require(h>=1,"group capacity")
+    splitter=3**d
+    g=(splitter+h-1)//h
+    q,rem=divmod(splitter,g)
+    max_words=q+(1 if rem else 0)
+    max_live=max_words*u
+    require(max_live<=K,"live row overflow")
+    table_sum=(rem*2**((q+1)*u)+(g-rem)*2**(q*u))
+    N=3**t
+    local=((3*N-1)//2)*table_sum
+    s=r-t;require(s>=1,"prefix width")
+    P=3**s
+    prefix=g*(3*P-1)
+    vectors=vector(t)+vector(s)+vector(d)-4
+    group=3*3**d-1
+    anchor=2*r-1
+    br=binary(r)
+    total=(local+prefix+vectors+group+anchor+6+
+           br["router"]+br["control"])
+    C=clog2(r);A=C+2
+    local_depth=A+vdepth(t)+t+1
+    prefix_depth=max(local_depth,A+vdepth(s))+s+1
+    group_depth=max(prefix_depth,A+vdepth(d))+d+1
+    final=max(A+4,br["depth"]+2,group_depth+4)
+    return {"c":c,"J":J,"K":K,"b":b,"m":m,"t":t,"d":d,"u":u,
+            "h":h,"g":g,"word_quotient":q,"word_remainder":rem,
+            "live_row_max":max_live,"N":N,"s":s,"P":P,
+            "local":local,"prefix":prefix,"vectors":vectors,
+            "group_selector":group,"anchor":anchor,
+            "binary_router":br["router"],"binary_control":br["control"],
+            "total":total,"depth":final}
 
+def selected_with_rows(r:int)->tuple[dict[str,object],dict[int,dict[str,object]]]:
+    rows={c:candidate(r,c) for c in OFFSETS}
+    best=min(rows.values(),key=lambda row:(row["total"],row["c"]))
+    return best,rows
 
-def boolean_budget(arity: int) -> int:
-    quotient = 3**arity // (9 * arity**3)
-    require(quotient >= 8, "Boolean budget too small")
-    return quotient.bit_length() - 1
+def analytic_tail()->dict[str,object]:
+    bases=[]
+    for r in (107,108,109):
+        e=math.ceil(4*r/3)+3
+        require(9*r**3*2**e<=3**r,"K base")
+        bases.append([r,e])
+    require(16*110**3<27*107**3,"K induction ratio")
+    table=[];maximum=(-1,None,None,None)
+    for h in range(27,81):
+        g=(2187+h-1)//h
+        numerator=(9*g+4)*(h+1)
+        denominator=8748
+        table.append([h,g,numerator,denominator])
+        if maximum[1] is None or numerator*maximum[3]>maximum[0]*denominator:
+            maximum=(numerator,h,g,denominator)
+    require(maximum[1:3]==(78,29),"prefix argmax")
+    require(maximum[0]==20935 and maximum[3]==8748,"prefix value")
+    left=(20935*8*967*1000 + 2187*8748*1000 +
+          4*8748*8*967)
+    denominator=8748*8*967*1000
+    require(25*left<67*denominator,"tail rational bound")
+    require(5000*65<3**32,"prefix error")
+    require(900000*967**2<3**967,"fixed group base")
+    require(192*2**64<3**50,"binary router")
+    require(24*64**2<3**42,"binary control")
+    return {"K_bases":bases,"K_induction":"16*110^3<27*107^3",
+            "prefix_table":table,
+            "prefix_maximum":{"h":78,"g":29,"value":"20935/8748"},
+            "local_bound":"2187/(8r)","lower_order":"4/1000",
+            "tail_start":967,"target":"67/25",
+            "tail_fraction":[left,denominator]}
 
+def ledger_audit()->dict[str,object]:
+    maximum=(-1,1,-1)
+    finite=(-1,1,-1)
+    choices={c:0 for c in OFFSETS}
+    selected_rows=[]
+    min_depth_slack=(10**9,-1)
+    for r in range(64,16385):
+        row,candidates=selected_with_rows(r);choices[row["c"]]+=1
+        unit=3**r;numerator=row["total"]*r
+        require(25*numerator<67*unit,"67/25 exact bound")
+        C=clog2(r)
+        depth_bound=r+math.ceil(7*C/5)+20
+        require(row["depth"]<=depth_bound,"depth bound")
+        slack=depth_bound-row["depth"]
+        if slack<min_depth_slack[0]:min_depth_slack=(slack,r)
+        if numerator*maximum[1]>maximum[0]*unit:
+            maximum=(numerator,unit,r)
+        if r<=966 and numerator*finite[1]>finite[0]*unit:
+            finite=(numerator,unit,r)
+        if r>=967:
+            tail=candidates[4]
+            require(3*tail["K"]>=4*r,"K lower")
+            require(27<=tail["h"]<=80,"h range")
+            require(8*tail["local"]*r*r<2187*unit,"local analytic")
+            require(1000*5*3**((tail["s"]+1)//2)*r<unit,
+                    "prefix error analytic")
+            fixed=(tail["vectors"]-vector(tail["s"])+tail["group_selector"]
+                   +tail["anchor"]+6)
+            require(1000*fixed*r<unit,"fixed analytic")
+            require(1000*tail["binary_router"]*r<unit,"binary router analytic")
+            require(1000*tail["binary_control"]*r<unit,"binary control analytic")
+            require((9*tail["g"]+4)*r*8748
+                    <=20935*243*tail["m"],"prefix main analytic")
+        if r in (64,65,66,67,72,94,107,184,500,966,967,1000,4096,16384):
+            selected_rows.append({
+                "r":r,"c":row["c"],"J":row["J"],"K":row["K"],
+                "t":row["t"],"d":row["d"],"g":row["g"],
+                "live_row_max":row["live_row_max"],
+                "size_ratio":decimal(numerator,unit),
+                "depth":row["depth"],"depth_bound":depth_bound})
+    require(maximum[2]==64,"maximum location")
+    require(finite[2]==64,"finite maximum")
+    return {"range":[64,16384],"portfolio_offsets":list(OFFSETS),
+            "choice_histogram":{str(k):v for k,v in choices.items()},
+            "size_bound":"25*size*r<67*3^r",
+            "depth_bound":"r+ceil(7*ceil(log2 r)/5)+20",
+            "maximum":{"r":maximum[2],"ratio":decimal(maximum[0],maximum[1])},
+            "finite_proof":{"range":[64,966],"maximum_r":finite[2],
+                            "maximum_ratio":decimal(finite[0],finite[1])},
+            "minimum_depth_slack":{"r":min_depth_slack[1],
+                                   "value":min_depth_slack[0]},
+            "selected":selected_rows}
 
-def schedule(arity: int) -> dict[str, int]:
-    j = boolean_budget(arity)
-    cap = j - 3
-    b, m = floor_power3(cap)
-    require(b >= 2 and m % 9 == 0, "local base")
-    local_width = b + 3
-    local_capacity = 27 * m
-    splitter_width = 5
-    splitter_words = 3**splitter_width
-    base_rows = m // 9
-    max_group_words = cap // base_rows
-    require(max_group_words >= 1, "group word capacity")
-    groups = (splitter_words + max_group_words - 1) // max_group_words
-    quotient, remainder = divmod(splitter_words, groups)
-    max_actual_words = quotient + (1 if remainder else 0)
-    require(max_actual_words <= max_group_words, "balanced group overflow")
-    prefix_width = arity - local_width
-    require(prefix_width >= 1, "prefix width")
-    return {
-        "r": arity,
-        "J": j,
-        "K": cap,
-        "b": b,
-        "m": m,
-        "t": local_width,
-        "N": local_capacity,
-        "d": splitter_width,
-        "base_rows": base_rows,
-        "max_group_words": max_group_words,
-        "g": groups,
-        "word_quotient": quotient,
-        "word_remainder": remainder,
-        "s": prefix_width,
-        "P": 3**prefix_width,
-    }
-
-
-def exact_row(arity: int) -> dict[str, int]:
-    plan = schedule(arity)
-    base_rows = plan["base_rows"]
-    q = plan["word_quotient"]
-    remainder = plan["word_remainder"]
-    table_sum = (
-        remainder * 2 ** ((q + 1) * base_rows)
-        + (plan["g"] - remainder) * 2 ** (q * base_rows)
-    )
-    local_library = (3 * plan["N"] - 1) // 2 * table_sum
-    prefix_routers = plan["g"] * (3 * plan["P"] - 1)
-    program_vectors = (
-        vector_count(plan["t"])
-        + vector_count(plan["s"])
-        + vector_count(plan["d"])
-        - 4
-    )
-    group_selector = 3 * 3 ** plan["d"] - 1
-    anchor = 2 * arity - 1
-    binary = binary_ledger(arity)
-    fixed = anchor + 2 + 3 + 1
-    total = (
-        local_library
-        + prefix_routers
-        + program_vectors
-        + group_selector
-        + fixed
-        + binary["router"]
-        + binary["control"]
-    )
-
-    c = ceil_log2(arity)
-    anchor_depth = c + 2
-    local_depth = (
-        anchor_depth + vector_depth(plan["t"]) + plan["t"] + 1
-    )
-    prefix_depth = max(
-        local_depth, anchor_depth + vector_depth(plan["s"])
-    ) + plan["s"] + 1
-    group_depth = max(
-        prefix_depth, anchor_depth + vector_depth(plan["d"])
-    ) + plan["d"] + 1
-    final_depth = max(
-        anchor_depth + 4,
-        binary["depth"] + 2,
-        group_depth + 4,
-    )
-    return {
-        **plan,
-        "table_sum": table_sum,
-        "local_library": local_library,
-        "prefix_routers": prefix_routers,
-        "program_vectors": program_vectors,
-        "group_selector": group_selector,
-        "anchor": anchor,
-        "binary_router": binary["router"],
-        "binary_control": binary["control"],
-        "total": total,
-        "final_depth": final_depth,
-        "depth_bound": (
-            arity
-            + c
-            + ceil_log2(c + 2)
-            + 17
-        ),
-    }
-
-
-def analytic_tail_audit() -> dict[str, object]:
-    bases = []
-    for arity in (107, 108, 109):
-        exponent = math.ceil(4 * arity / 3) + 3
-        left = 9 * arity**3 * 2**exponent
-        right = 3**arity
-        require(left <= right, "K lower-bound base")
-        bases.append([arity, exponent, right // left])
-    require(
-        16 * 110**3 < 27 * 107**3,
-        "three-step K induction ratio",
-    )
-
-    prefix_table = []
-    maximum = (-1, None)
-    for h in range(9, 27):
-        groups = (243 + h - 1) // h
-        numerator = (9 * groups + 4) * (h + 1)
-        denominator = 972
-        prefix_table.append([h, groups, numerator, denominator])
-        if maximum[1] is None or numerator * maximum[3] > maximum[0] * denominator:
-            maximum = (numerator, h, groups, denominator)
-    require(
-        maximum[0] * 243 == 644 * maximum[3],
-        "prefix maximum drift",
-    )
-    require(maximum[1] == 22 and maximum[2] == 12, "prefix argmax")
-
-    tail_upper_numerator = (
-        644 * 8 * 107 * 1000
-        + 243 * 243 * 1000
-        + 4 * 243 * 8 * 107
-    )
-    tail_upper_denominator = 243 * 8 * 107 * 1000
-    require(
-        tail_upper_numerator < 3 * tail_upper_denominator,
-        "analytic tail below three",
-    )
-
-    require(5000 * 65 < 3**32, "prefix half-width error")
-    require(149000 * 64**2 < 3**64, "fixed group error")
-    require(192 * 2**64 < 3**50, "binary router error")
-    require(24 * 64**2 < 3**42, "binary control error")
-    return {
-        "K_lower_bound": "K>=4r/3 for r>=107",
-        "K_base_rows": bases,
-        "three_step_ratio": "16*110^3<27*107^3",
-        "prefix_discrete_table": prefix_table,
-        "prefix_maximum": {
-            "h": maximum[1],
-            "g": maximum[2],
-            "value": "644/243",
-        },
-        "local_library_bound": "local/U < 243/(8r)",
-        "lower_order_bound": "4/1000",
-        "tail_upper_fraction": [
-            tail_upper_numerator,
-            tail_upper_denominator,
-        ],
-    }
-
-
-def ledger_audit() -> dict[str, object]:
-    maximum = (-1, 1, -1)
-    finite_maximum = (-1, 1, -1)
-    selected = []
-    group_counts: dict[int, int] = {}
-    minimum_depth_slack = (10**9, -1)
-
-    for arity in range(64, 16385):
-        row = exact_row(arity)
-        unit = 3**arity
-        numerator = row["total"] * arity
-        require(numerator < 3 * unit, "global size below three")
-        require(row["final_depth"] <= row["depth_bound"], "depth bound")
-        slack = row["depth_bound"] - row["final_depth"]
-        if slack < minimum_depth_slack[0]:
-            minimum_depth_slack = (slack, arity)
-
-        group_counts[row["g"]] = group_counts.get(row["g"], 0) + 1
-        if numerator * maximum[1] > maximum[0] * unit:
-            maximum = (numerator, unit, arity)
-        if arity <= 106 and numerator * finite_maximum[1] > finite_maximum[0] * unit:
-            finite_maximum = (numerator, unit, arity)
-
-        if arity in (
-            64, 65, 66, 67, 84, 94, 100, 106, 107, 128,
-            256, 500, 1000, 4096, 8192, 16384,
-        ):
-            selected.append({
-                "r": arity,
-                "J": row["J"],
-                "K": row["K"],
-                "t": row["t"],
-                "g": row["g"],
-                "group_word_sizes": [
-                    row["word_quotient"] + (1 if index < row["word_remainder"] else 0)
-                    for index in range(row["g"])
-                ],
-                "live_row_max": (
-                    row["word_quotient"]
-                    + (1 if row["word_remainder"] else 0)
-                ) * row["base_rows"],
-                "size_ratio": ratio_decimal(numerator, unit),
-                "final_depth": row["final_depth"],
-                "depth_bound": row["depth_bound"],
-            })
-
-    require(maximum[2] == 66, "maximum ratio arity")
-    require(finite_maximum[2] == 66, "finite maximum arity")
-    return {
-        "arity_range": [64, 16384],
-        "size_bound": "size<3*3^r/r",
-        "depth_bound": "r+C+ceil(log_2(C+2))+17",
-        "maximum_ratio": {
-            "r": maximum[2],
-            "value": ratio_decimal(maximum[0], maximum[1]),
-        },
-        "finite_range": {
-            "range": [64, 106],
-            "maximum_r": finite_maximum[2],
-            "maximum_ratio": ratio_decimal(
-                finite_maximum[0], finite_maximum[1]
-            ),
-        },
-        "group_count_histogram": {
-            str(key): value for key, value in sorted(group_counts.items())
-        },
-        "minimum_depth_slack": {
-            "r": minimum_depth_slack[1],
-            "value": minimum_depth_slack[0],
-        },
-        "selected": selected,
-    }
-
-
-def make_receipt() -> dict[str, object]:
-    result = {
-        "schema": "orbit-synthesis/plane-shared-library/v1",
-        "plane_factorization": plane_factorization_audit(),
-        "selector_reconstruction": selector_reconstruction_audit(),
-        "analytic_tail": analytic_tail_audit(),
-        "ledger": ledger_audit(),
-    }
-    canonical = json.dumps(result, sort_keys=True, separators=(",", ":"))
-    result["semantic_sha256"] = hashlib.sha256(canonical.encode()).hexdigest()
+def make_receipt()->dict[str,object]:
+    result={"schema":"orbit-synthesis/plane-shared-portfolio/v1",
+            "plane_factorization":semantic_factorization(),
+            "selector_reconstruction":reconstruction_audit(),
+            "analytic_tail":analytic_tail(),
+            "ledger":ledger_audit()}
+    canonical=json.dumps(result,sort_keys=True,separators=(",",":"))
+    result["semantic_sha256"]=hashlib.sha256(canonical.encode()).hexdigest()
     return result
 
-
-def main() -> int:
-    expected = None
-    output = None
-    arguments = iter(sys.argv[1:])
-    for argument in arguments:
-        if argument == "--expected":
-            expected = Path(next(arguments))
-        elif argument == "--out":
-            output = Path(next(arguments))
-        else:
-            raise SystemExit(f"unknown argument: {argument}")
-
-    result = make_receipt()
-    rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
+def main()->int:
+    expected=output=None
+    args=iter(sys.argv[1:])
+    for arg in args:
+        if arg=="--expected":expected=Path(next(args))
+        elif arg=="--out":output=Path(next(args))
+        else:raise SystemExit(arg)
+    result=make_receipt()
+    text=json.dumps(result,indent=2,sort_keys=True)+"\n"
     if expected is not None:
-        require(
-            result == json.loads(expected.read_text()),
-            "committed receipt drift",
-        )
-    if output is not None:
-        output.write_text(rendered)
-    print(rendered, end="")
+        require(result==json.loads(expected.read_text()),"receipt drift")
+    if output is not None:output.write_text(text)
+    print(text,end="")
     return 0
 
-
-if __name__ == "__main__":
+if __name__=="__main__":
     raise SystemExit(main())
