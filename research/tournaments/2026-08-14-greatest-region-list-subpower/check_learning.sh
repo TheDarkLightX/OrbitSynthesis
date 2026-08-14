@@ -4,29 +4,36 @@ set -euo pipefail
 lane_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 repo_dir="$(cd "$lane_dir/../../.." && pwd)"
 nogood="$lane_dir/check_domain_nogood.py"
+replay="$lane_dir/check_domain_nogood_replay.py"
 learning="$lane_dir/check_domain_learning.py"
 independent="$lane_dir/audits/independent/audit_domain_learning_independent.py"
 adapter="$lane_dir/check_solver_adapter.py"
 nogood_normal="$(mktemp)"
 nogood_optimized="$(mktemp)"
+replay_normal="$(mktemp)"
+replay_optimized="$(mktemp)"
 learning_normal="$(mktemp)"
 learning_optimized="$(mktemp)"
 independent_normal="$(mktemp)"
 independent_optimized="$(mktemp)"
 adapter_normal="$(mktemp)"
 adapter_optimized="$(mktemp)"
-trap 'rm -f "$nogood_normal" "$nogood_optimized" "$learning_normal" "$learning_optimized" "$independent_normal" "$independent_optimized" "$adapter_normal" "$adapter_optimized"' EXIT
+trap 'rm -f "$nogood_normal" "$nogood_optimized" "$replay_normal" "$replay_optimized" "$learning_normal" "$learning_optimized" "$independent_normal" "$independent_optimized" "$adapter_normal" "$adapter_optimized"' EXIT
 
 cd "$repo_dir"
 python3 -m py_compile \
   src/orbitsynthesis/domain_nogood.py \
   src/orbitsynthesis/domain_learning.py \
   src/orbitsynthesis/solver_adapter.py \
-  "$nogood" "$learning" "$independent" "$adapter"
+  "$nogood" "$replay" "$learning" "$independent" "$adapter"
 
 python3 "$nogood" > "$nogood_normal"
 python3 -O "$nogood" > "$nogood_optimized"
 cmp "$nogood_normal" "$nogood_optimized"
+
+python3 "$replay" > "$replay_normal"
+python3 -O "$replay" > "$replay_optimized"
+cmp "$replay_normal" "$replay_optimized"
 
 python3 "$learning" > "$learning_normal"
 python3 -O "$learning" > "$learning_optimized"
@@ -40,14 +47,15 @@ python3 "$adapter" > "$adapter_normal"
 python3 -O "$adapter" > "$adapter_optimized"
 cmp "$adapter_normal" "$adapter_optimized"
 
-python3 - "$nogood_normal" "$learning_normal" "$independent_normal" "$adapter_normal" <<'PY'
+python3 - "$nogood_normal" "$replay_normal" "$learning_normal" "$independent_normal" "$adapter_normal" <<'PY'
 import json
 import sys
 
 nogood = json.load(open(sys.argv[1], encoding="utf-8"))
-learning = json.load(open(sys.argv[2], encoding="utf-8"))
-independent = json.load(open(sys.argv[3], encoding="utf-8"))
-adapter = json.load(open(sys.argv[4], encoding="utf-8"))
+replay = json.load(open(sys.argv[2], encoding="utf-8"))
+learning = json.load(open(sys.argv[3], encoding="utf-8"))
+independent = json.load(open(sys.argv[4], encoding="utf-8"))
+adapter = json.load(open(sys.argv[5], encoding="utf-8"))
 
 assert nogood["synthetic"]["candidate_count"] == 3
 assert len(nogood["synthetic"]["core"]) == 1
@@ -59,6 +67,11 @@ assert nogood["random_differential"]["maximum_core_size"] == 3
 assert nogood["random_differential"]["total_core_literals"] == 897
 assert nogood["random_differential"]["total_clause_literals"] == 897
 assert nogood["principal"]["core_literals"]
+
+assert replay["raw_forged_core_verifies"] is True
+assert replay["model_aware_forged_core_rejected"] is True
+assert replay["feasible_control_preserved"] is True
+assert replay["actual_core"] != replay["forged_core"]
 
 assert learning["synthetic"]["states"] == 12
 assert learning["synthetic"]["reference_domain_checks"] == 4096
@@ -98,6 +111,7 @@ PY
 
 sha256sum \
   "$nogood" "$nogood_normal" \
+  "$replay" "$replay_normal" \
   "$learning" "$learning_normal" \
   "$independent" "$independent_normal" \
   "$adapter" "$adapter_normal" \
