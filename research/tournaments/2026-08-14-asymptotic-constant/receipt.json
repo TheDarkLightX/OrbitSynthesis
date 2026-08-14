@@ -1,0 +1,31 @@
+{
+  "schema": "orbit-synthesis/asymptotic-constant-summary/v1",
+  "status": "PASS",
+  "stdout_sha256": "e24ada921f88b27aef52ed148dd864ba2ba11fb13d1ef98591e88b4af9559c55",
+  "semantic_sha256": "03bf71c94192a83481baeb8dc16d634395025c8dce3c3b8718e16003878b66a7",
+  "theorem": {
+    "finite_portfolio": "5*size*r<12*3^r for r>=64",
+    "asymptotic_size": "limsup r*size/3^r <= 3/log_2 3",
+    "limit_decimal": "1.892789260714372110",
+    "asymptotic_depth": "r+(1+log_3 2)log_2 r+O(log log r)",
+    "depth_log_coefficient": "1.630929753571457437"
+  },
+  "checked_range": [64, 16384],
+  "finite_portfolio_maximum": {
+    "r": 64,
+    "ratio": "2.391548842960882081"
+  },
+  "asymptotic_schedule": {
+    "first_selected": 178,
+    "first_checked_ratio_below_two": 435,
+    "K": "floor(log_2(3^r/r^4))",
+    "N": "3^ceil(log_3(K*C^3))",
+    "g": "ceil(N/K)"
+  },
+  "semantic_checks": {
+    "coordinate_selector_tables_Q2": 512,
+    "coordinate_selector_rows_Q2": 4608,
+    "three_coordinate_rows": 1728,
+    "effective_rank_mutation": true
+  }
+}

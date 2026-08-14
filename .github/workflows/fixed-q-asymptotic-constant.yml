@@ -1,0 +1,24 @@
+name: fixed-q-asymptotic-constant
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/fixed-q-asymptotic-constant.yml'
+      - 'notes/QUASIPRIMAL_CONSERVATIVE_TERM_ASYMPTOTIC_CONSTANT.md'
+      - 'research/tournaments/2026-08-14-asymptotic-constant/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  asymptotic-constant-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Replay primary and independent asymptotic evidence
+        run: bash research/tournaments/2026-08-14-asymptotic-constant/check.sh

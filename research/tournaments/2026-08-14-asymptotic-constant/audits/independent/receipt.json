@@ -1,0 +1,24 @@
+{
+  "schema": "orbit-synthesis/asymptotic-constant-independent-summary/v1",
+  "status": "PASS",
+  "stdout_sha256": "dd7af892fb230e20928eaf55fc4a4c1148ac1a2936cc9853b03903464bade0b7",
+  "semantic_sha256": "73602d82183a5178b46b16ea662129da6158181729179d2c3419e48fdd3ff4f7",
+  "theorem": {
+    "finite_portfolio": "5*size*r<12*3^r for r>=64",
+    "asymptotic_size": "limsup r*size/3^r <= 3/log_2 3",
+    "limit_decimal": "1.892789260714372110",
+    "asymptotic_depth": "r+(1+log_3 2)log_2 r+O(log log r)"
+  },
+  "checked_range": [64, 16384],
+  "maximum_checked_portfolio_ratio": {
+    "r": 64,
+    "value": "2.391548842960882081"
+  },
+  "independence": {
+    "imports_primary_checker": false,
+    "imports_orbitsynthesis_compiler": false,
+    "coordinate_selector_tables_Q2": 512,
+    "coordinate_selector_rows_Q2": 4608,
+    "effective_rank_mutation": true
+  }
+}
