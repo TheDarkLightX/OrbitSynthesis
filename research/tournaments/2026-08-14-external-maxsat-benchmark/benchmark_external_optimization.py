@@ -14,12 +14,7 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from check_external_optimization import (
-    FAMILIES,
-    SyntheticKernel,
-    component_model,
-    scenarios,
-)
+from check_external_optimization import FAMILIES, SyntheticKernel, component_model, scenarios
 from orbitsynthesis.domain_optimization import optimize_weighted_domain
 from orbitsynthesis.external_optimization import (
     ExternalOptimizationError,
@@ -31,10 +26,7 @@ from orbitsynthesis.external_optimization import (
 
 def summary(samples):
     ordered = sorted(samples)
-    index = min(
-        len(ordered) - 1,
-        max(0, int(0.95 * len(ordered)) - 1),
-    )
+    index = min(len(ordered) - 1, max(0, int(0.95 * len(ordered)) - 1))
     return {
         "runs": len(ordered),
         "min_seconds": ordered[0],
@@ -51,12 +43,21 @@ def timed(callable_, repeat):
         started = time.perf_counter()
         result = callable_()
         samples.append(time.perf_counter() - started)
+        witness = getattr(result, "witness", None)
+        if witness is not None:
+            domain = tuple(sorted(witness.domain))
+        elif hasattr(result, "domain"):
+            domain = tuple(sorted(result.domain))
+        else:
+            domain = None
+        if hasattr(result, "objective"):
+            score = result.objective.score
+        else:
+            score = getattr(result, "signed_utility", None)
         candidate = (
             result.status if hasattr(result, "status") else "optimal",
-            tuple(sorted(result.witness.domain))
-            if getattr(result, "witness", None) is not None
-            else tuple(sorted(result.domain)),
-            getattr(result, "signed_utility", None),
+            domain,
+            score,
         )
         if semantic is None:
             semantic = candidate
@@ -85,6 +86,7 @@ def main() -> int:
     for family, state_count, candidate_data in FAMILIES:
         kernel = SyntheticKernel(state_count, candidate_data)
         model = component_model(state_count, candidate_data)
+        # Benchmark one unique-primary and one signed-primary case per family.
         for scenario, weights, required, forbidden in scenarios(state_count)[:2]:
             cnf = model.cnf(
                 required_states=required,
@@ -170,7 +172,8 @@ def main() -> int:
 
             expected_score = native_semantic[2]
             for backend, data in backend_rows.items():
-                score = data["semantic"][2]
+                semantic = data["semantic"]
+                score = semantic[2]
                 if score is not None and score != expected_score:
                     raise AssertionError(
                         f"{backend} benchmark changed the primary optimum"
