@@ -8,6 +8,7 @@ on:
       - 'notes/QUASIPRIMAL_CONSERVATIVE_TERM_*.md'
       - 'paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md'
       - 'research/tournaments/2026-08-13-semantic-router-frontier/**'
+      - 'research/tournaments/2026-08-13-program-vector-optimization/**'
       - 'lakefile.lean'
       - 'lean-toolchain'
   workflow_dispatch:
@@ -30,4 +31,6 @@ jobs:
           use-mathlib-cache: true
           build-args: '--wfail'
       - name: Replay exact evidence and Lean proofs
-        run: python3 experiments/audit_fixed_q_preprint.py
+        run: |
+          python3 experiments/audit_fixed_q_preprint.py
+          bash research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check.sh
