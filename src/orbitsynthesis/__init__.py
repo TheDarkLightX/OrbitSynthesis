@@ -12,6 +12,15 @@ from .discriminator_compile import (
     selector,
 )
 from .finite_algebra import FiniteAlgebra, FiniteOperation, InternalIsomorphism
+from .greatest_region_boundary import (
+    NoGreatestRegionAudit,
+    NoGreatestRegionWitness,
+    audit_no_greatest_region_witness,
+    build_no_greatest_region_witness,
+    internal_isomorphism_extends,
+    maximal_nonextendable_internal_isomorphism,
+    relation_is_internal_groupoid_invariant,
+)
 from .parameter_core import (
     BitsetNogoodDomainSearch,
     CompiledNogoodDomainSearch,
@@ -77,9 +86,18 @@ from .patchability_residual import (
     shortest_state_parameters,
 )
 from .safety import FiniteSafetyGame, SafetySolution
+from .subpower_lists import (
+    CandidateRejection,
+    ListSubpowerObstruction,
+    ListSubpowerResult,
+    ListSubpowerWitness,
+    quasi_primal_list_subpower_intersection,
+    verify_list_subpower_witness,
+)
 
 __all__ = [
     "BitsetNogoodDomainSearch",
+    "CandidateRejection",
     "CompiledNogoodDomainSearch",
     "CompiledParameterizedKernel",
     "Const",
@@ -96,6 +114,11 @@ __all__ = [
     "FixedDomainCorePoint",
     "FixedDomainCoreResult",
     "InternalIsomorphism",
+    "ListSubpowerObstruction",
+    "ListSubpowerResult",
+    "ListSubpowerWitness",
+    "NoGreatestRegionAudit",
+    "NoGreatestRegionWitness",
     "ObstructionHypergraph",
     "ParameterCoreInfo",
     "ParameterDomainFrontier",
@@ -109,6 +132,8 @@ __all__ = [
     "SafetySolution",
     "SeedRule",
     "Var",
+    "audit_no_greatest_region_witness",
+    "build_no_greatest_region_witness",
     "build_patchability_residual_automaton",
     "closure_with_parameters",
     "compile_table",
@@ -123,10 +148,12 @@ __all__ = [
     "has_pointed_extension_property",
     "hits_all",
     "incidence_masks",
+    "internal_isomorphism_extends",
     "learn_minimum_patchability_parameters",
     "maximal_domains_bitset_nogood",
     "maximal_domains_for_allowed_parameters",
     "maximal_domains_nogood",
+    "maximal_nonextendable_internal_isomorphism",
     "maximal_parameterized_domains",
     "minimal_clutter",
     "minimum_cores_for_domain",
@@ -145,8 +172,11 @@ __all__ = [
     "patchability_obstruction_hypergraph",
     "patchability_residual_automaton",
     "pointed_classes",
+    "quasi_primal_list_subpower_intersection",
+    "relation_is_internal_groupoid_invariant",
     "residual_mask",
     "selector",
     "shortest_accepting_parameters",
     "shortest_state_parameters",
+    "verify_list_subpower_witness",
 ]
