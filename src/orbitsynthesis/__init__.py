@@ -92,6 +92,13 @@ from .principal_greatest_region import (
     build_principal_no_greatest_region_witness,
 )
 from .safety import FiniteSafetyGame, SafetySolution
+from .safety_components import (
+    QuasiPrimalDomainResult,
+    StrategyCandidateRejection,
+    StrategyComponentObstruction,
+    quasi_primal_domain_result,
+    verify_quasi_primal_domain_result,
+)
 from .subpower_lists import (
     CandidateRejection,
     ListSubpowerObstruction,
@@ -137,8 +144,11 @@ __all__ = [
     "PointedClassRules",
     "PrincipalEquationAudit",
     "PrincipalNoGreatestRegionWitness",
+    "QuasiPrimalDomainResult",
     "SafetySolution",
     "SeedRule",
+    "StrategyCandidateRejection",
+    "StrategyComponentObstruction",
     "Var",
     "audit_no_greatest_region_witness",
     "audit_principal_no_greatest_region_witness",
@@ -182,6 +192,7 @@ __all__ = [
     "patchability_obstruction_hypergraph",
     "patchability_residual_automaton",
     "pointed_classes",
+    "quasi_primal_domain_result",
     "quasi_primal_list_subpower_intersection",
     "relation_is_internal_groupoid_invariant",
     "residual_mask",
@@ -189,4 +200,5 @@ __all__ = [
     "shortest_accepting_parameters",
     "shortest_state_parameters",
     "verify_list_subpower_witness",
+    "verify_quasi_primal_domain_result",
 ]
