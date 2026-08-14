@@ -17,6 +17,7 @@ on:
       - 'notes/DEMI_SEMIPRIMAL_GREATEST_REGION_CHARACTERIZATION.md'
       - 'notes/QUASIPRIMAL_LIST_SUBPOWER_TRACTABILITY.md'
       - 'notes/QUASIPRIMAL_DOMAIN_MAXSAT_COMPILATION.md'
+      - 'notes/QUASIPRIMAL_DOMAIN_SOLVER_CERTIFICATES.md'
       - 'research/tournaments/2026-08-14-greatest-region-list-subpower/**'
   workflow_dispatch:
 
