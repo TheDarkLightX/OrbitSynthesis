@@ -1,7 +1,7 @@
 """Exact lazy conflict learning for weighted quasi-primal domain search.
 
 The eager domain model can emit every component-rule selector and all of its
-CNF clauses at once.  This module provides the complementary lazy architecture:
+CNF clauses at once. This module provides the complementary lazy architecture:
 
 1. an outer state-assignment oracle proposes the best domain not excluded by
    previously learned state-only clauses;
@@ -12,7 +12,7 @@ CNF clauses at once.  This module provides the complementary lazy architecture:
 
 The candidate oracle implemented here is exhaustive and deliberately bounded.
 It is a deterministic reference implementation for tests and small standalone
-instances.  A production implementation can replace that oracle with an
+instances. A production implementation can replace that oracle with an
 incremental SAT/MaxSAT backend while keeping the same conflict-core and
 certificate interface.
 
@@ -33,7 +33,7 @@ from .domain_model import (
 from .domain_nogood import (
     DomainConflictCore,
     minimize_domain_failure,
-    verify_domain_conflict_core,
+    verify_domain_conflict_core_against_model,
 )
 from .domain_solver import WeightedDomainOptimum
 
@@ -91,8 +91,13 @@ def _weights(
         else set()
     )
     if unknown:
-        raise ValueError(f"state weight supplied outside the model: {unknown!r}")
-    if any(not isinstance(weight, int) or weight <= 0 for weight in result.values()):
+        raise ValueError(
+            f"state weight supplied outside the model: {unknown!r}"
+        )
+    if any(
+        not isinstance(weight, int) or weight <= 0
+        for weight in result.values()
+    ):
         raise ValueError("state weights must be positive integers")
     return result
 
@@ -108,7 +113,7 @@ def _better_candidate(
     if total_weight != current_weight:
         return total_weight > current_weight
     # Match the deterministic tie convention used by the bounded exhaustive
-    # optimizer.  State values are intentionally ordered through repr because
+    # optimizer. State values are intentionally ordered through repr because
     # the finite-algebra API permits arbitrary hashable carrier values.
     return repr(sorted(domain, key=repr)) < repr(
         sorted(current_domain, key=repr)
@@ -164,13 +169,13 @@ def maximum_weight_domain_with_learning(
 ) -> LearnedDomainSearchResult:
     """Find an exact maximum-weight domain by lazy component conflict learning.
 
-    Every learned core is independently verified against the raw component
-    failure before it can prune another state assignment.  Because each core
-    blocks only domains for which that component has no acceptable candidate,
-    learning never removes a feasible domain.  Therefore the first feasible
+    Every learned core is replayed against the compiled component model before
+    it can prune another state assignment. Because each verified core blocks
+    only domains for which that component has no acceptable candidate,
+    learning never removes a feasible domain. Therefore the first feasible
     proposal from the exact best-unblocked state oracle is globally optimal.
 
-    ``max_rounds`` is a fail-closed resource guard.  Exceeding it raises rather
+    ``max_rounds`` is a fail-closed resource guard. Exceeding it raises rather
     than returning an unproved optimum.
     """
 
@@ -227,8 +232,12 @@ def maximum_weight_domain_with_learning(
                         len(core.literals) for core in cores
                     ),
                     state_assignments_scanned=scanned,
-                    state_assignments_rejected_by_hard_constraints=hard_rejected,
-                    state_assignments_rejected_by_learned_cores=learned_rejected,
+                    state_assignments_rejected_by_hard_constraints=(
+                        hard_rejected
+                    ),
+                    state_assignments_rejected_by_learned_cores=(
+                        learned_rejected
+                    ),
                 ),
             )
 
@@ -252,8 +261,12 @@ def maximum_weight_domain_with_learning(
                         len(core.literals) for core in cores
                     ),
                     state_assignments_scanned=scanned,
-                    state_assignments_rejected_by_hard_constraints=hard_rejected,
-                    state_assignments_rejected_by_learned_cores=learned_rejected,
+                    state_assignments_rejected_by_hard_constraints=(
+                        hard_rejected
+                    ),
+                    state_assignments_rejected_by_learned_cores=(
+                        learned_rejected
+                    ),
                 ),
             )
         if not isinstance(solution, CompiledDomainFailure):
@@ -261,13 +274,18 @@ def maximum_weight_domain_with_learning(
 
         core = minimize_domain_failure(solution)
         if not core.holds(scan.domain):
-            raise AssertionError("learned core does not block its source domain")
-        if not verify_domain_conflict_core(
+            raise AssertionError(
+                "learned core does not block its source domain"
+            )
+        if not verify_domain_conflict_core_against_model(
+            model,
             solution,
             core,
             require_minimal=True,
         ):
-            raise AssertionError("learned core failed independent replay")
+            raise AssertionError(
+                "learned core failed compiled-model replay"
+            )
 
         signature = tuple(
             (literal.state, literal.included)
@@ -275,12 +293,16 @@ def maximum_weight_domain_with_learning(
         )
         if signature in core_signatures:
             # A repeated complete assignment would already have been rejected
-            # by the earlier identical core.  Treat repetition as a bug rather
+            # by the earlier identical core. Treat repetition as a bug rather
             # than risking a nonterminating learning loop.
-            raise AssertionError("duplicate learned core did not block proposal")
+            raise AssertionError(
+                "duplicate learned core did not block proposal"
+            )
         core_signatures.add(signature)
         cores.append(core)
         clause = core.blocking_clause(state_variables)
         if not clause:
-            raise AssertionError("empty learned clause would prove global failure")
+            raise AssertionError(
+                "empty learned clause would prove global failure"
+            )
         clauses.append(clause)
