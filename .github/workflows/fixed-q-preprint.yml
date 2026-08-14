@@ -11,6 +11,7 @@ on:
       - 'research/tournaments/2026-08-13-program-vector-optimization/**'
       - 'research/tournaments/2026-08-14-two-slice-compiler/**'
       - 'research/tournaments/2026-08-14-early-switch-compiler/**'
+      - 'research/tournaments/2026-08-14-plane-shared-library/**'
       - 'lakefile.lean'
       - 'lean-toolchain'
   workflow_dispatch:
@@ -38,3 +39,4 @@ jobs:
           bash research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check.sh
           bash research/tournaments/2026-08-14-two-slice-compiler/check.sh
           bash research/tournaments/2026-08-14-early-switch-compiler/check.sh
+          bash research/tournaments/2026-08-14-plane-shared-library/check.sh
