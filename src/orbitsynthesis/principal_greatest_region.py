@@ -1,12 +1,12 @@
 """Principal-equation no-greatest witnesses for quasi-primal algebras.
 
 The generic groupoid-invariant converse in ``greatest_region_boundary`` can be
-made equation-defined.  Its unsafe tuples all carry a tagged listing of a
+made equation-defined. Its unsafe tuples all carry a tagged listing of a
 nontrivial source or target subalgebra, so their first two coordinates are
-distinct.  Let ``p`` be the first projection and define ``g`` to be ``p`` on
-safe tuples and the second projection on unsafe tuples.  Groupoid invariance
+distinct. Let ``p`` be the first projection and define ``g`` to be ``p`` on
+safe tuples and the second projection on unsafe tuples. Groupoid invariance
 makes this branch equivariant; both branches are projections and hence remain
-inside the generated subalgebra.  Quasi-primal interpolation therefore makes
+inside the generated subalgebra. Quasi-primal interpolation therefore makes
 ``g`` a term, and the safe relation is exactly ``p=g``.
 
 The caller is responsible for the quasi-primality premise.
@@ -15,6 +15,7 @@ The caller is responsible for the quasi-primality premise.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import cached_property
 from itertools import product
 from typing import Hashable, Sequence
 
@@ -62,6 +63,7 @@ class PrincipalNoGreatestRegionWitness:
             self.safe_relation,
         )
 
+    @cached_property
     def flattened(self) -> frozenset[tuple[Value, ...]]:
         return frozenset(
             state + input_value + output
@@ -73,7 +75,7 @@ class PrincipalNoGreatestRegionWitness:
 
     def separator_value(self, flattened_transition: Sequence[Value]) -> Value:
         flattened = tuple(flattened_transition)
-        if flattened in self.flattened():
+        if flattened in self.flattened:
             return flattened[self.first_projection_index]
         return flattened[self.alternate_projection_index]
 
@@ -172,7 +174,7 @@ def audit_principal_no_greatest_region_witness(
         witness.left_domain | witness.right_domain
     )
 
-    safe_flattened = witness.flattened()
+    safe_flattened = witness.flattened
     total_arity = 2 * witness.state_arity + 1
     rows = tuple(product(algebra.values, repeat=total_arity))
 
