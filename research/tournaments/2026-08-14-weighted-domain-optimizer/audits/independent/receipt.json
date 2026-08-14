@@ -1,0 +1,21 @@
+{
+  "preference": {
+    "function": [
+      1,
+      0,
+      2
+    ],
+    "score": 13
+  },
+  "schema": "orbit-synthesis/weighted-domain-optimizer-independent/v1",
+  "semantic_sha256": "1893ead79ed69ff556dde90596d453df5bf3314677b6992f3b59d3dfd6d61aba",
+  "unary_corpus": {
+    "corpus_sha256": "ab589ba21f07278b82308c9a79dbc90b6846b882345764efb66df72c7e3e4346",
+    "feasible_instances": 2880,
+    "infeasible_instances": 192,
+    "instances": 3072,
+    "relations": 512,
+    "scenarios": 6,
+    "term_functions": 6
+  }
+}

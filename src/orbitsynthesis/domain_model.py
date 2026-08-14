@@ -101,6 +101,9 @@ class CNFEncoding:
 class WeightedCNFEncoding:
     variable_count: int
     hard_clauses: tuple[tuple[int, ...], ...]
+    # The first entry is a signed literal.  Positive state weight emits x_s;
+    # negative state weight emits not x_s.  Maximizing satisfied soft weight is
+    # therefore the original signed objective plus a fixed offset.
     soft_state_units: tuple[tuple[int, int], ...]
     top_weight: int
 
@@ -114,8 +117,8 @@ class WeightedCNFEncoding:
             for clause in self.hard_clauses
         )
         lines.extend(
-            f"{weight} {variable} 0"
-            for variable, weight in self.soft_state_units
+            f"{weight} {literal} 0"
+            for literal, weight in self.soft_state_units
         )
         return "\n".join(lines) + "\n"
 
@@ -207,6 +210,7 @@ class QuasiPrimalDomainModel:
         self,
         *,
         required_states: Iterable[State] = (),
+        forbidden_states: Iterable[State] = (),
     ) -> CNFEncoding:
         state_variables = {
             state: index + 1
@@ -242,10 +246,15 @@ class QuasiPrimalDomainModel:
                     if source != target
                 )
 
-        for state in required_states:
-            if state not in state_variables:
-                raise ValueError(f"required state outside model: {state!r}")
-            clauses.append((state_variables[state],))
+        required = frozenset(required_states)
+        forbidden = frozenset(forbidden_states)
+        if required & forbidden:
+            raise ValueError("required and forbidden states overlap")
+        unknown = (required | forbidden) - set(state_variables)
+        if unknown:
+            raise ValueError(f"hard state outside model: {min(unknown, key=repr)!r}")
+        clauses.extend((state_variables[state],) for state in required)
+        clauses.extend((-state_variables[state],) for state in forbidden)
 
         return CNFEncoding(
             variable_count=next_variable - 1,
@@ -262,29 +271,53 @@ class QuasiPrimalDomainModel:
         self,
         *,
         required_states: Iterable[State] = (),
+        forbidden_states: Iterable[State] = (),
         state_weights: Mapping[State, int] | None = None,
+        default_weight: int = 1,
     ) -> WeightedCNFEncoding:
-        encoding = self.cnf(required_states=required_states)
+        """Compile signed state utility to weighted partial MaxSAT.
+
+        A positive weight `w(s)` produces the soft unit `(x_s,w(s))`.  A
+        negative weight produces `(-x_s,-w(s))`; satisfying that unit rewards
+        exclusion.  For every domain `D`, total soft reward equals
+
+        `sum_(w(s)<0) -w(s) + sum_(s in D) w(s)`,
+
+        so maximizing reward is exactly equivalent to maximizing the signed
+        state-weight objective.  Zero-weight states produce no soft clause.
+        """
+
+        if not isinstance(default_weight, int):
+            raise TypeError("default_weight must be an integer")
+        supplied = {} if state_weights is None else dict(state_weights)
+        unknown = set(supplied) - set(self.states)
+        if unknown:
+            raise ValueError(f"state weight outside model: {min(unknown, key=repr)!r}")
+        if any(not isinstance(weight, int) for weight in supplied.values()):
+            raise TypeError("all state weights must be integers")
+
+        encoding = self.cnf(
+            required_states=required_states,
+            forbidden_states=forbidden_states,
+        )
         variable_by_state = dict(encoding.state_variables)
         weights = {
-            state: (
-                state_weights[state]
-                if state_weights is not None and state in state_weights
-                else 1
-            )
+            state: supplied.get(state, default_weight)
             for state in self.states
         }
-        if any(weight <= 0 for weight in weights.values()):
-            raise ValueError("state weights must be positive integers")
         soft = tuple(
-            (variable_by_state[state], weights[state])
-            for state in self.states
+            (
+                variable_by_state[state] if weight > 0 else -variable_by_state[state],
+                abs(weight),
+            )
+            for state, weight in weights.items()
+            if weight != 0
         )
         return WeightedCNFEncoding(
             variable_count=encoding.variable_count,
             hard_clauses=encoding.clauses,
             soft_state_units=soft,
-            top_weight=sum(weights.values()) + 1,
+            top_weight=sum(weight for _literal, weight in soft) + 1,
         )
 
 
