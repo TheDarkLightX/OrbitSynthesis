@@ -1,0 +1,21 @@
+{
+  "schema": "orbit-synthesis/formal-manuscript-repairs/v1",
+  "status": "PASS_KERNEL_CARDINALITY_GRAMMAR_GLUE_DECODER",
+  "source_sha256": {
+    "ManuscriptRepairs.lean": "4b082559f9bdcea0dc8518992c9c9a87960f2a33a289a0d3cf7ad55347b3ced7",
+    "AxiomAudit.lean": "1a358591415c181d8c68b109c50166cc1e14543d3c764a8747ca62a622a9e4f4",
+    "check.sh": "a38c6f8fabb04bca4d5297b841c6dcfb91ecee5ef8f82e557bf2c51afa506328"
+  },
+  "proved": [
+    "kernel-reduced finite cardinalities and q_h=3^(h-1)",
+    "exhaustive no-nullary-constructor catalogs for DTerm and QTerm",
+    "two-input anchor absorber and binary-left laws",
+    "outer glue on both binary anchor values and A=2",
+    "two-plane decoder on 00, 01, 10 and explicit unused 11 behavior"
+  ],
+  "axiom_boundary": "No new axioms; cardinality declarations print only propext, Classical.choice, Quot.sound; grammar and Q identities print no axioms.",
+  "nonclaims": [
+    "No integrated all-arity compiler or serialized DAG theorem.",
+    "No novelty, FTO, patent, license, or performance conclusion."
+  ]
+}

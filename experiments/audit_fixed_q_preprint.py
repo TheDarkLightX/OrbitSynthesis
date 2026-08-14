@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Portable, fail-closed gate for the fixed-Q preprint packet.
 
-This gate replays the exact signed-router and parallel-program-vector evidence,
-their independent audits, the conditional compiler ledger, the classical
-transfer falsifiers, and all three Lean proof layers.  It intentionally does
-not promote the integrated all-arity compiler beyond its stated frozen
-premises, and it makes no novelty, patent, license, or performance finding.
+This gate replays the exact signed-router, historical E/G vector, optimized
+sibling-shared vector, their independent audits, the historical conditional
+ledger, the integrated compiler reconstruction, the classical-transfer
+falsifiers, and the scoped Lean layers. It intentionally does not treat a
+recurrence-only Lean file as extracted-DAG evidence or make a novelty, patent,
+license, performance, peer-review, or publication finding.
 """
 
 from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -22,6 +24,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 FRONTIER = ROOT / "research/tournaments/2026-08-13-semantic-router-frontier"
+OPT_FRONTIER = ROOT / "research/tournaments/2026-08-13-program-vector-optimization"
 
 
 def require(condition: bool, message: str) -> None:
@@ -52,6 +55,41 @@ def run(command: list[str], *, env: dict[str, str] | None = None) -> bytes:
     return completed.stdout
 
 
+def ceil_log2(value: int) -> int:
+    require(value >= 1, "ceil_log2 input")
+    return (value - 1).bit_length()
+
+
+def retained_binary_depth(arity: int) -> int:
+    """Exact residual-first ledger used by the retained binary branch."""
+    require(arity >= 2, "binary ledger arity")
+    chunk = math.isqrt(arity)
+    width = (3**chunk).bit_length() - 1
+    levels = (arity - 1 + width - 1) // width
+    return (chunk + 1) * levels + 2 * width + 3 * ceil_log2(arity) + 8
+
+
+def check_binary_eventual_threshold() -> dict[str, object]:
+    below = [arity for arity in range(2, 40001) if retained_binary_depth(arity) < arity]
+    nonbelow = [arity for arity in range(2, 40001) if retained_binary_depth(arity) >= arity]
+    require(below and nonbelow, "binary threshold corpus empty")
+    require(min(below) == 273, "first isolated binary improvement drift")
+    require(max(nonbelow) == 338, "last nonbelow binary arity drift")
+    require(retained_binary_depth(338) == 338, "binary depth 338 drift")
+    require(retained_binary_depth(339) == 338, "binary depth 339 drift")
+    require(all(retained_binary_depth(arity) < arity for arity in range(339, 40001)),
+            "339 is not an eventual threshold in checked range")
+    return {
+        "first_isolated_below_r": min(below),
+        "last_nonbelow_r": max(nonbelow),
+        "eventual_below_r_from": 339,
+        "depth_338": retained_binary_depth(338),
+        "depth_339": retained_binary_depth(339),
+        "checked_through": 40000,
+        "wording": "339 is the eventual threshold, not the first hit",
+    }
+
+
 def replay_file_pair(
     label: str,
     script: Path,
@@ -77,7 +115,30 @@ def check_lean(temp_root: Path) -> dict[str, str]:
     router = FRONTIER / "lanes/formal/StrongSignedRouter.lean"
     vector = FRONTIER / "lanes/formal_program_vector/ProgramVector.lean"
     cost = FRONTIER / "lanes/formal_program_vector_cost/ProgramVectorCost.lean"
-    sources = (router, vector, cost)
+    optimized = OPT_FRONTIER / "lanes/native_scan/OptimalRailSemantics.lean"
+    formal_optimized = OPT_FRONTIER / "lanes/formal_optimized"
+    direct = formal_optimized / "DirectRail.lean"
+    sibling = formal_optimized / "SiblingShared.lean"
+    axiom_audit = formal_optimized / "AxiomAudit.lean"
+    formal_repairs = OPT_FRONTIER / "lanes/formal_manuscript_repairs"
+    repair_source = formal_repairs / "ManuscriptRepairs.lean"
+    repair_axiom_audit = formal_repairs / "AxiomAudit.lean"
+    formal_gap = OPT_FRONTIER / "lanes/formal_gap_closure"
+    gap_source = formal_gap / "DepthAndCensus.lean"
+    gap_axiom_audit = formal_gap / "AxiomAudit.lean"
+    sources = (
+        router,
+        vector,
+        cost,
+        optimized,
+        direct,
+        sibling,
+        axiom_audit,
+        repair_source,
+        repair_axiom_audit,
+        gap_source,
+        gap_axiom_audit,
+    )
 
     forbidden = re.compile(
         r"(^|[^A-Za-z0-9_])(sorry|admit)([^A-Za-z0-9_]|$)"
@@ -91,17 +152,78 @@ def check_lean(temp_root: Path) -> dict[str, str]:
     router_olean = temp_root / "StrongSignedRouter.olean"
     vector_olean = temp_root / "ProgramVector.olean"
     cost_olean = temp_root / "ProgramVectorCost.olean"
+    optimized_olean = temp_root / "OptimalRailSemantics.olean"
+    direct_olean = temp_root / "DirectRail.olean"
+    sibling_olean = temp_root / "SiblingShared.olean"
+    repair_olean = temp_root / "ManuscriptRepairs.olean"
+    gap_olean = temp_root / "DepthAndCensus.olean"
     base = ["lake", "env", "lean", "-t", "0", "-EwarningAsError=true"]
     run([*base, "-o", str(router_olean), str(router.relative_to(ROOT))])
     lean_env = os.environ.copy()
     lean_env["LEAN_PATH"] = str(temp_root)
     run([*base, "-o", str(vector_olean), str(vector.relative_to(ROOT))], env=lean_env)
     run([*base, "-o", str(cost_olean), str(cost.relative_to(ROOT))], env=lean_env)
+    run([*base, "-o", str(optimized_olean), str(optimized.relative_to(ROOT))])
+    run([*base, "-o", str(direct_olean), str(direct.relative_to(ROOT))], env=lean_env)
+    run([*base, "-o", str(sibling_olean), str(sibling.relative_to(ROOT))], env=lean_env)
+    axiom_stdout = run(
+        ["lake", "env", "lean", "-t", "0", str(axiom_audit.relative_to(ROOT))],
+        env=lean_env,
+    )
+    require(b"ofReduceBool" not in axiom_stdout, "optimized theorem depends on native_decide axiom")
+    run([*base, "-o", str(repair_olean), str(repair_source.relative_to(ROOT))], env=lean_env)
+    repair_axiom_stdout = run(
+        ["lake", "env", "lean", "-t", "0", str(repair_axiom_audit.relative_to(ROOT))],
+        env=lean_env,
+    )
+    require(b"ofReduceBool" not in repair_axiom_stdout, "repaired cardinality depends on native_decide axiom")
+    require("native_decide" not in repair_source.read_text(encoding="utf-8"), "native_decide in repair source")
+    run([*base, "-o", str(gap_olean), str(gap_source.relative_to(ROOT))], env=lean_env)
+    gap_axiom_stdout = run(
+        ["lake", "env", "lean", "-t", "0", str(gap_axiom_audit.relative_to(ROOT))],
+        env=lean_env,
+    )
+    require(b"ofReduceBool" not in gap_axiom_stdout, "formal gap theorem depends on native_decide axiom")
+    gap_receipt_path = formal_gap / "receipt.json"
+    gap_receipt = json.loads(gap_receipt_path.read_text(encoding="utf-8"))
+    require(
+        gap_receipt.get("status") == "PASS_SHARP_DEPTH__PARTIAL_OUTPUT_CENSUS",
+        "formal gap receipt status drift",
+    )
+    require(
+        gap_receipt.get("source_sha256", {}).get("DepthAndCensus.lean") == sha256(gap_source),
+        "formal gap receipt source binding drift",
+    )
+
+    formal_receipt_path = formal_optimized / "receipt.json"
+    formal_receipt = json.loads(formal_receipt_path.read_text(encoding="utf-8"))
+    require(
+        formal_receipt.get("status") == "PASS_EXACT_DIRECT_RAIL_AND_SIBLING_SHARED_ENVELOPE",
+        "optimized formal receipt status drift",
+    )
+    require(
+        formal_receipt.get("lane_sha256", {}).get("DirectRail.lean") == sha256(direct)
+        and formal_receipt.get("lane_sha256", {}).get("SiblingShared.lean") == sha256(sibling),
+        "optimized formal receipt source binding drift",
+    )
 
     return {
         "StrongSignedRouter.lean": sha256(router),
         "ProgramVector.lean": sha256(vector),
         "ProgramVectorCost.lean": sha256(cost),
+        "OptimalRailSemantics.lean": sha256(optimized),
+        "DirectRail.lean": sha256(direct),
+        "SiblingShared.lean": sha256(sibling),
+        "optimized_formal_receipt_sha256": sha256(formal_receipt_path),
+        "optimized_axiom_audit_sha256": hashlib.sha256(axiom_stdout).hexdigest(),
+        "ManuscriptRepairs.lean": sha256(repair_source),
+        "manuscript_repair_axiom_audit_sha256": hashlib.sha256(repair_axiom_stdout).hexdigest(),
+        "DepthAndCensus.lean": sha256(gap_source),
+        "formal_gap_axiom_audit_sha256": hashlib.sha256(gap_axiom_stdout).hexdigest(),
+        "formal_gap_receipt_sha256": sha256(gap_receipt_path),
+        "legacy_native_decide_occurrences": str(
+            sum(source.read_text(encoding="utf-8").count("native_decide") for source in (router, vector, cost))
+        ),
     }
 
 
@@ -109,6 +231,7 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix="orbit-fixed-q-preprint-") as temporary:
         temp_root = Path(temporary)
         results: dict[str, object] = {}
+        results["binary_threshold_regression"] = check_binary_eventual_threshold()
 
         fused = FRONTIER / "lanes/fused"
         normal_summary = temp_root / "fused.normal.json"
@@ -185,14 +308,98 @@ def main() -> None:
             temp_root,
         )
 
+        optimized = OPT_FRONTIER / "lanes/native_scan"
+        results["optimized_program_vector_author"] = replay_file_pair(
+            "optimized-program-vector-author",
+            optimized / "check_optimal_scan.py",
+            ["--max-width", "6"],
+            "--out",
+            optimized / "receipts/receipt.json",
+            temp_root,
+        )
+
+        optimized_audit = OPT_FRONTIER / "lanes/referee/kuhn_boolean_rail_audit"
+        results["optimized_program_vector_independent_audit"] = replay_file_pair(
+            "optimized-program-vector-audit",
+            optimized_audit / "audit_boolean_rails.py",
+            [
+                "--structural-width",
+                "9",
+                "--semantic-width",
+                "6",
+                "--arithmetic-width",
+                "4096",
+            ],
+            "--out",
+            optimized_audit / "receipt.json",
+            temp_root,
+        )
+
+        algebraic = OPT_FRONTIER / "lanes/algebraic"
+        algebraic_script = algebraic / "check_algebraic_program_vector.py"
+        algebraic_normal = run([sys.executable, str(algebraic_script.relative_to(ROOT))])
+        algebraic_optimized = run([sys.executable, "-O", str(algebraic_script.relative_to(ROOT))])
+        require(algebraic_normal == algebraic_optimized, "algebraic vector normal/-O mismatch")
+        algebraic_receipt = json.loads(algebraic_normal)
+        require(algebraic_receipt.get("status") == "PASS", "algebraic vector audit failed")
+        algebraic_committed = json.loads((algebraic / "receipt.json").read_text(encoding="utf-8"))
+        require(algebraic_committed.get("status") == "PASS", "algebraic committed receipt failed")
+        require(
+            algebraic_committed.get("semantic_sha256") == algebraic_receipt.get("semantic_sha256"),
+            "algebraic vector semantic receipt drift",
+        )
+        require(
+            algebraic_committed.get("checker_sha256") == sha256(algebraic_script),
+            "algebraic vector checker binding drift",
+        )
+        results["optimized_program_vector_second_reconstruction"] = {
+            "receipt_sha256": sha256(algebraic / "receipt.json"),
+            "stdout_sha256": hashlib.sha256(algebraic_normal).hexdigest(),
+            "semantic_sha256": algebraic_receipt["semantic_sha256"],
+        }
+
         variable_script = FRONTIER / "audits/variable_compiler/check_variable_compiler.py"
         variable_normal = run([sys.executable, str(variable_script.relative_to(ROOT))])
         variable_optimized = run([sys.executable, "-O", str(variable_script.relative_to(ROOT))])
         require(variable_normal == variable_optimized, "variable compiler normal/-O mismatch")
         require(b"CONDITIONAL_PASS_AFTER_RESIDUAL_FIRST_REPAIR" in variable_normal, "missing conditional compiler verdict")
-        results["conditional_compiler_ledger"] = {
+        results["historical_conditional_compiler_ledger"] = {
             "stdout_sha256": hashlib.sha256(variable_normal).hexdigest(),
             "semantic_sha256": "d81d0bd6b979ec0df4270fd60f04468884de6e286aea450ba28eed9897e51870",
+        }
+
+        bridge = OPT_FRONTIER / "audits/compiler_bridge"
+        bridge_script = bridge / "check_compiler_bridge.py"
+        bridge_normal = run([sys.executable, str(bridge_script.relative_to(ROOT))])
+        bridge_optimized = run([sys.executable, "-O", str(bridge_script.relative_to(ROOT))])
+        require(bridge_normal == bridge_optimized, "compiler bridge normal/-O mismatch")
+        require(
+            hashlib.sha256(bridge_normal).hexdigest()
+            == "ad2cba605d978f3e9e6c78608253a1db9b01da9366b75f70fcdc664f2df72dc1",
+            "compiler bridge stdout drift",
+        )
+        bridge_result = json.loads(bridge_normal)
+        require(
+            bridge_result.get("status")
+            == "PASS_I2_TO_I6__I1_AND_FINITE_FALLBACK_NOT_RECONSTRUCTED",
+            "compiler bridge verdict drift",
+        )
+        require(
+            bridge_result.get("semantic_sha256")
+            == "73a43b1e4292b56824e82a471833e69252c52f212463f182a90df63703eec23e",
+            "compiler bridge semantic drift",
+        )
+        bridge_receipt = json.loads((bridge / "receipt.json").read_text(encoding="utf-8"))
+        require(
+            bridge_receipt.get("semantic_sha256") == bridge_result.get("semantic_sha256"),
+            "compiler bridge committed receipt drift",
+        )
+        results["integrated_compiler_independent_reconstruction"] = {
+            "checker_sha256": sha256(bridge_script),
+            "report_sha256": sha256(bridge / "REPORT.md"),
+            "receipt_sha256": sha256(bridge / "receipt.json"),
+            "semantic_sha256": bridge_result["semantic_sha256"],
+            "stdout_sha256": hashlib.sha256(bridge_normal).hexdigest(),
         }
 
         transfer_script = FRONTIER / "lanes/classical_depth_transfer/check_transfer_barriers.py"
@@ -211,10 +418,14 @@ def main() -> None:
         "schema": "orbit-synthesis/fixed-q-preprint-gate/v1",
         "status": "PASS",
         "claim_boundary": (
-            "Exact PASS for the signed-router and program-vector theorems and their local "
-            "shared-DAG cost certificate. The all-arity r+O(log r) compiler remains conditional "
-            "on its named frozen integration premises. Novelty, patent/FTO, license, practical "
-            "performance, and publication readiness are not established by this gate."
+            "Exact PASS for the signed-router and optimized local program-vector semantics, "
+            "recurrence replay, and independent reconstructions. Lean coverage is scoped: the "
+            "optimized semantic identities are formalized, while no serialized width-w DAG or "
+            "integrated all-arity Lean theorem is certified. A separate no-author-import "
+            "reconstruction passes both compiler branches, their legality, substitution, decoder, "
+            "glue, and ledgers; together with the manuscript proof this supports the unconditional "
+            "manuscript theorem, not an external peer-review finding. Novelty, patent/FTO, license, "
+            "practical performance, and publication readiness are not established by this gate."
         ),
         "results": results,
     }

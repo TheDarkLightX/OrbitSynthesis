@@ -1,0 +1,896 @@
+{
+  "arithmetic": {
+    "asymptotics": {
+      "current_native_scan": "(4/3+o(1))q",
+      "kuhn_direct_rails": "(2+o(1))q",
+      "uncanonicalized_native_reference": "(3/2+o(1))q"
+    },
+    "checked_widths": 4096,
+    "component_bounds": {
+      "current_BG": "B(w)<=7*3^w/3",
+      "current_BGN": "C(w)<=26*3^w/9",
+      "current_vector_envelope": "3V(w)<=4*3^w+15*3^ceil(w/2)",
+      "current_vector_uniform": "V(w)<=7*3^w/3"
+    },
+    "exact_recurrences": {
+      "current_native_scan": "B=Ba+Bb+q+(q-3^a)/2; C=Ba+Cb+5q/3+(q-3^a)/2; V=2+Ba+Cb+4q/3-3^a/2+/-1/2",
+      "kuhn": "R1=4; Rw=Ra+Rb+q+3^a(3^b-1)/2; S=2+R+(q+/-1)/2",
+      "uncanonicalized_native_reference": "B1=C1=4; B=Ba+Bb+5q/3; C=Ba+Cb+7q/3; V=2+Ba+Cb+3q/2+/-1/2"
+    },
+    "maximum_ratios": {
+      "current_native_scan": {
+        "decimal": "2.333333333333",
+        "denominator": 9,
+        "numerator": 21,
+        "width": 2
+      },
+      "kuhn_direct_rails": {
+        "decimal": "3.000000000000",
+        "denominator": 9,
+        "numerator": 27,
+        "width": 2
+      },
+      "uncanonicalized_native_reference": {
+        "decimal": "2.666666666667",
+        "denominator": 9,
+        "numerator": 24,
+        "width": 2
+      }
+    }
+  },
+  "constants": {
+    "checks": 4372,
+    "operation_nodes_upper_bound": 2,
+    "scope": "A=2"
+  },
+  "frozen": {
+    "STATE.md": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6",
+    "check_lower_bound.py": "3b02d4cd842e7b8b252a38b3cdcb4fb2fc6044cf04f72b0b0250709a6cda2785",
+    "check_native_scan.py": "a41114a8f7bf21bd34d32b9fcc4b46e4558110de1aeb76817a071168c6d501e0",
+    "check_optimal_scan.py": "02da40907d0495fbbc5e4d2a9420952c2676ece1229ed0fffbb22c757dda2b16"
+  },
+  "mutations": {
+    "always_reuse_right_gain": {
+      "correct_gain": 1,
+      "left_state": [
+        0,
+        0
+      ],
+      "mutated_gain": 0,
+      "right_state": [
+        0,
+        1
+      ]
+    },
+    "count_distinct_outputs_as_a_complete_circuit": {
+      "N_distinct_outputs": 5,
+      "N_exact_minimum_gates": 6,
+      "P_distinct_outputs": 4,
+      "P_exact_minimum_gates": 5,
+      "width": 1
+    },
+    "drop_A_equals_2_scope": {
+      "actual": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "anchor": 0,
+      "expected": [
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "target": [
+        0
+      ]
+    },
+    "ignore_cell_sign": {
+      "expected": [
+        0,
+        0
+      ],
+      "physical": [
+        1
+      ],
+      "positive_pair_used": [
+        1,
+        0
+      ],
+      "root_sign": "P",
+      "target": [
+        0
+      ]
+    },
+    "share_not_bad_a0_with_gain_a2": {
+      "gain_physical_2": 0,
+      "not_bad_physical_0": 1,
+      "target": [
+        0
+      ]
+    }
+  },
+  "nonclaims": [
+    "No global circuit minimum beyond the scalar distinct-output lower bound.",
+    "No lower-order optimality, bounded-fanout, or formula-size theorem.",
+    "No binary-anchor absolute-name theorem.",
+    "No integrated compiler, novelty, prior-art, patent, FTO, license, or performance conclusion."
+  ],
+  "output_lower_bound": {
+    "all_width": {
+      "N": "4q/3+1 distinct noninput Boolean controls",
+      "P": "4q/3 distinct noninput Boolean controls",
+      "scope": "address-only scalar {d,u} DAG with raw terminals A=2,t0,...; output counting only"
+    },
+    "rows": [
+      {
+        "distinct_controls": 4,
+        "gain_functions": 2,
+        "mixed_functions": 3,
+        "overlap": 1,
+        "q": 3,
+        "root_sign": "P",
+        "scalar_gate_lower_bound": 4,
+        "width": 1
+      },
+      {
+        "distinct_controls": 5,
+        "gain_functions": 2,
+        "mixed_functions": 3,
+        "overlap": 0,
+        "q": 3,
+        "root_sign": "N",
+        "scalar_gate_lower_bound": 5,
+        "width": 1
+      },
+      {
+        "distinct_controls": 12,
+        "gain_functions": 5,
+        "mixed_functions": 9,
+        "overlap": 2,
+        "q": 9,
+        "root_sign": "P",
+        "scalar_gate_lower_bound": 12,
+        "width": 2
+      },
+      {
+        "distinct_controls": 13,
+        "gain_functions": 5,
+        "mixed_functions": 9,
+        "overlap": 1,
+        "q": 9,
+        "root_sign": "N",
+        "scalar_gate_lower_bound": 13,
+        "width": 2
+      },
+      {
+        "distinct_controls": 36,
+        "gain_functions": 14,
+        "mixed_functions": 27,
+        "overlap": 5,
+        "q": 27,
+        "root_sign": "P",
+        "scalar_gate_lower_bound": 36,
+        "width": 3
+      },
+      {
+        "distinct_controls": 37,
+        "gain_functions": 14,
+        "mixed_functions": 27,
+        "overlap": 4,
+        "q": 27,
+        "root_sign": "N",
+        "scalar_gate_lower_bound": 37,
+        "width": 3
+      },
+      {
+        "distinct_controls": 108,
+        "gain_functions": 41,
+        "mixed_functions": 81,
+        "overlap": 14,
+        "q": 81,
+        "root_sign": "P",
+        "scalar_gate_lower_bound": 108,
+        "width": 4
+      },
+      {
+        "distinct_controls": 109,
+        "gain_functions": 41,
+        "mixed_functions": 81,
+        "overlap": 13,
+        "q": 81,
+        "root_sign": "N",
+        "scalar_gate_lower_bound": 109,
+        "width": 4
+      },
+      {
+        "distinct_controls": 324,
+        "gain_functions": 122,
+        "mixed_functions": 243,
+        "overlap": 41,
+        "q": 243,
+        "root_sign": "P",
+        "scalar_gate_lower_bound": 324,
+        "width": 5
+      },
+      {
+        "distinct_controls": 325,
+        "gain_functions": 122,
+        "mixed_functions": 243,
+        "overlap": 40,
+        "q": 243,
+        "root_sign": "N",
+        "scalar_gate_lower_bound": 325,
+        "width": 5
+      }
+    ]
+  },
+  "schema": "orbit.program-vector.referee.boolean-rails.v1",
+  "semantic_sha256": "1be842ffaca9c0510834e0eac1ee38f0acc6c310d15bb954c1a76c24dcc6f342",
+  "status": "PASS_KUHN__PASS_NATIVE_CURRENT_4_OVER_3",
+  "structural": {
+    "rows": [
+      {
+        "allocated_operation_nodes": 6,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 3,
+        "distinct_output_functions": 4,
+        "distinct_output_root_ids": 4,
+        "exact_recurrence_count": 5,
+        "q": 3,
+        "reachable_operation_nodes": 5,
+        "root_sign": "P",
+        "width": 1
+      },
+      {
+        "allocated_operation_nodes": 6,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 3,
+        "distinct_output_functions": 5,
+        "distinct_output_root_ids": 5,
+        "exact_recurrence_count": 6,
+        "q": 3,
+        "reachable_operation_nodes": 6,
+        "root_sign": "N",
+        "width": 1
+      },
+      {
+        "allocated_operation_nodes": 6,
+        "construction": "current_native_scan",
+        "depth": 3,
+        "distinct_output_functions": 4,
+        "distinct_output_root_ids": 4,
+        "exact_recurrence_count": 5,
+        "q": 3,
+        "reachable_operation_nodes": 5,
+        "root_sign": "P",
+        "width": 1
+      },
+      {
+        "allocated_operation_nodes": 6,
+        "construction": "current_native_scan",
+        "depth": 3,
+        "distinct_output_functions": 5,
+        "distinct_output_root_ids": 5,
+        "exact_recurrence_count": 6,
+        "q": 3,
+        "reachable_operation_nodes": 6,
+        "root_sign": "N",
+        "width": 1
+      },
+      {
+        "allocated_operation_nodes": 7,
+        "construction": "kuhn_direct_rails",
+        "depth": 4,
+        "distinct_output_functions": 4,
+        "distinct_output_root_ids": 5,
+        "exact_recurrence_count": 7,
+        "q": 3,
+        "reachable_operation_nodes": 7,
+        "root_sign": "P",
+        "width": 1
+      },
+      {
+        "allocated_operation_nodes": 8,
+        "construction": "kuhn_direct_rails",
+        "depth": 4,
+        "distinct_output_functions": 5,
+        "distinct_output_root_ids": 5,
+        "exact_recurrence_count": 8,
+        "q": 3,
+        "reachable_operation_nodes": 8,
+        "root_sign": "N",
+        "width": 1
+      },
+      {
+        "allocated_operation_nodes": 23,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 4,
+        "distinct_output_functions": 12,
+        "distinct_output_root_ids": 13,
+        "exact_recurrence_count": 23,
+        "q": 9,
+        "reachable_operation_nodes": 23,
+        "root_sign": "P",
+        "width": 2
+      },
+      {
+        "allocated_operation_nodes": 24,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 4,
+        "distinct_output_functions": 13,
+        "distinct_output_root_ids": 14,
+        "exact_recurrence_count": 24,
+        "q": 9,
+        "reachable_operation_nodes": 24,
+        "root_sign": "N",
+        "width": 2
+      },
+      {
+        "allocated_operation_nodes": 20,
+        "construction": "current_native_scan",
+        "depth": 4,
+        "distinct_output_functions": 12,
+        "distinct_output_root_ids": 12,
+        "exact_recurrence_count": 20,
+        "q": 9,
+        "reachable_operation_nodes": 20,
+        "root_sign": "P",
+        "width": 2
+      },
+      {
+        "allocated_operation_nodes": 21,
+        "construction": "current_native_scan",
+        "depth": 4,
+        "distinct_output_functions": 13,
+        "distinct_output_root_ids": 13,
+        "exact_recurrence_count": 21,
+        "q": 9,
+        "reachable_operation_nodes": 21,
+        "root_sign": "N",
+        "width": 2
+      },
+      {
+        "allocated_operation_nodes": 26,
+        "construction": "kuhn_direct_rails",
+        "depth": 5,
+        "distinct_output_functions": 12,
+        "distinct_output_root_ids": 14,
+        "exact_recurrence_count": 26,
+        "q": 9,
+        "reachable_operation_nodes": 26,
+        "root_sign": "P",
+        "width": 2
+      },
+      {
+        "allocated_operation_nodes": 27,
+        "construction": "kuhn_direct_rails",
+        "depth": 5,
+        "distinct_output_functions": 13,
+        "distinct_output_root_ids": 14,
+        "exact_recurrence_count": 27,
+        "q": 9,
+        "reachable_operation_nodes": 27,
+        "root_sign": "N",
+        "width": 2
+      },
+      {
+        "allocated_operation_nodes": 69,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 5,
+        "distinct_output_functions": 36,
+        "distinct_output_root_ids": 40,
+        "exact_recurrence_count": 69,
+        "q": 27,
+        "reachable_operation_nodes": 69,
+        "root_sign": "P",
+        "width": 3
+      },
+      {
+        "allocated_operation_nodes": 70,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 5,
+        "distinct_output_functions": 37,
+        "distinct_output_root_ids": 41,
+        "exact_recurrence_count": 70,
+        "q": 27,
+        "reachable_operation_nodes": 70,
+        "root_sign": "N",
+        "width": 3
+      },
+      {
+        "allocated_operation_nodes": 57,
+        "construction": "current_native_scan",
+        "depth": 5,
+        "distinct_output_functions": 36,
+        "distinct_output_root_ids": 36,
+        "exact_recurrence_count": 57,
+        "q": 27,
+        "reachable_operation_nodes": 57,
+        "root_sign": "P",
+        "width": 3
+      },
+      {
+        "allocated_operation_nodes": 58,
+        "construction": "current_native_scan",
+        "depth": 5,
+        "distinct_output_functions": 37,
+        "distinct_output_root_ids": 37,
+        "exact_recurrence_count": 58,
+        "q": 27,
+        "reachable_operation_nodes": 58,
+        "root_sign": "N",
+        "width": 3
+      },
+      {
+        "allocated_operation_nodes": 78,
+        "construction": "kuhn_direct_rails",
+        "depth": 6,
+        "distinct_output_functions": 36,
+        "distinct_output_root_ids": 41,
+        "exact_recurrence_count": 78,
+        "q": 27,
+        "reachable_operation_nodes": 78,
+        "root_sign": "P",
+        "width": 3
+      },
+      {
+        "allocated_operation_nodes": 79,
+        "construction": "kuhn_direct_rails",
+        "depth": 6,
+        "distinct_output_functions": 37,
+        "distinct_output_root_ids": 41,
+        "exact_recurrence_count": 79,
+        "q": 27,
+        "reachable_operation_nodes": 79,
+        "root_sign": "N",
+        "width": 3
+      },
+      {
+        "allocated_operation_nodes": 175,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 5,
+        "distinct_output_functions": 108,
+        "distinct_output_root_ids": 121,
+        "exact_recurrence_count": 175,
+        "q": 81,
+        "reachable_operation_nodes": 175,
+        "root_sign": "P",
+        "width": 4
+      },
+      {
+        "allocated_operation_nodes": 176,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 5,
+        "distinct_output_functions": 109,
+        "distinct_output_root_ids": 122,
+        "exact_recurrence_count": 176,
+        "q": 81,
+        "reachable_operation_nodes": 176,
+        "root_sign": "N",
+        "width": 4
+      },
+      {
+        "allocated_operation_nodes": 151,
+        "construction": "current_native_scan",
+        "depth": 5,
+        "distinct_output_functions": 108,
+        "distinct_output_root_ids": 108,
+        "exact_recurrence_count": 151,
+        "q": 81,
+        "reachable_operation_nodes": 151,
+        "root_sign": "P",
+        "width": 4
+      },
+      {
+        "allocated_operation_nodes": 152,
+        "construction": "current_native_scan",
+        "depth": 5,
+        "distinct_output_functions": 109,
+        "distinct_output_root_ids": 109,
+        "exact_recurrence_count": 152,
+        "q": 81,
+        "reachable_operation_nodes": 152,
+        "root_sign": "N",
+        "width": 4
+      },
+      {
+        "allocated_operation_nodes": 199,
+        "construction": "kuhn_direct_rails",
+        "depth": 6,
+        "distinct_output_functions": 108,
+        "distinct_output_root_ids": 122,
+        "exact_recurrence_count": 199,
+        "q": 81,
+        "reachable_operation_nodes": 199,
+        "root_sign": "P",
+        "width": 4
+      },
+      {
+        "allocated_operation_nodes": 200,
+        "construction": "kuhn_direct_rails",
+        "depth": 6,
+        "distinct_output_functions": 109,
+        "distinct_output_root_ids": 122,
+        "exact_recurrence_count": 200,
+        "q": 81,
+        "reachable_operation_nodes": 200,
+        "root_sign": "N",
+        "width": 4
+      },
+      {
+        "allocated_operation_nodes": 467,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": 324,
+        "distinct_output_root_ids": 364,
+        "exact_recurrence_count": 467,
+        "q": 243,
+        "reachable_operation_nodes": 467,
+        "root_sign": "P",
+        "width": 5
+      },
+      {
+        "allocated_operation_nodes": 468,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": 325,
+        "distinct_output_root_ids": 365,
+        "exact_recurrence_count": 468,
+        "q": 243,
+        "reachable_operation_nodes": 468,
+        "root_sign": "N",
+        "width": 5
+      },
+      {
+        "allocated_operation_nodes": 398,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": 324,
+        "distinct_output_root_ids": 324,
+        "exact_recurrence_count": 398,
+        "q": 243,
+        "reachable_operation_nodes": 398,
+        "root_sign": "P",
+        "width": 5
+      },
+      {
+        "allocated_operation_nodes": 399,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": 325,
+        "distinct_output_root_ids": 325,
+        "exact_recurrence_count": 399,
+        "q": 243,
+        "reachable_operation_nodes": 399,
+        "root_sign": "N",
+        "width": 5
+      },
+      {
+        "allocated_operation_nodes": 566,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": 324,
+        "distinct_output_root_ids": 365,
+        "exact_recurrence_count": 566,
+        "q": 243,
+        "reachable_operation_nodes": 566,
+        "root_sign": "P",
+        "width": 5
+      },
+      {
+        "allocated_operation_nodes": 567,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": 325,
+        "distinct_output_root_ids": 365,
+        "exact_recurrence_count": 567,
+        "q": 243,
+        "reachable_operation_nodes": 567,
+        "root_sign": "N",
+        "width": 5
+      },
+      {
+        "allocated_operation_nodes": 1257,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": 972,
+        "distinct_output_root_ids": 1093,
+        "exact_recurrence_count": 1257,
+        "q": 729,
+        "reachable_operation_nodes": 1257,
+        "root_sign": "P",
+        "width": 6
+      },
+      {
+        "allocated_operation_nodes": 1258,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": 973,
+        "distinct_output_root_ids": 1094,
+        "exact_recurrence_count": 1258,
+        "q": 729,
+        "reachable_operation_nodes": 1258,
+        "root_sign": "N",
+        "width": 6
+      },
+      {
+        "allocated_operation_nodes": 1098,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": 972,
+        "distinct_output_root_ids": 972,
+        "exact_recurrence_count": 1098,
+        "q": 729,
+        "reachable_operation_nodes": 1098,
+        "root_sign": "P",
+        "width": 6
+      },
+      {
+        "allocated_operation_nodes": 1099,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": 973,
+        "distinct_output_root_ids": 973,
+        "exact_recurrence_count": 1099,
+        "q": 729,
+        "reachable_operation_nodes": 1099,
+        "root_sign": "N",
+        "width": 6
+      },
+      {
+        "allocated_operation_nodes": 1572,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": 972,
+        "distinct_output_root_ids": 1094,
+        "exact_recurrence_count": 1572,
+        "q": 729,
+        "reachable_operation_nodes": 1572,
+        "root_sign": "P",
+        "width": 6
+      },
+      {
+        "allocated_operation_nodes": 1573,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": 973,
+        "distinct_output_root_ids": 1094,
+        "exact_recurrence_count": 1573,
+        "q": 729,
+        "reachable_operation_nodes": 1573,
+        "root_sign": "N",
+        "width": 6
+      },
+      {
+        "allocated_operation_nodes": 3553,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 3280,
+        "exact_recurrence_count": 3553,
+        "q": 2187,
+        "reachable_operation_nodes": 3553,
+        "root_sign": "P",
+        "width": 7
+      },
+      {
+        "allocated_operation_nodes": 3554,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 3281,
+        "exact_recurrence_count": 3554,
+        "q": 2187,
+        "reachable_operation_nodes": 3554,
+        "root_sign": "N",
+        "width": 7
+      },
+      {
+        "allocated_operation_nodes": 3112,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 2916,
+        "exact_recurrence_count": 3112,
+        "q": 2187,
+        "reachable_operation_nodes": 3112,
+        "root_sign": "P",
+        "width": 7
+      },
+      {
+        "allocated_operation_nodes": 3113,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 2917,
+        "exact_recurrence_count": 3113,
+        "q": 2187,
+        "reachable_operation_nodes": 3113,
+        "root_sign": "N",
+        "width": 7
+      },
+      {
+        "allocated_operation_nodes": 4582,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 3281,
+        "exact_recurrence_count": 4582,
+        "q": 2187,
+        "reachable_operation_nodes": 4582,
+        "root_sign": "P",
+        "width": 7
+      },
+      {
+        "allocated_operation_nodes": 4583,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 3281,
+        "exact_recurrence_count": 4583,
+        "q": 2187,
+        "reachable_operation_nodes": 4583,
+        "root_sign": "N",
+        "width": 7
+      },
+      {
+        "allocated_operation_nodes": 10265,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 9841,
+        "exact_recurrence_count": 10265,
+        "q": 6561,
+        "reachable_operation_nodes": 10265,
+        "root_sign": "P",
+        "width": 8
+      },
+      {
+        "allocated_operation_nodes": 10266,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 9842,
+        "exact_recurrence_count": 10266,
+        "q": 6561,
+        "reachable_operation_nodes": 10266,
+        "root_sign": "N",
+        "width": 8
+      },
+      {
+        "allocated_operation_nodes": 9083,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 8748,
+        "exact_recurrence_count": 9083,
+        "q": 6561,
+        "reachable_operation_nodes": 9083,
+        "root_sign": "P",
+        "width": 8
+      },
+      {
+        "allocated_operation_nodes": 9084,
+        "construction": "current_native_scan",
+        "depth": 6,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 8749,
+        "exact_recurrence_count": 9084,
+        "q": 6561,
+        "reachable_operation_nodes": 9084,
+        "root_sign": "N",
+        "width": 8
+      },
+      {
+        "allocated_operation_nodes": 13397,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 9842,
+        "exact_recurrence_count": 13397,
+        "q": 6561,
+        "reachable_operation_nodes": 13397,
+        "root_sign": "P",
+        "width": 8
+      },
+      {
+        "allocated_operation_nodes": 13398,
+        "construction": "kuhn_direct_rails",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 9842,
+        "exact_recurrence_count": 13398,
+        "q": 6561,
+        "reachable_operation_nodes": 13398,
+        "root_sign": "N",
+        "width": 8
+      },
+      {
+        "allocated_operation_nodes": 30267,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 29524,
+        "exact_recurrence_count": 30267,
+        "q": 19683,
+        "reachable_operation_nodes": 30267,
+        "root_sign": "P",
+        "width": 9
+      },
+      {
+        "allocated_operation_nodes": 30268,
+        "construction": "uncanonicalized_native_reference",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 29525,
+        "exact_recurrence_count": 30268,
+        "q": 19683,
+        "reachable_operation_nodes": 30268,
+        "root_sign": "N",
+        "width": 9
+      },
+      {
+        "allocated_operation_nodes": 26772,
+        "construction": "current_native_scan",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 26244,
+        "exact_recurrence_count": 26772,
+        "q": 19683,
+        "reachable_operation_nodes": 26772,
+        "root_sign": "P",
+        "width": 9
+      },
+      {
+        "allocated_operation_nodes": 26773,
+        "construction": "current_native_scan",
+        "depth": 7,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 26245,
+        "exact_recurrence_count": 26773,
+        "q": 19683,
+        "reachable_operation_nodes": 26773,
+        "root_sign": "N",
+        "width": 9
+      },
+      {
+        "allocated_operation_nodes": 39927,
+        "construction": "kuhn_direct_rails",
+        "depth": 8,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 29525,
+        "exact_recurrence_count": 39927,
+        "q": 19683,
+        "reachable_operation_nodes": 39927,
+        "root_sign": "P",
+        "width": 9
+      },
+      {
+        "allocated_operation_nodes": 39928,
+        "construction": "kuhn_direct_rails",
+        "depth": 8,
+        "distinct_output_functions": null,
+        "distinct_output_root_ids": 29525,
+        "exact_recurrence_count": 39928,
+        "q": 19683,
+        "reachable_operation_nodes": 39928,
+        "root_sign": "N",
+        "width": 9
+      }
+    ],
+    "semantic_scalar_comparisons": 7174440
+  },
+  "verdicts": {
+    "current_native_scan": "VALID STRONGER CONSTRUCTION: zero-gain and N_(a1)=G_(a2) reuse give (4/3+o(1))q with unchanged depth",
+    "kuhn_direct_rails": "VALID: <=3q and (2+o(1))q, depth <=4+ceil(log2 w)",
+    "scalar_output_lower_bound": "VALID IN DECLARED ADDRESS-ONLY SCALAR GRAMMAR; global D+1 is not established",
+    "uncanonicalized_native_actual_counts": "GENUINE: exact recurrence gives (3/2+o(1))q, not a semantics/counting artifact"
+  }
+}

@@ -1,10 +1,15 @@
 # Parallel program vectors for conservative Q-term DAGs
 
-**Status:** the program-vector theorem below is exact, deterministically
-replayed, independently audited, and Lean-checked at both the semantic and
-shared-DAG cost levels. The all-arity compiler theorem is a **conditional
-manuscript theorem** because it composes previously frozen
-selector-table, anchor, binary-branch, decoder, and glue lemmas. Publication
+**Status:** historical exact construction, superseded as a local bound by
+`QUASIPRIMAL_CONSERVATIVE_TERM_OPTIMAL_PROGRAM_VECTOR.md`. The `7q`,
+`6+2*ceil(log_2 w)` theorem below remains valid and preserves the evidence path
+used by earlier manuscript versions; the sibling-shared construction improves
+it to `(4/3+o(1))q` and `3+ceil(log_2 w)` in the same declared local model.
+The all-arity statement in this historical note was a **conditional manuscript
+theorem** because it composed previously frozen selector-table, anchor,
+binary-branch, decoder, and glue lemmas. Those interfaces are now discharged
+by `QUASIPRIMAL_CONSERVATIVE_TERM_INTEGRATED_COMPILER.md`; the body below is
+retained as the exact earlier checkpoint, not the current claim boundary. Publication
 novelty, optimality, practical value, patent scope, freedom to operate, rights
 under an unsigned developer license, and any statement about private Tau work
 remain **UNKNOWN**.
@@ -49,7 +54,7 @@ above the raw anchor/address inputs for `w>=1`. The displayed size includes
 the two shared names. The width-zero base case uses only those names. The
 construction depends on the address and anchor, not on a routed payload wire.
 
-### Conditional all-arity compiler theorem
+### Historical conditional all-arity compiler theorem
 
 Assume the frozen conservative selector-table characterization, balanced
 global anchor, two-plane Q encoder/decoder, complement-relative binary
@@ -68,7 +73,7 @@ total size     <= 63*3^r/r,
 nonbinary depth <= r+5*ceil(log_2 r)+12.
 ```
 
-Together with syntax counting, the current conditional interval is
+Together with syntax counting, the interval at this historical checkpoint was
 
 ```text
 r-log_3(log r)-O(1) <= Delta_r(Q) <= r+O(log r).

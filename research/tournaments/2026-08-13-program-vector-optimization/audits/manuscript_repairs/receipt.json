@@ -1,0 +1,226 @@
+{
+  "depth": {
+    "theorem_6_10": {
+      "binary_dominates_nonbinary_only_at": [
+        64,
+        65
+      ],
+      "exact_range": [
+        64,
+        899
+      ],
+      "global_depth": "max(D_binary(r),D_nonbinary(r)) <= r+5ceil(log2 r)+12 for r>=64",
+      "selected_rows": [
+        {
+          "binary_depth": 104,
+          "max_branch_depth": 104,
+          "nonbinary_depth": 102,
+          "r": 64,
+          "theorem_ceiling": 106
+        },
+        {
+          "binary_depth": 107,
+          "max_branch_depth": 107,
+          "nonbinary_depth": 106,
+          "r": 65,
+          "theorem_ceiling": 112
+        },
+        {
+          "binary_depth": 107,
+          "max_branch_depth": 107,
+          "nonbinary_depth": 107,
+          "r": 66,
+          "theorem_ceiling": 113
+        },
+        {
+          "binary_depth": 107,
+          "max_branch_depth": 108,
+          "nonbinary_depth": 108,
+          "r": 67,
+          "theorem_ceiling": 114
+        },
+        {
+          "binary_depth": 272,
+          "max_branch_depth": 323,
+          "nonbinary_depth": 323,
+          "r": 272,
+          "theorem_ceiling": 329
+        },
+        {
+          "binary_depth": 272,
+          "max_branch_depth": 324,
+          "nonbinary_depth": 324,
+          "r": 273,
+          "theorem_ceiling": 330
+        },
+        {
+          "binary_depth": 319,
+          "max_branch_depth": 388,
+          "nonbinary_depth": 388,
+          "r": 337,
+          "theorem_ceiling": 394
+        },
+        {
+          "binary_depth": 338,
+          "max_branch_depth": 389,
+          "nonbinary_depth": 389,
+          "r": 338,
+          "theorem_ceiling": 395
+        },
+        {
+          "binary_depth": 338,
+          "max_branch_depth": 390,
+          "nonbinary_depth": 390,
+          "r": 339,
+          "theorem_ceiling": 396
+        },
+        {
+          "binary_depth": 728,
+          "max_branch_depth": 954,
+          "nonbinary_depth": 954,
+          "r": 899,
+          "theorem_ceiling": 961
+        }
+      ]
+    },
+    "theorem_6_4": {
+      "arities_checked": 4096,
+      "binary_classifier_depth": "2(r-1)",
+      "certified_ceiling": "3r+3ceil(log2 r)+4",
+      "final_depth_max": "2+max(3ceil(log2 r)+2, 2(r-1), 3r+3ceil(log2 r)+2)"
+    },
+    "threshold_339": {
+      "depth_338": 338,
+      "depth_339": 338,
+      "earlier_below_intervals_warning": "D_binary<r occurs in finite islands before 339; 339 is the eventual threshold, not min{r:D_binary(r)<r}",
+      "eventual_below_r_from": 339,
+      "first_isolated_below_r": 273,
+      "last_nonbelow_r": 338,
+      "tail_increment_at_30": 1125,
+      "tail_polynomial_at_30": 2139,
+      "tail_starts_at_r": 900
+    }
+  },
+  "frozen": {
+    "notes/QUASIPRIMAL_CONSERVATIVE_TERM_PARALLEL_PROGRAM_DEPTH.md": "570d4ef5468eb802689bfc139f28fd1f26250ec94dfeeacaa6d9c4fd30e25165",
+    "paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md": "a7e52b7f99d4ccd368dbd2a25203ed0b18e6f36ee7d616ef3e965951699c3f45",
+    "paper/paper_manifest.json": "f9a4096e1326960aa7046983cc1aad3e10b1e23646b870bc1e129b539eeb4da4",
+    "research/tournaments/2026-08-13-semantic-router-frontier/audits/program_vector/audit_program_vector.py": "5324d81e377f8038795b97574eae9d4ba8728a3a74af189d39fda4f76abc6e5d",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/check_parallel_program_vector.py": "2ba586a1ef97822aebbbcf692d29cd5bd3f8bbc8e785ddce43aff2180df3c350"
+  },
+  "manifest": {
+    "declared_paths": 62,
+    "gate": "FAIL_STALE_MANIFEST",
+    "hash_matches": 58,
+    "hash_mismatches": 4,
+    "manifest_sha256": "f9a4096e1326960aa7046983cc1aad3e10b1e23646b870bc1e129b539eeb4da4",
+    "mismatches": [
+      {
+        "expected": "22e15bfaf3667dc8d3f1b2961f0dfbaaf832e0b2e74af4cf8796dad7516263a0",
+        "kind": "shared_source",
+        "observed": "570a70f30f861992a378e3d619a8f793be70d50a59f732b8f6cab353b845a963",
+        "path": "paper/PAPER_PORTFOLIO.md"
+      },
+      {
+        "expected": "faef135454d138f4cd31ed7251ac5374707a063bd450aded38c5661094daf246",
+        "kind": "shared_source",
+        "observed": "774106fdfbeeda7c31a8ab43dd493e1e632040eea859d9ddc1d070f33727b80e",
+        "path": "research/SOURCES.md"
+      },
+      {
+        "expected": "48448451305daa13d07bc3396b1944ee74411635205ab4f0b8219f7b8e73b6a0",
+        "kind": "draft",
+        "observed": "a7e52b7f99d4ccd368dbd2a25203ed0b18e6f36ee7d616ef3e965951699c3f45",
+        "path": "paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md"
+      },
+      {
+        "expected": "8bbf845ea0a67fe6fed8c108c924e76e0eb1f9fd0dda13ccddd979991236b8fa",
+        "kind": "authoritative_source",
+        "observed": "570d4ef5468eb802689bfc139f28fd1f26250ec94dfeeacaa6d9c4fd30e25165",
+        "path": "notes/QUASIPRIMAL_CONSERVATIVE_TERM_PARALLEL_PROGRAM_DEPTH.md"
+      }
+    ],
+    "missing_paths": [],
+    "semantic_mismatches": [],
+    "semantic_missing": []
+  },
+  "schema": "orbit.manuscript-repairs.referee-audit.v1",
+  "selector_mux": {
+    "mux": {
+      "branch_dependency_depth": 3,
+      "current_identity_emitter_nodes": 15,
+      "identity_emitter_defect": "constructs the inner u(A) of u(u(A)) separately from the named u(A)",
+      "new_d_nodes_given_names": 7,
+      "operation_depth_above_raw_inputs": 5,
+      "operation_nodes": 9,
+      "raw_terminals": 5,
+      "rows_checked": 81,
+      "shared_name_u_nodes": 2,
+      "total_shared_nodes": 14
+    },
+    "normal_selector": {
+      "branch_dependency_depth": 2,
+      "formula": "d(d(x,y,e),d(x,y,n),n)",
+      "new_d_nodes": 3,
+      "rows_checked": 81
+    }
+  },
+  "semantic_sha256": "e91552a38b687f33aa82648f8eed65943536e0ee75bac0c7ca0c4cd144dbd833",
+  "slice_local": {
+    "generic_slice": "S_a={0,1}^a x {2} x Q^(r-a-1)",
+    "generic_slice_domain_size": "N_a=2^a*3^(r-a-1)",
+    "legality": "u(x_a),u(u(x_a)),x_a are global legal terms and name 1,0,2 only on S_a; off-slice values are masked by the first-two dispatcher",
+    "rows": [
+      {
+        "arity": 1,
+        "binary_tuples": 2,
+        "nonbinary_tuples": 1,
+        "slice_sum": 1
+      },
+      {
+        "arity": 2,
+        "binary_tuples": 4,
+        "nonbinary_tuples": 5,
+        "slice_sum": 5
+      },
+      {
+        "arity": 3,
+        "binary_tuples": 8,
+        "nonbinary_tuples": 19,
+        "slice_sum": 19
+      },
+      {
+        "arity": 4,
+        "binary_tuples": 16,
+        "nonbinary_tuples": 65,
+        "slice_sum": 65
+      },
+      {
+        "arity": 5,
+        "binary_tuples": 32,
+        "nonbinary_tuples": 211,
+        "slice_sum": 211
+      },
+      {
+        "arity": 6,
+        "binary_tuples": 64,
+        "nonbinary_tuples": 665,
+        "slice_sum": 665
+      },
+      {
+        "arity": 7,
+        "binary_tuples": 128,
+        "nonbinary_tuples": 2059,
+        "slice_sum": 2059
+      }
+    ],
+    "size_transfer": "O(N_a/(r-1))=O(N_a/r) for r>=2; r=1 is a finite base",
+    "tuples_checked": 3279,
+    "variable_dimension": "n=r-1"
+  },
+  "status": "PASS_MATH_REPAIRS__FAIL_STALE_PAPER_MANIFEST",
+  "wording_gate": {
+    "compiler_table": "The Section 7 values are depths/node counts of the emitted DAGs under variables-at-depth-one convention; they are not D_r(f), exact minima, or lower bounds.",
+    "publication": "Refresh the manifest only after the manuscript repair bytes and all intended evidence files are frozen."
+  }
+}

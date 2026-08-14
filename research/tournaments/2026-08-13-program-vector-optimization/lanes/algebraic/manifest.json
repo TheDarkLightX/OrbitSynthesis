@@ -1,0 +1,12 @@
+{
+  "files": {
+    "REPORT.md": "063036f60913adff1afa6a4ddc81f3cee0002eaa868526a795dfebeede9493ea",
+    "check_algebraic_program_vector.py": "1680570460d8567bee54f73caa4a6f49265627b1cbed2f6a294867fa31a5f19d",
+    "receipt.json": "f3d330b450fd6f5568c87d342d2be119c7cf4d07cd637fe04028d444160bff25",
+    "receipt_optimized.json": "f3d330b450fd6f5568c87d342d2be119c7cf4d07cd637fe04028d444160bff25"
+  },
+  "schema": "orbit.program_vector_optimization.algebraic.manifest.v1",
+  "semantic_sha256": "647f91c6c85173bbcb275e43a2301a67c61a7fd4d703b4720664a1341d7277aa",
+  "state_sha256": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6",
+  "status": "PASS"
+}

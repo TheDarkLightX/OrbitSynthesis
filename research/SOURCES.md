@@ -268,11 +268,23 @@ These show relevant infrastructure exists; they do **not** establish that ABA qu
 
     Used for: Chinese-journal ternary circuit-synthesis adjacency returned by the refreshed search. It optimizes FPRM delay and area after converting binary benchmarks to ternary circuits, not parameter-free discriminator-term DAGs or their Shannon depth.
 
+## Parallel-prefix and generate/propagate adjacency
+
+49. Richard E. Ladner and Michael J. Fischer, **Parallel Prefix Computation**, *Journal of the ACM* 27(4) (1980), 831–838. DOI: 10.1145/322217.322232.
+    https://doi.org/10.1145/322217.322232
+
+    Used for: primary attribution of balanced parallel-prefix computation. The fixed-`Q` program vector's first-mismatch summary is an instance of this classical pattern; the local question is its exact constant-free `{d,u}` embedding and charged scalar-output sharing, not the prefix idea itself.
+
+50. Richard P. Brent and H. T. Kung, **A Regular Layout for Parallel Adders**, *IEEE Transactions on Computers* C-31(3) (1982), 260–264. DOI: 10.1109/TC.1982.1675982.
+    https://doi.org/10.1109/TC.1982.1675982
+
+    Used for: classical generate/propagate and prefix-network adjacency, including the size/depth tradeoff viewpoint. It does not state the anchored discriminator-rail construction or its `4q/3` scalar-output census.
+
 ## Search-tool provenance for bootstrap / current tranche
 
 - Research Kernel, Morph, and LEAP were exposed and used in the 2026-08-13 tranche. Their run/candidate identifiers are recorded in the theorem note. They organize hypotheses, propose reformulations, or falsify abstractions; none is treated as proof authority.
 - Consensus: attempted, but the monthly search quota was exhausted; no claim relies on an unseen Consensus result.
 - Kurate: requests failed remotely; no claim is attributed to Kurate.
-- Chinese-language search: English and Chinese query variants were run through public web indexes with CNKI, Wanfang, SciEngine, `mathjournals.cn`, CQVIP, Peking University journal pages, and terms including `保守运算`, `判别函数`, `克隆`, `拟素代数`, `项运算`, `多值逻辑`, `二进制编码`, `多路选择器`, `电路复杂度`, `Shannon函数`, `深度`, and `局部编码`. Results 41–42, 44–48 are representative adjacent hits; no direct match was retrieved for the fixed-`Q` count, `Theta(3^r/r)` compiler, R9 router, or coefficient-`3/2` theorem. This is incomplete negative evidence because native-database coverage and terminology remain unresolved.
+- Chinese-language search: English and Chinese query variants were run through public web indexes with CNKI, Wanfang, SciEngine, `mathjournals.cn`, CQVIP, Peking University journal pages, and terms including `保守运算`, `判别函数`, `克隆`, `拟素代数`, `项运算`, `多值逻辑`, `二进制编码`, `多路选择器`, `电路复杂度`, `Shannon函数`, `深度`, and `局部编码`. Results 41–42, 44–48 are representative adjacent hits; no direct match was retrieved for the fixed-`Q` count, the sibling-shared `4q/3` local vector, or the integrated same-DAG `Theta(3^r/r)` / leading-one-depth construction. This is incomplete negative evidence because native-database coverage and terminology remain unresolved.
 - TheoremSearch retrieval-only attempts for the count/compiler failed locally with network errors. A proposed external query containing the unpublished theorem shape was rejected at the approval boundary and was not retried. Failure receipts are preserved under `runs/theoremsearch_conservative_q_terms/`; earlier initial-safety retrieval receipts remain under `runs/theoremsearch_q_term_initial_safety/`. None is theorem or novelty evidence.
 - Research Kernel retrieval exposed the existing Pixley source atom and earlier local hypotheses, but the durable graph predates the optimized compiler, exact count, and local-coding result. A generic public-literature retrieval on 2026-08-13 found no direct Lupanov atom in that graph. No write was attempted after the approval boundary had rejected publishing unpublished theorem-shaped payloads to that service; current local receipts and notes remain authoritative for this tranche.

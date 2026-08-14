@@ -1,0 +1,9 @@
+import DepthAndCensus
+
+#print axioms OrbitSynthesis.StrongSignedRouter.FormalGapClosure.siblingShared_size_depth_checkpoint
+#print axioms OrbitSynthesis.StrongSignedRouter.FormalGapClosure.TruthTable.eval_injective
+#print axioms OrbitSynthesis.StrongSignedRouter.FormalGapClosure.gainTable_eval
+#print axioms OrbitSynthesis.StrongSignedRouter.FormalGapClosure.badTable_eval
+#print axioms OrbitSynthesis.StrongSignedRouter.FormalGapClosure.notBadTable_eval
+#print axioms OrbitSynthesis.StrongSignedRouter.FormalGapClosure.badTable_injective
+#print axioms OrbitSynthesis.StrongSignedRouter.FormalGapClosure.notBadTable_injective
