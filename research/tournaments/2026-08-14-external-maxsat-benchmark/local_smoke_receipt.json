@@ -1,0 +1,30 @@
+{
+  "command": {
+    "certificate_verified": true,
+    "cost": 3,
+    "domain": [[0]],
+    "semantic_sha256": "a8f0ab4ee11c8fa865bb3b2dc0a9b2d77050e255a185f3a51e0e466f24a56554",
+    "status": "optimal",
+    "utility": 5
+  },
+  "highs": {
+    "certificate_verified": true,
+    "cost": 3,
+    "domain": [[0]],
+    "semantic_sha256": "2099d678e35780c3d3d0c91b05a3305d2fdacc4f321b4a98129e26e2f443b117",
+    "status": "optimal",
+    "utility": 5
+  },
+  "mutations": [
+    "wrong_cost",
+    "no_optimum",
+    "no_model",
+    "timeout"
+  ],
+  "parser": {
+    "cost": 3,
+    "literals": [1, -2, 3, -4],
+    "status": "optimal"
+  },
+  "schema": "orbit-synthesis/external-optimization-local-smoke/v1"
+}
