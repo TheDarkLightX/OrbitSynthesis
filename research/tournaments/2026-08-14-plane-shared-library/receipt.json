@@ -1,0 +1,294 @@
+{
+  "analytic_tail": {
+    "K_base_rows": [
+      [107, 146, 1],
+      [108, 147, 1],
+      [109, 149, 1]
+    ],
+    "K_lower_bound": "K>=4r/3 for r>=107",
+    "local_library_bound": "local/U < 243/(8r)",
+    "lower_order_bound": "4/1000",
+    "prefix_discrete_table": [
+      [9, 27, 2470, 972],
+      [10, 25, 2519, 972],
+      [11, 23, 2532, 972],
+      [12, 21, 2509, 972],
+      [13, 19, 2450, 972],
+      [14, 18, 2490, 972],
+      [15, 17, 2512, 972],
+      [16, 16, 2516, 972],
+      [17, 15, 2502, 972],
+      [18, 14, 2470, 972],
+      [19, 13, 2420, 972],
+      [20, 13, 2541, 972],
+      [21, 12, 2464, 972],
+      [22, 12, 2576, 972],
+      [23, 11, 2472, 972],
+      [24, 11, 2575, 972],
+      [25, 10, 2444, 972],
+      [26, 10, 2538, 972]
+    ],
+    "prefix_maximum": {
+      "g": 12,
+      "h": 22,
+      "value": "644/243"
+    },
+    "tail_upper_fraction": [611145032, 208008000],
+    "three_step_ratio": "16*110^3<27*107^3"
+  },
+  "ledger": {
+    "arity_range": [64, 16384],
+    "depth_bound": "r+C+ceil(log_2(C+2))+17",
+    "finite_range": {
+      "maximum_r": 66,
+      "maximum_ratio": "2.837104418458507959",
+      "range": [64, 106]
+    },
+    "group_count_histogram": {
+      "10": 1378,
+      "11": 1375,
+      "12": 1377,
+      "13": 1376,
+      "14": 686,
+      "15": 688,
+      "16": 689,
+      "17": 688,
+      "18": 687,
+      "19": 689,
+      "21": 687,
+      "23": 1865,
+      "25": 2067,
+      "27": 2069
+    },
+    "maximum_ratio": {
+      "r": 66,
+      "value": "2.837104418458507959"
+    },
+    "minimum_depth_slack": {
+      "r": 64,
+      "value": 0
+    },
+    "selected": [
+      {
+        "J": 80,
+        "K": 77,
+        "depth_bound": 90,
+        "final_depth": 90,
+        "g": 10,
+        "group_word_sizes": [25,25,25,24,24,24,24,24,24,24],
+        "live_row_max": 75,
+        "r": 64,
+        "size_ratio": "2.753782551206880087",
+        "t": 6
+      },
+      {
+        "J": 81,
+        "K": 78,
+        "depth_bound": 93,
+        "final_depth": 92,
+        "g": 10,
+        "group_word_sizes": [25,25,25,24,24,24,24,24,24,24],
+        "live_row_max": 75,
+        "r": 65,
+        "size_ratio": "2.794791091834190620",
+        "t": 6
+      },
+      {
+        "J": 83,
+        "K": 80,
+        "depth_bound": 94,
+        "final_depth": 93,
+        "g": 10,
+        "group_word_sizes": [25,25,25,24,24,24,24,24,24,24],
+        "live_row_max": 75,
+        "r": 66,
+        "size_ratio": "2.837104418458507959",
+        "t": 6
+      },
+      {
+        "J": 84,
+        "K": 81,
+        "depth_bound": 95,
+        "final_depth": 94,
+        "g": 27,
+        "group_word_sizes": [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+        "live_row_max": 81,
+        "r": 67,
+        "size_ratio": "2.677074400771052644",
+        "t": 7
+      },
+      {
+        "J": 110,
+        "K": 107,
+        "depth_bound": 112,
+        "final_depth": 111,
+        "g": 23,
+        "group_word_sizes": [11,11,11,11,11,11,11,11,11,11,11,11,11,10,10,10,10,10,10,10,10,10,10],
+        "live_row_max": 99,
+        "r": 84,
+        "size_ratio": "2.701607370211234225",
+        "t": 7
+      },
+      {
+        "J": 126,
+        "K": 123,
+        "depth_bound": 122,
+        "final_depth": 121,
+        "g": 19,
+        "group_word_sizes": [13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12],
+        "live_row_max": 117,
+        "r": 94,
+        "size_ratio": "2.508327253483539999",
+        "t": 7
+      },
+      {
+        "J": 135,
+        "K": 132,
+        "depth_bound": 128,
+        "final_depth": 127,
+        "g": 18,
+        "group_word_sizes": [14,14,14,14,14,14,14,14,14,13,13,13,13,13,13,13,13,13],
+        "live_row_max": 126,
+        "r": 100,
+        "size_ratio": "2.530590341021862383",
+        "t": 7
+      },
+      {
+        "J": 144,
+        "K": 141,
+        "depth_bound": 134,
+        "final_depth": 133,
+        "g": 17,
+        "group_word_sizes": [15,15,15,15,15,14,14,14,14,14,14,14,14,14,14,14,14],
+        "live_row_max": 135,
+        "r": 106,
+        "size_ratio": "2.536706059437362978",
+        "t": 7
+      },
+      {
+        "J": 146,
+        "K": 143,
+        "depth_bound": 135,
+        "final_depth": 134,
+        "g": 17,
+        "group_word_sizes": [15,15,15,15,15,14,14,14,14,14,14,14,14,14,14,14,14],
+        "live_row_max": 135,
+        "r": 107,
+        "size_ratio": "2.560500990122035029",
+        "t": 7
+      },
+      {
+        "J": 178,
+        "K": 175,
+        "depth_bound": 156,
+        "final_depth": 155,
+        "g": 13,
+        "group_word_sizes": [19,19,19,19,19,19,19,19,19,18,18,18,18],
+        "live_row_max": 171,
+        "r": 128,
+        "size_ratio": "2.361575849481430840",
+        "t": 7
+      },
+      {
+        "J": 378,
+        "K": 375,
+        "depth_bound": 285,
+        "final_depth": 284,
+        "g": 19,
+        "group_word_sizes": [13,13,13,13,13,13,13,13,13,13,13,13,13,13,13,12,12,12,12],
+        "live_row_max": 351,
+        "r": 256,
+        "size_ratio": "2.276075802700005477",
+        "t": 8
+      },
+      {
+        "J": 762,
+        "K": 759,
+        "depth_bound": 530,
+        "final_depth": 530,
+        "g": 27,
+        "group_word_sizes": [9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9],
+        "live_row_max": 729,
+        "r": 500,
+        "size_ratio": "2.091483344372096665",
+        "t": 9
+      },
+      {
+        "J": 1551,
+        "K": 1548,
+        "depth_bound": 1031,
+        "final_depth": 1031,
+        "g": 13,
+        "group_word_sizes": [19,19,19,19,19,19,19,19,19,18,18,18,18],
+        "live_row_max": 1539,
+        "r": 1000,
+        "size_ratio": "2.049149500307322376",
+        "t": 9
+      },
+      {
+        "J": 6452,
+        "K": 6449,
+        "depth_bound": 4129,
+        "final_depth": 4129,
+        "g": 10,
+        "group_word_sizes": [25,25,25,24,24,24,24,24,24,24],
+        "live_row_max": 6075,
+        "r": 4096,
+        "size_ratio": "2.173471749451020903",
+        "t": 10
+      },
+      {
+        "J": 12941,
+        "K": 12938,
+        "depth_bound": 8226,
+        "final_depth": 8226,
+        "g": 15,
+        "group_word_sizes": [17,17,17,16,16,16,16,16,16,16,16,16,16,16,16],
+        "live_row_max": 12393,
+        "r": 8192,
+        "size_ratio": "2.142642362933985146",
+        "t": 11
+      },
+      {
+        "J": 25922,
+        "K": 25919,
+        "depth_bound": 16419,
+        "final_depth": 16419,
+        "g": 23,
+        "group_word_sizes": [11,11,11,11,11,11,11,11,11,11,11,11,11,10,10,10,10,10,10,10,10,10,10],
+        "live_row_max": 24057,
+        "r": 16384,
+        "size_ratio": "2.168333518364848277",
+        "t": 12
+      }
+    ],
+    "size_bound": "size<3*3^r/r"
+  },
+  "plane_factorization": {
+    "mutation_value_2_low_as_high": 0,
+    "rows": 1641,
+    "widths": {
+      "1": {"boolean_plane_roots": 2, "naive_plane_occurrences": 6, "q_tables": 3},
+      "2": {"boolean_plane_roots": 4, "naive_plane_occurrences": 18, "q_tables": 9},
+      "3": {"boolean_plane_roots": 8, "naive_plane_occurrences": 54, "q_tables": 27},
+      "4": {"boolean_plane_roots": 16, "naive_plane_occurrences": 162, "q_tables": 81},
+      "5": {"boolean_plane_roots": 32, "naive_plane_occurrences": 486, "q_tables": 243}
+    }
+  },
+  "schema": "orbit-synthesis/plane-shared-library/v1",
+  "selector_reconstruction": {
+    "group_sizes": [3,2,2,2],
+    "labels_sha256": "3e794d4367963765ff0e72c52be00c596ee77733b8f05ce71f850f3e9b64f3a4",
+    "mutation_wrong_group": {
+      "bad_group": 1,
+      "expected": 1,
+      "good_group": 0,
+      "mutated": 0,
+      "point": [0,0,1]
+    },
+    "plane_references": 1536,
+    "rows": 1728,
+    "selectors": 64
+  },
+  "semantic_sha256": "9f3973a584f858b7cf4bc5ec6522944816963a6f51862d404847e4968961c389"
+}
