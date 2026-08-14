@@ -16,7 +16,6 @@ from orbitsynthesis.domain_model import (
     ComponentRuleSet,
     QuasiPrimalDomainModel,
 )
-from orbitsynthesis.domain_solver import literals_for_witness
 from orbitsynthesis.external_optimization import (
     ExternalOptimizationResult,
     solve_weighted_cnf_command,
@@ -59,7 +58,25 @@ def model_and_encoding():
     witness = model.solve_domain({(0,)})
     if not isinstance(witness, CompiledDomainWitness):
         raise AssertionError("expected a concrete component-domain witness")
-    literals = literals_for_witness(model, cnf, witness)
+
+    true_variables = {
+        variable
+        for state, variable in cnf.state_variables
+        if state in witness.domain
+    }
+    candidate_variables = {
+        (component_index, candidate_index): variable
+        for component_index, candidate_index, variable
+        in cnf.candidate_variables
+    }
+    for component_index, candidate_index in enumerate(witness.component_choices):
+        true_variables.add(
+            candidate_variables[(component_index, candidate_index)]
+        )
+    literals = tuple(
+        variable if variable in true_variables else -variable
+        for variable in range(1, cnf.variable_count + 1)
+    )
     return model, cnf, wcnf, literals
 
 
