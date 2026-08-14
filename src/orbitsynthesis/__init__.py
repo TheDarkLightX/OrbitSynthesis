@@ -11,6 +11,11 @@ from .discriminator_compile import (
     evaluate,
     selector,
 )
+from .domain_learning import (
+    LearnedDomainSearchResult,
+    LearnedDomainSearchStats,
+    maximum_weight_domain_with_learning,
+)
 from .domain_model import (
     CNFEncoding,
     ComponentCandidateRule,
@@ -20,6 +25,14 @@ from .domain_model import (
     QuasiPrimalDomainModel,
     WeightedCNFEncoding,
     compile_quasi_primal_domain_model,
+)
+from .domain_nogood import (
+    CandidateConflictWitness,
+    DomainConflictCore,
+    SignedStateLiteral,
+    candidate_violation_conditions,
+    minimize_domain_failure,
+    verify_domain_conflict_core,
 )
 from .domain_solver import (
     ParsedBooleanModel,
@@ -142,6 +155,7 @@ from .subpower_lists import (
 __all__ = [
     "BitsetNogoodDomainSearch",
     "CNFEncoding",
+    "CandidateConflictWitness",
     "CandidateRejection",
     "CompiledDomainFailure",
     "CompiledDomainWitness",
@@ -151,6 +165,7 @@ __all__ = [
     "ComponentRuleSet",
     "Const",
     "DeterministicTableReduction",
+    "DomainConflictCore",
     "DomainNogood",
     "DomainSearchResult",
     "DomainSearchStats",
@@ -163,6 +178,8 @@ __all__ = [
     "FixedDomainCorePoint",
     "FixedDomainCoreResult",
     "InternalIsomorphism",
+    "LearnedDomainSearchResult",
+    "LearnedDomainSearchStats",
     "ListSubpowerObstruction",
     "ListSubpowerResult",
     "ListSubpowerWitness",
@@ -185,6 +202,7 @@ __all__ = [
     "QuasiPrimalDomainResult",
     "SafetySolution",
     "SeedRule",
+    "SignedStateLiteral",
     "SolverAdapterError",
     "SolverCommand",
     "SolverExecutionReceipt",
@@ -200,6 +218,7 @@ __all__ = [
     "build_no_greatest_region_witness",
     "build_patchability_residual_automaton",
     "build_principal_no_greatest_region_witness",
+    "candidate_violation_conditions",
     "clause_satisfied",
     "closure_with_parameters",
     "compile_quasi_primal_domain_model",
@@ -225,7 +244,9 @@ __all__ = [
     "maximal_nonextendable_internal_isomorphism",
     "maximal_parameterized_domains",
     "maximum_weight_domain_exhaustive",
+    "maximum_weight_domain_with_learning",
     "minimal_clutter",
+    "minimize_domain_failure",
     "minimum_cores_for_domain",
     "minimum_parameter_solutions",
     "naive_local_domain_feasible",
@@ -255,6 +276,7 @@ __all__ = [
     "selector",
     "shortest_accepting_parameters",
     "shortest_state_parameters",
+    "verify_domain_conflict_core",
     "verify_list_subpower_witness",
     "verify_quasi_primal_domain_result",
 ]
