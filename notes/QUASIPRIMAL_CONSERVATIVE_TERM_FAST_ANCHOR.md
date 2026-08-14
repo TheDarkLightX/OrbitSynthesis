@@ -362,11 +362,11 @@ Recorded hashes:
 
 ```text
 checker SHA-256:
-  2ddb696c85b4e94166df34ed8a0643710c916481e5e967cc0e1ac4685d077bd0
+  07a7fa06b222c178c32359bebee6f52a22b98f59026fb174f6afb7dcc11e2039
 receipt/stdout SHA-256:
-  6cabb4ef6654884c5676bf23a657e942a2a849dc7f5ee68dcd78fe2f217fb62e
+  8df0d86fcb603043f7452be348f4e1fc4b8f66c6bcc5c770a6ec8bee4110a55c
 semantic SHA-256:
-  a477fb076e86283bc70cf63f20c2e2b8b43f6bca627e724b9e6afb20507ab610
+  cd98624ac0eebd3f9a9494c34ca0865e3c9c5fef8b0fe7834e41b5e4c114f76f
 ```
 
 The exact charged ratio over the replay range is maximized at `r=93`:
