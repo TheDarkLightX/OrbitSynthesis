@@ -12,6 +12,7 @@ on:
       - 'research/tournaments/2026-08-14-two-slice-compiler/**'
       - 'research/tournaments/2026-08-14-early-switch-compiler/**'
       - 'research/tournaments/2026-08-14-plane-shared-library/**'
+      - 'research/tournaments/2026-08-14-recursive-boolean-library/**'
       - 'lakefile.lean'
       - 'lean-toolchain'
   workflow_dispatch:
@@ -40,3 +41,4 @@ jobs:
           bash research/tournaments/2026-08-14-two-slice-compiler/check.sh
           bash research/tournaments/2026-08-14-early-switch-compiler/check.sh
           bash research/tournaments/2026-08-14-plane-shared-library/check.sh
+          bash research/tournaments/2026-08-14-recursive-boolean-library/check.sh
