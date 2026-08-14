@@ -1,14 +1,14 @@
-# Plane-shared Boolean libraries and a sub-three integrated compiler
+# Plane-shared Boolean libraries and a `67/25` integrated compiler
 
 **Status:** exact manuscript strengthening, 2026-08-14. This note is stacked
 on the integrated fixed-Q compiler, the sibling-shared program-vector theorem,
-the pivot-normalized anchor, and the subsequent slicing schedules. It changes
-the universal local library: instead of building two fresh router roots for
-every Q-valued table, it materializes each scalar Boolean table once and lets
-all Q tables reference an ordered pair of those roots.
+the pivot-normalized anchor, and the slicing schedules. It changes the
+universal local library: instead of building two new router roots for every
+Q-valued table, it materializes each scalar Boolean table once and lets every Q
+table reference an ordered pair of those existing roots.
 
-The construction, semantic factorization, finite arithmetic, analytic tail,
-and depth ledger have a standalone replay and a separately written no-import
+The semantic factorization, exact finite portfolio, analytic tail, and depth
+ledger have a standalone replay and a separately written no-import
 reconstruction. The result is not yet formalized end to end in Lean or
 externally peer reviewed. Publication novelty, patent/FTO status, license
 rights, and practical performance remain **UNKNOWN**.
@@ -27,33 +27,36 @@ For every `r>=64` and every `f in CT_r(Q)`, there is one parameter-free
 original-signature free-fanout scalar DAG with
 
 ```text
-size  < 3*3^r/r.
+size < (67/25)*3^r/r.
 ```
 
-Put `C=ceil(log_2 r)`. The same construction has depth at most
+Writing `C=ceil(log_2 r)`, the same portfolio has
 
 ```text
-r+C+max(ceil(log_2 t)+17, ceil(log_2 s)-t+16),
+depth <= r+ceil(7C/5)+20.
 ```
 
-for the explicit schedule parameters `t+s=r` below. In particular,
+The earlier explicit global constants were
 
 ```text
-depth = r+O(log r).
+34, 15, 21/2, 46/5.
 ```
 
-A convenient all-arity corollary is
+The local fixed-sign program vector is unchanged. For `q=3^w`, its size is
+`(4/3+o(1))q`, its matched leading scalar-output lower constant is `4/3`, and
+its depth is at most `3+ceil(log_2 w)`.
+
+The exact charged ratio in the replay range `64<=r<=16384` is maximal at
+`r=64`:
 
 ```text
-depth <= r+ceil(7C/5)+18.
+size*r/3^r = 2.679666803224281973...
 ```
 
-The previous explicit global size constant was `46/5`. The local fixed-sign
-program-vector theorem is unchanged: for `q=3^w`, its size remains
-`(4/3+o(1))q`, with matched leading scalar-output lower constant `4/3` and
-depth at most `3+ceil(log_2 w)`.
+This bounded maximum is validation evidence, not an exact global optimum or a
+matching global lower bound.
 
-## 2. The missing sharing
+## 2. Plane sharing
 
 On the nonbinary branch the legal two-plane code is
 
@@ -63,26 +66,26 @@ On the nonbinary branch the legal two-plane code is
 2 -> (1,0).
 ```
 
-Let a live local slice have `M` rows. There are `3^M` Q-valued tables, but a
-plane is only a Boolean table. The set of possible high planes and the set of
-possible low planes are both the same family
+Let a live local slice have `M` rows. There are `3^M` Q-valued tables, but each
+individual plane is a Boolean table. The high and low coordinates both range
+over the same family
 
 ```text
-{ beta : [M] -> {0,1} },
+{ beta:[M]->{0,1} },
 ```
 
 of cardinality `2^M`.
 
-Materialize one router root for each Boolean table `beta`. A Q table `F` then
-uses the ordered pair
+Materialize one scalar router root for every Boolean table `beta`. A Q table
+`F` is then represented by the ordered pair
 
 ```text
 (high_F,low_F)
 ```
 
-of two already existing Boolean roots. Pairing distinguished roots costs no
-operation node. The prefix high router points directly to `high_F`, and the
-prefix low router points directly to `low_F`.
+of two already materialized scalar roots. Pairing distinguished roots costs no
+operation node. The prefix high router points to `high_F`, and the prefix low
+router points to `low_F`.
 
 Thus a capacity-`N` padded local slice with `M` live rows costs at most
 
@@ -96,122 +99,108 @@ router nodes, rather than
 (3N-1)*3^M.
 ```
 
-The sharing is literal same-DAG root reuse. It does not identify unequal
-Boolean functions, add a vector-valued primitive, or treat a pair as one
-scalar node.
+This is literal same-DAG root reuse. It neither identifies unequal Boolean
+functions nor introduces a vector-valued gate.
 
-## 3. Schedule and balanced live slices
+## 3. Boolean budget and the four-candidate portfolio
 
-Define `J` as the largest integer satisfying
+Let `J` be the largest integer satisfying
 
 ```text
 9*r^3*2^J <= 3^r,
 ```
 
-and put
+put
 
 ```text
-K=J-3.
+K=J-3,
 ```
 
-Let `m=3^b` be the largest power of three not exceeding `K`. Use
+and let `m=3^b` be the largest power of three not exceeding `K`.
+
+For each
 
 ```text
-t=b+3,
-N=3^t=27m,
+c in {2,3,4,5},
+```
+
+define one candidate by
+
+```text
+t=b+c,
+d=min(7,t),
+u=3^(t-d),
+h=floor(K/u),
+g=ceil(3^d/h),
 s=r-t,
+N=3^t,
 P=3^s.
 ```
 
-Among the `t` local coordinates designate five splitter coordinates. The
-remaining `b-2` coordinates have
+Designate `d` of the `t` local coordinates as splitter coordinates. The
+remaining `t-d` coordinates contribute `u` rows per splitter word. Partition
+the `3^d` splitter words into `g` balanced consecutive groups. A group has at
+most
 
 ```text
-u=3^(b-2)=m/9
+ceil(3^d/g)*u <= h*u <= K
 ```
 
-assignments. The splitter cube has `3^5=243` words.
+live rows.
 
-Put
+For each group, zero-extend every Boolean table on its live rows to all `N`
+local addresses and realize it with one capacity-`N` positive signed router.
+Every group and every Boolean table shares one width-`t` sibling-shared program
+vector.
 
-```text
-h=floor(K/u),
-g=ceil(243/h).
-```
-
-Partition the 243 splitter words, in a fixed lexicographic order, into `g`
-balanced consecutive groups. Every group has at most `h` splitter words and
-therefore at most
-
-```text
-h*u <= K
-```
-
-live local rows. The groups cover the local cube exactly and are disjoint.
-
-For each group `G`, extend every Boolean table on
-
-```text
-G x Q^(b-2)
-```
-
-by zero on the other local addresses and realize it with one capacity-`N`
-positive signed router. All local Boolean roots and all groups share one
-width-`t` sibling-shared program vector.
-
-## 4. Prefix and group selection
-
-For each prefix assignment and each group, the selector table induces one
-high-plane root and one low-plane root in the corresponding Boolean library.
 For each group and each plane, one capacity-`P` positive router selects the
-proper root from the prefix assignment. The `2g` prefix routers share one
-width-`s` program vector and cost exactly
+correct Boolean root from the prefix assignment. The `2g` prefix routers share
+one width-`s` program vector and cost
 
 ```text
 g*(3P-1)
 ```
 
-skeleton nodes.
+nodes.
 
-Two capacity-`243` positive routers then select the correct group output from
-the five splitter coordinates. Each of their 243 leaves points to the
-prefix-selected output of the unique group containing that splitter word.
-The two group routers cost
+Finally, two capacity-`3^d` positive routers select the group high and low
+outputs using the splitter coordinates. They cost
 
 ```text
-3*243-1=728
+3*3^d-1
 ```
 
-nodes and share one width-five program vector.
+nodes and share one width-`d` program vector. Their branch payloads may depend
+on other local coordinates: the signed-router projection identity is
+pointwise in every branch valuation and does not require syntactic variable
+disjointness.
 
-This second routing step is legal even though its branch payloads depend on
-local variables. The signed-router projection identity is pointwise for every
-branch valuation; it does not require syntactic variable disjointness between
-payloads and address controls.
-
-Decode the resulting high/low pair once and apply the existing final
+Decode the selected high/low pair once and apply the existing final
 binary/nonbinary glue once.
 
-## 5. Exact charged ledger
+For each arity, use the candidate with the least exact charged count, breaking
+ties by the smaller `c`. This is an explicit four-element minimization, not an
+existential optimization over arbitrary circuits.
 
-Let the balanced groups have `M_1,...,M_g` live rows. The complete upper ledger
-is
+## 4. Exact candidate ledger
+
+Let the balanced groups of candidate `c` have live-row counts
+`M_1,...,M_g`. Its complete charged upper ledger is
 
 ```text
-((3N-1)/2)*sum_i 2^M_i        local Boolean libraries
-+g*(3P-1)                      prefix plane routers
-+S_P(t)+S_P(s)+S_P(5)-4        three vectors, two names shared
-+(3*243-1)                     two group routers
-+(2r-1)+2+3+1                  fast anchor, decoder, glue, u(x_0)
-+B_router+B_control.           complement-relative binary branch
+((3N-1)/2)*sum_i 2^M_i       local Boolean libraries
++g*(3P-1)                     prefix plane routers
++S_P(t)+S_P(s)+S_P(d)-4       three vectors, shared names
++(3*3^d-1)                    two group-selection routers
++(2r-1)+2+3+1                 fast anchor, decoder, glue, u(x_0)
++B_router+B_control.          complement-relative binary branch
 ```
 
-The `-4` counts the shared `one,zero` nodes once across the three program
-vectors. The displayed formula is an upper bound: constant Boolean functions
-and any additional structural hash coincidences may only reduce the actual
-union.
+The `-4` leaves one copy of the two dynamic name nodes across the three
+vectors. The formula is an upper bound: if two syntactic subgraphs hash to the
+same node, the actual union is smaller.
 
-## 6. Size proof
+## 5. Size proof
 
 Write
 
@@ -219,207 +208,216 @@ Write
 U=3^r/r.
 ```
 
-### 6.1 Local Boolean libraries
+### 5.1 Exact finite part
 
-Every `M_i<=K`, and
-
-```text
-2^K <= 3^r/(72r^3)
-```
-
-because `K=J-3`. Hence
+For every integer
 
 ```text
-L_local
- <= (3N/2)*g*2^K,
-L_local/U
- <= N*g/(48r^2).
+64<=r<=966,
 ```
 
-Since `m<=K<J<2r`, one has `N=27m<54r`. Also
-`m<=K<3m` gives
+the checker constructs all four candidate ledgers using exact integers,
+selects the least, and verifies
 
 ```text
-9<=h<=26,
-g=ceil(243/h)<=27.
+25*size*r < 67*3^r.
 ```
 
-Therefore
+The maximum over this finite set is the `r=64` value displayed above. The
+committed receipt records every input rule, source hash, semantic digest,
+selected checkpoints, and normal/optimized equality. This is a finite exact
+proof, not a floating-point sample.
+
+### 5.2 Analytic tail
+
+For `r>=967`, candidate `c=4` suffices. It has
 
 ```text
-L_local/U < 243/(8r).
+t=b+4,
+d=7,
+u=m/27,
+h=floor(27K/m),
+g=ceil(2187/h),
+N=81m.
 ```
 
-### 6.2 Prefix main term
-
-For `r>=107`,
+The Boolean budget satisfies
 
 ```text
-K>=4r/3.
+K>=4r/3
 ```
 
-A residue-three induction proves this. It is enough to check `r=107,108,109`
-for
+from `r=107` onward. It is enough to check the three residue bases
+`r=107,108,109` in
 
 ```text
-9r^3*2^(ceil(4r/3)+3) <= 3^r.
+9*r^3*2^(ceil(4r/3)+3) <= 3^r;
 ```
 
-Increasing `r` by three multiplies the power-of-two part by `16`, while
+increasing `r` by three multiplies the power-of-two part by `16`, while
 
 ```text
 16*(110/107)^3 < 27.
 ```
 
-Now `h=floor(9K/m)` implies
+Since `m<=K<3m`, one has
 
 ```text
-m>9K/(h+1).
+27<=h<=80,
+g<=81.
 ```
 
-The sibling-vector envelope gives
+#### Local Boolean libraries
+
+Every live-row count is at most `K`, and
+
+```text
+2^K <= 3^r/(72r^3).
+```
+
+Also `m<K<J<2r`, hence `N<162r`. Therefore
+
+```text
+L_local/U
+ < N*g/(48r^2)
+ < 2187/(8r).
+```
+
+#### Prefix main term
+
+The sibling-vector envelope is
 
 ```text
 S_P(s) <= (4/3)P+5*3^ceil(s/2).
 ```
 
-Thus the prefix routers and the main vector term contribute less than
+Because `h=floor(27K/m)`,
 
 ```text
-(3g+4/3)*(h+1)/324
+m>27K/(h+1)>=36r/(h+1).
 ```
 
-Shannon units. Checking the eighteen integers `9<=h<=26`, with
-`g=ceil(243/h)`, gives the exact maximum
+The normalized prefix-router and main-vector term is consequently below
 
 ```text
-644/243
+(9g+4)(h+1)/8748.
 ```
 
-at `(h,g)=(22,12)`.
-
-### 6.3 Lower-order groups
-
-The prefix half-width error is below `U/1000` because
+Checking the 54 integers `27<=h<=80`, with `g=ceil(2187/h)`, gives the exact
+maximum
 
 ```text
-5000r < 3^floor(r/2)
+20935/8748
 ```
 
-from the parity bases `64,65` onward.
+at `(h,g)=(78,29)`.
 
-The local vector satisfies
+#### Lower-order terms
+
+The vector half-width error is below `U/1000` from
 
 ```text
-S_P(t)<=7N/3<126r.
+5000r < 3^floor(r/2).
 ```
 
-Together with the width-five vector, 728 group-selector nodes, fast anchor,
-decoder, glue, and `u(x_0)`, the fixed group is below `149r`, hence below
-`U/1000` from
+For this candidate, the local vector, width-seven vector, group routers, fast
+anchor, decoder, glue, and `u(x_0)` are below `900r` nodes and hence below
+`U/1000` for `r>=967`. The binary-router and binary-control proofs each give
+another `U/1000`.
 
-```text
-149000*64^2<3^64
-```
-
-and monotonicity. The existing binary proofs give another `U/1000` each for
-routers and controls.
-
-Consequently, for `r>=107`,
+Thus
 
 ```text
 size/U
- < 644/243 + 243/(8r) + 4/1000
- <=644/243 + 243/(8*107) + 4/1000
- <3.
+ < 20935/8748 + 2187/(8r) + 4/1000
+ <=20935/8748 + 2187/(8*967) + 4/1000
+ <67/25.
 ```
 
-The finite range `64<=r<=106` is checked by exact integer arithmetic. Its
-maximum occurs at `r=66`:
+The last comparison is an exact rational inequality.
+
+## 6. Depth
+
+For a selected candidate, put
 
 ```text
-size*r/3^r = 2.837104418458507959...
+C=ceil(log_2 r).
 ```
 
-This finite check is a proof of forty-three explicit integer inequalities,
-not an extrapolation to the tail.
-
-## 7. Depth
-
-Put `C=ceil(log_2 r)`. The local Boolean roots have depth at most
+The local Boolean roots have depth at most
 
 ```text
 C+2+D_P(t)+t+1.
 ```
 
-The prefix routers add `s+1` levels after the maximum of local roots and their
-width-`s` controls. The five-coordinate group routers add six levels. The
-one-shot decoder and final glue add four.
-
-Therefore the exact schedule-dependent bound is
+The prefix routers add `s+1` levels after the maximum of their payload roots
+and width-`s` controls. The group routers add `d+1<=8` levels, followed by the
+one-shot decoder and two-level final glue. Hence
 
 ```text
-r+C+max(ceil(log_2 t)+17,
-        ceil(log_2 s)-t+16).
+D
+ <= r+C+max(ceil(log_2 t)+19,
+             ceil(log_2 s)-t+18).
 ```
 
-The same schedule estimates used by the preceding compiler imply
+For the analytic range, `K>=4r/3` and maximality of `m` imply
 
 ```text
-b>=C-ceil(2C/5)-1,
-t=b+3,
+b>=C-ceil(2C/5)-1.
+```
+
+The four candidates satisfy `b+2<=t<=b+5`, while `b<C`. A five-residue
+`27<32` induction gives
+
+```text
 ceil(log_2 t)<=ceil(2C/5)+1.
 ```
 
-Both branches are consequently below
+Also `ceil(log_2 s)<=C`. Substitution gives
 
 ```text
-r+ceil(7C/5)+18.
+D<=r+ceil(7C/5)+20.
 ```
 
-This retains leading depth coefficient one. The additive term is not claimed
-optimal.
+The remaining finite arities are checked exactly by the same ledger.
 
-## 8. Evidence
+## 7. Evidence
 
 Primary checker:
 
 `research/tournaments/2026-08-14-plane-shared-library/check_plane_shared_library.py`
 
-It checks:
+It verifies:
 
-- exhaustive plane factorization for local table widths one through five;
-- saturation of the shared Boolean-plane family;
-- 1,728 selector-reconstruction rows through grouped plane references;
-- effective plane and wrong-group mutations;
-- exact charged ledgers for every `64<=r<=16384`;
-- the finite `64..106` proof and the analytic `r>=107` proof separately;
-- all eighteen discrete prefix cases;
+- exact plane factorization and saturation through six live rows;
+- 1,728 grouped selector-reconstruction rows and effective mutations;
+- all four exact candidate ledgers for every `64<=r<=16384`;
+- the exact finite proof through arity 966;
+- the analytic tail components separately;
+- the discrete `20935/8748` prefix maximum;
 - the depth ledger; and
 - byte-identical normal and optimized receipts.
 
-A second checker independently reimplements the rail recurrences, Boolean
-budget, group schedule, local libraries, binary branch, and exact totals. It
-imports neither the primary checker nor an OrbitSynthesis compiler
-implementation.
+A second checker independently reimplements the Boolean planes, rail
+recurrences, portfolio, binary branch, finite proof, analytic tail, and depth
+ledger without importing the primary checker or an OrbitSynthesis compiler.
 
 Recorded primary semantic SHA-256:
 
 ```text
-9f3973a584f858b7cf4bc5ec6522944816963a6f51862d404847e4968961c389
+b98aa602a17208dcb9b0af22bab96e65a02e4888f6293d23b6b59aa7442a4f16
 ```
 
 Recorded independent semantic SHA-256:
 
 ```text
-bb90f7cd44a567333aade1b38949e3a02ff7b7e8cfd6343e36a87e8d0e8e3116
+b96a891f6e94a5d5d4aefa1b1efd20ebe31583347244746c225329b3fca7ab95
 ```
 
-## 9. Boundaries
+## 8. Boundaries
 
-The theorem does not improve or alter the local `4/3` program-vector lower
-constant. It does not prove an exact global size constant, a global lower
-bound matching three, an exact finite-width vector minimum, an optimal
-additive depth term, a formula or bounded-fanout theorem, publication novelty,
-or legal clearance. The integrated construction is not yet serialized and
-proved end to end in Lean.
+The theorem does not alter the local `4/3` program-vector leading constant,
+prove a matching global lower constant, determine the exact global optimum,
+settle the optimal additive depth term, or give formula or bounded-fanout
+bounds. It makes no publication-novelty or legal conclusion. The integrated
+construction is not yet serialized and proved end to end in Lean.
