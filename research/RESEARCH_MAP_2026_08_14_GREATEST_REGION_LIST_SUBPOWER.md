@@ -4,7 +4,7 @@
 
 **Decision:** the fixed-Q constant lane is frozen except for lower bounds,
 formalization, or a broader model. The main program returns to shared-term
-reactive synthesis.
+reactive synthesis and practical controller search.
 
 ## 1. Promoted results
 
@@ -56,6 +56,32 @@ LEAN_PENDING
 PRIOR_ART_TERMINOLOGY_PENDING
 ```
 
+### R3 — exact domain optimization model
+
+For an explicit finite quasi-primal safety game, compile every observation
+component into finitely many candidate rules. A rule consists only of:
+
+```text
+forbidden states,
+source -> successor closure implications.
+```
+
+State and rule-selector variables yield a polynomial-size CNF whose state
+assignment extends to a model exactly when it is a term-winning domain.
+Weighted state units give an exact weighted partial-MaxSAT formulation of the
+maximum-value domain problem.
+
+Status:
+
+```text
+EXACT_CNF_THEOREM
+DIMACS_AND_WCNF_EMITTERS
+CONTROLLER_CERTIFICATE_RECOVERY
+768_RANDOM_DOMAIN_DIFFERENTIALS
+EXACT_MAXIMAL_DOMAIN_DIFFERENTIALS
+EXTERNAL_SOLVER_BENCHMARK_PENDING
+```
+
 ## 2. Principal mathematical lane
 
 Develop the greatest-region equivalence into the reactive paper spine:
@@ -73,27 +99,41 @@ compression, and prior-art comparison.
 
 ## 3. Principal algorithmic lane
 
-Use `src/orbitsynthesis/subpower_lists.py` as the first practical backend.
-
-Pipeline:
+The practical kernel now has three layers:
 
 ```text
-candidate invariant domain
-  -> observation generator rows
-  -> safe successor lists
-  -> internal-groupoid components
-  -> witness table or component obstruction
+subpower_lists.py
+  fixed table/list interpolation
+
+safety_components.py
+  fixed-domain strategy or component obstruction
+
+domain_model.py
+  all-domain CNF / weighted-MaxSAT compilation
+```
+
+End-to-end pipeline:
+
+```text
+explicit finite algebra and safety relation
+  -> internal-isomorphism groupoid
+  -> component candidate rules
+  -> required-state CNF or weighted MaxSAT
+  -> selected domain and component rules
+  -> compatible controller table
   -> original-signature DAG compiler
   -> verification receipt
 ```
 
 Next implementation targets:
 
-1. learn component obstructions during maximal-domain search;
-2. minimize obstruction positions;
-3. support arbitrary output arity by solving shared row components once;
-4. benchmark against explicit generated-subpower closure and generic CSP;
-5. classify broader cube-term/Mal'cev list languages.
+1. integrate external SAT/MaxSAT solvers and decode their models;
+2. generate rules lazily from failed candidate domains;
+3. minimize and cache component obstructions;
+4. support incremental specification changes;
+5. benchmark against exhaustive search, existing nogood search, BDD/MDD, and
+   generic CSP encodings;
+6. classify broader cube-term/Mal'cev list languages.
 
 ## 4. Frozen lane
 
@@ -116,7 +156,7 @@ shared-term safety
 greatest-region iff demi-semi-primal
 single-equation nonextendable-symmetry obstruction
 maximal-domain antichains and initial-set complexity
-component obstruction algorithms
+component obstruction and MaxSAT algorithms
 ```
 
 ### Complexity paper
@@ -133,11 +173,12 @@ canonical-rank library
 
 ## 6. Evidence boundary
 
-The two promoted theorems are source-grounded and executable. They are not
-yet:
+The promoted theorems and backends are source-grounded and executable. They
+are not yet:
 
 - externally peer reviewed;
 - Lean-formalized;
 - publication-novelty determinations;
-- patent/FTO conclusions; or
-- practical performance claims.
+- patent/FTO conclusions;
+- external-solver performance benchmarks; or
+- evidence of scalability beyond the explicit checked instances.
