@@ -9,6 +9,7 @@ principal="$lane_dir/check_principal_equation.py"
 principal_independent="$lane_dir/audits/independent/audit_principal_equation_independent.py"
 component_backend="$lane_dir/check_component_backend.py"
 domain_model="$lane_dir/check_domain_model.py"
+domain_solver="$lane_dir/check_domain_solver.py"
 primary_normal="$(mktemp)"
 primary_optimized="$(mktemp)"
 independent_normal="$(mktemp)"
@@ -21,7 +22,9 @@ component_normal="$(mktemp)"
 component_optimized="$(mktemp)"
 domain_normal="$(mktemp)"
 domain_optimized="$(mktemp)"
-trap 'rm -f "$primary_normal" "$primary_optimized" "$independent_normal" "$independent_optimized" "$principal_normal" "$principal_optimized" "$principal_independent_normal" "$principal_independent_optimized" "$component_normal" "$component_optimized" "$domain_normal" "$domain_optimized"' EXIT
+solver_normal="$(mktemp)"
+solver_optimized="$(mktemp)"
+trap 'rm -f "$primary_normal" "$primary_optimized" "$independent_normal" "$independent_optimized" "$principal_normal" "$principal_optimized" "$principal_independent_normal" "$principal_independent_optimized" "$component_normal" "$component_optimized" "$domain_normal" "$domain_optimized" "$solver_normal" "$solver_optimized"' EXIT
 
 cd "$repo_dir"
 python3 -m py_compile \
@@ -33,12 +36,14 @@ python3 -m py_compile \
   src/orbitsynthesis/principal_greatest_region.py \
   src/orbitsynthesis/safety_components.py \
   src/orbitsynthesis/domain_model.py \
+  src/orbitsynthesis/domain_solver.py \
   "$primary" \
   "$independent" \
   "$principal" \
   "$principal_independent" \
   "$component_backend" \
-  "$domain_model"
+  "$domain_model" \
+  "$domain_solver"
 
 python3 "$primary" > "$primary_normal"
 python3 -O "$primary" > "$primary_optimized"
@@ -64,10 +69,14 @@ python3 "$domain_model" > "$domain_normal"
 python3 -O "$domain_model" > "$domain_optimized"
 cmp "$domain_normal" "$domain_optimized"
 
+python3 "$domain_solver" > "$solver_normal"
+python3 -O "$domain_solver" > "$solver_optimized"
+cmp "$solver_normal" "$solver_optimized"
+
 python3 - \
   "$primary_normal" "$independent_normal" \
   "$principal_normal" "$principal_independent_normal" \
-  "$component_normal" "$domain_normal" <<'PY'
+  "$component_normal" "$domain_normal" "$solver_normal" <<'PY'
 import json
 import sys
 
@@ -77,6 +86,7 @@ principal = json.load(open(sys.argv[3], encoding="utf-8"))
 principal_independent = json.load(open(sys.argv[4], encoding="utf-8"))
 component = json.load(open(sys.argv[5], encoding="utf-8"))
 domain = json.load(open(sys.argv[6], encoding="utf-8"))
+solver = json.load(open(sys.argv[7], encoding="utf-8"))
 
 assert primary["list_subpower"]["exact_instances"] == 27510
 assert primary["greatest_region"]["demi_semi_primal_count"] == 15
@@ -129,6 +139,22 @@ assert [
 assert domain["semantic_sha256"] == (
     "d12b80867b60303ba80b079800f8ca8ff36aedf0a20637776fcdae10f9c18a46"
 )
+
+assert solver["targeted"]["optimum_weight"] == 6
+assert solver["targeted"]["optimum_domain"] == [[0], [2]]
+assert solver["targeted"]["contradictory_mutation_rejected"] is True
+assert solver["targeted"]["selector_mutation_rejected"] is True
+assert solver["random_weighted"]["instances"] == 64
+assert solver["random_weighted"]["decoded_optima"] == 37
+assert solver["random_weighted"]["infeasible_required_sets"] == 27
+assert solver["principal"]["states"] == 81
+assert solver["principal"]["components"] == 227
+assert solver["principal"]["candidate_rules"] == 17174
+assert solver["principal"]["variables"] == 17255
+assert solver["principal"]["clauses"] == 17407
+assert solver["semantic_sha256"] == (
+    "2fefedfe42c1ebdd5110df4793fc511a0c0e2a6d3b7b92b332e4a70ef531c3ee"
+)
 PY
 
 sha256sum \
@@ -138,8 +164,10 @@ sha256sum \
   "$principal_independent" "$principal_independent_normal" \
   "$component_backend" "$component_normal" \
   "$domain_model" "$domain_normal" \
+  "$domain_solver" "$solver_normal" \
   src/orbitsynthesis/subpower_lists.py \
   src/orbitsynthesis/greatest_region_boundary.py \
   src/orbitsynthesis/principal_greatest_region.py \
   src/orbitsynthesis/safety_components.py \
-  src/orbitsynthesis/domain_model.py
+  src/orbitsynthesis/domain_model.py \
+  src/orbitsynthesis/domain_solver.py
