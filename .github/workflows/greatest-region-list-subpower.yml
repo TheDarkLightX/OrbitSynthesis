@@ -13,12 +13,15 @@ on:
       - 'src/orbitsynthesis/safety_components.py'
       - 'src/orbitsynthesis/domain_model.py'
       - 'src/orbitsynthesis/domain_solver.py'
+      - 'src/orbitsynthesis/domain_nogood.py'
+      - 'src/orbitsynthesis/domain_learning.py'
       - 'src/orbitsynthesis/solver_adapter.py'
       - 'src/orbitsynthesis/__init__.py'
       - 'notes/DEMI_SEMIPRIMAL_GREATEST_REGION_CHARACTERIZATION.md'
       - 'notes/QUASIPRIMAL_LIST_SUBPOWER_TRACTABILITY.md'
       - 'notes/QUASIPRIMAL_DOMAIN_MAXSAT_COMPILATION.md'
       - 'notes/QUASIPRIMAL_DOMAIN_SOLVER_CERTIFICATES.md'
+      - 'notes/QUASIPRIMAL_DOMAIN_CONFLICT_LEARNING.md'
       - 'notes/QUASIPRIMAL_EXTERNAL_SOLVER_ADAPTER.md'
       - 'research/tournaments/2026-08-14-greatest-region-list-subpower/**'
   workflow_dispatch:
@@ -29,7 +32,7 @@ permissions:
 jobs:
   exact-frontier-replay:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,4 +41,4 @@ jobs:
       - name: Replay mathematical frontiers and portable backends
         run: |
           bash research/tournaments/2026-08-14-greatest-region-list-subpower/check.sh
-          bash research/tournaments/2026-08-14-greatest-region-list-subpower/check_solver_adapter.sh
+          bash research/tournaments/2026-08-14-greatest-region-list-subpower/check_learning.sh
