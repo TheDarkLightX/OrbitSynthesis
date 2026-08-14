@@ -21,6 +21,14 @@ from .domain_model import (
     WeightedCNFEncoding,
     compile_quasi_primal_domain_model,
 )
+from .domain_optimization import (
+    WeightedBitsetDomainOptimizer,
+    WeightedDomainResult,
+    WeightedDomainStats,
+    WeightedObjective,
+    optimize_weighted_domain,
+    verify_weighted_domain_result,
+)
 from .domain_solver import (
     ParsedBooleanModel,
     WeightedDomainOptimum,
@@ -177,8 +185,12 @@ __all__ = [
     "StrategyCandidateRejection",
     "StrategyComponentObstruction",
     "Var",
+    "WeightedBitsetDomainOptimizer",
     "WeightedCNFEncoding",
     "WeightedDomainOptimum",
+    "WeightedDomainResult",
+    "WeightedDomainStats",
+    "WeightedObjective",
     "audit_no_greatest_region_witness",
     "audit_principal_no_greatest_region_witness",
     "build_no_greatest_region_witness",
@@ -215,6 +227,7 @@ __all__ = [
     "naive_local_domain_feasible",
     "nonextendable_internal_isomorphisms",
     "normalize_boolean_model",
+    "optimize_weighted_domain",
     "parameter_budget_frontier",
     "parameter_core",
     "parameter_core_catalog",
@@ -237,4 +250,5 @@ __all__ = [
     "shortest_state_parameters",
     "verify_list_subpower_witness",
     "verify_quasi_primal_domain_result",
+    "verify_weighted_domain_result",
 ]

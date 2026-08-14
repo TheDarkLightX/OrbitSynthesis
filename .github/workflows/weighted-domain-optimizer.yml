@@ -1,0 +1,29 @@
+name: weighted-domain-optimizer
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/weighted-domain-optimizer.yml'
+      - 'notes/WEIGHTED_CLONE_CONSTRAINED_DOMAIN_OPTIMIZATION.md'
+      - 'src/orbitsynthesis/__init__.py'
+      - 'src/orbitsynthesis/domain_model.py'
+      - 'src/orbitsynthesis/domain_optimization.py'
+      - 'src/orbitsynthesis/domain_search_*.py'
+      - 'src/orbitsynthesis/pointed_kernel.py'
+      - 'research/tournaments/2026-08-14-weighted-domain-optimizer/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-weighted-optimization:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Replay native, WCNF, and no-import audits
+        run: bash research/tournaments/2026-08-14-weighted-domain-optimizer/check.sh
