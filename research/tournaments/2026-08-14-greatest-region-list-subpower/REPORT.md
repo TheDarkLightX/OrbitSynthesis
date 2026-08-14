@@ -14,16 +14,16 @@ following universal property:
 > instance has a greatest term-winning invariant domain.
 
 The positive direction is the existing orbit/stabilizer greatest-fixed-point
-theorem.  The new converse constructs a no-greatest game from every
+theorem. The new converse constructs a no-greatest game from every
 graph-maximal nonextendable internal isomorphism.
 
 The generic witness has two term-winning domains, an infeasible union, and no
-term-winning common upper bound.  Two partial-symmetry images are made dead
+term-winning common upper bound. Two partial-symmetry images are made dead
 outside the source/codomain subalgebras; maximal nonextendability guarantees
 that those dead observations cannot propagate back into the one-sided winning
 domains.
 
-The theorem is exact for groupoid-invariant relations.  A universal
+The theorem is exact for groupoid-invariant relations. A universal
 single-equation version remains open.
 
 ### 2. Quasi-primal list-subpower tractability
@@ -37,14 +37,15 @@ Sg_(A^n)(G) intersect Product_i L_i != empty
 
 is polynomial-time.
 
-Transpose the generators into evaluation rows.  Rows split into connected
-components under internal isomorphisms.  A value at one component
+Transpose the generators into evaluation rows. Rows split into connected
+components under internal isomorphisms. A value at one component
 representative propagates uniquely because the row generates its subalgebra.
 The instance is feasible exactly when every component has one propagated value
 meeting all lists.
 
-The implementation returns a witness vector or one finite component
-obstruction.
+The implementation returns a generated evaluation vector and finite groupoid
+certificate, or one component obstruction recording why every representative
+value failed.
 
 ## Deterministic evidence
 
@@ -60,28 +61,24 @@ Independent no-import checker:
 research/tournaments/2026-08-14-greatest-region-list-subpower/audits/independent/audit_frontiers_independent.py
 ```
 
-Both check:
+Together they check:
 
 - `27,510` exact primary list-subpower instances against explicit closure;
-- `14,280` independent list instances, including all `13,755` Q cases;
+- `14,280` independently reconstructed list instances, including all
+  `13,755` Quackenbush-Q cases in scope;
 - the pure three-element discriminator and Quackenbush `Q`;
 - all `27` unary expansions of the three-element discriminator;
 - exactly `15` extension-property expansions and `12` nonextendable ones;
 - a valid generic no-greatest witness for every one of the `12`;
-- effective groupoid-edge and dead-state mutations; and
-- normal/optimized byte equality.
+- effective groupoid-edge and dead-state mutations;
+- `400` additional deterministic randomized list instances; and
+- byte-identical normal and optimized output for both implementations.
 
-Primary semantic SHA-256:
-
-```text
-1c70c6dbd2b24bbe796c4ea30c303ee894b17b744803e73de4574772df67d405
-```
-
-Independent semantic SHA-256:
-
-```text
-6f466d96b9361fd3f7f7862fcb0c12ddd4dfd81686ef1e7a1358f69b21ceb4b7
-```
+The lane gate compiles every involved Python module, runs both reconstructions
+under ordinary Python and `python -O`, compares their bytes, asserts the exact
+censuses and load-bearing Quackenbush-Q verdicts, and prints source/output
+SHA-256 values from the checked tree. No stale precomputed receipt is accepted
+as a substitute for replay.
 
 ## Boundaries
 
@@ -91,7 +88,7 @@ Independent semantic SHA-256:
 - The list solver assumes quasi-primality is established independently.
 - The broader cube-term/Mal'cev list-intersection frontier remains open.
 - Neither theorem is yet Lean-formalized or externally peer reviewed.
-- No novelty or legal conclusion is asserted.
+- No novelty, patent/FTO, or legal conclusion is asserted.
 
 ## Next actions
 
