@@ -12,6 +12,7 @@ on:
       - 'src/orbitsynthesis/principal_greatest_region.py'
       - 'src/orbitsynthesis/safety_components.py'
       - 'src/orbitsynthesis/domain_model.py'
+      - 'src/orbitsynthesis/domain_solver.py'
       - 'src/orbitsynthesis/__init__.py'
       - 'notes/DEMI_SEMIPRIMAL_GREATEST_REGION_CHARACTERIZATION.md'
       - 'notes/QUASIPRIMAL_LIST_SUBPOWER_TRACTABILITY.md'
