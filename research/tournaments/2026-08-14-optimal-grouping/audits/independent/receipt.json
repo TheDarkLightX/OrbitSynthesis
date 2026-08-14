@@ -1,0 +1,36 @@
+{
+  "arithmetic": {
+    "finite": {"r": 65, "ratio": "2.456979991212798512"},
+    "finite_optimizer": [64, 339],
+    "histogram": {"-1": 32, "-2": 0, "0": 222, "1": 16067, "2": 0},
+    "maximum": {"r": 65, "ratio": "2.456979991212798512"},
+    "range": [64, 16384],
+    "selected": [
+      {"bound": 103, "depth": 95, "g": 27, "maxrow": 81, "r": 64, "ratio": "2.443458733283378749", "shift": 0, "t": 7},
+      {"bound": 107, "depth": 97, "g": 26, "maxrow": 85, "r": 65, "ratio": "2.456979991212798512", "shift": 0, "t": 7},
+      {"bound": 108, "depth": 98, "g": 26, "maxrow": 85, "r": 66, "ratio": "2.427691383658716357", "shift": 0, "t": 7},
+      {"bound": 109, "depth": 99, "g": 26, "maxrow": 85, "r": 67, "ratio": "2.441772990037258968", "shift": 0, "t": 7},
+      {"bound": 142, "depth": 134, "g": 48, "maxrow": 137, "r": 100, "ratio": "2.258921067348512591", "shift": 0, "t": 8},
+      {"bound": 389, "depth": 379, "g": 116, "maxrow": 510, "r": 339, "ratio": "2.010477708325366884", "shift": 0, "t": 10},
+      {"bound": 390, "depth": 382, "g": 348, "maxrow": 510, "r": 340, "ratio": "2.011787310336732140", "shift": 1, "t": 11},
+      {"bound": 1053, "depth": 1047, "g": 1028, "maxrow": 1551, "r": 1000, "ratio": "1.938230058163850864", "shift": 1, "t": 13},
+      {"bound": 4157, "depth": 4151, "g": 6672, "maxrow": 6452, "r": 4096, "ratio": "1.906160132565392309", "shift": 1, "t": 16},
+      {"bound": 16453, "depth": 16447, "g": 44837, "maxrow": 25922, "r": 16384, "ratio": "1.896925294492655702", "shift": 1, "t": 19}
+    ],
+    "tail": "scheduled ceil(log_3(rJ)) candidate",
+    "theorem": {"depth": "r+C+2*ceil((4C+2)/3)+15", "size": "50*size*r<123*3^r"}
+  },
+  "bases": {
+    "J_rows": [[340, 510], [341, 512]],
+    "J_step": "8*342^3<9*340^3",
+    "tail": [78501117600, 37454400000],
+    "target": "123/50"
+  },
+  "optimizer": {
+    "affine_identity": "F(g)=4tN2^q+g[(3P-1)-4t(q-1)2^q]+5t",
+    "bruteforce_cases": 2880,
+    "intervals": "floor(N/g)=q"
+  },
+  "schema": "orbit-synthesis/optimal-grouping-independent/v1",
+  "semantic_sha256": "8c86365240f969b7bc3639c5167b36c8b7a78b8f253e65e747b98d533b8c49b5"
+}
