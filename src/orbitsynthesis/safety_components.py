@@ -1,7 +1,7 @@
 """Component certificates for fixed-domain quasi-primal safety synthesis.
 
 ``FiniteSafetyGame.quasi_primal_strategy_for_domain`` decides one fixed domain
-but returns only a table or ``None``.  This module exposes the same exact
+but returns only a table or ``None``. This module exposes the same exact
 internal-groupoid decomposition as a proof-carrying backend: success returns a
 total compatible strategy table; failure returns one component and a
 candidate-by-candidate reason.
@@ -16,9 +16,13 @@ from itertools import product
 from typing import Hashable, Iterable, Sequence
 
 from .finite_algebra import InternalIsomorphism
-from .safety import FiniteSafetyGame, Observation, Output, State
+from .safety import FiniteSafetyGame
 
 Value = Hashable
+State = tuple[Value, ...]
+Input = tuple[Value, ...]
+Output = tuple[Value, ...]
+Observation = tuple[Value, ...]
 
 
 @dataclass(frozen=True)
@@ -125,7 +129,7 @@ def _local_domains(
                 output
                 for output in allowed
                 if output in winning
-                and game.is_safe(state, input_value, output)
+                and (state, input_value, output) in game.safe_relation
             }
         domains[observation] = frozenset(allowed)
     return domains
@@ -270,7 +274,10 @@ def verify_quasi_primal_domain_result(
         if not all(value in generated for value in output):
             return False
         if state in winning:
-            if output not in winning or not game.is_safe(state, input_value, output):
+            if (
+                output not in winning
+                or (state, input_value, output) not in game.safe_relation
+            ):
                 return False
 
     isomorphisms = tuple(
