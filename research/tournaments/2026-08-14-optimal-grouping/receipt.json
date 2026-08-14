@@ -1,0 +1,55 @@
+{
+  "analytic_tail": {
+    "J_bases": [[340, 510], [341, 512]],
+    "J_step": "8*342^3<9*340^3",
+    "note": "optimized grouping is no larger than the scheduled tail candidate",
+    "tail_fraction": [78501117600, 37454400000],
+    "target": "123/50"
+  },
+  "ledger": {
+    "choice_histogram": {"-1": 32, "-2": 0, "0": 222, "1": 16067, "2": 0},
+    "deltas": [-2, -1, 0, 1, 2],
+    "depth_bound": "r+C+2*ceil((4C+2)/3)+15",
+    "finite": {
+      "maximum_r": 65,
+      "maximum_ratio": "2.456979991212798512",
+      "range": [64, 339]
+    },
+    "finite_optimizer_range": [64, 339],
+    "maximum": {"r": 65, "ratio": "2.456979991212798512"},
+    "minimum_depth_slack": {"r": 1014, "value": 4},
+    "range": [64, 16384],
+    "selected": [
+      {"delta": 0, "depth": 95, "depth_bound": 103, "g": 27, "intervals": 92, "max_rows": 81, "r": 64, "size_ratio": "2.443458733283378749", "t": 7},
+      {"delta": 0, "depth": 97, "depth_bound": 107, "g": 26, "intervals": 92, "max_rows": 85, "r": 65, "size_ratio": "2.456979991212798512", "t": 7},
+      {"delta": 0, "depth": 98, "depth_bound": 108, "g": 26, "intervals": 92, "max_rows": 85, "r": 66, "size_ratio": "2.427691383658716357", "t": 7},
+      {"delta": 0, "depth": 99, "depth_bound": 109, "g": 26, "intervals": 92, "max_rows": 85, "r": 67, "size_ratio": "2.441772990037258968", "t": 7},
+      {"delta": 0, "depth": 100, "depth_bound": 110, "g": 25, "intervals": 92, "max_rows": 88, "r": 68, "size_ratio": "2.412613893942587243", "t": 7},
+      {"delta": 0, "depth": 106, "depth_bound": 114, "g": 71, "intervals": 161, "max_rows": 93, "r": 72, "size_ratio": "2.402722579000414240", "t": 8},
+      {"delta": 0, "depth": 134, "depth_bound": 142, "g": 48, "intervals": 161, "max_rows": 137, "r": 100, "size_ratio": "2.258921067348512591", "t": 8},
+      {"delta": 0, "depth": 379, "depth_bound": 389, "g": 116, "intervals": 485, "max_rows": 510, "r": 339, "size_ratio": "2.010477708325366884", "t": 10},
+      {"delta": 1, "depth": 382, "depth_bound": 390, "g": 348, "intervals": 0, "max_rows": 510, "r": 340, "size_ratio": "2.011787310336732140", "t": 11},
+      {"delta": 1, "depth": 1047, "depth_bound": 1053, "g": 1028, "intervals": 0, "max_rows": 1551, "r": 1000, "size_ratio": "1.938230058163850864", "t": 13},
+      {"delta": 1, "depth": 4151, "depth_bound": 4157, "g": 6672, "intervals": 0, "max_rows": 6452, "r": 4096, "size_ratio": "1.906160132565392309", "t": 16},
+      {"delta": 1, "depth": 16447, "depth_bound": 16453, "g": 44837, "intervals": 0, "max_rows": 25922, "r": 16384, "size_ratio": "1.896925294492655702", "t": 19}
+    ],
+    "size_bound": "50*size*r<123*3^r",
+    "tail_schedule": "t=ceil(log_3(rJ)), g=ceil(3^t/J)"
+  },
+  "optimizer": {
+    "bruteforce_instances": 4000,
+    "identity": "E_N(g)=(N-(q-1)g)2^q on floor(N/g)=q",
+    "method": "test both endpoints of every quotient interval",
+    "mutation_lower_endpoints_only": {
+      "N": 8,
+      "P": 3,
+      "correct": 101,
+      "correct_g": 4,
+      "lower_only": 109,
+      "lower_only_g": 3,
+      "t": 1
+    }
+  },
+  "schema": "orbit-synthesis/optimal-group-recursive-boolean/v1",
+  "semantic_sha256": "9a4aeadad1d07406b7eaa0f7bc22b9df5c3f6f6fb0d2912a470707784cd75e87"
+}
