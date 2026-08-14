@@ -1,0 +1,29 @@
+{
+  "families": 4,
+  "instances": 20,
+  "rows": [
+    ["split2", "unique", [2, 1, 2], 1, "OPTIMUM FOUND", 1],
+    ["split2", "signed", [2, 1, 1], 0, "OPTIMUM FOUND", 0],
+    ["split2", "required", [1, 1, 1], 2, "OPTIMUM FOUND", 2],
+    ["split2", "forbidden", [1, 1, 1], 3, "OPTIMUM FOUND", 3],
+    ["split2", "zero", [0, 1, 2], 0, "OPTIMUM FOUND", 0],
+    ["choice4", "unique", [14, 3, 14], 1, "OPTIMUM FOUND", 1],
+    ["choice4", "signed", [2, 2, 6], 4, "OPTIMUM FOUND", 4],
+    ["choice4", "required", [5, 2, 9], 5, "OPTIMUM FOUND", 5],
+    ["choice4", "forbidden", [8, 2, 6], 8, "OPTIMUM FOUND", 8],
+    ["choice4", "zero", [0, 3, 14], 0, "OPTIMUM FOUND", 0],
+    ["cycle6", "unique", [57, 4, 57], 6, "OPTIMUM FOUND", 6],
+    ["cycle6", "signed", [10, 2, 20], 2, "OPTIMUM FOUND", 2],
+    ["cycle6", "required", [16, 4, 57], 5, "OPTIMUM FOUND", 5],
+    ["cycle6", "forbidden", [24, 4, 30], 12, "OPTIMUM FOUND", 12],
+    ["cycle6", "zero", [0, 4, 57], 0, "OPTIMUM FOUND", 0],
+    ["pruning9", "unique", [486, 6, 486], 25, "OPTIMUM FOUND", 25],
+    ["pruning9", "signed", [22, 3, 324], 8, "OPTIMUM FOUND", 8],
+    ["pruning9", "required", [31, 6, 249], 14, "OPTIMUM FOUND", 14],
+    ["pruning9", "forbidden", [56, 6, 249], 25, "OPTIMUM FOUND", 25],
+    ["pruning9", "zero", [0, 6, 486], 0, "OPTIMUM FOUND", 0]
+  ],
+  "rows_sha256": "c2634bf96dd934f4210d6d9b418d1fec25900c1818dcac582f62297593384672",
+  "schema": "orbit-synthesis/external-optimization-independent/v1",
+  "semantic_sha256": "3295548451c93286c56971ee27d304ff3a3b50601809f16e542486d39162bd87"
+}
