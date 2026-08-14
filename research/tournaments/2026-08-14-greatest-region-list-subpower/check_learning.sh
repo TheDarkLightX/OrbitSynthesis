@@ -51,29 +51,41 @@ adapter = json.load(open(sys.argv[4], encoding="utf-8"))
 
 assert nogood["synthetic"]["candidate_count"] == 3
 assert len(nogood["synthetic"]["core"]) == 1
-assert nogood["random_differential"]["failed_domains"] > 0
-assert nogood["random_differential"]["clauses_checked"] == nogood["random_differential"]["failed_domains"]
-assert nogood["random_differential"]["total_core_literals"] == nogood["random_differential"]["total_clause_literals"]
+assert nogood["random_differential"]["failed_domains"] == 591
+assert nogood["random_differential"]["matching_domains_checked"] == 1781
+assert nogood["random_differential"]["clauses_checked"] == 591
+assert nogood["random_differential"]["minimum_core_size"] == 1
+assert nogood["random_differential"]["maximum_core_size"] == 3
+assert nogood["random_differential"]["total_core_literals"] == 897
+assert nogood["random_differential"]["total_clause_literals"] == 897
 assert nogood["principal"]["core_literals"]
 
 assert learning["synthetic"]["states"] == 12
 assert learning["synthetic"]["reference_domain_checks"] == 4096
 assert learning["synthetic"]["learned_model_checks"] == 2
 assert learning["synthetic"]["learned_cores"] == 1
+assert learning["synthetic"]["learned_literals"] == 1
 assert learning["synthetic"]["optimum_weight"] == 11
 assert learning["synthetic"]["max_round_guard_rejected"] is True
 assert learning["random_exact"]["relations"] == 24
 assert learning["random_exact"]["states_per_relation"] == 9
 assert learning["random_exact"]["reference_component_model_checks"] == 12288
-assert learning["random_exact"]["learned_component_model_checks"] < 12288
-assert learning["random_exact"]["learned_core_count"] > 0
+assert learning["random_exact"]["learned_component_model_checks"] == 54
+assert learning["random_exact"]["learned_core_count"] == 30
+assert learning["random_exact"]["learned_literal_count"] == 57
+assert learning["random_exact"]["matching_domains_checked"] == 4544
+assert learning["random_exact"]["eager_hard_clause_total"] == 1079
+assert learning["random_exact"]["lazy_learned_clause_total"] == 30
 assert all(learning["mutations"].values())
 
 assert independent["exhaustive_minimizer"]["two_candidate_condition_families"] == 30625
+assert independent["exhaustive_minimizer"]["core_matching_assignments"] == 147766
 assert independent["randomized_multicandidate"]["instances"] == 2000
+assert independent["randomized_multicandidate"]["total_core_literals"] == 7351
 assert independent["lazy_synthetic"]["state_assignments"] == 4096
 assert independent["lazy_synthetic"]["component_checks"] == 2
 assert independent["lazy_synthetic"]["learned_cores"] == 1
+assert independent["lazy_synthetic"]["optimum_weight"] == 11
 
 assert adapter["reference"]["optimum_weight"] == 6
 assert adapter["reference"]["optimum_cost"] == 3
