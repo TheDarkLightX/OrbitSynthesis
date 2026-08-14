@@ -11,6 +11,16 @@ from .discriminator_compile import (
     evaluate,
     selector,
 )
+from .domain_model import (
+    CNFEncoding,
+    ComponentCandidateRule,
+    ComponentRuleSet,
+    CompiledDomainFailure,
+    CompiledDomainWitness,
+    QuasiPrimalDomainModel,
+    WeightedCNFEncoding,
+    compile_quasi_primal_domain_model,
+)
 from .finite_algebra import FiniteAlgebra, FiniteOperation, InternalIsomorphism
 from .greatest_region_boundary import (
     NoGreatestRegionAudit,
@@ -110,9 +120,14 @@ from .subpower_lists import (
 
 __all__ = [
     "BitsetNogoodDomainSearch",
+    "CNFEncoding",
     "CandidateRejection",
+    "CompiledDomainFailure",
+    "CompiledDomainWitness",
     "CompiledNogoodDomainSearch",
     "CompiledParameterizedKernel",
+    "ComponentCandidateRule",
+    "ComponentRuleSet",
     "Const",
     "DeterministicTableReduction",
     "DomainNogood",
@@ -144,18 +159,21 @@ __all__ = [
     "PointedClassRules",
     "PrincipalEquationAudit",
     "PrincipalNoGreatestRegionWitness",
+    "QuasiPrimalDomainModel",
     "QuasiPrimalDomainResult",
     "SafetySolution",
     "SeedRule",
     "StrategyCandidateRejection",
     "StrategyComponentObstruction",
     "Var",
+    "WeightedCNFEncoding",
     "audit_no_greatest_region_witness",
     "audit_principal_no_greatest_region_witness",
     "build_no_greatest_region_witness",
     "build_patchability_residual_automaton",
     "build_principal_no_greatest_region_witness",
     "closure_with_parameters",
+    "compile_quasi_primal_domain_model",
     "compile_table",
     "compile_vector_table",
     "deterministic_table_reduction",
