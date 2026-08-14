@@ -3,38 +3,47 @@
 **Research base:** `research/fixed-q-asymptotic-constant` / PR #23.
 
 **Decision:** the fixed-Q constant lane is frozen except for lower bounds,
-formalization, or a broader model.  The main program returns to shared-term
+formalization, or a broader model. The main program returns to shared-term
 reactive synthesis.
 
 ## 1. Promoted results
 
-### R1 — greatest-region characterization
+### R1 — exact greatest-region characterization
 
 For finite quasi-primal algebras, demi-semi-primality is equivalent to
-universal existence of a greatest shared-term winning region for finite
-internal-groupoid-invariant safety relations.
+universal existence of a greatest shared-term winning region for finite safety
+relations defined by one original-signature equation. Equivalently, it is the
+boundary for all internal-groupoid-invariant finite safety relations.
+
+The generic non-demi converse uses a graph-maximal nonextendable internal
+isomorphism, critical and dead observation orbits, and a principal separator
+
+```text
+g(x)=first projection  on safe tuples,
+g(x)=second projection on unsafe tuples.
+```
+
+The unsafe tuples carry distinct tagged subalgebra coordinates. Groupoid
+invariance and quasi-primal interpolation make `g` a term, and safety is the
+single equation `first=g`.
 
 Status:
 
 ```text
 DERIVED_GENERIC_PROOF
+PRINCIPAL_EQUATION_CONVERSE
 PRIMARY_EXECUTABLE_RECONSTRUCTION
 INDEPENDENT_NO_IMPORT_RECONSTRUCTION
+236,196_FLATTENED_ROWS_PER_RECONSTRUCTION
 LEAN_PENDING
 EXTERNAL_REVIEW_PENDING
-```
-
-Open sharpening:
-
-```text
-Can the generic non-demi converse always be realized by one equation?
 ```
 
 ### R2 — quasi-primal list-subpower algorithm
 
 For every fixed finite quasi-primal algebra, generated-subpower intersection
-with arbitrary explicit unary coordinate lists is polynomial-time.  Rows
-factor over internal-isomorphism groupoid components.
+with arbitrary explicit unary coordinate lists is polynomial-time. Rows factor
+over internal-isomorphism groupoid components.
 
 Status:
 
@@ -49,20 +58,18 @@ PRIOR_ART_TERMINOLOGY_PENDING
 
 ## 2. Principal mathematical lane
 
-Develop the greatest-region theorem into the reactive paper spine:
+Develop the greatest-region equivalence into the reactive paper spine:
 
 1. formalize the groupoid-component interpolation lemma;
 2. formalize the positive orbit/stabilizer fixed point;
-3. formalize the generic converse witness;
-4. decide the single-equation specialization;
-5. relate greatest-region existence to categorical demi-semi-primality without
-   overstating novelty.
+3. formalize graph-maximal nonextendability and orbit separation;
+4. formalize the principal-equation separator;
+5. minimize the universal state arity or prove a lower bound;
+6. relate the theorem to categorical demi-semi-primality without overstating
+   novelty.
 
-Kill condition for the equation-only sharpening:
-
-- find a finite quasi-primal algebra whose compatible relations cannot encode
-  the required dead/critical orbit separator by equations; or
-- locate a classical theorem already implying the exact specialization.
+The construction frontier is closed; the remaining work is proof hardening,
+compression, and prior-art comparison.
 
 ## 3. Principal algorithmic lane
 
@@ -107,7 +114,7 @@ Working center:
 ```text
 shared-term safety
 greatest-region iff demi-semi-primal
-nonextendable partial-symmetry obstruction
+single-equation nonextendable-symmetry obstruction
 maximal-domain antichains and initial-set complexity
 component obstruction algorithms
 ```
@@ -126,7 +133,8 @@ canonical-rank library
 
 ## 6. Evidence boundary
 
-The two promoted theorems are source-grounded and testable.  They are not yet:
+The two promoted theorems are source-grounded and executable. They are not
+yet:
 
 - externally peer reviewed;
 - Lean-formalized;
