@@ -1,17 +1,18 @@
 {
+  "author": "Dana Edwards",
   "build_inputs": {
     "lua_filter_sha256": "cd02ed594de2d040a82ac79706ff7d84eaa201209e313b07a753af4e0666e6aa",
     "preamble_sha256": "234baed76d7cb5d9be319a016f9f565cdcdc2e7eb5ef1181efdaa4876e048cc4",
-    "script_sha256": "41bdfa7172eb70a89a85fa3e7b509e9a3bf7d3ce2fcfb86dcf3409b4134222a8"
+    "script_sha256": "d204019cb567e9a7a750ed2eb4cff2f2e50d17b930e24643b7f4d95683905f06"
   },
   "outputs": {
     "pdf": {
       "path": "FIXED_Q_TERM_COMPLEXITY_PREPRINT.pdf",
-      "sha256": "81b23830fb6d4345affea2c31ccfdd812b59fd9b6e3ee579e8ddfd8c469a5191"
+      "sha256": "939f4fbb014478c56bc17006ad7bd0a128b10d9b7df269c8eca6771895597970"
     },
     "tex": {
       "path": "FIXED_Q_TERM_COMPLEXITY_PREPRINT.tex",
-      "sha256": "2b2566384d31728a7a92b407628d9a257dda5fef211787a5f692387fa344bca6"
+      "sha256": "928203b2c5a739b87ce1c6d3b715b2798bb93ce439e3277a1e0429bf40884287"
     }
   },
   "review_status": "NON_ARCHIVAL_REVIEW_COPY",

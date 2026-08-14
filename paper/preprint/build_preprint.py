@@ -21,6 +21,7 @@ OUTPUT_PDF = HERE / "FIXED_Q_TERM_COMPLEXITY_PREPRINT.pdf"
 BUILD_RECEIPT = HERE / "BUILD_RECEIPT.json"
 BUILD = HERE / "build"
 GENERATED = BUILD / "manuscript.generated.md"
+AUTHOR = "Dana Edwards"
 SOURCE_COMMIT = "ab20b9df50f331e430c1a43a9d8c3af9c1e8556c"
 EXPECTED_SOURCE_SHA = "01ddf4565212f798d0adf5c4c9b16d6de9074a317a34f2a39a80051de55a5410"
 
@@ -97,7 +98,7 @@ def generated_markdown() -> str:
     return f"""---
 title: "{title}"
 author:
-  - "AUTHOR METADATA PENDING HUMAN APPROVAL"
+  - "{AUTHOR}"
 date: "Review draft — 13 August 2026"
 lang: en-US
 abstract: |
@@ -115,9 +116,10 @@ keywords:
 
 \\begin{{reviewnotice}}
 \\textbf{{Review and authorship status.}} This PDF is a non-archival review copy.
-Creator names, order, affiliations, corresponding-author details, and ORCIDs
-remain subject to human approval. Do not deposit or represent this file as an
-authored preprint until that gate is closed. The mathematical source is bound to
+The author is {AUTHOR}. Affiliation, corresponding-author contact, ORCID,
+contribution statement, funding, competing interests, and final archival
+approval remain pending. Do not deposit this file until those gates are closed.
+The mathematical source is bound to
 SHA-256 \\texttt{{{source_sha}}} and repository commit
 \\href{{https://github.com/TheDarkLightX/OrbitSynthesis/commit/{SOURCE_COMMIT}}}
 {{\\texttt{{{SOURCE_COMMIT[:12]}}}}}. The manuscript has not been externally peer
@@ -145,8 +147,8 @@ circuit complexity).
 
 ### Generative AI and AI-assisted technologies {{.unnumbered}}
 
-During exploratory research and preparation of this review draft, the human
-project lead used OpenAI Codex and other separately invoked large-language-model
+During exploratory research and preparation of this review draft, the author
+used OpenAI Codex and other separately invoked large-language-model
 research agents to propose reformulations and proof strategies, draft and
 critique mathematical arguments, generate and review Python and Lean artifacts,
 and assist with organization and copy-editing. Research Kernel and Morph were
@@ -156,7 +158,7 @@ human-readable proofs and/or deterministic normal/optimized checkers,
 independent reimplementations, mutation tests, and scoped Lean kernel checks,
 as documented in Section 11 and the repository. AI systems are not authors and
 cannot accept responsibility for the work. Before submission or archival
-deposit, every named human author must inspect and approve the final manuscript,
+deposit, the author must inspect and approve the final manuscript,
 verify citations and originality, and accept full responsibility for its
 accuracy and integrity. The final archival version must replace this provisional
 statement with a complete retained-record inventory of the services, model or
@@ -165,10 +167,10 @@ generative-AI-created figures are included.
 
 ### Author contributions and approval {{.unnumbered}}
 
-Human authorship, author order, affiliations, and ORCIDs have not yet been
-approved. Contribution statements and corresponding-author details also remain
-pending. This review copy must not be deposited until all named human authors
-approve the final text and accept accountability for the work.
+{AUTHOR} is the named author. Affiliation, ORCID, corresponding-author
+contact, and a contribution statement remain pending. This review copy must not
+be deposited until the author approves the final text and accepts accountability
+for the work.
 
 ### Data, code, and reproducibility {{.unnumbered}}
 
@@ -182,7 +184,7 @@ hash is `{source_sha}`.
 ### Funding and competing interests {{.unnumbered}}
 
 Funding and competing-interest declarations have not yet been supplied by the
-human authors and must be completed before submission. No legal opinion about
+author and must be completed before submission. No legal opinion about
 patents, freedom to operate, or license scope is made in this manuscript.
 
 ### Ethics statement {{.unnumbered}}
@@ -285,6 +287,7 @@ def main() -> None:
     shutil.copy2(built_pdf, OUTPUT_PDF)
 
     receipt = {
+        "author": AUTHOR,
         "schema": "orbitsynthesis.academic_preprint_build.v1",
         "status": "PASS",
         "review_status": "NON_ARCHIVAL_REVIEW_COPY",

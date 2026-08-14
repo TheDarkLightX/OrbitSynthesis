@@ -3,10 +3,11 @@
 This directory contains the reproducible academic-format build of
 `paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md`.
 
-The generated PDF is deliberately marked **REVIEW DRAFT** because human creator
-names, author order, affiliations, ORCIDs, contributions, funding, competing
-interests, and final approval have not yet been supplied. It must not be
-deposited in an archival repository until those gates are closed.
+The author is **Dana Edwards**. The generated PDF remains marked **REVIEW
+DRAFT** because affiliation, ORCID, corresponding-author contact, contribution
+statement, funding, competing interests, and final archival approval have not
+yet been supplied. It must not be deposited in an archival repository until
+those gates are closed.
 
 ## Build
 
@@ -46,8 +47,8 @@ The provisional declaration follows the common cross-publisher baseline:
 5. The target journal's current policy must be checked again at submission,
    and the disclosure should also be repeated in the cover letter when asked.
 6. A confidential referee manuscript must not be uploaded to an external AI
-   system without the authors' permission and adequate confidentiality terms.
-7. Before archival deposit, the human authors should reconcile the retained
+   system without the author's permission and adequate confidentiality terms.
+7. Before archival deposit, the author should reconcile the retained
    session records into a complete inventory of services, model/version
    identifiers when available, purposes, and affected research stages.
 
