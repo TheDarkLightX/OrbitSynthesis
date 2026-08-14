@@ -10,6 +10,7 @@ on:
       - 'src/orbitsynthesis/subpower_lists.py'
       - 'src/orbitsynthesis/greatest_region_boundary.py'
       - 'src/orbitsynthesis/principal_greatest_region.py'
+      - 'src/orbitsynthesis/safety_components.py'
       - 'src/orbitsynthesis/__init__.py'
       - 'notes/DEMI_SEMIPRIMAL_GREATEST_REGION_CHARACTERIZATION.md'
       - 'notes/QUASIPRIMAL_LIST_SUBPOWER_TRACTABILITY.md'
