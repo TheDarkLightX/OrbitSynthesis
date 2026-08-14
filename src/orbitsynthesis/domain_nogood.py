@@ -6,12 +6,12 @@ component, the conditions violated by the current domain:
 - an included forbidden state; or
 - an included source whose selected successor is excluded.
 
-Each violation is a small conjunction of signed state literals.  Selecting one
+Each violation is a small conjunction of signed state literals. Selecting one
 violation per candidate and taking their union gives a conflict core whose
-conjunction still makes the whole component impossible.  Negating that core
+conjunction still makes the whole component impossible. Negating that core
 produces a sound CNF blocking clause for incremental SAT/MaxSAT search.
 
-The deterministic deletion pass returns a subset-minimal literal core.  It is
+The deterministic deletion pass returns a subset-minimal literal core. It is
 not claimed to minimize cardinality globally.
 """
 
@@ -20,7 +20,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Hashable, Mapping
 
-from .domain_model import CompiledDomainFailure
+from .domain_model import (
+    CompiledDomainFailure,
+    QuasiPrimalDomainModel,
+)
 
 Value = Hashable
 State = tuple[Value, ...]
@@ -63,7 +66,9 @@ class DomainConflictCore:
         clause = []
         for literal in self.literals:
             if literal.state not in state_variables:
-                raise ValueError(f"state missing from CNF variable map: {literal.state!r}")
+                raise ValueError(
+                    f"state missing from CNF variable map: {literal.state!r}"
+                )
             variable = state_variables[literal.state]
             clause.append(-variable if literal.included else variable)
         return tuple(clause)
@@ -76,7 +81,9 @@ def _literal_key(literal: SignedStateLiteral) -> tuple[str, int]:
 def _condition_key(
     condition: frozenset[SignedStateLiteral],
 ) -> tuple[int, tuple[tuple[str, int], ...]]:
-    return len(condition), tuple(sorted((_literal_key(item) for item in condition)))
+    return len(condition), tuple(
+        sorted((_literal_key(item) for item in condition))
+    )
 
 
 def candidate_violation_conditions(
@@ -124,13 +131,15 @@ def minimize_domain_failure(
     """Build a deterministic subset-minimal conflict core.
 
     The initial core takes the shortest lexicographically first violation for
-    each candidate.  A deletion pass then removes every literal whose absence
+    each candidate. A deletion pass then removes every literal whose absence
     still leaves at least one complete violation for every candidate.
     """
 
     conditions = candidate_violation_conditions(failure)
     if not conditions:
-        raise ValueError("compiled domain failure contains no candidate violations")
+        raise ValueError(
+            "compiled domain failure contains no candidate violations"
+        )
     if any(not candidate_conditions for candidate_conditions in conditions.values()):
         raise ValueError("one failed candidate has no recorded violation")
 
@@ -140,7 +149,9 @@ def minimize_domain_failure(
         for literal in candidate_conditions[0]
     )
     if not _covers_every_candidate(conditions, core):
-        raise AssertionError("initial conflict core does not cover every candidate")
+        raise AssertionError(
+            "initial conflict core does not cover every candidate"
+        )
 
     for literal in sorted(core, key=_literal_key, reverse=True):
         reduced = core - {literal}
@@ -167,7 +178,11 @@ def minimize_domain_failure(
         literals=tuple(sorted(core, key=_literal_key)),
         candidate_witnesses=tuple(witnesses),
     )
-    if not verify_domain_conflict_core(failure, result, require_minimal=True):
+    if not verify_domain_conflict_core(
+        failure,
+        result,
+        require_minimal=True,
+    ):
         raise AssertionError("constructed conflict core did not verify")
     return result
 
@@ -193,16 +208,51 @@ def verify_domain_conflict_core(
     conditions = candidate_violation_conditions(failure)
     if not conditions or not _covers_every_candidate(conditions, literal_set):
         return False
-    witnesses = {witness.candidate_index: witness for witness in core.candidate_witnesses}
+    witnesses = {
+        witness.candidate_index: witness
+        for witness in core.candidate_witnesses
+    }
     if set(witnesses) != set(conditions):
         return False
     for candidate_index, witness in witnesses.items():
         condition = frozenset(witness.condition)
-        if condition not in conditions[candidate_index] or not condition <= literal_set:
+        if (
+            condition not in conditions[candidate_index]
+            or not condition <= literal_set
+        ):
             return False
 
     if require_minimal:
         for literal in literal_set:
-            if _covers_every_candidate(conditions, literal_set - {literal}):
+            if _covers_every_candidate(
+                conditions,
+                literal_set - {literal},
+            ):
                 return False
     return True
+
+
+def verify_domain_conflict_core_against_model(
+    model: QuasiPrimalDomainModel,
+    failure: CompiledDomainFailure,
+    core: DomainConflictCore,
+    *,
+    require_minimal: bool = False,
+) -> bool:
+    """Replay the raw failure from the model before trusting its learned core.
+
+    This is the stronger proof-carrying boundary. It prevents a malformed or
+    stale ``CompiledDomainFailure`` from manufacturing a clause that is only
+    self-consistent with its own recorded fields. The deterministic model must
+    reproduce the complete failure object for the same domain, after which the
+    ordinary conflict verifier checks the core.
+    """
+
+    replay = model.solve_domain(failure.domain)
+    if replay != failure:
+        return False
+    return verify_domain_conflict_core(
+        failure,
+        core,
+        require_minimal=require_minimal,
+    )
