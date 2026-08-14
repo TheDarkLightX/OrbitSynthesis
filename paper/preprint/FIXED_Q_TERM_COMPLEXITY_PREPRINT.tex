@@ -1,0 +1,2580 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+\PassOptionsToPackage{space}{xeCJK}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+  \setmainfont[]{TeX Gyre Pagella}
+  \setsansfont[]{TeX Gyre Heros}
+  \setmonofont[]{Latin Modern Mono}
+  \setmathfont[]{TeX Gyre Pagella Math}
+  \ifXeTeX
+    \usepackage{xeCJK}
+    \setCJKmainfont[]{Noto Serif CJK SC}
+          \setCJKsansfont[]{Noto Sans CJK SC}
+              \setCJKmonofont[]{Noto Sans Mono CJK SC}
+      \fi
+  \ifLuaTeX
+    \usepackage[]{luatexja-fontspec}
+    \setmainjfont[]{Noto Serif CJK SC}
+  \fi
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{american}
+\ifPDFTeX
+\else
+\babelfont{rm}[]{TeX Gyre Pagella}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{lineno}
+\usepackage{draftwatermark}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{xurl}
+\usepackage{seqsplit}
+\usepackage{enumitem}
+
+\definecolor{OrbitBlue}{HTML}{163A5F}
+\definecolor{OrbitLight}{HTML}{EDF4FA}
+\definecolor{OrbitRule}{HTML}{8AA9C2}
+\definecolor{OrbitCode}{HTML}{F6F7F9}
+\definecolor{OrbitRed}{HTML}{9B2335}
+
+\AtBeginDocument{\hypersetup{
+  linkcolor=OrbitBlue,
+  citecolor=OrbitBlue,
+  urlcolor=OrbitBlue,
+  pdfsubject={Finite algebra and circuit complexity review preprint},
+  pdfkeywords={finite algebra, conservative operation, discriminator, term DAG, Shannon complexity, circuit depth}
+}}
+
+\SetWatermarkText{REVIEW DRAFT}
+\SetWatermarkScale{0.55}
+\SetWatermarkColor[gray]{0.95}
+\SetWatermarkAngle{55}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Fixed-$Q$ conservative term complexity}
+\fancyhead[R]{\small Review draft}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{reviewnotice}{
+  colback=OrbitLight,
+  colframe=OrbitRule,
+  boxrule=0.6pt,
+  arc=1.5pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{OrbitCode},
+  frame=single,
+  rulecolor=\color{OrbitRule},
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  aboveskip=0.8em,
+  belowskip=0.8em
+}
+
+\renewcommand{\arraystretch}{1.12}
+\setlength{\emergencystretch}{1.5em}
+\setlist{nosep, leftmargin=1.8em}
+\modulolinenumbers[5]
+\linenumbers
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Exact Census and Simultaneous Shannon Size--Depth Bounds for Conservative Terms over a Fixed Three-Element Algebra},
+  pdfauthor={AUTHOR METADATA PENDING HUMAN APPROVAL},
+  pdflang={en-US},
+  pdfkeywords={finite algebra, conservative
+operation, discriminator, term DAG, Shannon complexity, local
+coding, multivalued logic, circuit depth},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Exact Census and Simultaneous Shannon Size--Depth Bounds for
+Conservative Terms over a Fixed Three-Element Algebra}
+\author{AUTHOR METADATA PENDING HUMAN APPROVAL}
+\date{Review draft --- 13 August 2026}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Fix the three-element algebra
+
+\(Q=(\{0,1,2\};d,u)\),
+
+where \(d(x,y,z)=z\) when \(x=y\) and \(d(x,y,z)=x\) otherwise, and
+where \(u(0)=1\), \(u(1)=0\), and \(u(2)=1\). We study the
+parameter-free \(r\)-ary term operations of \(Q\) that are conservative.
+Their number is exactly
+
+\(|\mathrm{CT}_r(Q)| = 2^{5\mathbin{\cdot}2^{r-1}-5} \mathbin{\cdot} 3^{3^r-3\mathbin{\cdot}2^r+3}\).
+
+For an operation \(f\), let \(C_r(f)\) be the minimum number of
+original-signature operation nodes in a rooted term DAG computing \(f\),
+with free fan-out, and let \(D_r(f)\) be the corresponding minimum
+operation depth. We give a parameter-free Lupanov-style compiler and
+prove
+
+\(\max_{f \in \mathrm{CT}_r(Q)} C_r(f) = \Theta(3^r/r)\).
+
+The lower bound holds for almost every uniformly selected member of
+\(\mathrm{CT}_r(Q)\). A sequence of depth refinements includes an exact
+recursive signed-router family and an exact sibling-shared
+program-vector construction. For \(q=3^w\), either fixed signed-router
+vector has local size \(S(w)\) and depth \(D(w)\) satisfying
+
+\(3\mathbin{\cdot}S(w) \le  4q+15\mathbin{\cdot}3^{\lceil w/2 \rceil}\)
+
+and
+
+\(D(w) \le  3+\lceil \log_2 w \rceil\).
+
+Its leading size \((4/3+o(1))q\) matches a \(4q/3\) scalar-output lower
+bound in the declared address-only model. This is an exact local
+theorem, not a global compiler lower bound. An explicit two-plane
+construction and a complement-relative binary construction culminate in
+one and the same DAG having
+
+\(\operatorname{size}=O(3^r/r)\)
+
+and
+
+\(\operatorname{depth} \le  r+O(\log r)\).
+
+More explicitly, for \(r\ge 64\) the construction has size below
+\(34\mathbin{\cdot}3^r/r\) and depth at most
+\(r+4\mathbin{\cdot}\lceil \log_2 r \rceil+9\).
+
+Writing \(\Delta_r(Q)=\max_{f \in \mathrm{CT}_r(Q)} D_r(f)\), syntax
+counting also gives the almost-all lower bound
+
+\(D_r(f) \ge  r-\log_3(\log r)-O(1)\),
+
+and therefore the worst-case interval
+
+\(r-\log_3(\log r)-O(1) \le  \Delta_r(Q) \le  r+O(\log r)\).
+
+The displayed upper bound is a manuscript theorem with an explicit
+generic proof and a separate no-author-import executable reconstruction.
+It remains unformalized as an integrated Lean DAG theorem and does not
+settle the optimal additive term. The independently audited
+growing-router schedule supplied the earlier \(r+O(\sqrt{r})\) stage
+after a required residual-first repair. Historical R6/R7 and R9 bounds
+remain visible as prior compiler stages. The construction combines an
+exact conservative-clone census, dynamic value names, classical local
+coding, recursive subcube libraries, a balanced absorbing anchor, signed
+discriminator routers, and parallel address programs. Deterministic
+experiments check finite semantics, compiler schedules, mutations, and
+structural arithmetic. They are validation evidence, not substitutes for
+the generic proofs. No publication novelty, legal conclusion, practical
+performance, or relationship to private Tau work is claimed.
+\end{abstract}
+
+{
+\hypersetup{linkcolor=}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\begin{reviewnotice}
+\textbf{Review and authorship status.} This PDF is a non-archival review copy.
+Creator names, order, affiliations, corresponding-author details, and ORCIDs
+remain subject to human approval. Do not deposit or represent this file as an
+authored preprint until that gate is closed. The mathematical source is bound to
+SHA-256 \texttt{01ddf4565212f798d0adf5c4c9b16d6de9074a317a34f2a39a80051de55a5410} and repository commit
+\href{https://github.com/TheDarkLightX/OrbitSynthesis/commit/ab20b9df50f331e430c1a43a9d8c3af9c1e8556c}
+{\texttt{ab20b9df50f3}}. The manuscript has not been externally peer
+reviewed. Novelty, patent freedom to operate, license interpretation, and
+practical performance remain unknown and are not claimed.
+\end{reviewnotice}
+
+\noindent\textbf{Keywords:} finite algebra; conservative operation;
+discriminator; term DAG; Shannon complexity; local coding; multivalued
+logic; circuit depth.
+
+\noindent\textbf{MSC 2020:} 08A70 (applications of universal algebra in
+computer science); 68Q06 (networks and circuits as models of
+computation; circuit complexity).
+
+\hypertarget{claim-status-at-a-glance}{%
+\subsection*{Claim status at a glance}\label{claim-status-at-a-glance}}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Object
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Status in this draft
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What is not claimed
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Exact census, given the stated Pixley specialization & unconditional
+manuscript theorem & new discriminator interpolation theory \\
+\(L_r(Q)=\Theta(3^r/r)\) for shared \(\{d,u\}\) DAGs & unconditional
+manuscript theorem & an exact leading size constant or an ordinary-tree
+theorem \\
+\(\Delta_r(Q)=\Theta(r)\) and leading depth coefficient one &
+unconditional manuscript theorem & an optimal additive-depth term \\
+d-only signed family \(P_h,N_h\) & unconditional exact local theorem &
+an optimal router in every grammar \\
+sibling-shared program vector, Theorem 6.9 & unconditional exact local
+theorem in its declared \(A=2\), scalar-output, free-fanout model &
+simultaneous P/N cost, formula cost, or an integrated compiler lower
+bound \\
+\(O(3^r/r)\) size together with \(r+O(\log r)\) depth & unconditional
+manuscript theorem; independently reconstructed, not end-to-end
+Lean-formalized & an optimal additive-depth theorem, formula bound, or
+bounded-fanout bound \\
+novelty, FTO, patents, Tau/license relationship, practical speed &
+\textbf{UNKNOWN / not claimed} & legal or commercial clearance \\
+\end{longtable}
+
+\hypertarget{introduction}{%
+\subsection{1. Introduction}\label{introduction}}
+
+Shannon complexity asks how large a circuit must be in the worst case,
+and typically for almost every function, when the function class and
+basis are fixed. Classical work treats Boolean circuits, \(k\)-valued
+functional constructions, functionally complete bases, and local-coding
+synthesis. The object here differs in two linked respects:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  the original signature \(\{d,u\}\) is parameter-free and preserves the
+  proper subalgebra \(\{0,1\}\), so it is not functionally complete on
+  \(Q\); and
+\item
+  the semantic class is the conservative part of the term clone of one
+  fixed algebra.
+\end{enumerate}
+
+The first issue prevents us from simply naming constants. The second
+makes the semantic entropy slightly smaller than that of all ternary
+functions while retaining the leading term \((\log 3)3^r\). The
+parameter-free obstacle is handled constructively: a nonbinary input
+supplies dynamic names for \(0,1,2\), first locally and later through
+one balanced global anchor.
+
+The contribution stack established in this draft is:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  an exact closed-form census of the conservative \(r\)-ary term
+  operations;
+\item
+  a complete coordinate-selector representation of that fragment;
+\item
+  worst-case and almost-all operation-node lower bounds of order
+  \(3^r/r\);
+\item
+  a matching parameter-free shared-DAG compiler obtained by specializing
+  classical Lupanov local coding;
+\item
+  worst-case and almost-all depth lower bounds of order \(r\);
+\item
+  an explicit compiler progression from exponential Gray dependency
+  depth to linear depth, then to \(4r\), \(3r+O(\log r)\), the
+  historical R9 bound \((3/2)r+O(r/\log r)\), the signed-router bound
+  \(r+O(\sqrt{r})\), and finally the integrated parallel-program bound
+  \(r+O(\log r)\), always preserving \(O(3^r/r)\) size on the same DAG;
+\item
+  exact six-way ternary, seven-way Boolean, and nine-way Boolean
+  projection gadgets, retained as historical stages;
+\item
+  an exact d-only signed family \(P_h,N_h\) with \(3^{h-1}\)
+  programmable branches at dependency depth h, independently audited and
+  Lean-checked;
+\item
+  an exact sibling-shared absorbing-rail address summary that, for
+  either fixed sign, materializes all controls for a capacity-q signed
+  router in \((4/3+o(1))q\) shared-DAG nodes and \(O(\log \log q)\)
+  preprocessing depth, with a matching leading scalar-output lower bound
+  in the declared local model; and
+\item
+  source-auditable bounded checks with mutation controls, replay hashes,
+  two independent program-vector specifications, and an independent
+  reconstruction of the integrated compiler.
+\end{enumerate}
+
+The local-coding principle, recursive Shannon expansion, discriminator
+interpolation, and general Shannon-counting methodology are not
+contributions of this work. The paper-worthy candidate, subject to full
+prior-art review, is their exact specialization and simultaneous
+realization for this fixed parameter-free incomplete clone.
+
+\hypertarget{algebra-semantic-class-and-cost-model}{%
+\subsection{2. Algebra, semantic class, and cost
+model}\label{algebra-semantic-class-and-cost-model}}
+
+\hypertarget{the-fixed-algebra}{%
+\subsubsection{2.1 The fixed algebra}\label{the-fixed-algebra}}
+
+Let
+
+\(Q=(\{0,1,2\};d,u)\)
+
+with
+
+\begin{lstlisting}
+d(x,y,z) = z,  if x=y,
+           x,  otherwise,
+
+u(0)=1,  u(1)=0,  u(2)=1.
+\end{lstlisting}
+
+The binary set \(B=\{0,1\}\) is a proper subalgebra. Its nontrivial
+automorphism is complement, written \(\overline{0}=1\) and
+\(\overline{1}=0\). Notice that \(u\) is not conservative because
+\(u(2)=1\).
+
+An \(r\)-ary operation \(f:Q^r\to Q\) is \textbf{conservative} if
+
+\(f(x_0,\ldots ,x_{r-1}) \in \{x_0,\ldots ,x_{r-1}\}\)
+
+for every input tuple. Let \(\mathrm{CT}_r(Q)\) be the set of
+conservative \(r\)-ary operations induced by parameter-free terms over
+\(\{d,u\}\).
+
+\hypertarget{shared-term-dags}{%
+\subsubsection{2.2 Shared term DAGs}\label{shared-term-dags}}
+
+A rooted original-signature term DAG has:
+
+\begin{itemize}
+\tightlist
+\item
+  \(r\) designated input nodes \(x_0,\ldots ,x_{r-1}\);
+\item
+  operation nodes labelled by unary \(u\) or ternary \(d\);
+\item
+  ordered incoming edges matching the operation arity; and
+\item
+  one designated output node.
+\end{itemize}
+
+Fan-out is free. Input nodes are not charged. For
+\(f \in \mathrm{CT}_r(Q)\), define:
+
+\begin{itemize}
+\tightlist
+\item
+  \(C_r(f)\): the minimum number of operation nodes in such a DAG
+  computing \(f\);
+\item
+  \(D_r(f)\): the minimum operation depth, with every input at depth
+  zero and every operation one plus the maximum depth of its arguments;
+\item
+  \(L_r(Q)=\max_{f \in \mathrm{CT}_r(Q)} C_r(f)\); and
+\item
+  \(\Delta_r(Q)=\max_{f \in \mathrm{CT}_r(Q)} D_r(f)\).
+\end{itemize}
+
+The executable compiler reports all distinct reachable nodes, including
+the \(r\) inputs, and puts inputs at depth one. For any fixed emitted
+DAG, its total node count is its operation-node count plus at most
+\(r\), and its reported depth is its analytic operation depth plus one.
+The emitted values therefore upper bound, rather than equal, the minima
+\(C_r(f)\) and \(D_r(f)\). All asymptotic theorems and displayed
+analytic depth bounds use the operation-node convention.
+
+Ordinary unshared term trees are not the main cost model. The baseline
+compiler also has an expanded-tree analysis, but no order-optimal
+ordinary-tree theorem is claimed here.
+
+\hypertarget{semantic-characterization-and-exact-enumeration}{%
+\subsection{3. Semantic characterization and exact
+enumeration}\label{semantic-characterization-and-exact-enumeration}}
+
+\hypertarget{pixley-specialization}{%
+\subsubsection{3.1 Pixley specialization}\label{pixley-specialization}}
+
+Pixley's internal-isomorphism characterization of quasi-primal term
+operations {[}1,2{]} implies the following specialization for the fixed
+algebra.
+
+\textbf{Proposition 3.1 (conservative term criterion).} For \(r\ge 2\),
+a conservative operation \(f:Q^r\to Q\) belongs to \(\mathrm{CT}_r(Q)\)
+exactly when its restriction to the binary cube commutes with
+simultaneous complement:
+
+\(f(\overline{x_0},\ldots ,\overline{x_{r-1}}) = \overline{f(x_0,\ldots ,x_{r-1})}\)
+
+for every \(x \in B^r\).
+
+\textbf{Proof.} We spell out the internal-isomorphism catalog needed
+from Pixley's criterion. The only nonempty proper subalgebra is
+\(B=\{0,1\}\): it is closed under \(d\) and \(u\); a set containing
+\(2\) and closed under \(u\) also contains \(1\) and then \(0\), so it
+generates \(Q\); and neither singleton is closed under \(u\). Because
+\(d\) is the discriminator, every permutation preserves \(d\). On \(B\),
+the permutations preserving \(u\) are the identity and complement. On
+\(Q\), the identity is the only permutation preserving \(u\): the unique
+element \(2\) outside the two-cycle \(\{0,1\}\) must be fixed, after
+which complement would send \(u(2)=1\) to \(0\) while \(u(2)\) remains
+\(1\). There is no isomorphism between \(B\) and \(Q\) because their
+cardinalities differ.
+
+Thus the only nonidentity internal isomorphism that can constrain a term
+operation is simultaneous complement on \(B^r\). Pixley's
+characterization says that an operation preserving the relevant
+subalgebras and internal isomorphisms is a term operation.
+Conservativity supplies preservation of each tuple's value set and hence
+of both \(B\) and \(Q\); on the binary cube the remaining condition is
+exactly the displayed equivariance. Conversely every term operation
+preserves subalgebras and commutes with their automorphisms, so the
+condition is necessary. For \(r=1\), conservativity forces the identity
+projection. This is a concrete application of classical theory, not a
+new interpolation theorem. \(\square\)
+
+\hypertarget{exact-census}{%
+\subsubsection{3.2 Exact census}\label{exact-census}}
+
+\textbf{Theorem 3.2 (exact conservative term count).} For every
+\(r\ge 1\),
+
+\(|\mathrm{CT}_r(Q)| = 2^{5\mathbin{\cdot}2^{r-1}-5} \mathbin{\cdot} 3^{3^r-3\mathbin{\cdot}2^r+3}\).
+
+\textbf{Proof.} Partition \(Q^r\) by the set of values appearing in the
+tuple.
+
+On the binary cube, the \(2^r\) tuples form \(2^{r-1}\) complement
+pairs. The constant pair \(\{0^r,1^r\}\) is forced by conservativity and
+equivariance. Every other pair contains both values; choosing the value
+on one representative determines the complementary value on its partner.
+This contributes
+
+\(2^{2^{r-1}-1}\).
+
+A nonconstant tuple over \(\{0,2\}\) has two conservative output
+choices, as does a nonconstant tuple over \(\{1,2\}\). Each alphabet
+supplies \(2^r-2\) such tuples. These independent choices contribute
+
+\(2^{2\mathbin{\cdot}(2^r-2)}\).
+
+The all-\(2\) tuple is forced. Inclusion--exclusion gives
+
+\(3^r-3\mathbin{\cdot}2^r+3\)
+
+tuples using all three values, and each has three conservative output
+choices. Their contribution is
+
+\(3^{3^r-3\mathbin{\cdot}2^r+3}\).
+
+Multiplication and collection of the powers of two give the formula. The
+\(r=1\) instance equals one. \(\square\)
+
+The first values are
+
+\[
+\begin{aligned}
+|\mathrm{CT}_1(Q)| = 1, \\
+|\mathrm{CT}_2(Q)| = 32, \\
+|\mathrm{CT}_3(Q)| = 23,887,872.
+\end{aligned}
+\]
+
+In particular,
+
+\(\log |\mathrm{CT}_r(Q)| = (\log 3)3^r + O(2^r)\).
+
+\hypertarget{coordinate-selector-completeness}{%
+\subsubsection{3.3 Coordinate-selector
+completeness}\label{coordinate-selector-completeness}}
+
+\textbf{Proposition 3.3.} Every member of \(\mathrm{CT}_r(Q)\) has a
+complement-invariant coordinate-selector table.
+
+\textbf{Proof.} For every tuple \(x\), choose an index \(j(x)\) such
+that \(f(x)=x_{j(x)}\). On each binary complement pair choose the index
+on one representative and reuse it on its complement. Proposition 3.1
+guarantees that the reused index produces the required complementary
+value. Nonbinary internal-isomorphism orbits are singletons. Conversely,
+the compilers below realize every such compatible selector table.
+\(\square\)
+
+Selector tables need not be unique: a tuple can contain the desired
+output in several coordinates. The statement is semantic completeness,
+not a canonical encoding claim.
+
+\hypertarget{counting-lower-bounds}{%
+\subsection{4. Counting lower bounds}\label{counting-lower-bounds}}
+
+\hypertarget{shared-dag-size}{%
+\subsubsection{4.1 Shared-DAG size}\label{shared-dag-size}}
+
+\textbf{Theorem 4.1 (worst-case and almost-all size lower bound).} There
+is a constant \(c>0\) such that
+
+\(C_r(f) \ge  c\mathbin{\cdot}3^r/r\)
+
+for a fraction tending to one of the operations
+\(f \in \mathrm{CT}_r(Q)\). Consequently,
+
+\(L_r(Q)=\Omega(3^r/r)\).
+
+\textbf{Proof.} Topologically order a term DAG with \(s\) operation
+nodes. At operation position \(i\), the number of choices for a unary
+node and its predecessor is at most \(r+i\); the number for a ternary
+node and its ordered predecessors is at most \((r+i)^3\). Choosing the
+output and summing over all sizes at most \(s\) changes only constants,
+so the number of descriptions is
+
+\(\exp(O(s\mathbin{\cdot}\log(r+s)))\).
+
+For \(s=c\mathbin{\cdot}3^r/r\), the exponent is
+\(O(c\mathbin{\cdot}3^r)\). Theorem 3.2 gives
+\(\exp((\log 3+o(1))\mathbin{\cdot}3^r)\) semantic operations. A
+sufficiently small fixed \(c\) leaves an exponentially vanishing
+fraction covered by the short descriptions. \(\square\)
+
+This is a standard Shannon counting argument. It neither gives an
+optimal leading constant nor an \(\Omega(3^r)\) lower bound.
+
+\hypertarget{operation-depth}{%
+\subsubsection{4.2 Operation depth}\label{operation-depth}}
+
+Let \(A_h(r)\) overcount the number of original-signature term trees of
+operation depth at most \(h\) on \(r\) variables. Unsharing a DAG does
+not increase depth, and
+
+\[
+\begin{aligned}
+A_0(r) = r, \\
+A_{h+1}(r) \le  r + A_h(r) + A_h(r)^3 \le  3\mathbin{\cdot}A_h(r)^3
+\end{aligned}
+\]
+
+for \(r\ge 2\). Therefore
+
+\(\log A_h(r) \le  3^h\mathbin{\cdot}(\log r+(\log 3)/2)\).
+
+\textbf{Theorem 4.2 (almost-all depth lower bound).} For a uniformly
+selected \(f \in \mathrm{CT}_r(Q)\),
+
+\(D_r(f) \ge  r-\log_3(\log r)-O(1)\)
+
+with probability tending to one. In particular,
+
+\(\Delta_r(Q)=\Omega(r)\).
+
+\textbf{Proof.} If \(h\le r-\log_3(\log r)-K\) for a sufficiently large
+fixed \(K\), the logarithm of the number of depth-\(h\) syntactic
+candidates is a sufficiently small constant multiple of \(3^r\), whereas
+Theorem 3.2 gives semantic log-cardinality \((\log 3+o(1))3^r\). The
+fraction representable at that depth tends to zero exponentially in
+\(3^r\). \(\square\)
+
+The depth lower bound does not assume a bound on DAG size.
+
+\hypertarget{parameter-free-local-coding}{%
+\subsection{5. Parameter-free local
+coding}\label{parameter-free-local-coding}}
+
+\hypertarget{first-2-slices-and-dynamic-value-names}{%
+\subsubsection{\texorpdfstring{5.1 First-\(2\) slices and dynamic value
+names}{5.1 First-2 slices and dynamic value names}}\label{first-2-slices-and-dynamic-value-names}}
+
+Partition the nonbinary tuples by the least coordinate \(a\) at which
+\(x_a=2\). On this slice,
+
+\begin{lstlisting}
+x_0,...,x_(a-1) are binary,
+x_a=2,
+x_(a+1),...,x_(r-1) are unrestricted.
+\end{lstlisting}
+
+The slice has
+
+\(N_a=2^a\mathbin{\cdot}3^{r-a-1}\)
+
+rows. Within it, the terms
+
+\begin{lstlisting}
+u(u(x_a)),  u(x_a),  x_a
+\end{lstlisting}
+
+name \(0,1,2\), respectively. These are branch-local dynamic names, not
+parameter-free constant terms on all of \(Q^r\).
+
+The reachable first-\(2\) slices exactly partition the \(3^r-2^r\)
+nonbinary tuples because
+
+\(\sum_{a=0}^{r-1} 2^a\mathbin{\cdot}3^{r-a-1} = 3^r-2^r\).
+
+This already yields a no-wasted-leaf classifier. In the executable's
+total-node convention, writing \(T_r^{\mathrm{base}}\) for its emitted
+node count, it gives
+
+\[
+\begin{aligned}
+T_1^{\mathrm{base}}=6, \\
+T_r^{\mathrm{base}}=3\mathbin{\cdot}3^r-3\mathbin{\cdot}2^{r-1}+6r-4 < 4\mathbin{\cdot}3^r  \text{for} r\ge 2.
+\end{aligned}
+\]
+
+The corresponding fully expanded emitted term has recorded syntax size
+
+\((35\mathbin{\cdot}7^r-9\mathbin{\cdot}3^r-50)/12\)
+
+and depth \(4r+1\) in the executable convention. These are properties of
+that compiler, not exact minima.
+
+The constant-size equality selector used below is explicit:
+
+\[
+\begin{aligned}
+\operatorname{EqSel}(x,y;p,q)=d(d(x,y,p),d(x,y,q),q).
+\end{aligned}
+\]
+
+If \(x=y\), the outer discriminator returns \(p\); if \(x\ne y\), both
+inner discriminators return \(x\) and the outer one returns \(q\). Thus
+\(\operatorname{EqSel}\) has three operation nodes and two dependency
+levels.
+
+\hypertarget{mixed-domain-local-coding-lemma}{%
+\subsubsection{5.2 Mixed-domain local-coding
+lemma}\label{mixed-domain-local-coding-lemma}}
+
+\textbf{Lemma 5.1 (mixed binary/ternary local coding).} Let
+
+\(D=A_1 x \ldots  x A_n\),
+
+where each \(|A_i|\) is two or three, and set \(N=|D|\). In a circuit
+language with names for \(0,1,2\) and the displayed
+\(\operatorname{EqSel}\), every table \(F:D\to Q\) has a shared circuit
+of size \(O(N/n)\), uniformly over the mixture of coordinate alphabets.
+
+\textbf{Construction.} For sufficiently large \(n\), put
+\(H=\lfloor \log_3(N/n) \rfloor\); the finitely many smaller cases are
+absorbed into the uniform constant. Choose a block of coordinates whose
+number \(M\) of assignments is maximal subject to \(M\le H\). Maximality
+gives \(H/3<M\le H\), while \(N\ge 2^n\) implies \(M=\Theta(n)\). Only
+\(O(\log M)\) block coordinates are needed.
+
+Precompute the point indicators for the \(M\) block assignments. There
+are \(3^M\) functions from these assignments to \(Q\). A reflected
+ternary Gray order changes one table entry at a time, so one
+constant-size conditional update creates each successive library member
+from the preceding one. Thus the shared library costs \(O(3^M)\), and
+
+\(3^M \le  3^H \le  N/n\).
+
+The remaining coordinates have \(N/M=O(N/n)\) assignments. A mixed-radix
+decision tree classifies them and lets each leaf point into the shared
+block-function library. Point indicators, the library, and the prefix
+tree together cost \(O(N/n)\). \(\square\)
+
+This is a concrete specialization of Lupanov's classical local-coding
+principle {[}6{]}, not a new general synthesis method.
+
+\hypertarget{size-optimal-parameter-free-compilation}{%
+\subsubsection{5.3 Size-optimal parameter-free
+compilation}\label{size-optimal-parameter-free-compilation}}
+
+Apply Lemma 5.1 separately on every first-\(2\) slice, using the
+slice-local names \(u(u(x_a)),u(x_a),x_a\) from Section 5.1. No global
+anchor has been constructed or needed at this stage. On slice \(a\),
+apply the lemma to its \(n=r-1\) varying coordinates; the \(r=1\)
+identity is the separate finite base case. Uniformly absorbing the
+finitely many small \(n\), the total nonbinary cost is
+
+\(\sum_{a=0}^{r-1} O(N_a/r) = O(3^r/r)\).
+
+The all-binary branch is classified modulo complement in \(O(2^r)\)
+nodes, and the first-\(2\) dispatcher costs \(O(r)\). Both are lower
+order. Together with Theorem 4.1 this proves:
+
+\textbf{Theorem 5.2 (Shannon complexity).}
+
+\(L_r(Q)=\Theta(3^r/r)\).
+
+Moreover, for some constant \(c>0\), a uniformly selected member of
+\(\mathrm{CT}_r(Q)\) has complexity at least \(c\mathbin{\cdot}3^r/r\)
+with probability tending to one, while the compiler supplies the
+matching order for every member.
+
+The first executable realization uses a Gray-scheduled library. Its size
+has the desired order, but the Hamiltonian dependency chain gives poor
+depth. The next sections remove that scheduling artifact.
+
+\hypertarget{simultaneous-size-and-depth}{%
+\subsection{6. Simultaneous size and
+depth}\label{simultaneous-size-and-depth}}
+
+\hypertarget{layered-prefix-library}{%
+\subsubsection{6.1 Layered prefix
+library}\label{layered-prefix-library}}
+
+Order the \(M\) block assignments as \(y_1,\ldots ,y_M\), with disjoint
+point indicators \(chi_1,\ldots ,chi_M\). For every word \(w \in Q^j\),
+build \(g_w\) so that it equals \(w_i\) at \(y_i\) for \(i\le j\) and
+equals zero at all unprocessed points. The zero extension reuses its
+parent; the one and two extensions each add one selector. Hence the
+exact selector census is
+
+\(2\mathbin{\cdot}\sum_{j=0}^{M-1} 3^j = 3^M-1\),
+
+the same as for the Gray library, but the dependency depth is only \(M\)
+selector levels. Combining this library with the prefix decision tree
+proves that one DAG can simultaneously have
+
+\(\operatorname{size}=O(3^r/r)\) and \(\operatorname{depth}=O(r)\).
+
+Together with Theorem 4.2, this already establishes
+\(\Delta_r(Q)=\Theta(r)\).
+
+\hypertarget{recursive-subcube-library-and-the-4r-bound}{%
+\subsubsection{\texorpdfstring{6.2 Recursive subcube library and the
+\(4r\)
+bound}{6.2 Recursive subcube library and the 4r bound}}\label{recursive-subcube-library-and-the-4r-bound}}
+
+The layered construction is sharpened by recursively indexing the
+library by its actual mixed-radix block coordinates. If their alphabet
+sizes are \(q_1,\ldots ,q_b \in \{2,3\}\), let
+
+\(M_j=\prod_{i=j}^b q_i\).
+
+At a binary level, one \(\operatorname{EqSel}\) combines each pair of
+suffix functions. At a ternary level, two nested
+\(\operatorname{EqSel}\) terms combine each triple. The exact number of
+selector calls is
+
+\(S(q_1,\ldots ,q_b)=\sum_{j=1}^b (q_j-1)\mathbin{\cdot}3^{M_j} < 3\mathbin{\cdot}3^M\).
+
+The top level dominates because \(M_{j+1}\le M_j/2\). The library
+remains \(O(3^M)\), while a full mixed-radix prefix tree with \(P\)
+leaves uses exactly \(P-1\) weighted selector calls.
+
+The explicit depth accounting on first-\(2\) slice \(a\) is
+
+\(2 + 2a + 4(r-a-1) + 2(a+1) = 4r\).
+
+The four terms are, respectively, the deepest slice-local dynamic name,
+binary and ternary coordinate routing inside the slice, and the
+first-\(2\) dispatcher. The all-binary branch has depth at most
+\(4r-2\).
+
+\textbf{Theorem 6.1 (same-DAG \(4r\) construction).} Every
+\(f \in \mathrm{CT}_r(Q)\) has one parameter-free original-signature DAG
+with
+
+\(\operatorname{size}=O(3^r/r)\) and \(\operatorname{depth}\le 4r\).
+
+\hypertarget{one-global-nonbinary-anchor}{%
+\subsubsection{6.3 One global nonbinary
+anchor}\label{one-global-nonbinary-anchor}}
+
+Define
+
+\(h(x,y)=d(x,u(u(x)),d(y,u(x),x))\).
+
+\textbf{Lemma 6.2.} For all \(x,y \in Q\), \(h(x,y)=2\) exactly when
+\(x=2\) or \(y=2\); otherwise \(h(x,y)=x\).
+
+Use an ordered balanced binary tree whose leaves, from left to right,
+are \(x_0,\ldots ,x_{r-1}\), and label every internal node by \(h\);
+call its root \(A\). The leaf order is part of the construction. On the
+binary cube each \(h\) returns its left argument, so the tree returns
+its distinguished leftmost leaf \(x_0\); an arbitrary reassociation with
+\(x_0\) elsewhere is not asserted. Then
+
+\[
+\begin{aligned}
+A=2 exactly on nonbinary tuples, \\
+A=x_0 on the binary cube, \\
+\operatorname{size}(A)=O(r), \\
+\operatorname{depth}(A)\le 3\mathbin{\cdot}\lceil \log_2 r \rceil.
+\end{aligned}
+\]
+
+On the nonbinary branch, \(u(u(A)),u(A),A\) are global dynamic names for
+\(0,1,2\). On the binary branch they deliberately are not global
+constants. This is what keeps the construction parameter-free and
+compatible with the preserved subalgebra \(B\).
+
+An exhaustive closure of binary-arity term functions through operation
+depth three has cumulative sizes \(2,4,20,270\); the absorber's target
+semantics first occurs at depth three. This finite fact concerns this
+absorber, not the optimal depth of the final global compiler.
+
+\hypertarget{a-branch-depth-three-ternary-router}{%
+\subsubsection{6.4 A branch-depth-three ternary
+router}\label{a-branch-depth-three-ternary-router}}
+
+On a branch where terms named \(0,1,2\) have the indicated values,
+define
+
+\begin{lstlisting}
+mux(x,b0,b1,b2)
+ = d(
+     d(0,d(x,2,b0),d(0,x,b0)),
+     0,
+     d(d(1,x,b1),1,d(x,2,b2))
+   ).
+\end{lstlisting}
+
+\textbf{Lemma 6.3.} For every \(x,b0,b1,b2 \in Q\),
+
+\(mux(x,b0,b1,b2)=b_x\).
+
+Every branch argument lies exactly three discriminator nodes below the
+root. Direct substitution for \(x=0,1,2\) proves the identity. With
+\(0=u(u(A))\), \(1=u(A)\), and \(2=A\), the displayed shared
+materialization has seven \(d\) nodes and the two shared \(u\) name
+nodes. It therefore has nine operation nodes, or fourteen total nodes if
+its five distinct raw terminals are also counted. Its operation depth is
+five relative to an input anchor. An older executable reported fifteen
+because it constructed \(u(A)\) twice; that is an emitter artifact, not
+the shared-DAG census used here.
+
+A finite Z3 \passthrough{\lstinline!QF\_BV!} search reports
+\passthrough{\lstinline!UNSAT!} for branch depth at most two in a
+deliberately generous selector-only grammar: all 27 unary functions of
+the selector are admitted as free terminals; \(b0,b1,b2\) are branch
+terminals; internal nodes are \(u\) or \(d\); and all 81 valuations are
+imposed on the complete depth-two syntax tree. Together with the
+displayed term, this makes depth three optimal only for that finite
+branch-scoped grammar. It is not a global depth lower bound and
+currently has no separately checked proof certificate.
+
+\hypertarget{global-library-and-final-depth-theorem}{%
+\subsubsection{6.5 Global library and final depth
+theorem}\label{global-library-and-final-depth-theorem}}
+
+Put
+
+\(H=\lfloor \log_3(3^r/r) \rfloor\).
+
+Choose \(b\) ternary coordinates so that their number of assignments
+\(M=3^b\) is maximal subject to \(M\le H\). Apart from finitely many
+small arities, \(H/3<M\le H\), and therefore
+
+\[
+\begin{aligned}
+M=\Theta(r), \\
+3^M\le 3^r/r, \\
+3^r/M=O(3^r/r).
+\end{aligned}
+\]
+
+Build every \(Q\)-valued function on the local block recursively, using
+the router of Lemma 6.3 at each coordinate. The library costs
+\(O(3^M)\). Route the remaining prefix coordinates with the same router;
+the prefix tree costs \(O(3^r/M)\). Add the \(O(r)\) global anchor and
+the lower-order \(O(2^r)\) complement-orbit classifier for the binary
+branch. A final \(\operatorname{EqSel}\) chooses that binary classifier
+exactly when \(u(u(A))=A\) and otherwise chooses the global nonbinary
+library.
+
+The block and prefix partition the \(r\) routed coordinates. Each routed
+coordinate adds three branch-dependency levels. Put
+\(\alpha=3\mathbin{\cdot}\lceil \log_2 r \rceil\). The deepest dynamic
+name has depth \(\alpha+2\), and the nonbinary routed output before the
+final choice has depth at most \(3r+\alpha+2\). The binary
+complement-orbit classifier uses at most \(r-1\) sequential equality
+decisions, each one \(\operatorname{EqSel}\) of branch-dependency depth
+two, so its depth is at most \(2(r-1)\). The final
+\(\operatorname{EqSel}\) adds two levels. Therefore the second compiler
+has depth
+
+\begin{lstlisting}
+2+max(alpha+2, 2(r-1), 3r+alpha+2)
+  =3r+3*ceil(log_2 r)+4.
+\end{lstlisting}
+
+Taking the better of this construction and Theorem 6.1 gives:
+
+\textbf{Theorem 6.4 (simultaneous Shannon size and explicit depth).}
+Every \(f \in \mathrm{CT}_r(Q)\) has one parameter-free
+original-signature term DAG with
+
+\(\operatorname{size}=O(3^r/r)\)
+
+and
+
+\(\operatorname{depth}\le min(4r,3r+3\mathbin{\cdot}\lceil \log_2 r \rceil+4)\).
+
+Combining Theorems 4.2 and 6.4 gives
+
+\(r-\log_3(\log r)-O(1) \le  \Delta_r(Q) \le  min(4r,3r+3\mathbin{\cdot}\lceil \log_2 r \rceil+4)\),
+
+and in particular
+
+\(r-\log_3(\log r)-O(1) \le  \Delta_r(Q) \le  3r+O(\log r)\).
+
+Thus this historical compiler already proves \(\Delta_r(Q)=\Theta(r)\)
+with leading-coefficient interval \([1,3]\). The historical fixed-router
+stages below strictly narrowed that upper endpoint before the
+signed-family construction. Neither endpoint is claimed optimal.
+
+\hypertarget{historical-fixed-router-stages}{%
+\subsubsection{6.6--6.7 Historical fixed-router
+stages}\label{historical-fixed-router-stages}}
+
+Two fixed depth-three routers preceded the recursive signed family. They
+are retained for provenance and comparison, not because the optimized
+theorem depends on them.
+
+\begin{itemize}
+\tightlist
+\item
+  \(R6\) has 13 discriminator nodes and six ternary branches. Its six
+  fixed 18-slot programs realize all branch projections.
+\item
+  \(R7\) has 12 discriminator nodes and seven Boolean branches. Its
+  programs use the complement-relative binary names \(x_0,u(x_0)\), not
+  absolute constants.
+\item
+  \(R9\) is a full 13-node depth-three discriminator tree with nine
+  Boolean branches and 18 program slots. Nine programs realize all nine
+  projections.
+\end{itemize}
+
+Balanced six-way routing gave the historical nonbinary ceiling
+
+\((3\mathbin{\cdot}\log_6(3))r+O(r/\log r)=1.839441578296\ldots r+O(r/\log r)\).
+
+For R9, encode the dynamic values by \(0\to 00,1\to 01,2\to 10\), run
+two copies in parallel, and decode once with
+
+\(\operatorname{Dec}(high,low)=d(d(high,one,two),zero,low)\).
+
+This gave the later historical ceiling
+
+\((3/2)r+O(r/\log r)\).
+
+At every route level one shared address-control family serves all active
+routers (and both R9 planes), so the fixed-router schedules preserve
+\(O(3^r/r)\) size on the same DAG. The exact telescoping router census,
+balanced-library recurrences, residual schedules, and all fixed programs
+are in \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_PROGRAMMABLE_DEPTH.md}
+and \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_BOOLEAN_R9_DEPTH.md}.
+Deterministic replay covers 4,374 R6 cases, 896 R7 cases, 4,608 R9
+projection cases, 9,216 complement-relative cases, and 177,147 two-plane
+cases. These bounded checks validate the gadgets; the all-arity schedule
+statements remain manuscript proofs and historical calibration.
+
+The old bounds were, respectively,
+
+\[
+\begin{aligned}
+\operatorname{size}=O(3^r/r),  \operatorname{depth}\le (3\mathbin{\cdot}\log_6(3))r+O(r/\log r), \\
+\operatorname{size}=O(3^r/r),  \operatorname{depth}\le (3/2)r+O(r/\log r).
+\end{aligned}
+\]
+
+Neither fixed router is claimed capacity-optimal. A radius-one search
+found no R10 insertion into the frozen R9, which is only a bounded
+\passthrough{\lstinline!NO\_HIT!}.
+
+\hypertarget{recursive-signed-discriminator-routers}{%
+\subsubsection{6.8 Recursive signed discriminator
+routers}\label{recursive-signed-discriminator-routers}}
+
+The fixed R9 is not the final routing object. On the Boolean subalgebra
+define positive and negative depth-one cells
+
+\[
+\begin{aligned}
+P_1(x;c0,c1)=d(x,c0,c1), \\
+N_1(x;c0,c1)=d(c0,x,c1).
+\end{aligned}
+\]
+
+The exact programs are
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+cell & projection mode & constant 0 & constant 1 \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(P_1\) & \((0,0)\) returns x & \((1,0)\) & \((0,1)\) \\
+\(N_1\) & \((0,1)\) returns \(1-x\) & \((0,0)\) & \((1,1)\) \\
+\end{longtable}
+
+Recursively set
+
+\[
+\begin{aligned}
+P_h=d(P_{h-1},N_{h-1},P_{h-1}), \\
+N_h=d(N_{h-1},P_{h-1},N_{h-1}).
+\end{aligned}
+\]
+
+For a target in the left, middle, or right branch group, program the
+three children respectively as
+
+\begin{lstlisting}
+(projection,constant 0,constant 0),
+(constant 0,projection,constant 1),
+(constant 0,constant 0,projection).
+\end{lstlisting}
+
+At a positive parent the resulting expressions are
+
+\[
+\begin{aligned}
+d(x,0,0)=x, \\
+d(0,1-x,1)=x, \\
+d(0,0,x)=x.
+\end{aligned}
+\]
+
+The same transitions at a negative parent return \(1-x\). Constants lift
+by \(d(c,c,c)=c\).
+
+\textbf{Theorem 6.7 (exact strong signed-router family).} For every
+\(h\ge 1\), there are d-only full trees \(P_h,N_h\) with
+
+\begin{lstlisting}
+capacity                 q_h=3^(h-1),
+branch leaves             q_h,
+address-control leaves    2q_h,
+discriminator nodes       (3^h-1)/2,
+dependency depth          h.
+\end{lstlisting}
+
+For every target, \(P_h\) returns the target branch and \(N_h\) its
+Boolean complement; both signs also have constant-zero and constant-one
+modes. Every branch path in \(P_h\) has even middle-edge parity, while
+every branch path in \(N_h\) has odd parity.
+
+\textbf{Proof.} The semantic modes follow from the preceding induction.
+The recurrences
+
+\[
+\begin{aligned}
+q_h=3q_{h-1}, \\
+C_h=3C_{h-1}, \\
+S_h=1+3S_{h-1}, \\
+D_h=1+D_{h-1}
+\end{aligned}
+\]
+
+start at \(q_1=1,C_1=2,S_1=D_1=1\) and give the displayed counts. The
+middle child swaps P and N, while the outer children preserve the sign,
+proving the path-parity statement. No NOT or signed-leaf constructor
+occurs in the tree. \(\square\)
+
+Thus depth four already gives an exact R27 with 40 d nodes, 27 branches,
+and 54 controls; depth six gives R243. At fixed h the routing
+coefficient is \(h/(h-1)\), tending to one. The family theorem has been
+independently derived and replayed and has also been formalized in Lean
+in the exact d-only grammar. The grammar's lack of a constant or NOT
+constructor is enforced by its inductive constructors, not by the
+historical \passthrough{\lstinline!OriginalSignature!} predicate, which
+is true of every inhabitant. A later additive Lean layer re-proves the
+address/control cardinalities and \(q_h=3^{h-1}\) with kernel-reduced
+\passthrough{\lstinline!decide!} and induction, avoiding the predecessor
+file's native-evaluator checkpoints.
+
+The representation bridges must still be charged. On a nonbinary slice,
+\(A=2\) supplies legal names \(u(A)\) and \(u(u(A))\); two sibling
+copies of the router carry the Boolean planes and are decoded once. On
+the binary cube a logical relative program bit p is address-only, but
+its physical representative is \(x_0\) when \(p=0\) and \(u(x_0)\) when
+\(p=1\). Those physical wires are payload-relative. Their legality comes
+from simultaneous-complement equivariance, not from treating them as
+absolute constants or literally payload-independent controls.
+
+Choosing \(k=\lfloor \sqrt{r} \rfloor\), \(h=k+1\), and \(q=3^k\), and
+routing every short residual chunk first, gives the following audited
+compiler implication.
+
+\textbf{Conditional Corollary 6.8 (growing-router compiler).} Assume the
+coordinate-selector, global-anchor, two-plane representation,
+binary-orbit, decoder, and outer-glue lemmas used by the preceding
+compiler. Then every \(f \in \mathrm{CT}_r(Q)\) has one
+original-signature shared DAG with
+
+\[
+\begin{aligned}
+\operatorname{size}  = O(3^r/r), \\
+\operatorname{depth} = r+O(\sqrt{r}).
+\end{aligned}
+\]
+
+The residual-first qualification is necessary for this ledger. A
+residual-last schedule has an explicit coefficient-breaking
+counterexample at \(r=512\). An independent accounting audit checks the
+repaired integer schedule for every \(64\le r\le 10000\), including all
+controls, both planes, padding, the binary branch, anchor, decoder, and
+glue. This is an audited conditional composition, not a Lean proof of
+the end-to-end compiler.
+
+\hypertarget{sibling-shared-program-vectors-and-logarithmic-overhead}{%
+\subsubsection{6.9 Sibling-shared program vectors and logarithmic
+overhead}\label{sibling-shared-program-vectors-and-logarithmic-overhead}}
+
+The signed family exposes a second bottleneck: compiling \(2q\) program
+slots one at a time costs \(\Theta(q \log q)\) for a capacity-q router.
+The slots instead form a classical first-nonpropagating prefix state.
+The balanced-prefix idea is standard {[}29,30{]}; the local content here
+is its charged constant-free \(\{d,u\}\) realization and exact sharing
+census.
+
+A \textbf{multi-output shared DAG} is an acyclic original-signature
+operation graph with a finite ordered list of distinguished roots. Its
+size is the number of operation nodes in the union of their ancestor
+subgraphs, counted once; inputs are free and fan-out is unrestricted.
+Substitution adjoins that union once and permits arbitrary references to
+its roots. The final compiler still has one output root and uses the
+single-output convention of Section 2.
+
+Write a physical branch and target as \(p,t \in \{0,1,2\}^w\), and put
+\(q=3^w\). Let \(B_p(t)\) be one when the first mismatch exists and is
+not \((t_j,p_j)=(1,2)\), and let \(G_p(t)\) be one when the first
+mismatch is exactly that exceptional pair. Equality is the residual
+state \((B,G)=(0,0)\). The rails are disjoint. For consecutive word
+blocks \(U,V\), first-mismatch ownership gives the associative laws
+
+\[
+\begin{aligned}
+B_{\mathrm{UV}}=d(B_U,G_U,B_V), \\
+G_{\mathrm{UV}}=d(G_U,B_U,G_V).
+\end{aligned}
+\]
+
+Writing \(N=\neg B\), the complement rail co-produces in the same layer:
+
+\[
+\begin{aligned}
+N_{\mathrm{UV}}=d(G_U,B_U,N_V).
+\end{aligned}
+\]
+
+On the nonbinary branch put \(one=u(A)\) and \(zero=u(one)\). The
+complete one-digit base uses four non-name operation nodes:
+
+\[
+\begin{aligned}
+\text{physical} 0: B=d(x,A,one),       G=zero, \\
+\text{physical} 1: B=d(one,x,zero),    G=zero, \\
+\text{physical} 2: B=u(d(x,A,one)),    G=d(x,A,zero).
+\end{aligned}
+\]
+
+The final control pair is \((B,G)\) in a positive cell and \((G,N)\) in
+a negative cell. Cell sign is the root sign xor the parity of the middle
+digits of \(p\). Constant mode \(c\) uses \((1-c,c)\) in a positive cell
+and \((c,c)\) in a negative cell. No payload wire enters this address
+program.
+
+Two identities create the decisive shared-DAG reduction:
+
+\[
+\begin{aligned}
+G_{a s}=G_a       \text{when} the \text{physical} suffix s contains no digit 2, \\
+N_{a1}=G_{a2}.
+\end{aligned}
+\]
+
+The first reuses the left gain root whenever the right gain rail is
+zero. The second points every eligible not-B rail to an already
+materialized sibling gain root. Both are ordinary root reuse under free
+fan-out, not free gates.
+
+Put \(a=\lceil w/2 \rceil\), \(b=\lfloor w/2 \rfloor\), and \(A_0=3^a\).
+Let \(R(w)\) count the full \((B,G)\) library and \(E(w)\) the full
+\((B,G,N)\) suffix library, excluding the two names. Exact structural
+counting gives
+
+\[
+\begin{aligned}
+R(1)=4, \\
+R(w)=R(a)+R(b)+3^w+A_0\mathbin{\cdot}(3^b-1)/2, \\
+E(1)=4, \\
+E(w)=R(a)+E(b)+2\mathbin{\cdot}3^w-3^{w-1}+A_0\mathbin{\cdot}(3^b-1)/2.
+\end{aligned}
+\]
+
+At the top merge, the mixed/gain overlap has size
+
+\[
+\begin{aligned}
+O_P(w)=(3^{w-1}+1)/2, \\
+O_N(w)=(3^{w-1}-1)/2.
+\end{aligned}
+\]
+
+Thus, for \(w\ge 2\), the exact sizes of the displayed P and N
+constructions are
+
+\[
+\begin{aligned}
+S_P(w)=2+R(a)+E(b)+A_0\mathbin{\cdot}(3^b-1)/2+3^w-O_P(w), \\
+S_N(w)=2+R(a)+E(b)+A_0\mathbin{\cdot}(3^b-1)/2+3^w-O_N(w).
+\end{aligned}
+\]
+
+The direct bases are \(S_P(1)=5\) and \(S_N(1)=6\).
+
+\textbf{Theorem 6.9 (sibling-shared program vector).} Let \(A=2\). For
+either fixed P or N root sign and every \(w\ge 1\), all \(2q\)
+projection controls of the capacity-\(q=3^w\) signed router have one
+legal address-only scalar \(\{d,u\}\) multi-output shared DAG satisfying
+
+\[
+\begin{aligned}
+3\mathbin{\cdot}S(w) \le  4q+15\mathbin{\cdot}3^{\lceil w/2 \rceil}, \\
+S(w)   \le  7q/3, \\
+D(w)   \le  3+\lceil \log_2 w \rceil,
+\end{aligned}
+\]
+
+including the two shared name nodes and measured above raw
+anchor/address inputs. Consequently \(S(w)=(4/3+o(1))q\). Width zero
+uses only the two names.
+
+\textbf{Proof.} Induction on the balanced split gives
+\(R(w)\le 20\mathbin{\cdot}3^w/9\) and
+\(E(w)\le 26\mathbin{\cdot}3^w/9\); after substituting these
+inequalities in the exact top count, the residual half-width term is at
+most \(5\mathbin{\cdot}3^{\lceil w/2 \rceil}\). This proves the first
+display. It implies \(S\le 7q/3\) from width four onward, and widths one
+through three are direct bases. The one-digit rails have depth at most
+three, and each balanced merge adds one level, proving the depth bound.
+\(\square\)
+
+The bound has a matching leading lower term in this declared local
+model. The gain family has \((q+1)/2\) distinct scalar functions, the
+sign-selected B/N family has \(q\), and the only cross-family identities
+are \(N_{a1}=G_{a2}\). Their counts are \((q/3+1)/2\) for P and
+\((q/3-1)/2\) for N. Hence the requested controls comprise exactly
+\(4q/3\) distinct functions for P and \(4q/3+1\) for N. Every one is
+Boolean-valued, whereas the free terminals are the constant anchor
+\(A=2\) and Q-surjective address coordinates. No requested control is a
+free terminal, and one scalar operation node can root only one new
+scalar function. Therefore the leading local size constant is exactly
+\(4/3\).
+
+This lower bound does not apply to an arbitrary integrated router that
+avoids exposing these exact controls, to simultaneous P and N
+materialization, to formulas, or to bounded fan-out. It does not
+determine the finite-width exact minimum.
+
+Two independent no-author-import reconstructions check the semantics,
+recurrences, sharing identities, and lower census. Lean proves the rail
+algebra, one-digit bases, zero-gain reuse, sibling identity, final
+control decoding, exact arithmetic recurrences, the all-width envelope,
+the uniform upper bound, and the matched sharp depth
+\(3+\lceil \log_2 w \rceil\). The formal cost object is still a declared
+recurrence ledger rather than a serialized hash-consed DAG; its
+refinement link is the executable construction plus independent
+structural audit. The distinct-output lower census is only partially
+formalized: the bad/not-bad families are injective, but the gain
+quotient and final signed inclusion-exclusion remain open in Lean. A
+direct one-wire three-state encoding with merge \(d(S_U,A,S_V)\) is also
+valid, but its per-cell decoding is strictly more expensive than the
+sibling-shared two-rail construction.
+
+To apply this vector to the compiler, fix \(r\ge 64\), put
+
+\[
+\begin{aligned}
+L=4+\lceil \log_3(r^2) \rceil, \\
+H=r-L, \\
+M=3^{\lfloor \log_3 H \rfloor}, \\
+b=\log_3 M, \\
+s=r-b, \\
+P=3^s,
+\end{aligned}
+\]
+
+and let \(C=\lceil \log_2 r \rceil\). Proposition 3.3 supplies a total
+coordinate selector \(\sigma:Q^r\to \{0,\ldots ,r-1\}\) that is
+invariant under simultaneous complement on the Boolean cube. Lemma 6.2
+supplies the ordered balanced anchor \(A\), with \(A=2\) off that cube
+and \(A=x_0\) on it.
+
+\textbf{Lemma 6.10a (nonbinary two-plane compiler).} On \(A=2\), there
+is one legal original-signature shared DAG whose output is
+\(x_{\sigma(x)}\). Inclusive of the anchor, two generated names, one
+decoder, and the three nodes reserved for the final glue, its
+operation-node count is at most
+
+\[
+\begin{aligned}
+N_{\mathrm{NB}} = (3M-1)3^M+(3P-1)+S_P(b)+S_P(s)-2+4(r-1)+2+3,
+\end{aligned}
+\]
+
+and hence is below \((32+1/27+1/2)3^r/r\). Its output before the final
+glue has depth at most \(r+4C+7\).
+
+\textbf{Proof.} Write each input as \(x=(p,l)\) with \(p \in Q^s\) and
+\(l \in Q^b\). For a fixed prefix \(p\), define the local table
+
+\[
+\begin{aligned}
+g_p(l)=(p,l)_{\sigma(p,l)}.
+\end{aligned}
+\]
+
+Materialize the universal library of all \(3^M\) Q-valued tables on
+\(Q^b\). Encode table values by the two legal Boolean planes
+
+\[
+\begin{aligned}
+0 \to  (0,0),   1 \to  (0,1),   2 \to  (1,0).
+\end{aligned}
+\]
+
+Each table uses two capacity-M P routers, controlled by \(l\); every
+table and both planes share the same width-b vector from Theorem 6.9.
+For each prefix \(p\), take the two roots belonging to \(g_p\). Two
+capacity-P P routers, controlled by \(p\) and sharing one width-s
+vector, select those roots. Decode once with
+
+\[
+\begin{aligned}
+\operatorname{Dec}(high,low)=d(d(high,one,A),zero,low).
+\end{aligned}
+\]
+
+Its values on \(00,01,10\) are respectively \(0,1,2\); the unused code
+\(11\) is irrelevant. Thus the output is exactly
+\(g_p(l)=x_{\sigma(x)}\). Every control is a term over the raw address
+and \(A\); the names \(one=u(A)\) and \(zero=u(one)\) are charged nodes,
+not nullaries. Each vector is adjoined once and reused by every table,
+plane, and router that names it.
+
+Two capacity-M routers have \(3M-1\) discriminator nodes, and two
+capacity-P routers have \(3P-1\). This gives the displayed exact upper
+ledger. Since \(\lceil \log_3(r^2) \rceil\le 2\log_3(r)+1\) and
+\(5+2\log_3(r)<r/2\) from \(r=64\) onward, \(H>r/2\); together with
+\(H/3<M\le H\), this gives \(M>r/6\). The two-logarithm reserve also
+gives
+
+\[
+\begin{aligned}
+3^M \le  3^r/(81r^2).
+\end{aligned}
+\]
+
+Consequently the local routers cost less than \((1/27)3^r/r\), while the
+prefix routers and width-s vector cost less than
+
+\[
+\begin{aligned}
+(3+7/3)P < 32\mathbin{\cdot}3^r/r.
+\end{aligned}
+\]
+
+The width-b vector and fixed overhead are below \(7r\) nodes. The
+elementary inequality \(14r^2<3^r\), valid from \(r=64\), puts them
+below \((1/2)3^r/r\).
+
+The anchor has depth \(3C\). With
+\(D_P(w)\le 3+\lceil \log_2 w \rceil\), the two plane depths before
+decoding satisfy
+
+\[
+\begin{aligned}
+D_{\mathrm{local}}  \le  3C+D_P(b)+b+1, \\
+D_{\mathrm{prefix}} \le  \max(D_{\mathrm{local}},3C+D_P(s))+s+1.
+\end{aligned}
+\]
+
+Adding the two decoder levels and using \(b+s=r\) gives
+\(D_{\mathrm{NB}}\le r+4C+7\). \(\square\)
+
+The binary cube cannot use the absolute names just used. Its compiler is
+instead complement-relative.
+
+\textbf{Lemma 6.10b (binary complement-relative compiler).} On the
+Boolean cube there is a legal original-signature shared DAG whose output
+is \(x_{\sigma(x)}\). For \(r\ge 64\) its increment over the already
+present anchor is below \((1/2)3^r/r\), and its intrinsic output depth
+is at most \(r+4C+7\).
+
+\textbf{Proof.} Put \(z_i=0\) when \(x_i=x_0\) and \(z_i=1\) otherwise.
+The word \(z\) and the selector index are invariant under simultaneous
+complement. Choose
+
+\[
+\begin{aligned}
+k=\lfloor sqrt r \rfloor,  q=3^k,  w=\lfloor \log_2 q \rfloor.
+\end{aligned}
+\]
+
+Partition the \(r-1\) relative coordinates into chunks of width at most
+\(w\), placing the short residual chunk first. At a chunk of width
+\(c\), fix an injection \(\iota_c:\{0,1\}^c\to \{0,1,2\}^k\) into the
+first \(2^c\) branches of a capacity-q P router, and point every unused
+branch to the last live child. Each logical control table
+\(f:\{0,1\}^c\to \{0,1\}\) is the corresponding Theorem 6.9 P-control
+coordinate for \(\iota_c(z)\). It is installed as the physical,
+complement-relative wire \(x_0 \mathbin{\mathrm{xor}} f(z)\) and
+realized from leaves \(x_0,u(x_0)\) by the decision node
+
+\[
+\begin{aligned}
+\operatorname{Sel}(x_i,x_0,E,D)=d(d(x_i,x_0,E),d(x_i,x_0,D),D),
+\end{aligned}
+\]
+
+which returns \(E\) when \(x_i=x_0\) and \(D\) otherwise. One physical
+control therefore costs at most \(3(2^c-1)\) nodes and depth \(2c+1\).
+All router instances at a level share the same \(2q\) controls. On the
+representative orientation \(x_0=0\), these are the ordinary program
+bits. At the terminal prefix \(z\), use leaf \(x_{\sigma(0,z)}\); the
+routed leaf is therefore the requested coordinate. Complementing the
+input complements every payload and physical control; self-duality of
+\(d\) on \(\{0,1\}\) and complement invariance of \(\sigma\) then prove
+the other orientation. No absolute Boolean constant has been used.
+
+If \(I\) is the total number of router instances and the chunk widths
+are \(c_j\), residual-first ordering gives \(I<2^{r-1}\). Hence
+
+\[
+\begin{aligned}
+B_{\mathrm{router}}  = ((3q-1)/2)I                 < (1/4)3^r/r, \\
+B_{\mathrm{control}} = \sum_j 6q(2^{c_j}-1)         < (1/4)3^r/r.
+\end{aligned}
+\]
+
+For completeness, the first inequality follows from \(3rq2^r<3^r\); the
+second follows from \(B_{\mathrm{control}}<6rq^2\) and \(24r^2q^2<3^r\).
+Since \(q\le 3^{\sqrt{r}}\), these reduce to positivity of
+
+\[
+\begin{aligned}
+F_1(r)=(1-\log_3 2)r-\sqrt{r}-\log_3(3r), \\
+F_2(r)=r-2\sqrt{r}-\log_3(24r^2).
+\end{aligned}
+\]
+
+Both are positive at 64. For \(r\ge 64\),
+
+\[
+\begin{aligned}
+F_1'(r)=1-\log_3 2-1/(2\sqrt{r})-1/(r ln 3)>0, \\
+F_2'(r)=1-1/\sqrt{r}-2/(r ln 3)>0,
+\end{aligned}
+\]
+
+so the bounds hold for every real \(r\ge 64\), hence every integer arity
+in scope. The sole \(u(x_0)\) leaf is an existing anchor subnode and is
+not charged twice.
+
+If \(m\) is the number of chunks, the intrinsic depth is at most
+
+\[
+\begin{aligned}
+D_B \le  (k+1)m+2w+1.
+\end{aligned}
+\]
+
+For \(k\ge 8\), \(3k/2\le w<8k/5\). Indeed, \(2^19<3^12\) and
+\(3^5<2^8\) give \(19/12<\log_2(3)<8/5\), and the lower fractional
+margin exceeds one half already at \(k=8\). Since \(m\le 2(r-1)/(3k)+1\)
+and \(r<(k+1)^2\), this yields
+
+\[
+\begin{aligned}
+D_B < 2r/3+(73/15)k+8/3 \\
+\le  2r/3+(73/15)\sqrt{r}+8/3 \\
+\le  r+4C+7.
+\end{aligned}
+\]
+
+For the last inequality, use \(C\ge \log_2 r\). The difference is at
+least
+
+\begin{lstlisting}
+r/3+4log_2(r)+13/3-(73/15)sqrt(r).
+\end{lstlisting}
+
+It is positive at 64, and its derivative is at least
+\(1/3-73/(30\sqrt{r})>0\) there and thereafter. The displayed upper
+ledger is \(\log_3(2)r+O(sqrt r)\), so this branch is asymptotically
+below \(r\). \(\square\)
+
+Put \(zero=u(u(A))\), let \(B\) and \(N\) denote the binary and
+nonbinary outputs, and define
+
+\[
+\begin{aligned}
+\operatorname{Glue}(A,B,N)=d(d(zero,A,B),d(zero,A,N),N).
+\end{aligned}
+\]
+
+The glue adds exactly three discriminator nodes and two levels. On the
+Boolean cube \(zero=A\), so it returns \(B\); off the cube
+\(A=2,zero=0\), so it returns \(N\).
+
+\textbf{Theorem 6.10 (integrated parallel-program compiler).} Every
+\(f \in \mathrm{CT}_r(Q)\) has one parameter-free original-signature
+term DAG with
+
+\[
+\begin{aligned}
+\operatorname{size}  = O(3^r/r), \\
+\operatorname{depth} = r+O(\log r).
+\end{aligned}
+\]
+
+For every \(r\ge 64\), one such DAG has
+
+\[
+\begin{aligned}
+\operatorname{size}  < 34\mathbin{\cdot}3^r/r, \\
+\operatorname{depth} \le  r+4\mathbin{\cdot}\lceil \log_2 r \rceil+9.
+\end{aligned}
+\]
+
+\textbf{Proof.} Apply Proposition 3.3 to obtain \(\sigma\), construct
+the common anchor, take the union of the two DAGs in Lemmas 6.10a and
+6.10b, and adjoin the glue. The nonbinary ledger already reserves the
+unique glue. Therefore
+
+\[
+\begin{aligned}
+\operatorname{size}/(3^r/r) < 32+1/27+1/2+1/4+1/4 < 34.
+\end{aligned}
+\]
+
+Free fan-out makes this a union of ancestors, not a formula expansion:
+each program vector, table root, and control root is installed once. The
+depth is the maximum, not the sum, of the anchor/name path, the binary
+path, and the nonbinary path, followed by two glue levels. The two
+lemmas give the displayed bound. Theorem 6.1 handles the finite range
+\(r<64\). \(\square\)
+
+Together with Theorem 4.2, Theorem 6.10 matches the leading depth
+coefficient one. It does not determine the optimal additive term,
+ordinary-tree complexity, a bounded-fanout bound, or an exact global
+size constant. A standalone no-author-import implementation
+independently reconstructs the anchor, signed router, sibling-shared
+vector, both compiler branches, decoder, same-DAG union, and glue; it
+checks effective mutations and exact integer ledgers through arity
+16,384. The integrated construction has not yet been serialized and
+proved in Lean, and this internal audit is not external peer review.
+
+\hypertarget{compiler-progression-and-bounded-validation}{%
+\subsection{7. Compiler progression and bounded
+validation}\label{compiler-progression-and-bounded-validation}}
+
+\hypertarget{one-common-arity-nine-target}{%
+\subsubsection{7.1 One common arity-nine
+target}\label{one-common-arity-nine-target}}
+
+The compilers were compared on the same fixed arity-nine reduction
+selector, evaluating all \(3^9=19,683\) input rows. The reported node
+counts include variables, and reported depths put variables at depth
+one. They describe the emitted DAGs under that executable convention;
+they are not \(C_r(f)\), \(D_r(f)\), exact minima, or lower bounds.
+
+\begin{longtable}[]{@{}lrr@{}}
+\toprule\noalign{}
+compiler schedule & distinct reachable DAG nodes & reported depth \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+no-wasted-leaf first-\(2\) classifier & 58,331 & 37 \\
+Gray local coding & 19,329 & 179 \\
+layered prefix library & 18,327 & 45 \\
+recursive subcube library & 18,135 & 37 \\
+global anchor and depth-three router & 23,807 & 41 \\
+\end{longtable}
+
+The table illustrates different goals. Gray local coding produces the
+first large size reduction but serializes the library. Layering removes
+that chain. Recursive subcubes give the best bounded result in this
+test. The global-anchor compiler is asymptotically shallower but is
+worse at arity nine.
+
+The structural analytic bounds are equal at arity \(16\); the global
+bound is smaller than \(4r\) from arity \(20\) onward. At arities
+\(32,64,128,256\), the recorded depth-bound savings are
+\(13,42,103,228\), respectively. These are arithmetic consequences of
+the proved formulas, not performance claims about a materialized large
+circuit.
+
+The later routing stages are theorem-level schedule comparisons, not
+additions to the materialized arity-nine benchmark above:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2143}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2857}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2857}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2143}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+routing stage
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+same-DAG size
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+depth ceiling
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+evidence status
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+historical R6 & \(O(3^r/r)\) &
+\((3\mathbin{\cdot}\log_6(3))r+O(r/\log r)\) & manuscript proof plus
+bounded replay and audit \\
+historical Boolean-plane R9 & \(O(3^r/r)\) & \((3/2)r+O(r/\log r)\) &
+manuscript proof plus bounded replay and audit \\
+recursive signed family & \(O(3^r/r)\) & \(r+O(\sqrt{r})\) & exact
+family independently audited and Lean-checked; historical repaired
+compiler stage \\
+sibling-shared vector & \(O(3^r/r)\) & \(r+O(\log r)\) & local
+\((4/3+o(1))q\) vector plus matching leading scalar-output lower bound;
+integrated compiler independently reconstructed \\
+\end{longtable}
+
+R9 is therefore a preserved historical stage, not the current ceiling.
+
+\hypertarget{finite-checks}{%
+\subsubsection{7.2 Finite checks}\label{finite-checks}}
+
+The deterministic checkers currently establish the following bounded
+facts.
+
+\begin{itemize}
+\tightlist
+\item
+  The exact category census agrees with the formula through arity eight.
+\item
+  All \(1\) and \(32\) semantic conservative operations at arities one
+  and two are directly enumerated and compiled.
+\item
+  The arity-three formula evaluates to \(23,887,872\).
+\item
+  All \(128\) compatible arity-two selector-index tables are compiled
+  and checked; the larger number reflects nonunique selector
+  representations, not additional semantic operations.
+\item
+  Fixed-seed full-table evaluation is performed through arity seven.
+\item
+  Every row of the arity-nine reduction selector is evaluated.
+\item
+  Gray paths through block length four, layered selector censuses
+  through \(M=8\), representative recursive-subcube censuses, and
+  asymptotic plan arithmetic through arity \(64\) are checked.
+\item
+  The absorber is checked on all nine input pairs; the router is checked
+  on all 81 valuations; balanced anchors are checked through arity
+  seven; and global structural depth arithmetic is checked through arity
+  \(256\).
+\item
+  The programmable routers are checked on all 4,374 six-way cases, 896
+  seven-way cases, and 896 complement-relative cases. The composed
+  compiler covers all 128 compatible arity-two selector tables plus
+  fixed-seed tables through arity five, and its library and structural
+  recurrences are checked through 128 points and arity 4,096,
+  respectively.
+\item
+  The Boolean R9 is checked on all 4,608 projections and 9,216
+  relative-orientation cases; the two-plane transfer is checked on all
+  177,147 target/payload cases. Its composed compiler covers 135 tables
+  and 1,641 complete tuples through arity five, with the library
+  recurrence checked through 256 points and structural depth arithmetic
+  through arity 4,096.
+\item
+  The recursive signed family is proved by induction, independently
+  checked through direct truth tables and discriminator ROBDDs,
+  mutation-tested on every R27 target, and Lean-checked for every depth,
+  sign, mode, target, and Boolean branch valuation. The independent
+  compiler audit checks every integer arity \(64..10000\) after the
+  residual-first repair.
+\item
+  The historical E/G vector is checked on 1,200,114 target/physical/sign
+  pairs, 18 dependency sets, 11,356 concrete router cases, 262
+  direct-discriminator ROBDD modes, and 232 padding cases. Its author
+  ledger checks every integer arity \(64..4096\); an independent audit
+  extends the arithmetic replay through arity 16,384 and materializes
+  both signs through width nine.
+\item
+  The sibling-shared vector has two independent no-author-import
+  reconstructions. The broader algebraic replay checks 5,978,710
+  control-pair identities across five constructions through width six,
+  exact structural counts through width ten, recurrence arithmetic,
+  ROBDD and concrete router semantics, and effective mutations. Its
+  normal and optimized receipts are byte-identical. The separate referee
+  reconstruction derives the exact recurrences and scalar-output census
+  without importing the author builder.
+\item
+  Lean proves the optimized rail algebra, disjointness, one-digit bases,
+  one-layer block composition, zero-gain reuse, sibling identity, final
+  controls, exact sibling recurrences, the all-width
+  \(3S\le 4q+15\mathbin{\cdot}3^{\lceil w/2 \rceil}\) envelope, and
+  uniform \(S\le 7q/3\). The formal cost is a recurrence-level ledger
+  rather than a serialized hash-consed DAG; the independent structural
+  implementations supply that refinement evidence. Lean now proves the
+  sharp local depth. It does not yet prove the complete distinct-output
+  lower census or the end-to-end \(r+O(\log r)\) compiler.
+\item
+  An additive manuscript-repair Lean layer re-proves router
+  cardinalities with kernel-reduced \passthrough{\lstinline!decide!},
+  replaces vacuous signature predicates by exhaustive
+  no-nullary-constructor catalogs, and proves the anchor cell, outer
+  glue, and valid two-plane decoder identities. It still does not
+  formalize the full ordered anchor DAG or integrated compiler.
+\item
+  The independent compiler-bridge reconstruction imports no author
+  implementation. It checks 3,279 anchor rows, 597,870 target/physical
+  vector identities, 4,632 concrete router cases, all 128 compatible
+  arity-two selectors plus four deterministic arity-three selectors
+  through both branches and the glue, and every exact integer ledger
+  from arity 64 through 16,384. Normal and optimized outputs are
+  byte-identical. Its written induction and inequalities, not that
+  bounded sweep alone, support Theorem 6.10.
+\item
+  Mutation controls detect omitted complement quotienting, spurious
+  all-\(2\) choices, complement asymmetry, corrupted Gray paths, invalid
+  block caps or schedules, incorrect selector censuses, dropped depth
+  corrections, wrong absorbers, constant swaps, incomplete tables, and
+  binary-anchor scope errors.
+\item
+  Programmable-routing controls additionally reject effective gadget
+  mutations, illegal absolute binary controls, omitted or per-node
+  control accounting, sparse full-code accounting, omission of the
+  binary depth branch, and a non-complement-invariant selector table.
+\item
+  Boolean-plane controls additionally reject serializing the planes,
+  repeating the decoder at every level, omitting the decoder charge, and
+  moving from per-level to per-node controls.
+\end{itemize}
+
+These computations validate implementations, bounded identities, and
+arithmetic. They do not prove the all-\(r\) theorems or publication
+novelty.
+
+\hypertarget{replay-receipts}{%
+\subsubsection{7.3 Replay receipts}\label{replay-receipts}}
+
+Normal and optimized Python runs agree at the following semantic hashes.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+receipt
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+semantic SHA-256
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\path{runs/quasiprimal_conservative_term_count/summary.json} &
+\texttt{\seqsplit{f7f1758972b68abd8aba60ae547cb899c5d9376cced7cba449c34a2697e001b8}} \\
+\path{runs/quasiprimal_local_coding_compiler/summary.json} &
+\texttt{\seqsplit{4aaf27d678847aa0455ae8be552a165c3e9ec08c007031878f6aa40b0794ed89}} \\
+\path{runs/quasiprimal_layered_local_coding_compiler/summary.json} &
+\texttt{\seqsplit{b42fa56c1e78e670e2a436181337957309a0b2a658b6f539486b85cedc482d54}} \\
+\path{runs/quasiprimal_subcube_local_coding_compiler/summary.json} &
+\texttt{\seqsplit{f9d89ec9829c3abef05d1cdc17ef811330674bd056d90c3579a8f32b0b2eb7b8}} \\
+\path{runs/quasiprimal_global_anchor_routing/summary.json} &
+\texttt{\seqsplit{fb5ca7bf56d9aba9fdb0f69d1f1355c92d56d4f9306ee08a922bfc770ef60501}} \\
+\path{runs/quasiprimal_programmable_projection_routing/summary.json} &
+\texttt{\seqsplit{e663534756cf67ffb12fd9ae3fe722c465bd70cd91b73af1fb8084af1c0706dc}} \\
+\path{runs/quasiprimal_boolean_r9_routing/summary.json} &
+\texttt{\seqsplit{e4a09ef72986c1221c28e80d8227879a9e0aa0f93679e49e9f750f7e65977fce}} \\
+\path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/summary.json}
+&
+\texttt{\seqsplit{4852080965ac89f54f436401950ca22ecc0dd7887593b5c01dcadcaeb883ea2a}} \\
+\path{research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/receipt.json}
+&
+\texttt{\seqsplit{ac566d0b716575ff693bc3a1f125283c764ef608a04c183a17293fe66adc4cb2}} \\
+\path{research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/receipt.json}
+&
+\texttt{\seqsplit{d81d0bd6b979ec0df4270fd60f04468884de6e286aea450ba28eed9897e51870}} \\
+\path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt.json}
+&
+\texttt{\seqsplit{9699a3fe058369ac22a4a4d8050d07825cc80112cbc4c601a85914100db13f88}} \\
+\path{research/tournaments/2026-08-13-semantic-router-frontier/audits/program_vector/receipt.json}
+&
+\texttt{\seqsplit{4922df2221b3e6195d7b1af3a3ac770ae92a8aed10843430b9cffb20959c58ea}} \\
+\path{research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/receipts/receipt.json}
+&
+\texttt{\seqsplit{3b30a1ad6de10d39705d65edc3b27b8fd22acf361d2f7bd68f47d4d459e6d2ac}} \\
+\path{research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/kuhn_boolean_rail_audit/receipt.json}
+&
+\texttt{\seqsplit{1be842ffaca9c0510834e0eac1ee38f0acc6c310d15bb954c1a76c24dcc6f342}} \\
+\path{research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/receipt.json}
+&
+\texttt{\seqsplit{647f91c6c85173bbcb275e43a2301a67c61a7fd4d703b4720664a1341d7277aa}} \\
+\path{research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge/receipt.json}
+&
+\texttt{\seqsplit{73a43b1e4292b56824e82a471833e69252c52f212463f182a90df63703eec23e}} \\
+\end{longtable}
+
+The formal checkpoints are source- and receipt-hash bound:
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+formal source
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+source SHA-256
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+receipt SHA-256
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\path{lanes/formal/StrongSignedRouter.lean} &
+\texttt{\seqsplit{687a77ed1f3b0bfe2a540bc670f6db942e15bddc339ccfbceffba9699766227a}}
+&
+\texttt{\seqsplit{e984f5cf50bc23489fe7bd832f08c075f61abf66885c6b0736735420eb934662}} \\
+\path{lanes/formal_program_vector/ProgramVector.lean} &
+\texttt{\seqsplit{c2f477edd110c4df96f3c30f31f02de09af93045720babfd38dd2dd79a5573dd}}
+&
+\texttt{\seqsplit{5e79e4eb49af361fbed1c8962a67583a48e532526698da584b8825d55136cffa}} \\
+\path{lanes/formal_program_vector_cost/ProgramVectorCost.lean} &
+\texttt{\seqsplit{ea516b085cdedd3f0ee70f83a9d0240df55e7e68cf0ad8ce77558efd91db55d2}}
+&
+\texttt{\seqsplit{4919835f32d8afdfc48f72979edf4ad4ef0b1f8b16271ed9858a60750d2b6211}} \\
+\path{program-vector-optimization/lanes/formal_optimized/DirectRail.lean}
+&
+\texttt{\seqsplit{57963dadfb40cef30d94f630126f3179c55e98bea68e5974daa8e91913c404bd}}
+&
+\texttt{\seqsplit{cd5f1a49799726c3009748b5634a30cc154dd05d28440881df07404738c4e42e}} \\
+\path{program-vector-optimization/lanes/formal_optimized/SiblingShared.lean}
+&
+\texttt{\seqsplit{8eb02a3e2e5a4f7531d740b704422d09724376821f83b921aec98b77a0277e77}}
+&
+\texttt{\seqsplit{cd5f1a49799726c3009748b5634a30cc154dd05d28440881df07404738c4e42e}} \\
+\path{program-vector-optimization/lanes/formal_gap_closure/DepthAndCensus.lean}
+&
+\texttt{\seqsplit{ea75a228cc1316f0c53cff397409d4b9f6be4202611e29be28488a81f9a7be8c}}
+&
+\texttt{\seqsplit{7dcae0bbc3b3ced6d244886be01f3090a382859a6baac44906a31bb87b526a79}} \\
+\path{program-vector-optimization/lanes/formal_manuscript_repairs/ManuscriptRepairs.lean}
+&
+\texttt{\seqsplit{4b082559f9bdcea0dc8518992c9c9a87960f2a33a289a0d3cf7ad55347b3ced7}}
+&
+\texttt{\seqsplit{cb9e6f0d0bbee03738e39a541e305a171e20a65fbac82b70e8f4faac59e16631}} \\
+\end{longtable}
+
+\hypertarget{relation-to-prior-work}{%
+\subsection{8. Relation to prior work}\label{relation-to-prior-work}}
+
+This draft intentionally separates classical ingredients, directly
+adjacent work, and the still-unknown originality of the exact
+conjunction.
+
+\hypertarget{universal-algebra}{%
+\subsubsection{8.1 Universal algebra}\label{universal-algebra}}
+
+Pixley's discriminator and quasi-primal results {[}1,2{]} supply the
+internal-isomorphism characterization used in Proposition 3.1.
+Baker--Pixley interpolation {[}3{]} and Quackenbusch's extension
+hierarchy {[}4{]} form the wider structural background. None of those
+results is claimed here. Modern discriminator-clone and
+conservative-clone work, including {[}14{]}, must also be checked in
+full before submission.
+
+\hypertarget{shannon-synthesis-and-multivalued-logic}{%
+\subsubsection{8.2 Shannon synthesis and multivalued
+logic}\label{shannon-synthesis-and-multivalued-logic}}
+
+Shannon's circuit-counting method is classical {[}5{]}. Lupanov
+introduced the local-coding principle used in the upper bound {[}6{]}.
+Yablonskii's functional constructions in \(k\)-valued logic establish a
+much broader historical setting {[}7{]}. Orlov studies realization and
+basis-sensitive circuit and formula Shannon functions for \(k\)-valued
+bases {[}8,27{]}. Kochergin establishes linear Shannon-depth behavior
+for \(k\)-valued functions over arbitrary complete finite bases {[}9{]}.
+Safin studies depth versus complexity in precomplete multivalued classes
+{[}10{]}. Korshunov's survey maps local coding, Shannon effects, leading
+coefficients, formulas, and depth {[}13{]}. Gashkov's primary 1978
+theorem gives Boolean formulas over \(\{AND,OR,NOT\}\) with depth
+\(n-\log_2(\log_2 n)+O(1)\) while retaining formula-Shannon size
+\(\Theta(2^n/\log n)\) {[}28{]}.
+
+The present parameter-free basis is incomplete because every term
+preserves \(B=\{0,1\}\). Therefore the scopes are not textually
+identical. That difference is not novelty evidence: the present
+theorems, including the signed recurrence and sibling-shared vector, may
+still be expected specializations or consequences of older closed-class
+complexity, local-code decoding, switching-term, multiplexer, or
+universal-circuit machinery. Dual-rail or two-rail representations are
+also classical in logic synthesis; Ishiura gives a
+two-rail-input/two-rail-output BDD synthesis construction in a different
+basis and objective {[}19{]}, and Backes uses dual-rail encodings of
+ternary semantic values for verification-oriented circuit
+transformations {[}20{]}. These do not establish or refute the
+fixed-\(Q\) theorem, but they prevent claiming the representation change
+itself as novel. Full-text Russian and international review is required.
+Tarasov's work on depth versus complexity for many-valued functional
+systems is another nearby line that must be compared directly before
+submission {[}17,18{]}.
+
+The first-mismatch state law in Theorem 6.9 is also a classical
+kill/propagate/generate-style prefix monoid. Ladner--Fischer
+parallel-prefix computation {[}29{]} and Brent--Kung generate/propagate
+networks {[}30{]} are therefore explicit methodological ancestry. The
+paper does not claim the monoid or its balanced evaluation as new. The
+potentially local contribution is the exact constant-free discriminator
+embedding, the sibling root identities, and the matching \(4q/3\)
+scalar-output census under this paper's cost model.
+
+\hypertarget{simultaneous-size-and-depth-and-multiplexer-depth}{%
+\subsubsection{8.3 Simultaneous size and depth, and multiplexer
+depth}\label{simultaneous-size-and-depth-and-multiplexer-depth}}
+
+Lozhkin gives Boolean results on formulas simultaneously approaching
+Shannon size and depth {[}11{]} and, more recently, exact
+basis-sensitive depth results for multiplexers with few selector lines
+{[}12{]}. Kochergin's finite-complete-basis theorem {[}9{]} already
+makes linear Shannon depth a classical phenomenon; the point here is one
+incomplete parameter-free basis, not the order \(\Theta(r)\) by itself.
+McColl and Paterson give a classical leading-one depth shape for all
+Boolean functions in a richer basis {[}24{]}. Gashkov's source proof
+uses a Lupanov parallel-series representation, but a checked transfer
+ledger shows that dense Booleanization gives leading depth
+\(\log_2(3)r\) and source-witness size \(\Theta(3^r/\log r)\), so it
+does not directly supply the present same-DAG order \(O(3^r/r)\) or
+coefficient one {[}28{]}. This nontransfer is not novelty evidence: a
+native Q-valued Lupanov--Gashkov construction remains open, and
+Lupanov's separate delayed-circuit model still requires a primary-source
+model comparison. Valiant's universal circuits and Cook--Hoover
+depth-universal circuits establish programmable control and joint
+size/depth routing as classical themes {[}21,22{]}. Holmgren and
+Rothblum give modern linear-size shared multiselection circuits in a
+different Boolean model {[}23{]}. Those models do not immediately
+translate to this incomplete ternary term clone, but they make broad
+novelty claims about programmable controls, shared selection,
+simultaneous synthesis, or leading-one depth unsafe. The unresolved
+comparison is the exact conjunction of the fixed no-nullary signature,
+signed P/N counts, charged sibling-shared materialization, and same-DAG
+compiler. Because \(d\) has arity three on a three-element address
+alphabet, a leading depth coefficient one is the natural information
+rate; any eventual novelty claim must rest on the exact incomplete-basis
+realization, not surprise at that coefficient.
+
+\hypertarget{chinese-language-adjacency}{%
+\subsubsection{8.4 Chinese-language
+adjacency}\label{chinese-language-adjacency}}
+
+The public-index search located Wu and Chen's 1985 ternary
+sequential-circuit work with three-rail output {[}15{]} and Xu, Guan,
+and Zhang's 2013 ternary reversible-logic synthesis algorithm {[}16{]}.
+A focused follow-up also located Zhang, Chen, and Wang's BDD-to-MUX
+area/delay optimization {[}25{]} and He, Gong, and Wei's shared
+multi-output BDD construction {[}26{]}. Their algebras, reversibility
+conditions, and physical, empirical, or gate-cost objectives differ from
+original-signature \(Q\)-term DAGs, but the latter two are direct
+adjacency for shared selector structures.
+
+No direct match was verified in the bounded search for the exact
+fixed-\(Q\) census, the d-only signed \(P_h/N_h\) family, the
+sibling-shared \(4q/3\) local vector, or the integrated same-DAG
+\(O(3^r/r)\) and \(r+O(\log r)\) conjunction. This is only weak negative
+evidence. Native CNKI/Wanfang full-text coverage, translation variance
+for clone-theoretic terminology, Russian citation-chain review,
+paywalled many-valued sources, and expert comparison remain missing.
+
+\hypertarget{paper-safe-positioning}{%
+\subsubsection{8.5 Paper-safe
+positioning}\label{paper-safe-positioning}}
+
+The strongest currently supportable positioning is:
+
+\begin{quote}
+Classical interpolation, counting, local-coding, parallel-prefix, and
+programmable-selection tools are specialized to one fixed parameter-free
+conservative term fragment. The exact census and signed-router family
+are joined by a scalar program-vector interface with matching \(4q/3\)
+leading upper and lower terms in its declared local model; an explicit
+two-plane and complement-relative construction then gives one same-DAG
+compiler at counting-scale size and leading-one depth.
+\end{quote}
+
+Whether that exact specialization or conjunction is publication-novel
+remains \textbf{UNKNOWN}.
+
+\hypertarget{provenance-tau-boundary-and-explicit-nonclaims}{%
+\subsection{9. Provenance, Tau boundary, and explicit
+nonclaims}\label{provenance-tau-boundary-and-explicit-nonclaims}}
+
+The mathematics in this draft concerns one public classical finite
+algebra and public circuit-complexity methods. The recorded
+implementations were independently written for OrbitSynthesis and do not
+rely on Tau source, Tau specifications, private communications, private
+materials, or an unsigned developer license. This is a provenance
+statement only. It is not a novelty finding, a patent analysis, a
+license interpretation, or a noninfringement opinion.
+
+This draft does \textbf{not} claim:
+
+\begin{itemize}
+\tightlist
+\item
+  an optimal leading constant for the global Shannon-size function or
+  the integrated all-arity compiler; Theorem 6.9's \(4/3\) statement is
+  only the leading constant for one exact scalar-output program-vector
+  interface;
+\item
+  an exact or optimal additive term beyond the leading-depth coefficient
+  one;
+\item
+  that the finite Z3 result applies outside its selector-only depth-two
+  grammar;
+\item
+  an \(\Omega(3^r)\) size lower bound;
+\item
+  an order-optimal ordinary unshared-term-tree bound;
+\item
+  novelty of Pixley interpolation, Shannon counting, Lupanov local
+  coding, Gray codes, recursive Shannon expansion, layered scheduling,
+  or generic linear depth;
+\item
+  the same count or bounds for every quasi-primal algebra or every
+  incomplete clone;
+\item
+  a general \(r+\lceil \log_3 r \rceil+O(1)\) lower barrier for every
+  compiler; the dependency argument currently applies only to a
+  restricted exposed-control router cascade;
+\item
+  Lean extraction of a serialized materialized DAG or formal
+  verification of the integrated compiler, a complete external
+  independent proof review, or peer review;
+\item
+  publication novelty over Russian, Chinese, or international
+  closed-class complexity literature;
+\item
+  use of, conclusions about, or limitations of Tau private work;
+\item
+  rights under the unsigned Tau developer license; or
+\item
+  patent freedom to operate.
+\end{itemize}
+
+Any commercial implementation, patent filing, categorical novelty
+statement, or claim-adjacent Tau integration requires separate
+legal/license review and a current prior-art search.
+
+\hypertarget{remaining-and-quarantined-work}{%
+\subsection{10. Remaining and quarantined
+work}\label{remaining-and-quarantined-work}}
+
+The mathematical next steps are:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  obtain external mathematical review of the independently reconstructed
+  integrated compiler and compare its exact model with the closest
+  many-valued and delayed-circuit literature;
+\item
+  extract or serialize the sibling-shared program-vector DAG and
+  formally connect its width-indexed terms, subterm union, recurrence,
+  and compiler substitution in Lean;
+\item
+  determine whether Lupanov's delayed-circuit model, Orlov--Lupanov,
+  Kochergin, multiplexer, universal-circuit, or closed-class results
+  already subsume the exact fixed-signature conjunction;
+\item
+  determine the optimal additive term between the counting lower bound
+  and the \(r+O(\log r)\) upper bound;
+\item
+  determine ordinary-tree complexity and the global, rather than local
+  program-vector, basis-sensitive leading-size constants; and
+\item
+  classify fixed finite clones for which parameter-free local coding
+  gives the same order closure.
+\end{enumerate}
+
+Boolean-plane R9 and the \(7q\) E/G vector remain fully visible
+historical stages. The exact signed family and sibling-shared
+\((4/3+o(1))q\) vector are independently audited; the latter has a
+matching leading scalar-output lower bound in its declared local model.
+The complete \(r+O(\log r)\) composition has an independent
+no-author-import reconstruction and is promoted as a manuscript theorem,
+but not as an end-to-end Lean theorem or an externally refereed result.
+Novelty, formal integration, practical value, and FTO remain
+quarantined.
+
+Negative knowledge also remains active: naive ordinary-monotone
+two-extreme reasoning is false for d's antitone middle input;
+residual-last growing-router chunking breaks the size ledger; sequential
+\(\Theta(qw)\) program generation loses the target order; and reserving
+only one logarithm can make the local library exceed the claimed bound.
+Solver timeouts, bounded \passthrough{\lstinline!NO\_HIT!} results, and
+grammar-specific UNSAT results are not upper bounds, lower bounds, or
+optimality evidence.
+
+\hypertarget{reproducibility-map}{%
+\subsection{11. Reproducibility map}\label{reproducibility-map}}
+
+The mathematical source notes for this version are:
+
+\begin{itemize}
+\tightlist
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_ENUMERATION.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_SHANNON_COMPLEXITY.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_LINEAR_DEPTH.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_SUBCUBE_DEPTH.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_GLOBAL_ANCHOR_DEPTH.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_PROGRAMMABLE_DEPTH.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_BOOLEAN_R9_DEPTH.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_PARALLEL_PROGRAM_DEPTH.md};
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_OPTIMAL_PROGRAM_VECTOR.md};
+  and
+\item
+  \path{notes/QUASIPRIMAL_CONSERVATIVE_TERM_INTEGRATED_COMPILER.md}.
+\end{itemize}
+
+The frozen theorem, audit, and prior-art packets for the new stages are:
+
+\begin{itemize}
+\tightlist
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/STATE.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/PRIOR_ART.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/audits/program_vector/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/classical_depth_transfer/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/kuhn_boolean_rail_audit/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_optimized/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_gap_closure/REPORT.md};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_manuscript_repairs/REPORT.md};
+  and
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge/REPORT.md}.
+\end{itemize}
+
+The implementation and deterministic checkers are:
+
+\begin{itemize}
+\tightlist
+\item
+  \path{src/orbitsynthesis/orbit_term_compile_local.py};
+\item
+  \path{experiments/quasiprimal_conservative_term_count.py};
+\item
+  \path{experiments/quasiprimal_local_coding_compiler.py};
+\item
+  \path{experiments/quasiprimal_layered_local_coding_compiler.py};
+\item
+  \path{experiments/quasiprimal_subcube_local_coding_compiler.py};
+\item
+  \path{experiments/quasiprimal_global_anchor_routing.py};
+\item
+  \path{experiments/quasiprimal_programmable_projection_routing.py};
+\item
+  \path{experiments/quasiprimal_boolean_r9_routing.py};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/check_strong_router_family.py};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/audit_strong_family.py};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/check_variable_compiler.py};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/check_parallel_program_vector.py};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/audits/program_vector/audit_program_vector.py};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/classical_depth_transfer/check_transfer_barriers.py};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/ProgramVector.lean};
+\item
+  \path{research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.lean};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/check_native_scan.py};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/check_optimal_scan.py};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/OptimalRailSemantics.lean};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/kuhn_boolean_rail_audit/audit_boolean_rails.py};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/check_algebraic_program_vector.py};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_optimized/DirectRail.lean};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_optimized/SiblingShared.lean};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_gap_closure/DepthAndCensus.lean};
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_manuscript_repairs/ManuscriptRepairs.lean};
+  and
+\item
+  \path{research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge/check_compiler_bridge.py}.
+\end{itemize}
+
+The semantic JSON receipts listed in Section 7 are the bounded-evidence
+authority for numerical claims. The Lean checkpoint receipts bind the
+formal sources and toolchain; they do not carry the asymptotic compiler
+claim. The exact program-vector replay commands and frozen hashes are in
+\path{lanes/program_vector/manifest.json}; the independent family
+commands and hashes are in
+\path{audits/strong_family/audit_manifest.json}. The source ledger is
+\path{research/SOURCES.md}; the provenance/legal separation is
+\path{research/IP_BOUNDARY.md}; and the current status map is
+\path{research/RESEARCH_MAP_2026_08_13.md}.
+
+Reproduction must preserve both the normal Python run and the optimized
+\passthrough{\lstinline!python -O!} run and require equal semantic
+hashes. A passing receipt validates only the finite scope named in that
+receipt.
+
+\clearpage
+
+\hypertarget{declarations}{%
+\subsection*{Declarations}\label{declarations}}
+\addcontentsline{toc}{subsection}{Declarations}
+
+\hypertarget{generative-ai-and-ai-assisted-technologies}{%
+\subsubsection*{Generative AI and AI-assisted
+technologies}\label{generative-ai-and-ai-assisted-technologies}}
+\addcontentsline{toc}{subsubsection}{Generative AI and AI-assisted
+technologies}
+
+During exploratory research and preparation of this review draft, the
+human project lead used OpenAI Codex and other separately invoked
+large-language-model research agents to propose reformulations and proof
+strategies, draft and critique mathematical arguments, generate and
+review Python and Lean artifacts, and assist with organization and
+copy-editing. Research Kernel and Morph were used as
+research-orchestration and suggestion systems. Their outputs were
+treated as untrusted suggestions: promoted claims were required to have
+human-readable proofs and/or deterministic normal/optimized checkers,
+independent reimplementations, mutation tests, and scoped Lean kernel
+checks, as documented in Section 11 and the repository. AI systems are
+not authors and cannot accept responsibility for the work. Before
+submission or archival deposit, every named human author must inspect
+and approve the final manuscript, verify citations and originality, and
+accept full responsibility for its accuracy and integrity. The final
+archival version must replace this provisional statement with a complete
+retained-record inventory of the services, model or version identifiers
+when available, purposes, and affected research stages. No
+generative-AI-created figures are included.
+
+\hypertarget{author-contributions-and-approval}{%
+\subsubsection*{Author contributions and
+approval}\label{author-contributions-and-approval}}
+\addcontentsline{toc}{subsubsection}{Author contributions and approval}
+
+Human authorship, author order, affiliations, and ORCIDs have not yet
+been approved. Contribution statements and corresponding-author details
+also remain pending. This review copy must not be deposited until all
+named human authors approve the final text and accept accountability for
+the work.
+
+\hypertarget{data-code-and-reproducibility}{%
+\subsubsection*{Data, code, and
+reproducibility}\label{data-code-and-reproducibility}}
+\addcontentsline{toc}{subsubsection}{Data, code, and reproducibility}
+
+No empirical or personal data were used. Source code, proof artifacts,
+deterministic checkers, and frozen receipts are available in the public
+\href{https://github.com/TheDarkLightX/OrbitSynthesis}{OrbitSynthesis
+repository} and in
+\href{https://github.com/TheDarkLightX/OrbitSynthesis/pull/16}{draft PR
+16}. Section 11 gives the exact reproduction map. The principal
+manuscript source hash is
+\texttt{\seqsplit{01ddf4565212f798d0adf5c4c9b16d6de9074a317a34f2a39a80051de55a5410}}.
+
+\hypertarget{funding-and-competing-interests}{%
+\subsubsection*{Funding and competing
+interests}\label{funding-and-competing-interests}}
+\addcontentsline{toc}{subsubsection}{Funding and competing interests}
+
+Funding and competing-interest declarations have not yet been supplied
+by the human authors and must be completed before submission. No legal
+opinion about patents, freedom to operate, or license scope is made in
+this manuscript.
+
+\hypertarget{ethics-statement}{%
+\subsubsection*{Ethics statement}\label{ethics-statement}}
+\addcontentsline{toc}{subsubsection}{Ethics statement}
+
+This work is mathematical and computational and involved no human
+participants, animals, personal data, or clinical intervention.
+
+\hypertarget{references}{%
+\subsection*{References}\label{references}}
+\addcontentsline{toc}{subsection}{References}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A. F. Pixley, ``Functionally Complete Algebras Generating Distributive
+  and Permutable Classes,'' \emph{Mathematische Zeitschrift} 114 (1970),
+  361--372. \url{https://eudml.org/doc/171324}
+\item
+  A. F. Pixley, ``The Ternary Discriminator Function in Universal
+  Algebra,'' \emph{Mathematische Annalen} 191 (1971), 167--180.
+  \url{https://eudml.org/doc/162131}
+\item
+  K. A. Baker and A. F. Pixley, ``Polynomial Interpolation and the
+  Chinese Remainder Theorem for Algebraic Systems,'' \emph{Mathematische
+  Zeitschrift} 143 (1975), 165--174. \url{https://eudml.org/doc/172222}
+\item
+  R. W. Quackenbusch, ``Demi-Semi-Primal Algebras and Mal'cev-Type
+  Conditions,'' \emph{Mathematische Zeitschrift} 122 (1971), 166--176.
+  \url{https://eudml.org/doc/171592}
+\item
+  C. E. Shannon, ``The Synthesis of Two-Terminal Switching Circuits,''
+  \emph{Bell System Technical Journal} 28 (1949).
+  \url{https://www.nokia.com/bell-labs/publications-and-media/publications/the-synthesis-of-two-terminal-switching-circuits/}
+\item
+  O. B. Lupanov, ``On the Principle of Local Coding and the Realization
+  of Functions in a Certain Class of Networks Composed of Functional
+  Elements,'' \emph{Doklady Akademii Nauk SSSR} 140(2) (1961), 322--325.
+  \url{https://www.mathnet.ru/eng/dan25510}
+\item
+  S. V. Yablonskii, ``Functional Constructions in a k-Valued Logic,''
+  \emph{Trudy Matematicheskogo Instituta imeni V. A. Steklova} 51
+  (1958), 5--142. \url{https://www.mathnet.ru/eng/tm1275}
+\item
+  V. A. Orlov, ``Complexity of Implementing Functions of k-Valued Logic
+  by Circuits and Formulas in Functionally Complete Bases,''
+  \emph{Discrete Applied Mathematics} 135(1--3) (2004), 223--233.
+  \url{https://doi.org/10.1016/S0166-218X(02)00306-2}
+\item
+  A. V. Kochergin, ``On the Depth of k-Valued Logic Functions Over
+  Arbitrary Bases,'' \emph{Journal of Mathematical Sciences} 233(1)
+  (2018), 100--102. \url{https://doi.org/10.1007/s10958-018-3927-5}
+\item
+  R. F. Safin, ``On a Relation Between Depth and Complexity in
+  Precomplete Classes of k-Valued Logic,'' \emph{Mathematical Problems
+  of Cybernetics} 13 (2004), 223--278 {[}Russian{]}.
+  \url{https://keldysh.ru/papers/2004/mvk/mvk2004_223.pdf}
+\item
+  S. A. Lozhkin, ``On Synthesis of Formulas Whose Complexity and Depth
+  Do Not Exceed Asymptotically Best Estimates of High Accuracy,''
+  \emph{Moscow University Mathematics Bulletin} 62(3) (2007), 93--100.
+  \url{https://www.mathnet.ru/eng/vmumm1048}
+\item
+  S. A. Lozhkin, ``On the Depth of a Multiplexer Function with a Small
+  Number of Select Lines,'' \emph{Mathematical Notes} 115(5) (2024),
+  748--754. \url{https://www.mathnet.ru/eng/mzm14190}
+\item
+  A. D. Korshunov, ``Computational Complexity of Boolean Functions,''
+  \emph{Russian Mathematical Surveys} 67(1) (2012), 93--165.
+  \url{https://www.mathnet.ru/eng/rm9459}
+\item
+  E. Lehtonen and A. Szendrei, ``Equivalence of Operations with Respect
+  to Discriminator Clones,'' \emph{Discrete Mathematics} 309 (2009),
+  673--685. \url{https://arxiv.org/abs/0706.0195}
+\item
+  吴训威 and 陈偕雄,
+  ``具有三轨输出的三值触发器及其在三值时序电路中的应用,'' \emph{中国科学
+  A辑} 1985(7), 643--653.
+  \url{https://www.sciengine.com/doi/pdf/39cfd4607c82435d895d35165b3b28c0}
+\item
+  徐明强, 管致锦, and 张海豹, ``基于最小混乱度的三值可逆逻辑综合算法,''
+  \emph{电子学报} 41(7) (2013), 1352--1357.
+  \url{https://sns.wanfangdata.com.cn/sns/perio/dianzixb/?isSync=0\&issueNum=07\&page=2\&publishYear=2013\&tabId=article}
+\item
+  P. B. Tarasov, ``Uniformity of Certain Systems of Functions of
+  Many-Valued Logic,'' \emph{Moscow University Mathematics Bulletin}
+  68(2) (2013), 99--102. \url{https://m.mathnet.ru/eng/vmumm398}
+\item
+  P. B. Tarasov, ``Several Conditions for Uniformity of a Finite System
+  of Many-Valued Logic,'' \emph{Uchenye Zapiski Kazanskogo Universiteta.
+  Seriya Fiziko-Matematicheskie Nauki} 156(3) (2014), 123--131.
+  \url{https://www.mathnet.ru/eng/uzku1272}
+\item
+  N. Ishiura, ``Synthesis of Multilevel Logic Circuits from Binary
+  Decision Diagrams,'' \emph{IEICE Transactions on Information} E76-D(9)
+  (1993), 1085--1092.
+  \url{https://globals.ieice.org/en_transactions/information/10.1587/e76-d_9_1085/_p}
+\item
+  J. Backes, \emph{Algorithms and Data Structures for Logic Synthesis
+  and Verification}, Ph.D.~dissertation, University of Minnesota (2013),
+  dual-rail ternary encoding discussion.
+  \url{https://loonwerks.com/publications/pdf/backes2013phd.pdf}
+\item
+  L. G. Valiant, ``Universal Circuits (Preliminary Report),''
+  \emph{Proceedings of STOC 1976}, 196--203.
+  \url{https://doi.org/10.1145/800113.803649}
+\item
+  S. A. Cook and H. J. Hoover, ``A Depth-Universal Circuit,'' \emph{SIAM
+  Journal on Computing} 14(4) (1985), 833--839.
+  \url{https://doi.org/10.1137/0214058}
+\item
+  J. Holmgren and R. Rothblum, ``Linear-Size Boolean Circuits for
+  Multiselection,'' \emph{CCC 2024}, 11:1--11:20.
+  \url{https://doi.org/10.4230/LIPIcs.CCC.2024.11}
+\item
+  W. F. McColl and M. S. Paterson, ``The Depth of All Boolean
+  Functions,'' \emph{SIAM Journal on Computing} 6(2) (1977), 373--380.
+  \url{https://doi.org/10.1137/0206026}
+\item
+  张会红, 陈治文, and 汪鹏君, ``二叉决策图映射电路的面积和延时优化,''
+  \emph{电子与信息学报} 41(3) (2019), 725--731.
+  \url{https://doi.org/10.11999/JEIT180443}
+\item
+  何新华, 宫云战, and 魏道政, ``面向多输出电路的BDD拼接构造,''
+  \emph{电子与信息学报} 19(3) (1997), 356--360.
+  \url{https://jeit.ac.cn/article/id/85665992-ae08-49a4-83ca-1381a6d4735f}
+\item
+  V. A. Orlov, ``Realization of k-Valued Functions by Circuits of
+  Functional Elements,'' \emph{Mathematical Notes} 64 (1998), 371--376.
+  \url{https://doi.org/10.1007/BF02314847}
+\item
+  S. B. Gashkov, ``On the Depth of Boolean Functions,'' \emph{Problemy
+  Kibernetiki} 34 (1978), 265--268 {[}Russian{]}.
+  \url{https://publ.lib.ru/ARCHIVES/P/\%27\%27Problemy_kibernetiki\%27\%27_\%28seriya\%29/\%cf\%f0\%ee\%e1\%eb\%e5\%ec\%fb\%20\%ea\%e8\%e1\%e5\%f0\%ed\%e5\%f2\%e8\%ea\%e8.\%20\%c2\%fb\%ef\%f3\%f1\%ea\%2034.(1978).pdf}
+\item
+  R. E. Ladner and M. J. Fischer, ``Parallel Prefix Computation,''
+  \emph{Journal of the ACM} 27(4) (1980), 831--838.
+  \url{https://doi.org/10.1145/322217.322232}
+\item
+  R. P. Brent and H. T. Kung, ``A Regular Layout for Parallel Adders,''
+  \emph{IEEE Transactions on Computers} C-31(3) (1982), 260--264.
+  \url{https://doi.org/10.1109/TC.1982.1675982}
+\end{enumerate}
+
+\end{document}
