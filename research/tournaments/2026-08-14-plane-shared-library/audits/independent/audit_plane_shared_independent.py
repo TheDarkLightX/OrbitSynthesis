@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Independent no-import reconstruction of the plane-shared compiler ledger."""
+"""Independent no-import audit of the portfolio plane-shared compiler."""
 
 from __future__ import annotations
-
 import hashlib
 import itertools
 import json
@@ -11,314 +10,207 @@ import sys
 from functools import lru_cache
 from pathlib import Path
 
-if hasattr(sys, "set_int_max_str_digits"):
+if hasattr(sys,"set_int_max_str_digits"):
     sys.set_int_max_str_digits(0)
 
+CHOICES=(2,3,4,5)
 
-def assert_true(value: bool, label: str) -> None:
-    if not value:
-        raise AssertionError(label)
+def check(ok:bool,label:str)->None:
+    if not ok: raise AssertionError(label)
 
+def log2ceil(n:int)->int:
+    check(n>0,"log domain")
+    return (n-1).bit_length()
 
-def ceiling_log_two(n: int) -> int:
-    return (n - 1).bit_length()
+def pow3floor(n:int)->tuple[int,int]:
+    p=1;e=0
+    while 3*p<=n:p*=3;e+=1
+    return e,p
 
+def dec(n:int,d:int,k:int=18)->str:
+    q,r=divmod(n,d);digits=[]
+    for _ in range(k):
+        r*=10;x,r=divmod(r,d);digits.append(str(x))
+    return str(q)+"."+''.join(digits)
 
-def lower_power_three(n: int) -> tuple[int, int]:
-    p = 1
-    e = 0
-    while 3 * p <= n:
-        p *= 3
-        e += 1
-    return e, p
+@lru_cache(None)
+def rails(w:int)->tuple[int,int,int]:
+    if w==0:return 0,0,2
+    if w==1:return 4,4,5
+    a=(w+1)//2;b=w//2
+    ra,_,_=rails(a);rb,eb,_=rails(b)
+    cross=3**a*(3**b-1)//2
+    regular=ra+rb+3**w+cross
+    ext=ra+eb+2*3**w-3**(w-1)+cross
+    vec=2+ra+eb+cross+3**w-(3**(w-1)+1)//2
+    return regular,ext,vec
 
+def vnodes(w:int)->int:return rails(w)[2]
+def vheight(w:int)->int:return 2 if w==0 else 3+log2ceil(w)
 
-def decimal(n: int, d: int, digits: int = 18) -> str:
-    q, r = divmod(n, d)
-    out = []
-    for _ in range(digits):
-        r *= 10
-        x, r = divmod(r, d)
-        out.append(str(x))
-    return str(q) + "." + "".join(out)
+@lru_cache(None)
+def binary(r:int)->tuple[int,int,int]:
+    k=math.isqrt(r);q=3**k;w=q.bit_length()-1
+    left=r-1;sizes=[]
+    if left%w:sizes.append(left%w)
+    sizes.extend([w]*(left//w))
+    live=1;instances=controls=0
+    for width in sizes:
+        instances+=live;controls+=6*q*(2**width-1);live*=2**width
+    check(live==2**(r-1),"binary leaves")
+    return ((3*q-1)//2*instances,controls,(k+1)*len(sizes)+2*w+1)
 
+@lru_cache(None)
+def budget(r:int)->tuple[int,int,int,int]:
+    j=(3**r//(9*r**3)).bit_length()-1
+    k=j-3;b,m=pow3floor(k)
+    return j,k,b,m
 
-@lru_cache(maxsize=None)
-def rail_census(w: int) -> tuple[int, int, int]:
-    if w == 0:
-        return 0, 0, 2
-    if w == 1:
-        return 4, 4, 5
-    a = (w + 1) // 2
-    b = w // 2
-    ra, _, _ = rail_census(a)
-    rb, eb, _ = rail_census(b)
-    cross = 3**a * (3**b - 1) // 2
-    regular = ra + rb + 3**w + cross
-    extended = ra + eb + 2 * 3**w - 3 ** (w - 1) + cross
-    vector = (
-        2 + ra + eb + cross + 3**w - (3 ** (w - 1) + 1) // 2
-    )
-    return regular, extended, vector
+def build_candidate(r:int,offset:int)->dict[str,int]:
+    j,k,b,m=budget(r)
+    t=b+offset
+    d=min(7,t)
+    unit=3**(t-d)
+    per_group=k//unit
+    check(per_group>0,"group capacity")
+    words=3**d
+    groups=(words+per_group-1)//per_group
+    small,large=divmod(words,groups)
+    maxrows=(small+(1 if large else 0))*unit
+    check(maxrows<=k,"row bound")
+    table_sum=(large*2**((small+1)*unit)
+               +(groups-large)*2**(small*unit))
+    n=3**t
+    local=((3*n-1)//2)*table_sum
+    s=r-t;p=3**s
+    prefix=groups*(3*p-1)
+    vectors=vnodes(t)+vnodes(s)+vnodes(d)-4
+    group_mux=3*3**d-1
+    br,bc,bd=binary(r)
+    total=local+prefix+vectors+group_mux+(2*r-1)+6+br+bc
+    c=log2ceil(r);anchor=c+2
+    local_depth=anchor+vheight(t)+t+1
+    prefix_depth=max(local_depth,anchor+vheight(s))+s+1
+    group_depth=max(prefix_depth,anchor+vheight(d))+d+1
+    depth=max(anchor+4,bd+2,group_depth+4)
+    return {"offset":offset,"J":j,"K":k,"b":b,"m":m,"t":t,"d":d,
+            "unit":unit,"per_group":per_group,"groups":groups,
+            "small":small,"large":large,"maxrows":maxrows,
+            "local":local,"prefix":prefix,"vectors":vectors,
+            "group_mux":group_mux,"binary_router":br,"binary_control":bc,
+            "total":total,"depth":depth,"s":s,"P":p}
 
+def choose(r:int)->tuple[dict[str,int],dict[int,dict[str,int]]]:
+    rows={x:build_candidate(r,x) for x in CHOICES}
+    best=min(rows.values(),key=lambda x:(x["total"],x["offset"]))
+    return best,rows
 
-def vector_nodes(w: int) -> int:
-    return rail_census(w)[2]
+def planes()->dict[str,object]:
+    rows=0;counts={}
+    for width in range(0,7):
+        expected=set(itertools.product((0,1),repeat=width))
+        observed=set()
+        for table in itertools.product((0,1,2),repeat=width):
+            high=tuple(int(v==2) for v in table)
+            low=tuple(int(v==1) for v in table)
+            rebuilt=tuple(2 if high[i] else (1 if low[i] else 0)
+                          for i in range(width))
+            check(rebuilt==table,"plane rebuild")
+            observed.add(high);observed.add(low);rows+=width
+        check(observed==expected,"plane saturation")
+        counts[str(width)]=len(observed)
+    bad=tuple(2 if x else 0 for x in (0,1))
+    check(bad!=(0,1),"plane mutation")
+    return {"rows":rows,"boolean_counts":counts,
+            "mutation_low_as_high":list(bad)}
 
+def proof_bases()->dict[str,object]:
+    bases=[]
+    for r in (107,108,109):
+        exponent=math.ceil(4*r/3)+3
+        check(9*r**3*2**exponent<=3**r,"K base")
+        bases.append([r,exponent])
+    check(16*110**3<27*107**3,"K step")
+    table=[];winner=(-1,None,None)
+    for h in range(27,81):
+        g=(2187+h-1)//h
+        value=(9*g+4)*(h+1)
+        table.append([h,g,value,8748])
+        if value>winner[0]:winner=(value,h,g)
+    check(winner==(20935,78,29),"discrete maximum")
+    lhs=(20935*8*967*1000+2187*8748*1000+4*8748*8*967)
+    den=8748*8*967*1000
+    check(25*lhs<67*den,"tail total")
+    for ok,name in [
+        (5000*65<3**32,"prefix"),
+        (900000*967**2<3**967,"fixed"),
+        (192*2**64<3**50,"binary router"),
+        (24*64**2<3**42,"binary control")]:
+        check(ok,name)
+    return {"K_bases":bases,"K_step":"16*110^3<27*107^3",
+            "table":table,"winner":{"h":78,"g":29,"value":"20935/8748"},
+            "tail":[lhs,den],"target":"67/25"}
 
-def vector_height(w: int) -> int:
-    return 2 if w == 0 else 3 + ceiling_log_two(w)
+def arithmetic()->dict[str,object]:
+    maximum=(-1,1,-1);finite=(-1,1,-1);counts={x:0 for x in CHOICES}
+    selected=[]
+    for r in range(64,16385):
+        row,allrows=choose(r);counts[row["offset"]]+=1
+        universe=3**r;num=row["total"]*r
+        check(25*num<67*universe,"global size")
+        c=log2ceil(r);db=r+math.ceil(7*c/5)+20
+        check(row["depth"]<=db,"global depth")
+        if num*maximum[1]>maximum[0]*universe:maximum=(num,universe,r)
+        if r<=966 and num*finite[1]>finite[0]*universe:
+            finite=(num,universe,r)
+        if r>=967:
+            tail=allrows[4]
+            check(3*tail["K"]>=4*r,"K/r")
+            check(27<=tail["per_group"]<=80,"h")
+            check(8*tail["local"]*r*r<2187*universe,"local")
+            check(1000*5*3**((tail["s"]+1)//2)*r<universe,
+                  "prefix error")
+            fixed=(tail["vectors"]-vnodes(tail["s"])
+                   +tail["group_mux"]+(2*r-1)+6)
+            check(1000*fixed*r<universe,"fixed")
+            check(1000*tail["binary_router"]*r<universe,"binary router")
+            check(1000*tail["binary_control"]*r<universe,"binary control")
+            check((9*tail["groups"]+4)*r*8748
+                  <=20935*243*tail["m"],"prefix main")
+        if r in (64,66,67,107,966,967,4096,16384):
+            selected.append({"r":r,"offset":row["offset"],"t":row["t"],
+                             "d":row["d"],"groups":row["groups"],
+                             "ratio":dec(num,universe),
+                             "depth":row["depth"],"depth_bound":db})
+    check(maximum[2]==64,"maximum")
+    check(finite[2]==64,"finite maximum")
+    return {"range":[64,16384],"offset_counts":{str(k):v for k,v in counts.items()},
+            "maximum":{"r":maximum[2],"ratio":dec(maximum[0],maximum[1])},
+            "finite":{"range":[64,966],"maximum_r":finite[2],
+                      "ratio":dec(finite[0],finite[1])},
+            "selected":selected,
+            "theorem":{"size":"25*size*r<67*3^r",
+                       "depth":"r+ceil(7*ceil(log2 r)/5)+20"}}
 
-
-def relative_binary_cost(r: int) -> tuple[int, int, int]:
-    k = math.isqrt(r)
-    q = 3**k
-    width = q.bit_length() - 1
-    remaining = r - 1
-    sizes = []
-    if remaining % width:
-        sizes.append(remaining % width)
-    sizes += [width] * (remaining // width)
-    population = 1
-    routers = 0
-    controls = 0
-    for size in sizes:
-        routers += population
-        controls += 6 * q * (2**size - 1)
-        population *= 2**size
-    assert_true(population == 2 ** (r - 1), "binary population")
-    return (
-        routers * ((3 * q - 1) // 2),
-        controls,
-        (k + 1) * len(sizes) + 2 * width + 1,
-    )
-
-
-def budget(r: int) -> int:
-    return (3**r // (9 * r**3)).bit_length() - 1
-
-
-def parameters(r: int) -> dict[str, int]:
-    j = budget(r)
-    k = j - 3
-    b, m = lower_power_three(k)
-    t = b + 3
-    n = 3**t
-    unit = m // 9
-    word_cap = k // unit
-    group_count = (243 + word_cap - 1) // word_cap
-    small, large_count = divmod(243, group_count)
-    assert_true(small + (1 if large_count else 0) <= word_cap, "group cap")
-    return {
-        "J": j,
-        "K": k,
-        "b": b,
-        "m": m,
-        "t": t,
-        "N": n,
-        "unit": unit,
-        "word_cap": word_cap,
-        "g": group_count,
-        "small_words": small,
-        "large_count": large_count,
-        "s": r - t,
-    }
-
-
-def charge(r: int) -> tuple[int, int, dict[str, int]]:
-    p = parameters(r)
-    table_roots = (
-        p["large_count"] * 2 ** ((p["small_words"] + 1) * p["unit"])
-        + (p["g"] - p["large_count"])
-        * 2 ** (p["small_words"] * p["unit"])
-    )
-    local = ((3 * p["N"] - 1) // 2) * table_roots
-    prefix_capacity = 3 ** p["s"]
-    prefix = p["g"] * (3 * prefix_capacity - 1)
-    vectors = vector_nodes(p["t"]) + vector_nodes(p["s"]) + vector_nodes(5) - 4
-    group_mux = 728
-    anchor_and_fixed = (2 * r - 1) + 6
-    br, bc, bd = relative_binary_cost(r)
-    total = local + prefix + vectors + group_mux + anchor_and_fixed + br + bc
-
-    c = ceiling_log_two(r)
-    anchor_depth = c + 2
-    local_depth = anchor_depth + vector_height(p["t"]) + p["t"] + 1
-    prefix_depth = max(
-        local_depth, anchor_depth + vector_height(p["s"])
-    ) + p["s"] + 1
-    mux_depth = max(
-        prefix_depth, anchor_depth + vector_height(5)
-    ) + 6
-    depth = max(anchor_depth + 4, bd + 2, mux_depth + 4)
-    return total, depth, p
-
-
-def semantic_plane_audit() -> dict[str, object]:
-    checked = 0
-    union_sizes = {}
-    for h in range(0, 7):
-        booleans = set(itertools.product((0, 1), repeat=h))
-        seen = set()
-        for table in itertools.product((0, 1, 2), repeat=h):
-            hi = tuple(value == 2 for value in table)
-            lo = tuple(value == 1 for value in table)
-            rebuilt = tuple(
-                2 if hi[i] else (1 if lo[i] else 0) for i in range(h)
-            )
-            assert_true(rebuilt == table, "plane rebuilding")
-            seen.add(tuple(map(int, hi)))
-            seen.add(tuple(map(int, lo)))
-            checked += h
-        assert_true(seen == booleans, "plane saturation")
-        union_sizes[str(h)] = len(seen)
-
-    mutation = tuple(
-        2 if low else (1 if low else 0)
-        for low in (0, 1)
-    )
-    assert_true(mutation != (0, 1), "plane mutation")
-    return {
-        "rows": checked,
-        "boolean_root_counts": union_sizes,
-        "mutation_low_used_as_both_planes": list(mutation),
-    }
-
-
-def arithmetic_audit() -> dict[str, object]:
-    maximum = (-1, 1, -1)
-    finite_maximum = (-1, 1, -1)
-    selected = []
-    tail_k_min = (10**9, -1)
-    for r in range(64, 16385):
-        total, depth, p = charge(r)
-        universe = 3**r
-        numerator = total * r
-        assert_true(numerator < 3 * universe, "size theorem")
-        c = ceiling_log_two(r)
-        depth_bound = r + c + ceiling_log_two(c + 2) + 17
-        assert_true(depth <= depth_bound, "depth theorem")
-        if numerator * maximum[1] > maximum[0] * universe:
-            maximum = (numerator, universe, r)
-        if r <= 106 and numerator * finite_maximum[1] > finite_maximum[0] * universe:
-            finite_maximum = (numerator, universe, r)
-        if r >= 107:
-            assert_true(3 * p["K"] >= 4 * r, "tail K/r")
-            margin = 3 * p["K"] - 4 * r
-            if margin < tail_k_min[0]:
-                tail_k_min = (margin, r)
-        if r in (64, 66, 67, 100, 106, 107, 500, 1000, 8192, 16384):
-            selected.append({
-                "r": r,
-                "J": p["J"],
-                "K": p["K"],
-                "t": p["t"],
-                "g": p["g"],
-                "size_ratio": decimal(numerator, universe),
-                "depth": depth,
-                "depth_bound": depth_bound,
-            })
-
-    assert_true(maximum[2] == 66, "maximum location")
-    assert_true(finite_maximum[2] == 66, "finite maximum location")
-
-    prefix = []
-    max_pair = (-1, 1, -1, -1)
-    for h in range(9, 27):
-        g = (243 + h - 1) // h
-        numerator = (9 * g + 4) * (h + 1)
-        denominator = 972
-        prefix.append([h, g, numerator, denominator])
-        if numerator * max_pair[1] > max_pair[0] * denominator:
-            max_pair = (numerator, denominator, h, g)
-    assert_true(max_pair[2:] == (22, 12), "prefix maximum location")
-    assert_true(max_pair[0] * 243 == 644 * max_pair[1], "prefix value")
-
-    return {
-        "range": [64, 16384],
-        "maximum": {
-            "r": maximum[2],
-            "ratio": decimal(maximum[0], maximum[1]),
-        },
-        "finite_64_106": {
-            "maximum_r": finite_maximum[2],
-            "maximum_ratio": decimal(
-                finite_maximum[0], finite_maximum[1]
-            ),
-        },
-        "tail_K_margin": {
-            "minimum": tail_k_min[0],
-            "r": tail_k_min[1],
-        },
-        "prefix_table": prefix,
-        "prefix_maximum": "644/243",
-        "selected": selected,
-        "theorem": {
-            "size": "size<3*3^r/r",
-            "depth": "r+C+ceil(log_2(C+2))+17",
-        },
-    }
-
-
-def base_inequalities() -> dict[str, object]:
-    rows = []
-    for r in (107, 108, 109):
-        exponent = math.ceil(4 * r / 3) + 3
-        assert_true(9 * r**3 * 2**exponent <= 3**r, "K base")
-        rows.append([r, exponent])
-    assert_true(16 * 110**3 < 27 * 107**3, "K induction")
-    assert_true(5000 * 65 < 3**32, "prefix error")
-    assert_true(149000 * 64**2 < 3**64, "fixed error")
-    assert_true(192 * 2**64 < 3**50, "binary router")
-    assert_true(24 * 64**2 < 3**42, "binary controls")
-    return {
-        "K_bases": rows,
-        "K_three_step": "16*110^3<27*107^3",
-        "lower_order_bases": [
-            "5000*65<3^32",
-            "149000*64^2<3^64",
-            "192*2^64<3^50",
-            "24*64^2<3^42",
-        ],
-    }
-
-
-def make_receipt() -> dict[str, object]:
-    result = {
-        "schema": "orbit-synthesis/plane-shared-independent/v1",
-        "planes": semantic_plane_audit(),
-        "bases": base_inequalities(),
-        "arithmetic": arithmetic_audit(),
-    }
-    canonical = json.dumps(result, sort_keys=True, separators=(",", ":"))
-    result["semantic_sha256"] = hashlib.sha256(canonical.encode()).hexdigest()
+def receipt()->dict[str,object]:
+    result={"schema":"orbit-synthesis/plane-shared-portfolio-independent/v1",
+            "planes":planes(),"bases":proof_bases(),"arithmetic":arithmetic()}
+    raw=json.dumps(result,sort_keys=True,separators=(",",":"))
+    result["semantic_sha256"]=hashlib.sha256(raw.encode()).hexdigest()
     return result
 
-
-def main() -> int:
-    expected = None
-    output = None
-    args = iter(sys.argv[1:])
+def main()->int:
+    expected=output=None;args=iter(sys.argv[1:])
     for arg in args:
-        if arg == "--expected":
-            expected = Path(next(args))
-        elif arg == "--out":
-            output = Path(next(args))
-        else:
-            raise SystemExit(arg)
-
-    result = make_receipt()
-    text = json.dumps(result, indent=2, sort_keys=True) + "\n"
+        if arg=="--expected":expected=Path(next(args))
+        elif arg=="--out":output=Path(next(args))
+        else:raise SystemExit(arg)
+    data=receipt();text=json.dumps(data,indent=2,sort_keys=True)+"\n"
     if expected is not None:
-        assert_true(
-            result == json.loads(expected.read_text()),
-            "receipt mismatch",
-        )
-    if output is not None:
-        output.write_text(text)
-    print(text, end="")
+        check(data==json.loads(expected.read_text()),"receipt mismatch")
+    if output is not None:output.write_text(text)
+    print(text,end="")
     return 0
 
-
-if __name__ == "__main__":
+if __name__=="__main__":
     raise SystemExit(main())
