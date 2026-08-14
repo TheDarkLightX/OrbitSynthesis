@@ -85,6 +85,12 @@ from .patchability_residual import (
     shortest_accepting_parameters,
     shortest_state_parameters,
 )
+from .principal_greatest_region import (
+    PrincipalEquationAudit,
+    PrincipalNoGreatestRegionWitness,
+    audit_principal_no_greatest_region_witness,
+    build_principal_no_greatest_region_witness,
+)
 from .safety import FiniteSafetyGame, SafetySolution
 from .subpower_lists import (
     CandidateRejection,
@@ -129,12 +135,16 @@ __all__ = [
     "PatchabilityResult",
     "PointedClass",
     "PointedClassRules",
+    "PrincipalEquationAudit",
+    "PrincipalNoGreatestRegionWitness",
     "SafetySolution",
     "SeedRule",
     "Var",
     "audit_no_greatest_region_witness",
+    "audit_principal_no_greatest_region_witness",
     "build_no_greatest_region_witness",
     "build_patchability_residual_automaton",
+    "build_principal_no_greatest_region_witness",
     "closure_with_parameters",
     "compile_table",
     "compile_vector_table",
