@@ -1,9 +1,9 @@
 """External exact-optimization adapters for OrbitSynthesis WCNF models.
 
-OrbitSynthesis treats an external optimizer as an untrusted search oracle. A
+OrbitSynthesis treats an external optimizer as an untrusted search oracle.  A
 returned assignment is normalized, checked against every hard clause, decoded
 into the selected state domain, and replayed into one complete compatible
-controller table. The model/controller certificate is therefore checked even
+controller table.  The model/controller certificate is therefore checked even
 when the backend itself is optional or out of process.
 
 The adapters currently support:
@@ -13,7 +13,7 @@ The adapters currently support:
 * arbitrary Open-WBO-style command-line solvers through a no-shell subprocess
   interface.
 
-The assignment is a checkable feasibility certificate. Global optimality and
+The assignment is a checkable feasibility certificate.  Global optimality and
 infeasibility remain backend claims unless a proof-producing solver, bounded
 exhaustive check, native OrbitSynthesis replay, or another independent backend
 is used as an additional authority.
@@ -65,7 +65,7 @@ class ExternalOptimizationResult:
     """An external result after OrbitSynthesis model-certificate checking.
 
     ``certificate_verified`` concerns the returned assignment and reconstructed
-    controller. ``optimality_authority`` records where the optimum/infeasible
+    controller.  ``optimality_authority`` records where the optimum/infeasible
     claim came from; it is deliberately separate because a model by itself is
     not a compact proof that no better model exists.
     """
@@ -113,7 +113,12 @@ class ExternalOptimizationResult:
             "signed_utility": self.signed_utility,
         }
         return hashlib.sha256(
-            json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+            json.dumps(
+                payload,
+                sort_keys=True,
+                separators=(",", ":"),
+                default=repr,
+            ).encode()
         ).hexdigest()
 
 
@@ -228,6 +233,7 @@ def _checked_result(
     wall_seconds: float,
     state_weights: Mapping[State, int] | None,
     default_weight: int,
+    status: str,
     optimality_authority: str,
     metadata: Mapping[str, object] | None = None,
 ) -> ExternalOptimizationResult:
@@ -253,7 +259,7 @@ def _checked_result(
     )
     return ExternalOptimizationResult(
         backend=backend,
-        status="optimal",
+        status=status,
         certificate_verified=True,
         optimality_authority=optimality_authority,
         witness=witness,
@@ -280,17 +286,21 @@ def solve_weighted_cnf_command(
     default_weight: int = 1,
     env: Mapping[str, str] | None = None,
     cwd: str | os.PathLike[str] | None = None,
+    accepted_returncodes: Iterable[int] = (0,),
 ) -> ExternalOptimizationResult:
     """Run an Open-WBO-style executable without invoking a shell.
 
     ``{wcnf}`` or ``{input}`` in any command argument is replaced by the
-    temporary WCNF path. When no placeholder is present, the path is appended.
+    temporary WCNF path.  When no placeholder is present, the path is appended.
     The returned model is always decoded and checked before it is exposed.
     """
 
     _validate_encodings(cnf, wcnf)
     if not command:
         raise ValueError("external MaxSAT command must be nonempty")
+    accepted = frozenset(int(code) for code in accepted_returncodes)
+    if not accepted:
+        raise ValueError("accepted_returncodes must be nonempty")
 
     with tempfile.TemporaryDirectory(prefix="orbit-maxsat-") as directory:
         input_path = Path(directory) / "instance.wcnf"
@@ -328,7 +338,7 @@ def solve_weighted_cnf_command(
             ) from error
         elapsed = time.perf_counter() - started
 
-        if completed.returncode != 0:
+        if completed.returncode not in accepted:
             raise ExternalOptimizationError(
                 "external MaxSAT solver exited with code "
                 f"{completed.returncode}: {completed.stderr.strip()}"
@@ -378,7 +388,10 @@ def solve_weighted_cnf_command(
             wall_seconds=elapsed,
             state_weights=state_weights,
             default_weight=default_weight,
-            optimality_authority="backend_status",
+            status=parsed.status,
+            optimality_authority=(
+                "backend_status" if parsed.status == "optimal" else "not_claimed"
+            ),
             metadata=metadata,
         )
 
@@ -394,7 +407,7 @@ def solve_weighted_cnf_highs(
 ) -> ExternalOptimizationResult:
     """Solve the WCNF through SciPy's deterministic HiGHS MILP wrapper.
 
-    HiGHS uses floating-point coefficient storage. To retain exact integer
+    HiGHS uses floating-point coefficient storage.  To retain exact integer
     objective comparison, this adapter rejects objective magnitudes above the
     largest integer exactly representable by binary64.
     """
@@ -541,6 +554,7 @@ def solve_weighted_cnf_highs(
         wall_seconds=elapsed,
         state_weights=state_weights,
         default_weight=default_weight,
+        status="optimal",
         optimality_authority="backend_status",
         metadata=metadata,
     )
@@ -602,6 +616,7 @@ def solve_weighted_cnf_pysat_rc2(
         wall_seconds=elapsed,
         state_weights=state_weights,
         default_weight=default_weight,
+        status="optimal",
         optimality_authority="backend_status",
         metadata={"solver": solver},
     )
