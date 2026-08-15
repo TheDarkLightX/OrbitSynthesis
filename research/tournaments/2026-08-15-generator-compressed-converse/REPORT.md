@@ -145,9 +145,13 @@ The independent semantic SHA-256 is
 3bab14c0844a2c16475746758444e3e55a901bc9e85ded9278923353131da60f
 ```
 
-The independent script was executed under ordinary and optimized Python with
-byte-identical output before publication. The branch gate performs the same
-normal/optimized comparison for both implementations.
+An equivalent no-import reconstruction was executed locally under ordinary and
+optimized Python with byte-identical output. The exact new implementation was
+also syntax-compiled and exercised through an API-compatible local harness on
+all 27 expansions. The committed branch gate repeats normal/optimized checks
+for the primary and independent repository sources; GitHub did not execute it
+because the job was rejected before runner allocation by the account billing
+block.
 
 ## Boundaries
 
