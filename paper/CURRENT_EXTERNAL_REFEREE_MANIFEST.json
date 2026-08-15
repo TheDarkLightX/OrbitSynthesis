@@ -1,0 +1,91 @@
+{
+  "schema": "orbit-synthesis/external-referee-manifest/v1",
+  "created_date": "2026-08-15",
+  "repository": "TheDarkLightX/OrbitSynthesis",
+  "review_branch": "review/fixed-q-integrated-2026-08-15",
+  "review_commit": "4c88add7a611836b2ee8eab668ab24293d6f4de1",
+  "order_pair_base_commit": "5f3093a636d1523331c93bcf5224c6393a57393f",
+  "pull_requests": {
+    "order_pair_theorem": 15,
+    "integrated_reconstruction": 36
+  },
+  "main_claims": {
+    "order_pair_vector": {
+      "capacity": "q=3^w",
+      "size": "C_s(w)=(4/3+o(1))*q",
+      "uniform_size": "2*C_s(w)<=5*q-1",
+      "depth": "3+ceil(log_2 w)",
+      "scoped_lower_bound_positive": "4*q/3-1 distinct nonconstant outputs",
+      "scoped_lower_bound_negative": "4*q/3 distinct nonconstant outputs"
+    },
+    "integrated_compiler": {
+      "arity_scope": "r>=64",
+      "size": "<(19/2)*3^r/r",
+      "depth": "<=r+4*ceil(log_2 r)+9",
+      "architecture_limsup": "limsup N(r)r/3^r=9",
+      "architecture_limsup_scope": "declared recursive-local two-stage compiler only"
+    }
+  },
+  "semantic_receipts": {
+    "order_pair": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/receipt.json",
+      "schema": "orbit-synthesis/order-pair-program-vector/v1",
+      "semantic_sha256": "bc2378444813857cb3943fff3b45164e21a486fc588b89c9125e6fbdbc2fd83d"
+    },
+    "explicit_bridge": {
+      "path": "research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/receipt.json",
+      "schema": "orbit-synthesis/order-pair-integrated-compiler/v1",
+      "semantic_sha256": "b0dec4c34465d5b25e5aa35e59ac6016452afcb9df1307bbb6b52b5399b81e23"
+    },
+    "constant_15": {
+      "path": "research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/receipt_constant_15.json",
+      "schema": "orbit-synthesis/order-pair-integrated-constant-15/v1",
+      "semantic_sha256": "ad37969af91fee138674e66151ed1c55c6b4428f5786dce56a44e78744c25193"
+    },
+    "adaptive_113_8": {
+      "path": "research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/receipt_adaptive_113_8.json",
+      "schema": "orbit-synthesis/order-pair-adaptive-113-over-8/v1",
+      "semantic_sha256": "fb4bb1f1cac137e8bbe22a47070b733858009d60d6f3d2ddc755951ff1380142"
+    },
+    "hierarchical_49_5": {
+      "path": "research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/receipt_hierarchical_49_5.json",
+      "schema": "orbit-synthesis/order-pair-hierarchical-49-over-5/v1",
+      "semantic_sha256": "ea6d5cf35755fd04cc69b040af1152ae3f72e8a6c4d41a65cc0256551929c520"
+    },
+    "recursive_local_19_2": {
+      "path": "research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/receipt_recursive_local_19_2.json",
+      "schema": "orbit-synthesis/order-pair-recursive-local-19-over-2/v1",
+      "semantic_sha256": "414dc3baf877c10e1a9e22a8a971c282bc15e7772906362fec0fbcd3d4d8a98f"
+    },
+    "evidence_graph": {
+      "path": "research/tournaments/2026-08-13-program-vector-optimization/runs/research_kernel_integrated_reconstruction/receipt.json",
+      "schema": "orbit-synthesis/research-kernel-integrated-reconstruction/v1",
+      "semantic_sha256": "3e426fb12a36800599dc699b09cb052db127968c458811e302a836e969ef854d"
+    }
+  },
+  "authoritative_documents": [
+    "paper/CURRENT_EXTERNAL_REFEREE_PACKET.md",
+    "paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md",
+    "notes/QUASIPRIMAL_CONSERVATIVE_TERM_INTEGRATED_COMPILER_RECONSTRUCTION.md",
+    "notes/QUASIPRIMAL_CONSERVATIVE_TERM_HIERARCHICAL_CONSTANT_49_5.md",
+    "notes/QUASIPRIMAL_CONSERVATIVE_TERM_RECURSIVE_LOCAL_CONSTANT_19_2.md",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/REPORT.md",
+    "research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/REPORT.md",
+    "research/tournaments/2026-08-13-program-vector-optimization/runs/research_kernel_integrated_reconstruction/REPORT.md"
+  ],
+  "reproduction_commands": [
+    "python3 experiments/audit_fixed_q_preprint.py",
+    "bash research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/check.sh",
+    "bash research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/check.sh",
+    "bash research/tournaments/2026-08-13-program-vector-optimization/runs/research_kernel_integrated_reconstruction/check.sh"
+  ],
+  "deliberately_unpromoted": [
+    "byte identity with the unavailable local 01ddf456 packet",
+    "publication novelty",
+    "freedom to operate",
+    "external human peer review",
+    "hosted GitHub Actions execution",
+    "global optimality of the compiler size constant"
+  ],
+  "snapshot_rule": "Review mathematical content at review_commit. This manifest is intentionally committed only on a successor branch and must not change the review target."
+}
