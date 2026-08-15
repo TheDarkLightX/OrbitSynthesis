@@ -24,6 +24,16 @@ check_hierarchical_49_5.py
 receipt_hierarchical_49_5.json
   git blob 643f47ef16523a2510fe48e8b6125d94bd7001a0
   semantic SHA-256 ea6d5cf35755fd04cc69b040af1152ae3f72e8a6c4d41a65cc0256551929c520
+
+recursive_local_compiler_model.py
+  git blob 6a2bd79e40b23992987177d6c59fe5abf461d031
+
+check_recursive_local_19_2.py
+  git blob 61490426fdfc57801efb7706de5d78c0d0075961
+
+receipt_recursive_local_19_2.json
+  git blob 14a1d1d3c0e2a49b65665033e5cfeb2d6a80f056
+  semantic SHA-256 414dc3baf877c10e1a9e22a8a971c282bc15e7772906362fec0fbcd3d4d8a98f
 ```
 
-The lane `check.sh` regenerates all four receipts under normal and optimized Python and compares them byte-for-byte with the committed JSON files.
+The lane `check.sh` regenerates all five receipts under normal and optimized Python and compares them byte-for-byte with the committed JSON files.
