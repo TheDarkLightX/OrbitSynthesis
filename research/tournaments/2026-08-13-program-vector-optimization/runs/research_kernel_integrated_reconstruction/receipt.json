@@ -1,5 +1,5 @@
 {
-  "atom_count": 9,
+  "atom_count": 10,
   "bindings": {
     "adaptive": {
       "schema": "orbit-synthesis/order-pair-adaptive-113-over-8/v1",
@@ -13,12 +13,16 @@
       "schema": "orbit-synthesis/order-pair-integrated-constant-15/v1",
       "semantic_sha256": "ad37969af91fee138674e66151ed1c55c6b4428f5786dce56a44e78744c25193"
     },
+    "hierarchical": {
+      "schema": "orbit-synthesis/order-pair-hierarchical-49-over-5/v1",
+      "semantic_sha256": "ea6d5cf35755fd04cc69b040af1152ae3f72e8a6c4d41a65cc0256551929c520"
+    },
     "order_pair": {
       "schema": "orbit-synthesis/order-pair-program-vector/v1",
       "semantic_sha256": "bc2378444813857cb3943fff3b45164e21a486fc588b89c9125e6fbdbc2fd83d"
     }
   },
-  "edge_count": 8,
+  "edge_count": 9,
   "infrastructure": {
     "HOSTED_CI": "BLOCKED_INFRASTRUCTURE"
   },
@@ -31,10 +35,11 @@
     "BRIDGE_113_8",
     "BRIDGE_15",
     "BRIDGE_34",
+    "BRIDGE_49_5",
     "BRIDGE_BOUNDED_SEMANTICS",
     "OPV_EXACT"
   ],
   "schema": "orbit-synthesis/research-kernel-integrated-reconstruction/v1",
-  "semantic_sha256": "12e723ff962092df431db0da3416b3a56364a0960f41e935b4e269624d478634",
+  "semantic_sha256": "548e78f2baef1c4c0ad8d7444b8fe5116499bcd4d7415230cc25c25c9f9d0894",
   "status": "PASS"
 }
