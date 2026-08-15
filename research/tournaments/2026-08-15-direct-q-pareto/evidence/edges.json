@@ -1,0 +1,12 @@
+{
+  "schema": "orbit-synthesis/direct-q-pareto-edges/v1",
+  "edges": [
+    {"from": "DIRECT_Q_MUX_CORRECT", "to": "PARETO_BOUNDED_SEMANTICS", "type": "supports"},
+    {"from": "DIRECT_Q_CODE_BRIDGE", "to": "PARETO_BOUNDED_SEMANTICS", "type": "supports"},
+    {"from": "PARETO_BOUNDED_SEMANTICS", "to": "PARETO_SIZE_8", "type": "supports"},
+    {"from": "PARETO_BOUNDED_SEMANTICS", "to": "PARETO_DEPTH_6LOG", "type": "supports"},
+    {"from": "DIRECT_Q_MUX_MINIMAL", "to": "GLOBAL_PARETO_OPTIMALITY", "type": "insufficient_for"},
+    {"from": "DIRECT_Q_LEAN", "to": "PARETO_SIZE_8", "type": "not_required"},
+    {"from": "PUBLICATION_NOVELTY", "to": "PARETO_SIZE_8", "type": "not_required"}
+  ]
+}
