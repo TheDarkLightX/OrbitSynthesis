@@ -35,3 +35,4 @@ jobs:
           python3 experiments/audit_fixed_q_preprint.py
           bash research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/check.sh
           bash research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/check.sh
+          bash research/tournaments/2026-08-13-program-vector-optimization/runs/research_kernel_integrated_reconstruction/check.sh
