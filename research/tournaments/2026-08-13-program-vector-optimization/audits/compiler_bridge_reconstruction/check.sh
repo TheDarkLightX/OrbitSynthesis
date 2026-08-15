@@ -8,7 +8,9 @@ constant_normal="$(mktemp)"
 constant_optimized="$(mktemp)"
 adaptive_normal="$(mktemp)"
 adaptive_optimized="$(mktemp)"
-trap 'rm -f "$bridge_normal" "$bridge_optimized" "$constant_normal" "$constant_optimized" "$adaptive_normal" "$adaptive_optimized"' EXIT
+hierarchical_normal="$(mktemp)"
+hierarchical_optimized="$(mktemp)"
+trap 'rm -f "$bridge_normal" "$bridge_optimized" "$constant_normal" "$constant_optimized" "$adaptive_normal" "$adaptive_optimized" "$hierarchical_normal" "$hierarchical_optimized"' EXIT
 
 cd "$lane_dir"
 
@@ -27,10 +29,17 @@ python3 -O check_adaptive_113_8.py --out "$adaptive_optimized"
 cmp "$adaptive_normal" "$adaptive_optimized"
 cmp "$adaptive_normal" receipt_adaptive_113_8.json
 
+python3 check_hierarchical_49_5.py --out "$hierarchical_normal"
+python3 -O check_hierarchical_49_5.py --out "$hierarchical_optimized"
+cmp "$hierarchical_normal" "$hierarchical_optimized"
+cmp "$hierarchical_normal" receipt_hierarchical_49_5.json
+
 python3 -m py_compile \
   compiler_bridge_model.py \
+  hierarchical_compiler_model.py \
   check_compiler_bridge.py \
   check_constant_15.py \
-  check_adaptive_113_8.py
+  check_adaptive_113_8.py \
+  check_hierarchical_49_5.py
 
-echo "compiler bridge reconstruction, constant-15 theorem, and adaptive 113/8 theorem: PASS"
+echo "compiler bridge and all integrated sharpenings: PASS"
