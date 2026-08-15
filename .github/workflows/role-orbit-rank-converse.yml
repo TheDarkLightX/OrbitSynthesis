@@ -1,0 +1,26 @@
+name: role-orbit-rank-converse
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/role-orbit-rank-converse.yml'
+      - 'src/orbitsynthesis/role_orbit_witness.py'
+      - 'src/orbitsynthesis/__init__.py'
+      - 'notes/DEMI_SEMIPRIMAL_ROLE_ORBIT_RANK_WITNESS.md'
+      - 'research/tournaments/2026-08-15-role-orbit-rank-converse/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-role-orbit-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Replay primary and independent role-rank audits
+        run: bash research/tournaments/2026-08-15-role-orbit-rank-converse/check.sh
