@@ -52,6 +52,9 @@ Semantic SHA-256:
 3bab14c0844a2c16475746758444e3e55a901bc9e85ded9278923353131da60f
 ```
 
-The exact script and its normal/optimized output were compared byte-for-byte
-before upload. This is deterministic finite evidence, not Lean formalization,
+An equivalent no-import source was executed under ordinary and optimized
+Python with byte-identical output before publication. The committed script is
+gated to repeat that comparison when a runner is available. GitHub rejected
+the current job before executing any steps because of the account billing
+block. This remains deterministic finite evidence, not Lean formalization,
 external peer review, or novelty determination.
