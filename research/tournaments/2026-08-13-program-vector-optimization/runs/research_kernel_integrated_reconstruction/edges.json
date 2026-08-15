@@ -6,9 +6,10 @@
     {"from": "BRIDGE_34", "to": "BRIDGE_15", "type": "refined_by"},
     {"from": "BRIDGE_15", "to": "BRIDGE_113_8", "type": "refined_by"},
     {"from": "BRIDGE_113_8", "to": "BRIDGE_49_5", "type": "refined_by"},
-    {"from": "BYTE_EXACT_LOCAL_EQUIVALENCE", "to": "BRIDGE_49_5", "type": "not_required"},
-    {"from": "PUBLICATION_NOVELTY", "to": "BRIDGE_49_5", "type": "not_required"},
-    {"from": "EXTERNAL_REFEREE", "to": "BRIDGE_49_5", "type": "not_required"},
-    {"from": "HOSTED_CI", "to": "BRIDGE_49_5", "type": "not_required"}
+    {"from": "BRIDGE_49_5", "to": "BRIDGE_19_2", "type": "refined_by"},
+    {"from": "BYTE_EXACT_LOCAL_EQUIVALENCE", "to": "BRIDGE_19_2", "type": "not_required"},
+    {"from": "PUBLICATION_NOVELTY", "to": "BRIDGE_19_2", "type": "not_required"},
+    {"from": "EXTERNAL_REFEREE", "to": "BRIDGE_19_2", "type": "not_required"},
+    {"from": "HOSTED_CI", "to": "BRIDGE_19_2", "type": "not_required"}
   ]
 }
