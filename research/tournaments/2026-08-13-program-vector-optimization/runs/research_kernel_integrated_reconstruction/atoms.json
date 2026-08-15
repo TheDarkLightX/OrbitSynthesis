@@ -1,0 +1,68 @@
+{
+  "schema": "orbit-synthesis/research-kernel-atoms/v1",
+  "atoms": [
+    {
+      "id": "OPV_EXACT",
+      "claim": "The sibling-shared order-pair vector has depth 3+ceil(log2 w), asymptotic size (4/3+o(1))3^w, and the scoped matching output-count leading lower bound.",
+      "status": "SUPPORTED",
+      "scope": "Exact ordered projection-control vector over the nonbinary anchor interface.",
+      "evidence": ["order_pair_receipt", "pr15_lean_layers"]
+    },
+    {
+      "id": "BRIDGE_BOUNDED_SEMANTICS",
+      "claim": "The explicit hash-consed compiler bridge computes every checked compatible selector table.",
+      "status": "SUPPORTED",
+      "scope": "All 128 arity-two selectors and 32 deterministic arity-three selectors.",
+      "evidence": ["bridge_receipt"]
+    },
+    {
+      "id": "BRIDGE_34",
+      "claim": "For every r>=64 the explicit reconstructed compiler has size below 34*3^r/r and depth at most r+4ceil(log2 r)+9.",
+      "status": "SUPPORTED",
+      "scope": "Generic complement-invariant coordinate selectors; parameter-free shared d/u DAG.",
+      "evidence": ["bridge_proof_note", "bridge_receipt"]
+    },
+    {
+      "id": "BRIDGE_15",
+      "claim": "The fixed reconstructed schedule has total size below 15*3^r/r for every r>=64.",
+      "status": "SUPPORTED",
+      "scope": "Exact finite range 64..511 plus analytic tail from 512.",
+      "evidence": ["constant_15_note", "constant_15_receipt"]
+    },
+    {
+      "id": "BRIDGE_113_8",
+      "claim": "The adaptive schedule has total size below (113/8)*3^r/r for every r>=64 with the same depth bound.",
+      "status": "SUPPORTED",
+      "scope": "Exact finite range 64..1023 plus analytic tail from 1024.",
+      "evidence": ["adaptive_note", "adaptive_receipt"]
+    },
+    {
+      "id": "BYTE_EXACT_LOCAL_EQUIVALENCE",
+      "claim": "The reconstruction is byte-identical to the local packet identified by 01ddf456.",
+      "status": "UNKNOWN",
+      "scope": "Source identity and receipt identity.",
+      "evidence": []
+    },
+    {
+      "id": "PUBLICATION_NOVELTY",
+      "claim": "The exact conjunction is novel in the publication or patent sense.",
+      "status": "UNKNOWN",
+      "scope": "Full international prior art and freedom to operate.",
+      "evidence": []
+    },
+    {
+      "id": "EXTERNAL_REFEREE",
+      "claim": "A fresh external human referee has reviewed the current integrated packet.",
+      "status": "UNKNOWN",
+      "scope": "Current reconstruction and eventual byte-exact local packet.",
+      "evidence": []
+    },
+    {
+      "id": "HOSTED_CI",
+      "claim": "GitHub-hosted Actions executed the reconstruction gate.",
+      "status": "BLOCKED_INFRASTRUCTURE",
+      "scope": "Current repository account runner state.",
+      "evidence": ["zero_step_workflow_jobs"]
+    }
+  ]
+}
