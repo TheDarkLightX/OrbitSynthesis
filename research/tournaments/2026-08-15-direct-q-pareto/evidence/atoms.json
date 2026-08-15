@@ -1,0 +1,59 @@
+{
+  "schema": "orbit-synthesis/direct-q-pareto-atoms/v1",
+  "atoms": [
+    {
+      "id": "DIRECT_Q_MUX_CORRECT",
+      "claim": "The five-node direct Q multiplexer selects each arbitrary Q-valued payload exactly.",
+      "status": "SUPPORTED",
+      "evidence": ["pareto_receipt", "mux_minimality_receipt"]
+    },
+    {
+      "id": "DIRECT_Q_MUX_MINIMAL",
+      "claim": "Five operation nodes are necessary in the declared local d/u DAG grammar with dynamic value names available as terminals.",
+      "status": "SUPPORTED",
+      "evidence": ["mux_minimality_receipt"]
+    },
+    {
+      "id": "DIRECT_Q_CODE_BRIDGE",
+      "claim": "The code 0->10, 1->01, 2->00 uses two one-node rails and a one-node decoder.",
+      "status": "SUPPORTED",
+      "evidence": ["pareto_receipt"]
+    },
+    {
+      "id": "PARETO_BOUNDED_SEMANTICS",
+      "claim": "The complete direct-Q/signed-outer DAG computes every checked compatible selector.",
+      "status": "SUPPORTED",
+      "evidence": ["pareto_receipt"]
+    },
+    {
+      "id": "PARETO_SIZE_8",
+      "claim": "For every r>=64 the declared compiler has size below 8*3^r/r.",
+      "status": "SUPPORTED",
+      "evidence": ["pareto_receipt", "pareto_proof_note"]
+    },
+    {
+      "id": "PARETO_DEPTH_6LOG",
+      "claim": "For every r>=64 the declared compiler has depth at most r+6ceil(log2 r)+9.",
+      "status": "SUPPORTED",
+      "evidence": ["pareto_receipt", "pareto_proof_note"]
+    },
+    {
+      "id": "DIRECT_Q_LEAN",
+      "claim": "The new scoped Lean mux/code source has been compiled with the pinned toolchain.",
+      "status": "UNDER_TEST",
+      "evidence": ["placeholder_free_source"]
+    },
+    {
+      "id": "GLOBAL_PARETO_OPTIMALITY",
+      "claim": "The size-depth Pareto points are globally optimal among all d/u DAGs.",
+      "status": "UNKNOWN",
+      "evidence": []
+    },
+    {
+      "id": "PUBLICATION_NOVELTY",
+      "claim": "The direct-Q Pareto construction is publication-novel and clear of relevant prior art.",
+      "status": "UNKNOWN",
+      "evidence": []
+    }
+  ]
+}
