@@ -1,0 +1,36 @@
+{
+  "semantic": {
+    "backend": "Z3 Optimize weighted Boolean objectives",
+    "checks": {
+      "all_eager_domains_replayed": true,
+      "all_lazy_domains_replayed": true,
+      "all_learned_cores_model_verified": true,
+      "all_random_objectives_match_exhaustive": true
+    },
+    "principal": {
+      "components": 227,
+      "eager_hard_clauses": 17405,
+      "eager_variables": 17255,
+      "lazy_learned_clauses": 3,
+      "lazy_learned_literals": 6,
+      "lazy_optimizer_calls": 4,
+      "lazy_variables": 81,
+      "name": "principal",
+      "objective": 78,
+      "states": 81
+    },
+    "random": {
+      "eager_hard_clauses_sum": 1079,
+      "eager_variables_sum": 1067,
+      "instances": 24,
+      "lazy_learned_clauses_sum": 31,
+      "lazy_learned_literals_sum": 60,
+      "lazy_optimizer_calls_sum": 55,
+      "lazy_variables_sum": 216,
+      "objectives_sum": 1001
+    },
+    "schema": "orbit-synthesis/z3-eager-lazy-domain-benchmark/v1"
+  },
+  "semantic_sha256": "fa0020acc50e1a8afba3e3cf375d063206e11ebcefe7ef7b1b5fbc50083c1a80",
+  "solver": "4.15.4"
+}
