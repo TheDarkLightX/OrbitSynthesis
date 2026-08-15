@@ -16,6 +16,7 @@ EXPECTED = {
     "constant_15": (AUDIT / "receipt_constant_15.json", "orbit-synthesis/order-pair-integrated-constant-15/v1", "ad37969af91fee138674e66151ed1c55c6b4428f5786dce56a44e78744c25193"),
     "adaptive": (AUDIT / "receipt_adaptive_113_8.json", "orbit-synthesis/order-pair-adaptive-113-over-8/v1", "fb4bb1f1cac137e8bbe22a47070b733858009d60d6f3d2ddc755951ff1380142"),
     "hierarchical": (AUDIT / "receipt_hierarchical_49_5.json", "orbit-synthesis/order-pair-hierarchical-49-over-5/v1", "ea6d5cf35755fd04cc69b040af1152ae3f72e8a6c4d41a65cc0256551929c520"),
+    "recursive_local": (AUDIT / "receipt_recursive_local_19_2.json", "orbit-synthesis/order-pair-recursive-local-19-over-2/v1", "414dc3baf877c10e1a9e22a8a971c282bc15e7772906362fec0fbcd3d4d8a98f"),
 }
 PROMOTED = {
     "OPV_EXACT",
@@ -24,6 +25,7 @@ PROMOTED = {
     "BRIDGE_15",
     "BRIDGE_113_8",
     "BRIDGE_49_5",
+    "BRIDGE_19_2",
 }
 HELD = {
     "BYTE_EXACT_LOCAL_EQUIVALENCE",
