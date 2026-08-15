@@ -10,10 +10,10 @@
     },
     {
       "id": "BRIDGE_BOUNDED_SEMANTICS",
-      "claim": "The explicit hash-consed compiler bridge computes every checked compatible selector table.",
+      "claim": "The explicit hash-consed compiler bridges compute every checked compatible selector table.",
       "status": "SUPPORTED",
-      "scope": "Baseline and hierarchical bounded complete-DAG reconstructions.",
-      "evidence": ["bridge_receipt", "hierarchical_receipt"]
+      "scope": "Baseline, hierarchical, and recursive-local bounded complete-DAG reconstructions.",
+      "evidence": ["bridge_receipt", "hierarchical_receipt", "recursive_local_receipt"]
     },
     {
       "id": "BRIDGE_34",
@@ -42,6 +42,13 @@
       "status": "SUPPORTED",
       "scope": "Bounded complete-DAG semantics, exact finite range 64..1023, and analytic tail from 1024.",
       "evidence": ["hierarchical_note", "hierarchical_receipt"]
+    },
+    {
+      "id": "BRIDGE_19_2",
+      "claim": "The recursive-local two-stage compiler has total size below (19/2)*3^r/r for every r>=64 with the same depth bound.",
+      "status": "SUPPORTED",
+      "scope": "Recursive local libraries through width two in complete-DAG tests, exact finite range 64..1023, and analytic tail from 1024.",
+      "evidence": ["recursive_local_note", "recursive_local_receipt"]
     },
     {
       "id": "BYTE_EXACT_LOCAL_EQUIVALENCE",
