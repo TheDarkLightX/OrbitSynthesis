@@ -1,0 +1,47 @@
+{
+  "depth": "<=r+4*ceil(log2 r)+9",
+  "finite": {
+    "arities": [
+      64,
+      1023
+    ],
+    "checks": 960,
+    "worst_arity": 85,
+    "worst_decimal": "9.444444444444720"
+  },
+  "schema": "orbit-synthesis/order-pair-recursive-local-19-over-2/v1",
+  "semantic_sha256": "414dc3baf877c10e1a9e22a8a971c282bc15e7772906362fec0fbcd3d4d8a98f",
+  "semantics": {
+    "arities": [
+      3,
+      4
+    ],
+    "library_sizes": [
+      27,
+      19683
+    ],
+    "local_widths": [
+      1,
+      2
+    ],
+    "maximum_depth": 21,
+    "maximum_nodes": 127,
+    "row_checks": 1890,
+    "selector_tables": 66
+  },
+  "status": "recursive local library plus hierarchical residual proof",
+  "tail": {
+    "arities": [
+      1024,
+      16384
+    ],
+    "cases": {
+      "ratio_above_two": 6193,
+      "ratio_at_most_two": 9166,
+      "transition": 2
+    },
+    "checks": 122888,
+    "tail_bound": "<91/10<19/2"
+  },
+  "theorem": "size <(19/2)*3^r/r for every r>=64"
+}
