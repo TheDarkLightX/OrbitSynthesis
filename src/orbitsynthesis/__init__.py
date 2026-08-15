@@ -146,6 +146,13 @@ from .safety_components import (
     quasi_primal_domain_result,
     verify_quasi_primal_domain_result,
 )
+from .state_optimality_certificate import (
+    StateSearchCertificate,
+    StateSearchProofNode,
+    certify_external_result_with_state_search,
+    generate_state_search_certificate,
+    verify_state_search_certificate,
+)
 from .structural_benchmarks import (
     ExactAntichainFamily,
     PrincipalBackendFamily,
@@ -218,6 +225,8 @@ __all__ = [
     "QuasiPrimalDomainResult",
     "SafetySolution",
     "SeedRule",
+    "StateSearchCertificate",
+    "StateSearchProofNode",
     "StrategyCandidateRejection",
     "StrategyComponentObstruction",
     "Var",
@@ -237,6 +246,7 @@ __all__ = [
     "build_principal_backend_family",
     "build_principal_no_greatest_region_witness",
     "certify_external_result",
+    "certify_external_result_with_state_search",
     "clause_satisfied",
     "closed_form_objective_authority",
     "closure_with_parameters",
@@ -253,6 +263,7 @@ __all__ = [
     "eligible_core_isomorphisms",
     "evaluate",
     "first_extension_failure",
+    "generate_state_search_certificate",
     "generated_at_observation",
     "has_pointed_extension_property",
     "hits_all",
@@ -302,6 +313,7 @@ __all__ = [
     "solve_weighted_cnf_pysat_rc2",
     "verify_list_subpower_witness",
     "verify_quasi_primal_domain_result",
+    "verify_state_search_certificate",
     "verify_weighted_domain_result",
     "weighted_soft_reward",
     "weighted_unsatisfied_cost",

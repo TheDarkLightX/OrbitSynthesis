@@ -1,0 +1,34 @@
+name: state-search-optimality-certificates
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/state-search-optimality-certificates.yml'
+      - 'src/orbitsynthesis/state_optimality_certificate.py'
+      - 'src/orbitsynthesis/optimization_authority.py'
+      - 'src/orbitsynthesis/structural_benchmarks.py'
+      - 'src/orbitsynthesis/domain_model.py'
+      - 'src/orbitsynthesis/external_optimization.py'
+      - 'src/orbitsynthesis/__init__.py'
+      - 'tools/orbit_state_certificate.py'
+      - 'notes/STATE_SEARCH_OPTIMALITY_CERTIFICATES.md'
+      - 'research/ORBIT_SYNTHESIS_VALUE_ASSESSMENT_2026_08_14.md'
+      - 'research/tournaments/2026-08-14-state-search-certificates/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-state-search-certificates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact backend dependency
+        run: python -m pip install --upgrade scipy
+      - name: Replay optimality and infeasibility certificates
+        run: bash research/tournaments/2026-08-14-state-search-certificates/check.sh
