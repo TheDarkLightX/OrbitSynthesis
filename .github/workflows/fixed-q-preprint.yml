@@ -5,8 +5,10 @@ on:
     paths:
       - '.github/workflows/fixed-q-preprint.yml'
       - 'experiments/audit_fixed_q_preprint.py'
+      - 'experiments/validate_current_external_referee_manifest.py'
       - 'notes/QUASIPRIMAL_CONSERVATIVE_TERM_*.md'
       - 'paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md'
+      - 'paper/CURRENT_EXTERNAL_REFEREE_*'
       - 'research/tournaments/2026-08-13-semantic-router-frontier/**'
       - 'research/tournaments/2026-08-13-program-vector-optimization/**'
       - 'lakefile.lean'
@@ -22,6 +24,8 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -36,3 +40,8 @@ jobs:
           bash research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/check.sh
           bash research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge_reconstruction/check.sh
           bash research/tournaments/2026-08-13-program-vector-optimization/runs/research_kernel_integrated_reconstruction/check.sh
+      - name: Validate immutable external-referee snapshot
+        run: |
+          python3 experiments/validate_current_external_referee_manifest.py > /tmp/referee-normal.json
+          python3 -O experiments/validate_current_external_referee_manifest.py > /tmp/referee-optimized.json
+          cmp /tmp/referee-normal.json /tmp/referee-optimized.json
