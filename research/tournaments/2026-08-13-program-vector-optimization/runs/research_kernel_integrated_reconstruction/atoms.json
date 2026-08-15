@@ -12,8 +12,8 @@
       "id": "BRIDGE_BOUNDED_SEMANTICS",
       "claim": "The explicit hash-consed compiler bridge computes every checked compatible selector table.",
       "status": "SUPPORTED",
-      "scope": "All 128 arity-two selectors and 32 deterministic arity-three selectors.",
-      "evidence": ["bridge_receipt"]
+      "scope": "Baseline and hierarchical bounded complete-DAG reconstructions.",
+      "evidence": ["bridge_receipt", "hierarchical_receipt"]
     },
     {
       "id": "BRIDGE_34",
@@ -35,6 +35,13 @@
       "status": "SUPPORTED",
       "scope": "Exact finite range 64..1023 plus analytic tail from 1024.",
       "evidence": ["adaptive_note", "adaptive_receipt"]
+    },
+    {
+      "id": "BRIDGE_49_5",
+      "claim": "The two-stage residual compiler has total size below (49/5)*3^r/r for every r>=64 with the same depth bound.",
+      "status": "SUPPORTED",
+      "scope": "Bounded complete-DAG semantics, exact finite range 64..1023, and analytic tail from 1024.",
+      "evidence": ["hierarchical_note", "hierarchical_receipt"]
     },
     {
       "id": "BYTE_EXACT_LOCAL_EQUIVALENCE",
