@@ -1,0 +1,26 @@
+name: direct-q-pareto
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/direct-q-pareto.yml'
+      - 'notes/QUASIPRIMAL_CONSERVATIVE_TERM_DIRECT_Q_PARETO_SIZE_8.md'
+      - 'research/tournaments/2026-08-15-direct-q-pareto/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  direct-q-pareto-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned bounded-synthesis solver
+        run: python3 -m pip install -r research/tournaments/2026-08-15-direct-q-pareto/requirements.txt
+      - name: Replay Pareto compiler and mux minimality
+        run: bash research/tournaments/2026-08-15-direct-q-pareto/check.sh
