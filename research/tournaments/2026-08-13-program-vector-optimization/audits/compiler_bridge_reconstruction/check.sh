@@ -6,7 +6,9 @@ bridge_normal="$(mktemp)"
 bridge_optimized="$(mktemp)"
 constant_normal="$(mktemp)"
 constant_optimized="$(mktemp)"
-trap 'rm -f "$bridge_normal" "$bridge_optimized" "$constant_normal" "$constant_optimized"' EXIT
+adaptive_normal="$(mktemp)"
+adaptive_optimized="$(mktemp)"
+trap 'rm -f "$bridge_normal" "$bridge_optimized" "$constant_normal" "$constant_optimized" "$adaptive_normal" "$adaptive_optimized"' EXIT
 
 cd "$lane_dir"
 
@@ -20,9 +22,15 @@ python3 -O check_constant_15.py --out "$constant_optimized"
 cmp "$constant_normal" "$constant_optimized"
 cmp "$constant_normal" receipt_constant_15.json
 
+python3 check_adaptive_113_8.py --out "$adaptive_normal"
+python3 -O check_adaptive_113_8.py --out "$adaptive_optimized"
+cmp "$adaptive_normal" "$adaptive_optimized"
+cmp "$adaptive_normal" receipt_adaptive_113_8.json
+
 python3 -m py_compile \
   compiler_bridge_model.py \
   check_compiler_bridge.py \
-  check_constant_15.py
+  check_constant_15.py \
+  check_adaptive_113_8.py
 
-echo "compiler bridge reconstruction and constant-15 sharpening: PASS"
+echo "compiler bridge reconstruction, constant-15 theorem, and adaptive 113/8 theorem: PASS"
