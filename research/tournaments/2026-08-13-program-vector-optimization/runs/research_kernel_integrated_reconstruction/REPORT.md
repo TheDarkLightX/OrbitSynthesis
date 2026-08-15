@@ -13,15 +13,25 @@ BRIDGE_BOUNDED_SEMANTICS
 BRIDGE_34
 BRIDGE_15
 BRIDGE_113_8
+BRIDGE_49_5
 ```
 
 These correspond to:
 
 1. the exact sibling-shared order-pair theorem from PR #15;
-2. the bounded complete-DAG selector-table reconstruction;
+2. the bounded complete-DAG selector-table reconstructions;
 3. the explicit all-arity compiler with constant 34;
-4. the fixed-schedule constant below 15; and
-5. the adaptive constant below `113/8`.
+4. the fixed-schedule constant below 15;
+5. the adaptive constant below `113/8`; and
+6. the two-stage residual compiler below `49/5`.
+
+The strongest promoted construction preserves depth
+
+```text
+r+4*ceil(log_2 r)+9
+```
+
+and has construction-specific normalized limsup exactly `9`.
 
 ## Deliberately unpromoted claims
 
@@ -54,15 +64,19 @@ constant below 15
 adaptive constant below 113/8
   schema orbit-synthesis/order-pair-adaptive-113-over-8/v1
   semantic fb4bb1f1cac137e8bbe22a47070b733858009d60d6f3d2ddc755951ff1380142
+
+hierarchical constant below 49/5
+  schema orbit-synthesis/order-pair-hierarchical-49-over-5/v1
+  semantic ea6d5cf35755fd04cc69b040af1152ae3f72e8a6c4d41a65cc0256551929c520
 ```
 
 ## Evidence receipt
 
 ```text
 schema orbit-synthesis/research-kernel-integrated-reconstruction/v1
-semantic 12e723ff962092df431db0da3416b3a56364a0960f41e935b4e269624d478634
-atoms 9
-edges 8
+semantic 548e78f2baef1c4c0ad8d7444b8fe5116499bcd4d7415230cc25c25c9f9d0894
+atoms 10
+edges 9
 ```
 
 Normal and optimized validator outputs are byte-identical.
