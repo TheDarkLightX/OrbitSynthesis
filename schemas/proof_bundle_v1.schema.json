@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbitsynthesis.dev/schema/proof-bundle-v1.json",
+  "title": "OrbitSynthesis proof bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "problem",
+    "problem_sha256",
+    "component_model_sha256",
+    "result",
+    "optimality_certificate",
+    "metadata",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema": {
+      "const": "orbit-synthesis/proof-bundle/v1"
+    },
+    "problem": {
+      "$ref": "finite_safety_problem_v1.schema.json"
+    },
+    "problem_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "component_model_sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "backend",
+        "domain",
+        "signed_utility",
+        "component_choices",
+        "strategy",
+        "backend_semantic_sha256"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "optimal",
+            "infeasible"
+          ]
+        },
+        "backend": {
+          "type": "string",
+          "minLength": 1
+        },
+        "domain": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/row"
+              }
+            }
+          ]
+        },
+        "signed_utility": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "component_choices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "strategy": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "observation",
+              "output"
+            ],
+            "properties": {
+              "observation": {
+                "$ref": "#/$defs/row"
+              },
+              "output": {
+                "$ref": "#/$defs/row"
+              }
+            }
+          }
+        },
+        "backend_semantic_sha256": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/sha256"
+            }
+          ]
+        }
+      }
+    },
+    "optimality_certificate": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "schema",
+        "model_sha256",
+        "problem_sha256",
+        "state_count",
+        "weights",
+        "required_mask",
+        "forbidden_mask",
+        "target_score",
+        "target_domain_mask",
+        "root",
+        "nodes",
+        "semantic_sha256",
+        "statistics"
+      ],
+      "properties": {
+        "schema": {
+          "const": "orbit-synthesis/state-search-optimality/v1"
+        },
+        "model_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "problem_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "state_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "weights": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "required_mask": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "forbidden_mask": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "target_score": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "target_domain_mask": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "root": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "state_index",
+              "include_child",
+              "exclude_child",
+              "component_index",
+              "upper_bound"
+            ],
+            "properties": {
+              "kind": {
+                "enum": [
+                  "branch",
+                  "conflict",
+                  "bound"
+                ]
+              },
+              "state_index": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "include_child": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "exclude_child": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "component_index": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "upper_bound": {
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "semantic_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "statistics": {
+          "type": "object"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object"
+    },
+    "manifest_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "$defs": {
+    "atom": {
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "row": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/atom"
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
