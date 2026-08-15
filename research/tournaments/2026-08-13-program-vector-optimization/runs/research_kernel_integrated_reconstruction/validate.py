@@ -15,9 +15,21 @@ EXPECTED = {
     "bridge": (AUDIT / "receipt.json", "orbit-synthesis/order-pair-integrated-compiler/v1", "b0dec4c34465d5b25e5aa35e59ac6016452afcb9df1307bbb6b52b5399b81e23"),
     "constant_15": (AUDIT / "receipt_constant_15.json", "orbit-synthesis/order-pair-integrated-constant-15/v1", "ad37969af91fee138674e66151ed1c55c6b4428f5786dce56a44e78744c25193"),
     "adaptive": (AUDIT / "receipt_adaptive_113_8.json", "orbit-synthesis/order-pair-adaptive-113-over-8/v1", "fb4bb1f1cac137e8bbe22a47070b733858009d60d6f3d2ddc755951ff1380142"),
+    "hierarchical": (AUDIT / "receipt_hierarchical_49_5.json", "orbit-synthesis/order-pair-hierarchical-49-over-5/v1", "ea6d5cf35755fd04cc69b040af1152ae3f72e8a6c4d41a65cc0256551929c520"),
 }
-PROMOTED = {"OPV_EXACT", "BRIDGE_BOUNDED_SEMANTICS", "BRIDGE_34", "BRIDGE_15", "BRIDGE_113_8"}
-HELD = {"BYTE_EXACT_LOCAL_EQUIVALENCE", "PUBLICATION_NOVELTY", "EXTERNAL_REFEREE"}
+PROMOTED = {
+    "OPV_EXACT",
+    "BRIDGE_BOUNDED_SEMANTICS",
+    "BRIDGE_34",
+    "BRIDGE_15",
+    "BRIDGE_113_8",
+    "BRIDGE_49_5",
+}
+HELD = {
+    "BYTE_EXACT_LOCAL_EQUIVALENCE",
+    "PUBLICATION_NOVELTY",
+    "EXTERNAL_REFEREE",
+}
 
 
 def load(path: Path) -> dict:
@@ -43,7 +55,10 @@ def main() -> int:
     assert all(atoms[name]["status"] == "SUPPORTED" for name in PROMOTED)
     assert all(atoms[name]["status"] == "UNKNOWN" for name in HELD)
     assert atoms["HOSTED_CI"]["status"] == "BLOCKED_INFRASTRUCTURE"
-    assert all(edge["from"] in atoms and edge["to"] in atoms for edge in edges_data["edges"])
+    assert all(
+        edge["from"] in atoms and edge["to"] in atoms
+        for edge in edges_data["edges"]
+    )
 
     result = {
         "schema": "orbit-synthesis/research-kernel-integrated-reconstruction/v1",
