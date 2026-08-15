@@ -1,0 +1,31 @@
+name: direct-q-pareto-formal
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/direct-q-pareto-formal.yml'
+      - 'research/tournaments/2026-08-15-direct-q-pareto/DirectQMux.lean'
+      - 'research/tournaments/2026-08-15-direct-q-pareto/check_lean.sh'
+      - 'research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/**'
+      - 'research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/**'
+      - 'research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/**'
+      - 'lakefile.lean'
+      - 'lean-toolchain'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  direct-q-mux-lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          test: false
+          use-mathlib-cache: true
+          build-args: '--wfail'
+      - name: Compile direct-Q mux and code bridge
+        run: bash research/tournaments/2026-08-15-direct-q-pareto/check_lean.sh
