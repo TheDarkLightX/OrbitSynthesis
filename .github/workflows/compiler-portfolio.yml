@@ -1,0 +1,36 @@
+name: compiler-portfolio
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/compiler-portfolio.yml'
+      - 'src/orbitsynthesis/decision_diagram.py'
+      - 'src/orbitsynthesis/decision_diagram_runtime.py'
+      - 'src/orbitsynthesis/fixed_q_structural.py'
+      - 'src/orbitsynthesis/compiler_portfolio.py'
+      - 'src/orbitsynthesis/compiler_portfolio_runtime.py'
+      - 'src/orbitsynthesis/compiler_portfolio_policy.py'
+      - 'src/orbitsynthesis/portfolio_bundle.py'
+      - 'src/orbitsynthesis/portfolio.py'
+      - 'tools/orbit_synthesize.py'
+      - 'schemas/mdd_artifact_v1.schema.json'
+      - 'schemas/compiler_portfolio_v1.schema.json'
+      - 'schemas/portfolio_proof_bundle_v1.schema.json'
+      - 'notes/COMPILER_PORTFOLIO.md'
+      - 'research/tournaments/2026-08-15-compiler-portfolio/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-compiler-portfolio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Replay structural, exact, MDD, and policy gates
+        run: bash research/tournaments/2026-08-15-compiler-portfolio/check.sh

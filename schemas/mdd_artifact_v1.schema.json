@@ -1,0 +1,149 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbitsynthesis.dev/schema/mdd-artifact-v1.json",
+  "title": "OrbitSynthesis reduced vector MDD artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "compiler",
+    "reason",
+    "row_limit",
+    "orders_considered",
+    "diagram",
+    "certificate",
+    "semantic_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "orbit-synthesis/mdd-artifact/v1"},
+    "status": {"enum": ["compiled", "unsupported", "not_applicable"]},
+    "compiler": {"const": "reduced-ordered-mdd/v1"},
+    "reason": {"type": ["string", "null"]},
+    "row_limit": {"type": "integer", "minimum": 1},
+    "orders_considered": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {"type": "integer", "minimum": 0}
+      }
+    },
+    "diagram": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/diagram"}
+      ]
+    },
+    "certificate": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/certificate"}
+      ]
+    },
+    "semantic_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "atom": {
+      "oneOf": [
+        {"type": "integer"},
+        {"type": "string"}
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "index"],
+      "properties": {
+        "kind": {"enum": ["terminal", "node"]},
+        "index": {"type": "integer", "minimum": 0}
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["variable", "children"],
+      "properties": {
+        "variable": {"type": "integer", "minimum": 0},
+        "children": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/reference"}
+        }
+      }
+    },
+    "diagram": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "carrier",
+        "input_arity",
+        "output_arity",
+        "variable_order",
+        "terminals",
+        "nodes",
+        "root",
+        "semantic_sha256"
+      ],
+      "properties": {
+        "schema": {"const": "orbit-synthesis/reduced-vector-mdd/v1"},
+        "carrier": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/atom"}
+        },
+        "input_arity": {"type": "integer", "minimum": 0},
+        "output_arity": {"type": "integer", "minimum": 0},
+        "variable_order": {
+          "type": "array",
+          "items": {"type": "integer", "minimum": 0}
+        },
+        "terminals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "items": {"$ref": "#/$defs/atom"}
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/node"}
+        },
+        "root": {"$ref": "#/$defs/reference"},
+        "semantic_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "certificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "algebra_sha256",
+        "strategy_sha256",
+        "mdd_sha256",
+        "rows_checked",
+        "node_count",
+        "terminal_count",
+        "depth",
+        "evaluation_sha256",
+        "semantic_sha256"
+      ],
+      "properties": {
+        "schema": {"const": "orbit-synthesis/mdd-table-equivalence/v1"},
+        "algebra_sha256": {"$ref": "#/$defs/sha256"},
+        "strategy_sha256": {"$ref": "#/$defs/sha256"},
+        "mdd_sha256": {"$ref": "#/$defs/sha256"},
+        "rows_checked": {"type": "integer", "minimum": 0},
+        "node_count": {"type": "integer", "minimum": 0},
+        "terminal_count": {"type": "integer", "minimum": 0},
+        "depth": {"type": "integer", "minimum": 0},
+        "evaluation_sha256": {"$ref": "#/$defs/sha256"},
+        "semantic_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

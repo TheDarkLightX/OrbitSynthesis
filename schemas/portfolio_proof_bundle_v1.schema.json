@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbitsynthesis.dev/schema/portfolio-proof-bundle-v1.json",
+  "title": "OrbitSynthesis compiler-portfolio proof bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "proof_bundle",
+    "compiler_portfolio",
+    "manifest_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "orbit-synthesis/portfolio-proof-bundle/v1"},
+    "proof_bundle": {"$ref": "proof_bundle_v1.schema.json"},
+    "compiler_portfolio": {"$ref": "compiler_portfolio_v1.schema.json"},
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
