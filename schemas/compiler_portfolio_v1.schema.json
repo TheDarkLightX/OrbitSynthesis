@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbitsynthesis.dev/schema/compiler-portfolio-v1.json",
+  "title": "OrbitSynthesis compiler portfolio artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "config",
+    "selected_backend",
+    "selected_kind",
+    "attempts",
+    "original_signature",
+    "mdd",
+    "reason",
+    "semantic_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "orbit-synthesis/compiler-portfolio/v1"},
+    "status": {"enum": ["compiled", "unsupported", "not_applicable"]},
+    "config": {"$ref": "#/$defs/config"},
+    "selected_backend": {"type": ["string", "null"]},
+    "selected_kind": {
+      "oneOf": [
+        {"type": "null"},
+        {"enum": ["original_signature", "mdd"]}
+      ]
+    },
+    "attempts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/attempt"}
+    },
+    "original_signature": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/original_signature"}
+      ]
+    },
+    "mdd": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "mdd_artifact_v1.schema.json"}
+      ]
+    },
+    "reason": {"type": ["string", "null"]},
+    "semantic_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policy",
+        "exact_max_rows",
+        "mdd_max_rows",
+        "structural_candidate_limit",
+        "enable_exact",
+        "enable_structural",
+        "enable_mdd",
+        "include_shannon_diagnostic",
+        "exact_limits"
+      ],
+      "properties": {
+        "policy": {
+          "enum": ["practical", "original_signature", "mdd_only"]
+        },
+        "exact_max_rows": {"type": "integer", "minimum": 1},
+        "mdd_max_rows": {"type": "integer", "minimum": 1},
+        "structural_candidate_limit": {"type": "integer", "minimum": 1},
+        "enable_exact": {"type": "boolean"},
+        "enable_structural": {"type": "boolean"},
+        "enable_mdd": {"type": "boolean"},
+        "include_shannon_diagnostic": {"type": "boolean"},
+        "exact_limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_depth",
+            "max_semantic_functions",
+            "max_combinations",
+            "max_exploration_nodes",
+            "max_operation_arity"
+          ],
+          "properties": {
+            "max_depth": {"type": "integer", "minimum": 1},
+            "max_semantic_functions": {"type": "integer", "minimum": 1},
+            "max_combinations": {"type": "integer", "minimum": 1},
+            "max_exploration_nodes": {"type": "integer", "minimum": 1},
+            "max_operation_arity": {"type": "integer", "minimum": 1}
+          }
+        }
+      }
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backend",
+        "tier",
+        "status",
+        "implementation_kind",
+        "reason",
+        "score",
+        "metrics"
+      ],
+      "properties": {
+        "backend": {"type": "string", "minLength": 1},
+        "tier": {"enum": ["tiny", "medium", "practical", "research"]},
+        "status": {
+          "enum": ["compiled", "unsupported", "not_applicable", "diagnostic"]
+        },
+        "implementation_kind": {
+          "oneOf": [
+            {"type": "null"},
+            {"enum": ["original_signature", "mdd"]}
+          ]
+        },
+        "reason": {"type": ["string", "null"]},
+        "score": {"type": ["integer", "null"], "minimum": 0},
+        "metrics": {"type": "object"}
+      }
+    },
+    "original_signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["backend", "dag", "certificate", "semantic_sha256"],
+      "properties": {
+        "backend": {
+          "enum": ["exact-semantic-closure", "fixed-q-structural-router"]
+        },
+        "dag": {"type": "object"},
+        "certificate": {"type": "object"},
+        "semantic_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -22,7 +22,7 @@ The repository will not assume that a Myhill-Nerode-style minimization theorem f
 
 ## Practical finite-algebra kernel
 
-The standalone research kernel also studies safety controllers constrained to be one shared term operation of a finite algebra. It can compile internal partial-symmetry constraints to exact domain models, optimize a winning domain, reconstruct a complete controller, emit independently replayable evidence, and—when bounded original-signature compilation succeeds—emit a checked executable operation DAG.
+The standalone research kernel also studies safety controllers constrained to be one shared term operation of a finite algebra. It can compile internal partial-symmetry constraints to exact domain models, optimize a winning domain, reconstruct a complete controller, emit independently replayable evidence, and produce a checked executable implementation.
 
 ### Portable semantic proof bundle
 
@@ -58,18 +58,46 @@ python3 tools/orbit_synthesize.py verify-executable \
 
 A successful executable bundle additionally contains a shared DAG whose nodes are only declared basic operations of the embedded finite algebra. The verifier evaluates the DAG on the complete finite input space and checks exact equality with the certified controller table. Bounded compiler exhaustion is reported as `unsupported`; it is not treated as a nondefinability proof.
 
+### Practical compiler portfolio
+
+```bash
+python3 tools/orbit_synthesize.py synthesize-portfolio \
+  --input examples/proof_bundle/discriminator_policy.json \
+  --out portfolio.json \
+  --backend native \
+  --portfolio-policy practical
+
+python3 tools/orbit_synthesize.py verify-portfolio \
+  --input portfolio.json
+```
+
+The portfolio records four distinct tiers:
+
+```text
+tiny       exact semantic closure
+medium     fixed-Q structural signed-router recognition
+practical  reduced ordered vector MDD
+research   fixed-Q Shannon diagnostic only
+```
+
+The Shannon/Lupanov lane is never automatically selected. A portfolio result either contains a verified original-signature DAG or a separately typed MDD implementation. The verifier recomputes the deterministic selection from the recorded attempts and policy.
+
 See:
 
 ```text
 notes/PORTABLE_PROOF_BUNDLES.md
 notes/ORIGINAL_SIGNATURE_DAG_BUNDLES.md
+notes/COMPILER_PORTFOLIO.md
 schemas/finite_safety_problem_v1.schema.json
 schemas/proof_bundle_v1.schema.json
 schemas/controller_dag_artifact_v1.schema.json
 schemas/executable_proof_bundle_v1.schema.json
+schemas/mdd_artifact_v1.schema.json
+schemas/compiler_portfolio_v1.schema.json
+schemas/portfolio_proof_bundle_v1.schema.json
 ```
 
-The current v1 interface is explicit and finite, assumes the caller has justified quasi-primal interpolation, and does not yet provide a temporal or omega-categorical frontend. The generic original-signature compiler is bounded; specialized high-arity compilers remain separate research backends.
+The current v1 interface is explicit and finite, assumes the caller has justified quasi-primal interpolation, and does not yet provide a temporal or omega-categorical frontend. The original-signature compilers are incomplete by design; MDD output is exact executable behavior but is not claimed to be an algebra term.
 
 ## Status
 
