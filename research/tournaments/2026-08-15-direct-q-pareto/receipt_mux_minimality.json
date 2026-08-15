@@ -1,0 +1,38 @@
+{
+  "conclusion": "five operation nodes are necessary and sufficient in the declared grammar",
+  "exact_size_results": {
+    "1": "UNSAT",
+    "2": "UNSAT",
+    "3": "UNSAT",
+    "4": "UNSAT",
+    "5": "SAT"
+  },
+  "grammar": {
+    "operations": [
+      "u",
+      "d"
+    ],
+    "output": "last operation node",
+    "sharing": "arbitrary references to earlier nodes",
+    "terminals": [
+      "x",
+      "b0",
+      "b1",
+      "b2",
+      "0",
+      "1",
+      "2"
+    ]
+  },
+  "schema": "orbit-synthesis/direct-q-mux-minimality/v1",
+  "scope_boundary": "This is a local gadget lower bound with dynamic value names treated as available terminals. It is not a lower bound for the complete integrated compiler or for richer signatures.",
+  "semantic_sha256": "f3c706a0b912e1a492bfefffe9ae0af33777ea2acd6d245d00212c3c24d6e45f",
+  "solver": {
+    "name": "Z3",
+    "version": "4.16.0"
+  },
+  "status": "exact bounded synthesis",
+  "truth_table_rows": 81,
+  "witness_nodes": 5,
+  "witness_semantic_checks": 81
+}
