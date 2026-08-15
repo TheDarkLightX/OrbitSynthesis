@@ -1,0 +1,37 @@
+name: original-signature-dag-bundles
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/original-signature-dag-bundles.yml'
+      - 'src/orbitsynthesis/original_signature_dag.py'
+      - 'src/orbitsynthesis/executable_bundle.py'
+      - 'src/orbitsynthesis/proof_bundle.py'
+      - 'src/orbitsynthesis/proof_bundle_io.py'
+      - 'src/orbitsynthesis/problem_io.py'
+      - 'src/orbitsynthesis/finite_algebra.py'
+      - 'src/orbitsynthesis/__init__.py'
+      - 'tools/orbit_synthesize.py'
+      - 'schemas/controller_dag_artifact_v1.schema.json'
+      - 'schemas/executable_proof_bundle_v1.schema.json'
+      - 'examples/proof_bundle/**'
+      - 'notes/ORIGINAL_SIGNATURE_DAG_BUNDLES.md'
+      - 'research/tournaments/2026-08-15-original-signature-dag-bundles/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  exact-original-signature-dags:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install exact backend dependency
+        run: python -m pip install --upgrade scipy
+      - name: Replay executable DAG bundles
+        run: bash research/tournaments/2026-08-15-original-signature-dag-bundles/check.sh

@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbitsynthesis.dev/schema/controller-dag-artifact-v1.json",
+  "title": "OrbitSynthesis original-signature controller DAG artifact v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "compiler",
+    "limits",
+    "statistics",
+    "reason",
+    "dag",
+    "certificate",
+    "semantic_sha256"
+  ],
+  "properties": {
+    "schema": {
+      "const": "orbit-synthesis/controller-dag-artifact/v1"
+    },
+    "status": {
+      "enum": [
+        "compiled",
+        "unsupported",
+        "not_applicable"
+      ]
+    },
+    "compiler": {
+      "const": "bounded-semantic-closure/v1"
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_depth",
+        "max_semantic_functions",
+        "max_combinations",
+        "max_exploration_nodes",
+        "max_operation_arity"
+      ],
+      "properties": {
+        "max_depth": {"type": "integer", "minimum": 1},
+        "max_semantic_functions": {"type": "integer", "minimum": 1},
+        "max_combinations": {"type": "integer", "minimum": 1},
+        "max_exploration_nodes": {"type": "integer", "minimum": 1},
+        "max_operation_arity": {"type": "integer", "minimum": 1}
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "semantic_functions",
+        "combinations_tried",
+        "exploration_nodes",
+        "depth_reached",
+        "skipped_operations"
+      ],
+      "properties": {
+        "semantic_functions": {"type": "integer", "minimum": 0},
+        "combinations_tried": {"type": "integer", "minimum": 0},
+        "exploration_nodes": {"type": "integer", "minimum": 0},
+        "depth_reached": {"type": "integer", "minimum": 0},
+        "skipped_operations": {"type": "integer", "minimum": 0}
+      }
+    },
+    "reason": {
+      "type": ["string", "null"]
+    },
+    "dag": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/dag"}
+      ]
+    },
+    "certificate": {
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "#/$defs/certificate"}
+      ]
+    },
+    "semantic_sha256": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"status": {"const": "compiled"}},
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "reason": {"type": "null"},
+          "dag": {"$ref": "#/$defs/dag"},
+          "certificate": {"$ref": "#/$defs/certificate"}
+        }
+      },
+      "else": {
+        "properties": {
+          "reason": {"type": "string", "minLength": 1},
+          "dag": {"type": "null"},
+          "certificate": {"type": "null"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "index"],
+      "properties": {
+        "kind": {"enum": ["input", "node"]},
+        "index": {"type": "integer", "minimum": 0}
+      }
+    },
+    "dag": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "input_arity",
+        "output_arity",
+        "signature",
+        "nodes",
+        "roots",
+        "semantic_sha256"
+      ],
+      "properties": {
+        "schema": {
+          "const": "orbit-synthesis/original-signature-dag/v1"
+        },
+        "input_arity": {"type": "integer", "minimum": 0},
+        "output_arity": {"type": "integer", "minimum": 0},
+        "signature": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "arity"],
+            "properties": {
+              "name": {"type": "string", "minLength": 1},
+              "arity": {"type": "integer", "minimum": 0}
+            }
+          }
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["operation", "arguments"],
+            "properties": {
+              "operation": {"type": "string", "minLength": 1},
+              "arguments": {
+                "type": "array",
+                "items": {"$ref": "#/$defs/reference"}
+              }
+            }
+          }
+        },
+        "roots": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/reference"}
+        },
+        "semantic_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "certificate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "algebra_sha256",
+        "strategy_sha256",
+        "dag_sha256",
+        "rows_checked",
+        "output_arity",
+        "node_count",
+        "depth",
+        "evaluation_sha256",
+        "semantic_sha256"
+      ],
+      "properties": {
+        "schema": {
+          "const": "orbit-synthesis/controller-dag-equivalence/v1"
+        },
+        "algebra_sha256": {"$ref": "#/$defs/sha256"},
+        "strategy_sha256": {"$ref": "#/$defs/sha256"},
+        "dag_sha256": {"$ref": "#/$defs/sha256"},
+        "rows_checked": {"type": "integer", "minimum": 0},
+        "output_arity": {"type": "integer", "minimum": 0},
+        "node_count": {"type": "integer", "minimum": 0},
+        "depth": {"type": "integer", "minimum": 0},
+        "evaluation_sha256": {"$ref": "#/$defs/sha256"},
+        "semantic_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}
