@@ -1,0 +1,103 @@
+{
+  "claim_boundary": "This is a post-referee Pareto refinement on a separate branch. The 15/2 limsup is construction-specific and is not a lower bound for arbitrary d/u DAGs.",
+  "depth": "<=r+6*ceil(log2 r)+9",
+  "finite": {
+    "arities": [
+      64,
+      1023
+    ],
+    "checks": 960,
+    "minimum_depth_slack": 4,
+    "worst_arity": 84,
+    "worst_decimal": "7.925011431184678"
+  },
+  "gadgets": {
+    "codes": {
+      "0": [
+        1,
+        0
+      ],
+      "1": [
+        0,
+        1
+      ],
+      "2": [
+        0,
+        0
+      ]
+    },
+    "decoder_nodes": 1,
+    "encoder_nodes_per_value": 2,
+    "mux_checks": 81,
+    "mux_depth": 3,
+    "mux_nodes": 5
+  },
+  "schema": "orbit-synthesis/direct-q-pareto-size-8/v1",
+  "semantic_sha256": "9a121cea2251c4039dde487bddf3b7477d434f4134e2c63d1515639143182a41",
+  "semantics": {
+    "arities": [
+      3,
+      5
+    ],
+    "direct_widths": [
+      1,
+      2
+    ],
+    "library_sizes": [
+      27,
+      19683
+    ],
+    "local_widths": [
+      1,
+      2
+    ],
+    "maximum_depth": 27,
+    "maximum_nodes": 269,
+    "row_checks": 2214,
+    "selector_tables": 66
+  },
+  "status": "explicit bounded construction plus finite/analytic proof",
+  "tail": {
+    "architecture_limsup": "15/2",
+    "arities": [
+      1024,
+      16384
+    ],
+    "cases": {
+      "large_ratio": 8088,
+      "small_ratio": 7271,
+      "transition": 2
+    },
+    "checks": 199693,
+    "common_lower_terms": "four terms below 1/100",
+    "limsup_samples": [
+      {
+        "arity": 733,
+        "local_width": 6,
+        "normalized_decimal": "7.557013854784"
+      },
+      {
+        "arity": 2192,
+        "local_width": 7,
+        "normalized_decimal": "7.522417142992"
+      },
+      {
+        "arity": 6567,
+        "local_width": 8,
+        "normalized_decimal": "7.508613095060"
+      },
+      {
+        "arity": 19690,
+        "local_width": 9,
+        "normalized_decimal": "7.503251744644"
+      },
+      {
+        "arity": 59057,
+        "local_width": 10,
+        "normalized_decimal": "7.501210885164"
+      }
+    ],
+    "tail_total": "<769/100<8"
+  },
+  "theorem": "size <8*3^r/r for every r>=64"
+}
