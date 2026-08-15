@@ -1,0 +1,41 @@
+{
+  "claim_boundary": "The analytic proof uses the exact PR #15 recurrence, the explicit reconstructed compiler ledger, and the previously audited binary branch bounds. It is independent of the byte-exact 01ddf456 packet.",
+  "depth": "<=r+4*ceil(log2 r)+9",
+  "finite": {
+    "arities": [
+      64,
+      511
+    ],
+    "checks": 448,
+    "worst_arity": 93,
+    "worst_decimal": "14.925925925925938"
+  },
+  "schema": "orbit-synthesis/order-pair-integrated-constant-15/v1",
+  "semantic_sha256": "ad37969af91fee138674e66151ed1c55c6b4428f5786dce56a44e78744c25193",
+  "status": "finite replay plus unbounded analytic-tail certificate",
+  "tail": {
+    "arities": [
+      512,
+      16384
+    ],
+    "binary_bound": "<(3/4)*3^r/r",
+    "checks": 95238,
+    "local_library_bound": "<(1/27)*3^r/r",
+    "lower_order_bound": "<(1/100)*3^r/r",
+    "prefix_bound": "<(432/31)*3^r/r",
+    "sum": "308278/20925<15",
+    "worst_binary_arity": 512,
+    "worst_binary_decimal": "1.065778e-87"
+  },
+  "theorem": "total size <15*3^r/r for every r>=64",
+  "vector": {
+    "bound": "C_+(w)<=3*3^w/2",
+    "checks": 494,
+    "widths": [
+      7,
+      500
+    ],
+    "worst_decimal": "1.455875628715135",
+    "worst_width": 7
+  }
+}

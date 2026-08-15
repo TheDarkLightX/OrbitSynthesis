@@ -1,0 +1,108 @@
+{
+  "claim_boundary": "This independently reconstructs one explicit shared d/u DAG from a compatible selector table and proves the stated 34 size constant and coefficient-one depth ledger. It is not the byte-exact local 01ddf456 packet, a novelty opinion, FTO analysis, or a proof of finite-width optimality.",
+  "integrated_semantics": {
+    "arities": [
+      2,
+      3
+    ],
+    "maximum_materialized_depth": 17,
+    "maximum_materialized_nodes": 81,
+    "row_checks": 2016,
+    "selector_tables": 160
+  },
+  "large_arity_ledger": {
+    "arities": [
+      64,
+      16384
+    ],
+    "bounded_stronger_constant_16": true,
+    "checks": 228494,
+    "depth": "<=r+4*ceil(log2 r)+9",
+    "minimum_depth_slack": 2,
+    "proved_constant": "<34*3^r/r",
+    "worst_nonbinary_arity": 93,
+    "worst_nonbinary_decimal": "14.925925925925926",
+    "worst_total_arity": 93,
+    "worst_total_decimal": "14.925925925925938"
+  },
+  "mutations": {
+    "duplicated_prefix_vector": {
+      "normalized_decimal": "4.019310e+29",
+      "witness_arity": 64
+    },
+    "non_equivariant_selector_rejected": true,
+    "serialized_planes": {
+      "depth": 159,
+      "target": 97,
+      "witness_arity": 64
+    }
+  },
+  "order_pair_component": {
+    "exact_rows": [
+      {
+        "depth": 3,
+        "nodes": 6,
+        "root": "positive",
+        "width": 1
+      },
+      {
+        "depth": 3,
+        "nodes": 6,
+        "root": "negative",
+        "width": 1
+      },
+      {
+        "depth": 4,
+        "nodes": 20,
+        "root": "positive",
+        "width": 2
+      },
+      {
+        "depth": 4,
+        "nodes": 21,
+        "root": "negative",
+        "width": 2
+      },
+      {
+        "depth": 5,
+        "nodes": 66,
+        "root": "positive",
+        "width": 3
+      },
+      {
+        "depth": 5,
+        "nodes": 67,
+        "root": "negative",
+        "width": 3
+      },
+      {
+        "depth": 5,
+        "nodes": 151,
+        "root": "positive",
+        "width": 4
+      },
+      {
+        "depth": 5,
+        "nodes": 152,
+        "root": "negative",
+        "width": 4
+      },
+      {
+        "depth": 6,
+        "nodes": 428,
+        "root": "positive",
+        "width": 5
+      },
+      {
+        "depth": 6,
+        "nodes": 429,
+        "root": "negative",
+        "width": 5
+      }
+    ],
+    "semantic_checks": 132858
+  },
+  "schema": "orbit-synthesis/order-pair-integrated-compiler/v1",
+  "semantic_sha256": "b0dec4c34465d5b25e5aa35e59ac6016452afcb9df1307bbb6b52b5399b81e23",
+  "status": "fresh-room explicit construction and deterministic audit"
+}

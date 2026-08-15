@@ -1,0 +1,44 @@
+{
+  "claim_boundary": "This is a fresh-room optimization of the reconstructed compiler, not a claim about the byte-exact 01ddf456 packet.",
+  "depth": "<=r+4*ceil(log2 r)+9",
+  "finite": {
+    "arities": [
+      64,
+      1023
+    ],
+    "checks": 960,
+    "worst_arity": 88,
+    "worst_decimal": "14.123456790123541"
+  },
+  "parameter_rule": "H=r+1-ceil(log_3(r^2)); M=largest power of 3 <=H",
+  "schema": "orbit-synthesis/order-pair-adaptive-113-over-8/v1",
+  "semantic_sha256": "fb4bb1f1cac137e8bbe22a47070b733858009d60d6f3d2ddc755951ff1380142",
+  "status": "exact finite replay plus analytic-tail certificate",
+  "tail": {
+    "arities": [
+      1024,
+      16384
+    ],
+    "binary": "<1/100",
+    "cases": {
+      "gap_equal": 2,
+      "ratio_above_three": 28,
+      "ratio_at_most_three": 15331
+    },
+    "checks": 184332,
+    "lower_order": "<1/100",
+    "tail_total": "<1407/100<113/8",
+    "vector_coefficient": "27/20"
+  },
+  "theorem": "size <(113/8)*3^r/r for every r>=64",
+  "vector": {
+    "bound": "C_+(w)<=27*3^w/20",
+    "checks": 491,
+    "widths": [
+      10,
+      500
+    ],
+    "worst_decimal": "1.349455536926959",
+    "worst_width": 10
+  }
+}
