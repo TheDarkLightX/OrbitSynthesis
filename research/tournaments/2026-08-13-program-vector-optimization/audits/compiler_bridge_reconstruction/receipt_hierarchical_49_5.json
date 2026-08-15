@@ -1,0 +1,39 @@
+{
+  "depth": "<=r+4*ceil(log2 r)+9",
+  "finite": {
+    "arities": [
+      64,
+      1023
+    ],
+    "checks": 960,
+    "worst_arity": 88,
+    "worst_decimal": "9.777777777777862"
+  },
+  "schema": "orbit-synthesis/order-pair-hierarchical-49-over-5/v1",
+  "semantic_sha256": "ea6d5cf35755fd04cc69b040af1152ae3f72e8a6c4d41a65cc0256551929c520",
+  "semantics": {
+    "arities": [
+      3,
+      4
+    ],
+    "maximum_depth": 20,
+    "maximum_nodes": 137,
+    "row_checks": 3024,
+    "selector_tables": 80
+  },
+  "status": "explicit hierarchical reconstruction plus finite/analytic proof",
+  "tail": {
+    "arities": [
+      1024,
+      16384
+    ],
+    "cases": {
+      "ratio_above_two": 6206,
+      "ratio_at_most_two": 9153,
+      "transition": 2
+    },
+    "checks": 122888,
+    "tail_bound": "<91/10<49/5"
+  },
+  "theorem": "size <(49/5)*3^r/r for every r>=64"
+}
