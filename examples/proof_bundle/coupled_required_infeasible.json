@@ -1,0 +1,80 @@
+{
+  "algebra": {
+    "carrier": [
+      0,
+      1,
+      2
+    ],
+    "operations": [
+      {
+        "arity": 3,
+        "name": "d",
+        "outputs": [
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          2,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "arity": 1,
+        "name": "u",
+        "outputs": [
+          1,
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  "game": {
+    "input_arity": 0,
+    "safe_relation": {
+      "mode": "allowed",
+      "transitions": [
+        {"input": [], "output": [0], "state": [0]},
+        {"input": [], "output": [0], "state": [1]},
+        {"input": [], "output": [2], "state": [2]}
+      ]
+    },
+    "state_arity": 1
+  },
+  "name": "coupled-required-policy-infeasible",
+  "objective": {
+    "default_state_weight": 0,
+    "forbidden_states": [],
+    "required_states": [
+      [0],
+      [1]
+    ],
+    "state_weights": []
+  },
+  "schema": "orbit-synthesis/finite-safety-problem/v1",
+  "semantics": {
+    "mode": "quasi_primal_internal_groupoid",
+    "quasi_primal_premise_acknowledged": true
+  }
+}

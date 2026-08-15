@@ -138,6 +138,8 @@ from .principal_greatest_region import (
     audit_principal_no_greatest_region_witness,
     build_principal_no_greatest_region_witness,
 )
+from .problem_io import FiniteSafetyProblem
+from .proof_bundle import ProofBundle, synthesize_proof_bundle, verify_proof_bundle
 from .safety import FiniteSafetyGame, SafetySolution
 from .safety_components import (
     QuasiPrimalDomainResult,
@@ -197,6 +199,7 @@ __all__ = [
     "FiniteAlgebra",
     "FiniteOperation",
     "FiniteSafetyGame",
+    "FiniteSafetyProblem",
     "FixedDomainCorePoint",
     "FixedDomainCoreResult",
     "InternalIsomorphism",
@@ -221,6 +224,7 @@ __all__ = [
     "PrincipalBackendFamily",
     "PrincipalEquationAudit",
     "PrincipalNoGreatestRegionWitness",
+    "ProofBundle",
     "QuasiPrimalDomainModel",
     "QuasiPrimalDomainResult",
     "SafetySolution",
@@ -311,7 +315,9 @@ __all__ = [
     "solve_weighted_cnf_command",
     "solve_weighted_cnf_highs",
     "solve_weighted_cnf_pysat_rc2",
+    "synthesize_proof_bundle",
     "verify_list_subpower_witness",
+    "verify_proof_bundle",
     "verify_quasi_primal_domain_result",
     "verify_state_search_certificate",
     "verify_weighted_domain_result",

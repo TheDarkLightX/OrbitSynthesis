@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://orbitsynthesis.dev/schema/finite-safety-problem-v1.json",
+  "title": "OrbitSynthesis finite safety problem v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "name",
+    "semantics",
+    "algebra",
+    "game",
+    "objective"
+  ],
+  "properties": {
+    "schema": {
+      "const": "orbit-synthesis/finite-safety-problem/v1"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "quasi_primal_premise_acknowledged"
+      ],
+      "properties": {
+        "mode": {
+          "const": "quasi_primal_internal_groupoid"
+        },
+        "quasi_primal_premise_acknowledged": {
+          "const": true
+        }
+      }
+    },
+    "algebra": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "carrier",
+        "operations"
+      ],
+      "properties": {
+        "carrier": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/atom"
+          }
+        },
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "arity",
+              "outputs"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "arity": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "outputs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/atom"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "game": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state_arity",
+        "input_arity",
+        "safe_relation"
+      ],
+      "properties": {
+        "state_arity": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "input_arity": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "safe_relation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "mode",
+            "transitions"
+          ],
+          "properties": {
+            "mode": {
+              "enum": [
+                "allowed",
+                "forbidden"
+              ]
+            },
+            "transitions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/transition"
+              }
+            }
+          }
+        }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "default_state_weight",
+        "state_weights",
+        "required_states",
+        "forbidden_states"
+      ],
+      "properties": {
+        "default_state_weight": {
+          "type": "integer"
+        },
+        "state_weights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "state",
+              "weight"
+            ],
+            "properties": {
+              "state": {
+                "$ref": "#/$defs/row"
+              },
+              "weight": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "required_states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        },
+        "forbidden_states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/row"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "atom": {
+      "oneOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "row": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/atom"
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "input",
+        "output"
+      ],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/row"
+        },
+        "input": {
+          "$ref": "#/$defs/row"
+        },
+        "output": {
+          "$ref": "#/$defs/row"
+        }
+      }
+    }
+  }
+}

@@ -20,6 +20,36 @@ The first program studies three questions that arise directly from the current l
 
 The repository will not assume that a Myhill-Nerode-style minimization theorem for synthesis exists. That connection remains a candidate conjecture to test against the adjacent register/nominal-automata literature.
 
+## Practical finite-algebra kernel
+
+The standalone research kernel also studies safety controllers constrained to be one shared term operation of a finite algebra. It can compile internal partial-symmetry constraints to exact domain models, optimize a winning domain, reconstruct a complete controller, and emit independently replayable evidence.
+
+A versioned portable interface is under active review:
+
+```bash
+python3 tools/orbit_synthesize.py canonicalize \
+  --input examples/proof_bundle/discriminator_policy.json \
+  --out problem.json
+
+python3 tools/orbit_synthesize.py synthesize \
+  --input problem.json \
+  --out bundle.json \
+  --backend native
+
+python3 tools/orbit_synthesize.py verify \
+  --input bundle.json
+```
+
+The bundle verifier rebuilds the finite algebra and internal-groupoid component model, reconstructs the complete controller, recomputes the signed objective, and verifies a finite optimum or infeasibility proof. See:
+
+```text
+notes/PORTABLE_PROOF_BUNDLES.md
+schemas/finite_safety_problem_v1.schema.json
+schemas/proof_bundle_v1.schema.json
+```
+
+The current v1 interface is explicit and finite, assumes the caller has justified quasi-primal interpolation, and does not yet provide a temporal or omega-categorical frontend.
+
 ## Status
 
 Research program bootstrapped August 2026. See the research branch / draft pull requests for active claims and experiments.
