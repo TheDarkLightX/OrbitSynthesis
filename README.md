@@ -22,9 +22,9 @@ The repository will not assume that a Myhill-Nerode-style minimization theorem f
 
 ## Practical finite-algebra kernel
 
-The standalone research kernel also studies safety controllers constrained to be one shared term operation of a finite algebra. It can compile internal partial-symmetry constraints to exact domain models, optimize a winning domain, reconstruct a complete controller, and emit independently replayable evidence.
+The standalone research kernel also studies safety controllers constrained to be one shared term operation of a finite algebra. It can compile internal partial-symmetry constraints to exact domain models, optimize a winning domain, reconstruct a complete controller, emit independently replayable evidence, and—when bounded original-signature compilation succeeds—emit a checked executable operation DAG.
 
-A versioned portable interface is under active review:
+### Portable semantic proof bundle
 
 ```bash
 python3 tools/orbit_synthesize.py canonicalize \
@@ -40,15 +40,36 @@ python3 tools/orbit_synthesize.py verify \
   --input bundle.json
 ```
 
-The bundle verifier rebuilds the finite algebra and internal-groupoid component model, reconstructs the complete controller, recomputes the signed objective, and verifies a finite optimum or infeasibility proof. See:
+The semantic bundle verifier rebuilds the finite algebra and internal-groupoid component model, reconstructs the complete controller, recomputes the signed objective, and verifies a finite optimum or infeasibility proof.
+
+### Executable original-signature bundle
+
+```bash
+python3 tools/orbit_synthesize.py synthesize-executable \
+  --input examples/proof_bundle/discriminator_policy.json \
+  --out executable.json \
+  --backend native \
+  --dag-policy required \
+  --dag-max-depth 1
+
+python3 tools/orbit_synthesize.py verify-executable \
+  --input executable.json
+```
+
+A successful executable bundle additionally contains a shared DAG whose nodes are only declared basic operations of the embedded finite algebra. The verifier evaluates the DAG on the complete finite input space and checks exact equality with the certified controller table. Bounded compiler exhaustion is reported as `unsupported`; it is not treated as a nondefinability proof.
+
+See:
 
 ```text
 notes/PORTABLE_PROOF_BUNDLES.md
+notes/ORIGINAL_SIGNATURE_DAG_BUNDLES.md
 schemas/finite_safety_problem_v1.schema.json
 schemas/proof_bundle_v1.schema.json
+schemas/controller_dag_artifact_v1.schema.json
+schemas/executable_proof_bundle_v1.schema.json
 ```
 
-The current v1 interface is explicit and finite, assumes the caller has justified quasi-primal interpolation, and does not yet provide a temporal or omega-categorical frontend.
+The current v1 interface is explicit and finite, assumes the caller has justified quasi-primal interpolation, and does not yet provide a temporal or omega-categorical frontend. The generic original-signature compiler is bounded; specialized high-arity compilers remain separate research backends.
 
 ## Status
 
