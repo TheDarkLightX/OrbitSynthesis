@@ -21,6 +21,7 @@ from orbitsynthesis.generator_compressed_witness import (
 from orbitsynthesis.role_orbit_witness import (
     audit_role_orbit_principal_no_greatest_region_witness,
     build_role_orbit_principal_no_greatest_region_witness,
+    generating_tuple_orbit_representatives,
 )
 
 Q = (0, 1, 2)
@@ -126,24 +127,19 @@ def make_receipt() -> dict[str, object]:
         )
 
         if table == (1, 0, 1):
+            rank_orbits = generating_tuple_orbit_representatives(
+                algebra,
+                witness.structural.isomorphism.domain,
+                role_rank,
+                internal_isomorphisms=isomorphisms,
+            )
             q_checkpoint = {
                 "role_rank": role_rank,
                 "generator_tag_upper_bound": upper,
                 "generating_orbit_counts": list(
                     audit.compression_audit.generating_orbit_counts
                 ),
-                "available_rank_three_orbits": len(
-                    witness.structural.source_state
-                    and __import__(
-                        "orbitsynthesis.role_orbit_witness",
-                        fromlist=["generating_tuple_orbit_representatives"],
-                    ).generating_tuple_orbit_representatives(
-                        algebra,
-                        witness.structural.isomorphism.domain,
-                        role_rank,
-                        internal_isomorphisms=isomorphisms,
-                    )
-                ),
+                "available_rank_three_orbits": len(rank_orbits),
                 "roles": [
                     list(witness.structural.source_state),
                     list(witness.structural.source_output_zero),
