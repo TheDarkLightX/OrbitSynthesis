@@ -29,6 +29,7 @@ trap 'rm -f "$primary_normal" "$primary_optimized" "$independent_normal" "$indep
 cd "$repo_dir"
 python3 -m py_compile \
   src/orbitsynthesis/finite_algebra.py \
+  src/orbitsynthesis/parameter_closure.py \
   src/orbitsynthesis/patchability.py \
   src/orbitsynthesis/safety.py \
   src/orbitsynthesis/subpower_lists.py \
@@ -120,7 +121,7 @@ assert component["random_differential"]["domain_instances"] == 768
 assert component["random_differential"]["feasible"] == 165
 assert component["random_differential"]["infeasible"] == 603
 assert [
-    row["feasible"] for row in component["principal_differential"]
+    row["feasible"] for row in component["principal_differential"]["rows"]
 ] == [True, True, False]
 assert component["targeted"]["component_size"] == 2
 
@@ -165,6 +166,7 @@ sha256sum \
   "$component_backend" "$component_normal" \
   "$domain_model" "$domain_normal" \
   "$domain_solver" "$solver_normal" \
+  src/orbitsynthesis/parameter_closure.py \
   src/orbitsynthesis/subpower_lists.py \
   src/orbitsynthesis/greatest_region_boundary.py \
   src/orbitsynthesis/principal_greatest_region.py \

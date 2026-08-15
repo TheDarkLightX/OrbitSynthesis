@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/greatest-region-list-subpower.yml'
       - 'src/orbitsynthesis/finite_algebra.py'
+      - 'src/orbitsynthesis/parameter_closure.py'
       - 'src/orbitsynthesis/patchability.py'
       - 'src/orbitsynthesis/safety.py'
       - 'src/orbitsynthesis/subpower_lists.py'

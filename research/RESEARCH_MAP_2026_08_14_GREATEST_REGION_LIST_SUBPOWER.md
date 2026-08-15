@@ -193,8 +193,10 @@ state-only optimization oracle
 
 Next implementation targets:
 
-1. connect a real incremental SAT/MaxSAT backend under assumptions;
-2. benchmark eager selector CNF against lazy state-only learning;
+1. connect an external incremental MaxSAT backend with a proof-capable
+   optimality boundary;
+2. extend the Z3 eager/lazy calibration to scalable antichain and hardness
+   families, measuring memory and compilation time;
 3. compare subset-minimal and minimum-cardinality conflict cores;
 4. cache cores across incremental specification changes;
 5. add maximal-domain enumeration through blocking clauses;
@@ -246,6 +248,6 @@ are not yet:
 - Lean-formalized;
 - publication-novelty determinations;
 - patent/FTO conclusions;
-- real external-solver performance benchmarks;
+- external Open-WBO/MaxHS/RC2 performance and proof-trace benchmarks;
 - checked MaxSAT optimality proofs; or
 - evidence of scalability beyond the explicit calibration instances.

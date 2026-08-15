@@ -131,8 +131,9 @@ the problem and solver streams.
 
 A fake-solver adversarial audit covers valid CNF/WCNF decoding, false objective,
 UNSAT, timeout, output limit, bad return code, missing placeholder, and inert
-shell metacharacters. A real Open-WBO/MaxHS/RC2 performance run is still
-pending.
+shell metacharacters. A separate real-solver calibration now compares the eager
+and lazy encodings with Z3 Optimize. Open-WBO/MaxHS/RC2 and checked optimality
+proofs remain pending.
 
 ### 6. Verified state-literal conflict learning
 
@@ -169,6 +170,23 @@ same conflict certificates.
 
 ## Deterministic evidence
 
+### Gate repair on the frozen remote snapshot
+
+Fresh-room replay of remote head `a294308a8e12e86d825c15ca63b1b8044d6016a5`
+found three defects before the evidence packet would execute:
+
+1. `parameter_closure.py` contained escaped type brackets and could not import;
+2. the historical core seed returned three private literals instead of the one
+   shared literal required by its own synthetic control; and
+3. `check.sh` indexed the old list-shaped component receipt after that receipt
+   had moved its rows under a `rows` field.
+
+The type syntax and receipt path are repaired. Conflict minimization now
+compares the historical seed with a deterministic marginal-cover seed, then
+deletes redundancies and verifies the result against the raw failure and the
+compiled model. It remains a subset-minimal heuristic, not a
+minimum-cardinality algorithm. Both complete gates now replay from source.
+
 Established frontier and backend checkers:
 
 ```text
@@ -188,6 +206,14 @@ New conflict-learning checkers:
 check_domain_nogood.py
 check_domain_learning.py
 audits/independent/audit_domain_learning_independent.py
+```
+
+Real-solver calibration:
+
+```text
+benchmark_z3_learning.py
+check_z3_benchmark.sh
+Z3_BENCHMARK.md
 ```
 
 The established packet checks:
@@ -233,6 +259,14 @@ state, and the second proposal is optimal.
 The no-import core audit exhausts `30,625` two-candidate condition families and
 checks `2,000` larger deterministic random families.
 
+On Z3 4.15.4, the 81-state principal obstruction uses `17,255` eager
+variables and `17,405` eager hard clauses, versus `81` lazy state variables,
+three learned clauses, and four optimizer calls. Seven local repetitions gave
+medians of 209.23 ms eager and 13.07 ms lazy. On 24 tiny nine-state random
+games, eager was faster in aggregate (40.18 ms versus 76.98 ms). These are
+host-specific calibration observations and support a portfolio, not a universal
+lazy-solver dominance claim.
+
 The workflow now runs the established gate and `check_learning.sh`, with normal
 versus optimized byte equality required for every new checker. GitHub-hosted
 execution remains subject to the repository account's documented
@@ -266,7 +300,8 @@ than copied into this report before the integrated gate runs.
 - The universal state-arity cost of the converse has not been minimized.
 - The lazy reference oracle still enumerates state assignments; it is a
   correctness oracle, not a scalability claim.
-- No real external MaxSAT backend has yet been benchmarked in this environment.
+- Z3 weighted Boolean optimization has been benchmarked in-process; no
+  Open-WBO, MaxHS, RC2, or external proof-trace benchmark has been completed.
 - Minimum-cardinality conflict cores, proof traces for global MaxSAT
   optimality, and cross-update core reuse remain open.
 - Neither main theorem is yet Lean-formalized or externally peer reviewed.
@@ -274,10 +309,10 @@ than copied into this report before the integrated gate runs.
 
 ## Next actions
 
-1. Replace the exhaustive state oracle with an incremental MaxSAT adapter and
-   feed verified learned clauses back under assumptions.
-2. Benchmark eager selector CNF against lazy state-only learning on antichain,
-   initial-set-hardness, and random instances.
+1. Connect the verified lazy clauses to an external incremental MaxSAT backend
+   with a proof-capable optimality boundary.
+2. Extend the mixed eager/lazy Z3 calibration to scalable antichain and
+   initial-set-hardness families, including memory and compilation time.
 3. Compare subset-minimal cores with exact minimum-cardinality cores.
 4. Cache learned conflicts across small specification updates.
 5. Formalize the groupoid-component interpolation and conflict-soundness lemmas

@@ -17,8 +17,9 @@ not claimed to minimize cardinality globally.
 
 from __future__ import annotations
 
+from collections.abc import Hashable, Mapping
 from dataclasses import dataclass
-from typing import Hashable, Mapping
+from fractions import Fraction
 
 from .domain_model import (
     CompiledDomainFailure,
@@ -81,9 +82,7 @@ def _literal_key(literal: SignedStateLiteral) -> tuple[str, int]:
 def _condition_key(
     condition: frozenset[SignedStateLiteral],
 ) -> tuple[int, tuple[tuple[str, int], ...]]:
-    return len(condition), tuple(
-        sorted((_literal_key(item) for item in condition))
-    )
+    return len(condition), tuple(sorted(_literal_key(item) for item in condition))
 
 
 def candidate_violation_conditions(
@@ -125,45 +124,107 @@ def _covers_every_candidate(
     )
 
 
+def _delete_redundant_literals(
+    conditions: dict[int, tuple[frozenset[SignedStateLiteral], ...]],
+    seed: frozenset[SignedStateLiteral],
+) -> frozenset[SignedStateLiteral]:
+    """Deterministically shrink a covering seed to an irredundant core."""
+
+    core = seed
+    for literal in sorted(core, key=_literal_key, reverse=True):
+        reduced = core - {literal}
+        if _covers_every_candidate(conditions, reduced):
+            core = reduced
+    return core
+
+
+def _marginal_cover_seed(
+    conditions: dict[int, tuple[frozenset[SignedStateLiteral], ...]],
+) -> frozenset[SignedStateLiteral]:
+    """Build a compact deterministic cover using marginal candidate gain.
+
+    A violation condition can cover several candidates once its literals are
+    present. Choosing only the first condition of each candidate misses that
+    sharing. At each step we instead minimize new-literals/newly-covered over
+    every recorded condition. This is a set-cover heuristic, not a claim of
+    global minimum cardinality.
+    """
+
+    core: frozenset[SignedStateLiteral] = frozenset()
+    while not _covers_every_candidate(conditions, core):
+        uncovered = {
+            candidate_index
+            for candidate_index, candidate_conditions in conditions.items()
+            if not any(condition <= core for condition in candidate_conditions)
+        }
+        choices = []
+        for candidate_conditions in conditions.values():
+            for condition in candidate_conditions:
+                expanded = core | condition
+                added = len(expanded) - len(core)
+                newly_covered = sum(
+                    candidate_index in uncovered
+                    and any(
+                        candidate_condition <= expanded
+                        for candidate_condition in conditions[candidate_index]
+                    )
+                    for candidate_index in conditions
+                )
+                if added <= 0 or newly_covered <= 0:
+                    continue
+                choices.append(
+                    (
+                        Fraction(added, newly_covered),
+                        added,
+                        -newly_covered,
+                        _condition_key(condition),
+                        condition,
+                    )
+                )
+        if not choices:
+            raise AssertionError("candidate violations admit no covering seed")
+        core |= min(choices, key=lambda choice: choice[:-1])[-1]
+    return core
+
+
 def minimize_domain_failure(
     failure: CompiledDomainFailure,
 ) -> DomainConflictCore:
     """Build a deterministic subset-minimal conflict core.
 
-    The initial core takes the shortest lexicographically first violation for
-    each candidate. A deletion pass then removes every literal whose absence
-    still leaves at least one complete violation for every candidate.
+    Two deterministic seeds are compared: the historical union of the first
+    violation for each candidate, and a marginal-cover seed that detects
+    literals shared across candidates. A deletion pass makes each seed
+    irredundant; the smaller deterministic result is returned.
     """
 
     conditions = candidate_violation_conditions(failure)
     if not conditions:
-        raise ValueError(
-            "compiled domain failure contains no candidate violations"
-        )
+        raise ValueError("compiled domain failure contains no candidate violations")
     if any(not candidate_conditions for candidate_conditions in conditions.values()):
         raise ValueError("one failed candidate has no recorded violation")
 
-    core = frozenset(
+    first_condition_seed = frozenset(
         literal
         for candidate_conditions in conditions.values()
         for literal in candidate_conditions[0]
     )
-    if not _covers_every_candidate(conditions, core):
-        raise AssertionError(
-            "initial conflict core does not cover every candidate"
-        )
-
-    for literal in sorted(core, key=_literal_key, reverse=True):
-        reduced = core - {literal}
-        if _covers_every_candidate(conditions, reduced):
-            core = reduced
+    if not _covers_every_candidate(conditions, first_condition_seed):
+        raise AssertionError("initial conflict core does not cover every candidate")
+    seeds = (first_condition_seed, _marginal_cover_seed(conditions))
+    cores = tuple(_delete_redundant_literals(conditions, seed) for seed in seeds)
+    core = min(
+        cores,
+        key=lambda candidate: (
+            len(candidate),
+            tuple(sorted(_literal_key(item) for item in candidate)),
+        ),
+    )
 
     witnesses = []
     for candidate_index in sorted(conditions):
         condition = next(
-            condition
-            for condition in conditions[candidate_index]
-            if condition <= core
+            condition for condition in conditions[candidate_index] if condition <= core
         )
         witnesses.append(
             CandidateConflictWitness(
@@ -209,17 +270,13 @@ def verify_domain_conflict_core(
     if not conditions or not _covers_every_candidate(conditions, literal_set):
         return False
     witnesses = {
-        witness.candidate_index: witness
-        for witness in core.candidate_witnesses
+        witness.candidate_index: witness for witness in core.candidate_witnesses
     }
     if set(witnesses) != set(conditions):
         return False
     for candidate_index, witness in witnesses.items():
         condition = frozenset(witness.condition)
-        if (
-            condition not in conditions[candidate_index]
-            or not condition <= literal_set
-        ):
+        if condition not in conditions[candidate_index] or not condition <= literal_set:
             return False
 
     if require_minimal:
