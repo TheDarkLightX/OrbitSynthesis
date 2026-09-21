@@ -1,0 +1,24 @@
+{
+  "schema": "orbit.program-vector-optimization.gain-loss-referee-manifest.v1",
+  "verdict": "EXACT_LOCAL_THEOREM_SALVAGED",
+  "semantic_sha256": "5c25cde2692b6be004fa5e64782aea99980c654a97038650a19b2c57e3cb4018",
+  "files": {
+    "research/tournaments/2026-08-13-program-vector-optimization/STATE.md": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/check_gain_loss_vector.py": "ba7dbc467fdc1f3c5af3470eb12997f4d9ba8d46addb195700ba58fc636d8989",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/REPORT.md": "9ce65b526a9572c7f046cf7a36c4216b64ebfb8ce816c68d7f6fc769918b83cc",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/receipt.json": "248ed6e378cd8a909a4fb20a1d8e0c7558e8dd780be13411e1b338c4187b4744",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/receipt_optimized.json": "248ed6e378cd8a909a4fb20a1d8e0c7558e8dd780be13411e1b338c4187b4744"
+  },
+  "replay": [
+    "python3 research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/check_gain_loss_vector.py --out research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/receipt.json",
+    "python3 -O research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/check_gain_loss_vector.py --out research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/receipt_optimized.json",
+    "cmp -s research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/receipt.json research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/receipt_optimized.json"
+  ],
+  "scope": {
+    "gain_loss": "27*size<=100q and depth<=4+ceil(log2 w)",
+    "native_ternary": "size<=4q-1 and depth<=4+ceil(log2 w)",
+    "branch": "nonbinary A=2 only",
+    "cost_model": "original-signature multi-output shared DAG with free fanout",
+    "not_claimed": "integrated compiler, binary branch, formulas, global optimality, novelty, FTO"
+  }
+}

@@ -5,11 +5,17 @@ on:
     paths:
       - '.github/workflows/fixed-q-preprint.yml'
       - 'experiments/audit_fixed_q_preprint.py'
+      - 'experiments/test_preprint_subject.py'
       - 'experiments/audit_native_router_refinement.py'
       - 'notes/QUASIPRIMAL_CONSERVATIVE_TERM_*.md'
       - 'paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md'
       - 'paper/NATIVE_FIND_FIRST_ROUTER_*.md'
+      - 'paper/preprint/**'
       - 'research/tournaments/2026-08-13-semantic-router-frontier/**'
+      - 'research/tournaments/2026-08-13-program-vector-optimization/**'
+      - 'research/replays/pr16-20260921/**'
+      - 'research/RESEARCH_MAP_2026_08_13.md'
+      - 'research/SOURCES.md'
       - 'lakefile.lean'
       - 'lean-toolchain'
   workflow_dispatch:
@@ -32,7 +38,10 @@ jobs:
           use-mathlib-cache: true
           build-args: '--wfail'
       - name: Replay frozen preprint evidence and Lean proofs
-        run: python3 experiments/audit_fixed_q_preprint.py
+        run: |
+          python3 -B experiments/test_preprint_subject.py
+          python3 -B -O experiments/test_preprint_subject.py
+          python3 experiments/audit_fixed_q_preprint.py
       - name: Replay native router refinement evidence and Lean proofs
         run: python3 experiments/audit_native_router_refinement.py
       - name: Replay exact order-pair vectors and Lean proofs

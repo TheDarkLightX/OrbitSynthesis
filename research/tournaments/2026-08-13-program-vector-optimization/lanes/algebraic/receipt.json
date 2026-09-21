@@ -1,0 +1,32 @@
+{
+  "arithmetic_widths": 512,
+  "checker_sha256": "1680570460d8567bee54f73caa4a6f49265627b1cbed2f6a294867fa31a5f19d",
+  "concrete_router_checks_through_width_two": 9268,
+  "constant_router_modes_through_width_four": 20,
+  "cross_rail_identity_max_width": 5,
+  "direct_robdd_projection_modes_through_width_four": 242,
+  "headline": {
+    "N_asymptotic": "(4/3+o(1))q",
+    "N_uniform": "7q/3",
+    "P_asymptotic": "(4/3+o(1))q",
+    "P_uniform": "7q/3",
+    "depth": "2 if w=0 else 3+ceil(log2(w))",
+    "q": "3^w"
+  },
+  "normal_and_optimized_semantics_identical": true,
+  "replay_commands": [
+    "python3 research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/check_algebraic_program_vector.py",
+    "python3 -O research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/check_algebraic_program_vector.py"
+  ],
+  "schema": "orbit.program_vector_optimization.algebraic.receipt.v1",
+  "semantic_projection_pairs_through_width_six": 5978710,
+  "semantic_sha256": "647f91c6c85173bbcb275e43a2301a67c61a7fd4d703b4720664a1341d7277aa",
+  "state_sha256": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6",
+  "status": "PASS",
+  "structural_materialization_max_width": 10,
+  "recursive_terminal_mixed_exact_nodes": {
+    "N": [2, 6, 21, 58, 152, 399, 1099, 3113, 9084, 26773, 79643],
+    "P": [2, 5, 20, 57, 151, 398, 1098, 3112, 9083, 26772, 79642],
+    "widths": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  }
+}

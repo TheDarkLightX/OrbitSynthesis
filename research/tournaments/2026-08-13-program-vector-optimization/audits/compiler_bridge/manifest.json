@@ -1,0 +1,13 @@
+{
+  "artifacts": {
+    "REPORT.md": "a8fbc93efb852ee07b83f65a6de74cc7ba7efd5d23448d76ea6ecd0d1e82826f",
+    "check_compiler_bridge.py": "375f922cf91a7878d634faa4eceb648b89a907d8596c822346b2faee890445f6",
+    "receipt.json": "496583729f11fdd83fc123d83b47bffdbd289f7f99c9c593efe61e3acd4e2125",
+    "receipt_optimized.json": "496583729f11fdd83fc123d83b47bffdbd289f7f99c9c593efe61e3acd4e2125"
+  },
+  "schema": "orbit.program-vector.compiler-bridge-independent-audit.manifest.v1",
+  "subjects": {
+    "paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md": "47e017956f2a8e7b9fc8103f78432b5725a673459abd542ae2ad2ef58cd79654",
+    "research/tournaments/2026-08-13-program-vector-optimization/STATE.md": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6"
+  }
+}
