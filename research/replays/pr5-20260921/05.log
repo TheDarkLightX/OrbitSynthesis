@@ -1,0 +1,9 @@
+ABA ocLTL projection-fiber distribution
+  34 fibers of size 1
+   6 fibers of size 7
+   4 fibers of size 25
+   1 fibers of size 79
+  projection signatures: 45
+  complete T3 types:     255
+  largest fiber:         79
+  extra predicate bits needed for possible full refinement: 7

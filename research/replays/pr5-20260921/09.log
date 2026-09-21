@@ -1,0 +1,5 @@
+ABA clause-projection exhaustive checks passed
+  n_coarse = 1..4
+  eliminated BA variables r = 1,2
+  100 randomized clauses per (n_coarse,r)
+  0..3 positive disequation obligations

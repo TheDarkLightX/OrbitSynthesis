@@ -32,7 +32,28 @@
   "review_thread": "01a0c5ee-5982-75c1-b0db-15b1f69b9a66",
   "review_report_sha256": {
     "review-final.txt": "13dc16a52f2192c188d9b04c0c43b43725c36a7d08f3827c89898796602fc285",
-    "followup-final.txt": "7e811f6df596f11c79f85b48e7a28f8129a6863d1dc6f54995bf4b6b320a5837"
+    "followup-final.txt": "7e811f6df596f11c79f85b48e7a28f8129a6863d1dc6f54995bf4b6b320a5837",
+    "integration-review-final.txt": "35cb2eaf9bdf8a8a66cd865cc92a00171145b9832dca01ce4c6ad5cb31dba324"
   },
-  "scope": "Repair and stronger evidence for an existing manuscript bound, not a new bound. No all-arity Lean compiler theorem, novelty or measured zkVM speedup."
+  "scope": "Repair and stronger evidence for an existing manuscript bound, not a new bound. No all-arity Lean compiler theorem, novelty or measured zkVM speedup.",
+  "integration": {
+    "main_commit": "17e7986f63b3cddfd954fff57585c629010ed9a5",
+    "reviewed_subject": {
+      "subject_sha256": "37159a863c2c4a63b2b3fc5be6f19ad0977ec9c77febac591b484eba45de3d47",
+      "checked_files": 82,
+      "manuscript_sha256": "01ddf4565212f798d0adf5c4c9b16d6de9074a317a34f2a39a80051de55a5410",
+      "meaning": "current source binding; mathematical coverage stays scoped"
+    },
+    "predecessor_subject_unchanged": true,
+    "predecessor_mathematical_inputs_unchanged": true,
+    "changed_predecessor_files": [
+      ".github/workflows/fixed-q-preprint.yml",
+      "experiments/audit_fixed_q_preprint.py",
+      "experiments/test_preprint_subject.py"
+    ],
+    "ordinary_optimized_subject_mutant_tests": "PASS",
+    "final_combined_gate": "HOSTED_CI_REQUIRED",
+    "review_result": "NO_BLOCKERS",
+    "independent_binding_controls_rejected": 328
+  }
 }

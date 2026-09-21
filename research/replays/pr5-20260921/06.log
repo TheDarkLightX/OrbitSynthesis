@@ -1,0 +1,7 @@
+ABA interior-y fiber group-testing checks
+  r=1: |F_r|=   1, information LB= 0, atomic optimum= 0
+  r=2: |F_r|=   7, information LB= 3, atomic optimum= 4
+  r=3: |F_r|=  25, information LB= 5, atomic optimum= 6
+  r=4: |F_r|=  79, information LB= 7, atomic optimum= 8
+  r=5: |F_r|= 241, information LB= 8, atomic optimum=10
+hardest r=4 fiber: 7 unrestricted bits, but 8 atomic equation tests

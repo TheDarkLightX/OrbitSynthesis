@@ -20,3 +20,16 @@ ran both full CLI numeric-substitution rejection controls. Independent follow-up
 also checked the byte-comparison path with receipt computation stubbed, without
 counting that stub as mathematical replay. Raw report hashes are in qualification.
 This is an internal agent review, not external peer review or a novelty finding.
+
+The integration preserves PR16's reviewed 75-file inventory as historical bytes.
+A successor 82-file inventory adds this lane and its note. Among the old inputs,
+only the workflow, selected inventory path and its test change; all mathematical
+source and receipts are identical. The shared gate selects the successor through
+one constant used by the mutation test too. The workflow retains the preprint,
+native-router and order-pair gates and adds the fast-anchor gate. Its path filters
+cover every bound file. Final combined hosted CI remains required.
+
+The independent integration follow-up found no blockers. All 82 hashes and CI
+filters matched, the 72 unchanged predecessor inputs matched main exactly, and
+328 changed/missing input controls rejected in ordinary and optimized execution
+of the actual binding checker. The inventory remains a trusted review input.

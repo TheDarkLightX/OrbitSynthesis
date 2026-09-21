@@ -1,0 +1,54 @@
+{
+  "schema": "orbitsynthesis-pr-qualification-v1",
+  "pr": 13,
+  "original_head": "364d7a9d46bce9d1e10687d091369e4980a6b364",
+  "inherited_qualified_repair": "abbc0ce6be4a3b2611ebdd253294c625731528e8",
+  "python": "3.12",
+  "lean": "4.34.0-rc1",
+  "mathlib": "9aa55045016ce35bb2379a8fc3d7f268995fb99a",
+  "command": "python3 -B experiments/audit_fixed_q_preprint.py",
+  "result": {
+    "claim_boundary": "Exact PASS for the signed-router and program-vector theorems and their local shared-DAG cost certificate. The all-arity r+O(log r) compiler remains conditional on its named frozen integration premises. Novelty, patent/FTO, license, practical performance, and publication readiness are not established by this gate.",
+    "results": {
+      "classical_transfer": {
+        "semantic_sha256": "0e2f9218bb41de563c9eec29e05a8dc8a370f7b470d87fa36bb046d2de3113ed"
+      },
+      "conditional_compiler_ledger": {
+        "semantic_sha256": "d81d0bd6b979ec0df4270fd60f04468884de6e286aea450ba28eed9897e51870",
+        "stdout_sha256": "629e0ba0f471b1de6e3824e090b9510640d23e91cd0ed59fea1997c9556ea649"
+      },
+      "lean": {
+        "ProgramVector.lean": "c2f477edd110c4df96f3c30f31f02de09af93045720babfd38dd2dd79a5573dd",
+        "ProgramVectorCost.lean": "ea516b085cdedd3f0ee70f83a9d0240df55e7e68cf0ad8ce77558efd91db55d2",
+        "StrongSignedRouter.lean": "687a77ed1f3b0bfe2a540bc670f6db942e15bddc339ccfbceffba9699766227a"
+      },
+      "program_vector_author": {
+        "file_sha256": "c9e8b1ad9c57f4ef55ea458b2573f20578a137a6c7b5fb1a66707bb7ee68b632",
+        "semantic_sha256": "9699a3fe058369ac22a4a4d8050d07825cc80112cbc4c601a85914100db13f88"
+      },
+      "program_vector_independent_audit": {
+        "file_sha256": "f6af15d3b5a8330a0f8248f9ffa5410dd1dfc762a89dbc20ecfe0d21aee714b8",
+        "semantic_sha256": "4922df2221b3e6195d7b1af3a3ac770ae92a8aed10843430b9cffb20959c58ea"
+      },
+      "signed_router_author": {
+        "summary_sha256": "6042127fd9f214e63bc38aa8e6367d1db7580c24b2b2e7a3aeba16625279aff0",
+        "witness_sha256": "6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65"
+      },
+      "signed_router_independent_audit": {
+        "file_sha256": "41ebde43fb3dee99b995224670d607bba331aa498cb49fca477802b4aea632a8",
+        "semantic_sha256": "ac566d0b716575ff693bc3a1f125283c764ef608a04c183a17293fe66adc4cb2"
+      }
+    },
+    "schema": "orbit-synthesis/fixed-q-preprint-gate/v1",
+    "status": "PASS"
+  },
+  "gate_sha256": "44610fd2228c1d260300059f40520c4725f51ade6c9ec30c6a237d930c044ae9",
+  "ordinary_package_lean": "PASS: lake build --wfail, 443 jobs",
+  "python_compileall": "PASS",
+  "notes": [
+    "Original author and independent-auditor evidence reproduced byte-for-byte in ordinary and optimized Python.",
+    "All three standalone Lean proof layers compile under the pinned environment.",
+    "Preserved original preprint packet bytes, including three historical extra EOF blank lines.",
+    "The all-arity integrated compiler remains conditional on its named hypotheses. No practical speedup, novelty or release-readiness claim follows."
+  ]
+}

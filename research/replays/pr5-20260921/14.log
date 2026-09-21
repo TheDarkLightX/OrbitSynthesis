@@ -1,0 +1,4 @@
+ABA S_d symmetry quotient checks passed
+  full concrete arena == histogram quotient for d=1..4
+  zero safety fixed points compared
+  invariant positive predecessor masks compared

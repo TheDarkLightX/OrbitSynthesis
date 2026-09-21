@@ -1,0 +1,295 @@
+{
+  "demo": {
+    "compiled_artifact_verified": false,
+    "patent_clearance_established": false,
+    "production_authority": false,
+    "results": {
+      "delayed_service": {
+        "accepted": true,
+        "checked_product_edges": 4,
+        "checked_recurrence_sets": 1,
+        "contract_sha256": "bf7919c70a91d6c287bdb5d286833f59662302846ce420b12ae16a4c1ff9eb53",
+        "reachable_product_states": 2,
+        "strategy_sha256": "3f49d8741d9452033058c200033a8cbd59aa9e5496b5edb9cd31f1e7c2c46a30"
+      },
+      "fair_arbiter": {
+        "accepted": true,
+        "checked_product_edges": 16,
+        "checked_recurrence_sets": 2,
+        "contract_sha256": "7497bb35d0791348c3affdf1a0fa4b844cacd6a415b54ec4964d2c1f1c245a38",
+        "reachable_product_states": 4,
+        "strategy_sha256": "8800afe9abc97d3f2ab2f07ac7ffa1d69f11d1bd90f082028a67010f8ef71c7f"
+      },
+      "output_bit_flip": {
+        "accepted": false,
+        "code": "unsafe_transition",
+        "cycle": [],
+        "detail": "selected transition is unsafe",
+        "prefix": [
+          {
+            "input": 0,
+            "memory": 0,
+            "next_memory": 0,
+            "next_plant": -1,
+            "output": 1,
+            "plant": 0
+          }
+        ],
+        "recurrence_index": null
+      },
+      "priority_arbiter": {
+        "accepted": false,
+        "code": "recurrence_counterexample",
+        "cycle": [
+          {
+            "input": 1,
+            "memory": 5,
+            "next_memory": 5,
+            "next_plant": 2,
+            "output": 1,
+            "plant": 2
+          }
+        ],
+        "detail": "reachable cycle avoids a recurrence set",
+        "prefix": [
+          {
+            "input": 3,
+            "memory": 0,
+            "next_memory": 5,
+            "next_plant": 2,
+            "output": 1,
+            "plant": 0
+          }
+        ],
+        "recurrence_index": 1
+      },
+      "starving_service": {
+        "accepted": false,
+        "code": "recurrence_counterexample",
+        "cycle": [
+          {
+            "input": 0,
+            "memory": 0,
+            "next_memory": 0,
+            "next_plant": 1,
+            "output": 0,
+            "plant": 1
+          }
+        ],
+        "detail": "reachable cycle avoids a recurrence set",
+        "prefix": [
+          {
+            "input": 1,
+            "memory": 0,
+            "next_memory": 0,
+            "next_plant": 1,
+            "output": 0,
+            "plant": 0
+          }
+        ],
+        "recurrence_index": 0
+      }
+    },
+    "schema": "orbitsynthesis/finite-strategy-demo/v1",
+    "tau_execution_performed": false
+  },
+  "exhaustive_graph_cases_per_mode": 33100,
+  "exhaustive_producer_bridge_cases_per_mode": 8192,
+  "exhaustive_table_machines_per_mode": 592,
+  "image_bit_corruptions_rejected_per_mode": 1120,
+  "intended_application_scope": "solely_tau_net",
+  "known_faults_detected": [
+    "unchecked_contract_pin",
+    "skipped_safety",
+    "omitted_recurrence",
+    "ignored_second_input",
+    "runtime_ignored_memory",
+    "runtime_output_flip",
+    "runtime_memory_update_flip",
+    "omitted_runtime_comparison"
+  ],
+  "native_codegen_verified": false,
+  "normal_optimized_agree": true,
+  "patent_clearance_established": false,
+  "producer_demo": {
+    "accepted": true,
+    "domain_order": {
+      "inputs": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "states_and_outputs": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ]
+    },
+    "intended_application_scope": "solely_tau_net",
+    "native_codegen_verified": false,
+    "producer": "FiniteSafetyGame.solve_ordinary",
+    "producer_winning_state_count": 3,
+    "recurrence_required": false,
+    "runtime_refinement_verified": false,
+    "schema": "orbitsynthesis/tau-net-controller-demo/v1",
+    "source_sha256": {
+      "examples/controllers/synthesize_tau_net_gate.py": "7bc1d91eb14c6f18b97d166a9b7e9ebf67573c9f9f3e9a37dcacb6171ab7e2bc",
+      "src/orbitsynthesis/controller_compile.py": "7bdce9c734535fe2fb061b187a1aedad13c564871fb5b9c261df101d89f839ea",
+      "src/orbitsynthesis/controller_runtime.py": "9652a088bfd898f2673a5a2bbdbfa5d2af550a0f17702a13777967e5f253e760",
+      "src/orbitsynthesis/finite_algebra.py": "8a0f66c904783542640006f3f63faa1d9af86669d35496b268ac52f26cb076ad",
+      "src/orbitsynthesis/safety.py": "9bc959a16d5f96d5c8acae3067341c78d4c0c3061414589ce2f0b2aa61bbae00",
+      "src/orbitsynthesis/safety_export.py": "91ee38e8bbb7f9fc4103495ba8b1cc60dd268dd270cbe5bd3a3176dea0fb853a",
+      "src/orbitsynthesis/strategy_checker.py": "f2d7ac7401662840dc0b165a93baf1902328d3a950f12a13ba400332291b195a"
+    },
+    "table_runtime_equivalence_verified": true,
+    "table_runtime_verification": {
+      "checked_memory_input_pairs": 12,
+      "program_sha256": "f9070e544bed6d07fcc64f0b7a0ecc0ed2cff701dcd1d537d9f8664486ad5c91",
+      "runtime_profile": "orbitsynthesis/osmc-table-runtime/v1",
+      "strategy_verification": {
+        "checked_product_edges": 12,
+        "checked_recurrence_sets": 0,
+        "contract_sha256": "1f37493c022e0c8842087ba53c72cde58c2100d25f2f8a92829fbd996c2e5301",
+        "reachable_product_states": 3,
+        "strategy_sha256": "f22bb2cea551f7a24a845683a32d175388324f9a4fababbb678911bb910a1e03"
+      }
+    },
+    "tau_execution_performed": false,
+    "tau_net_deployed": false,
+    "verification": {
+      "checked_product_edges": 12,
+      "checked_recurrence_sets": 0,
+      "contract_sha256": "1f37493c022e0c8842087ba53c72cde58c2100d25f2f8a92829fbd996c2e5301",
+      "reachable_product_states": 3,
+      "strategy_sha256": "f22bb2cea551f7a24a845683a32d175388324f9a4fababbb678911bb910a1e03"
+    }
+  },
+  "producer_relation_models_per_mode": 256,
+  "runtime_refinement_verified": false,
+  "schema": "orbitsynthesis/finite-controller-replay/v1",
+  "seeded_product_cases_per_mode": 300,
+  "source_sha256": {
+    "LICENSE": "85508b9757ff910428e29187f2b199070dc70e3e07c0ac02ae6b4cac5c3e6cb9",
+    "README.md": "fdd62d4abddad25ee139ffc814d63df66261dbf31c562534829e41f6cd96b3db",
+    "examples/controllers/README.md": "610ca6d7a1f87a4f101b51291cec86fa35e8202408a373c3a5ed639adf0e012e",
+    "examples/controllers/TABLE_RUNTIME.md": "ac60b0b741110986a8c31435d44bcbb6b80a1769c19fc1ec12637a85ef21e0de",
+    "examples/controllers/TAU_NET_APPLICATION.md": "bf821f66bd515270db661a79f59823f7e9a539932c83853d495899092b40dcef",
+    "examples/controllers/arbiter.contract.json": "7497bb35d0791348c3affdf1a0fa4b844cacd6a415b54ec4964d2c1f1c245a38",
+    "examples/controllers/arbiter.sha256": "62c79b15c02a16fe34aa8191cd8fb00d001a11823ae0dfc04c7cb2164781e13c",
+    "examples/controllers/arbiter.strategy.json": "8800afe9abc97d3f2ab2f07ac7ffa1d69f11d1bd90f082028a67010f8ef71c7f",
+    "examples/controllers/arbiter_priority.contract.json": "7497bb35d0791348c3affdf1a0fa4b844cacd6a415b54ec4964d2c1f1c245a38",
+    "examples/controllers/arbiter_priority.sha256": "62c79b15c02a16fe34aa8191cd8fb00d001a11823ae0dfc04c7cb2164781e13c",
+    "examples/controllers/arbiter_priority.strategy.json": "a7cc41f6d35892a3b807e6509e4065289a4eeee32bce191bf4b4718452333b83",
+    "examples/controllers/output_flip.contract.json": "ef491526116d7e3b65d3f1506feb7a0e9c4603b8a0ac5d4e22466ba5aef15dd3",
+    "examples/controllers/output_flip.sha256": "1ddfbf6bc42cf69ddc39f9de846e691376e6d188d54f38ab656cca4a271fc824",
+    "examples/controllers/output_flip.strategy.json": "e2f4e647eeb4b6a06ef5817067977e7382295b0264fdc430f7ecb604c22cacdf",
+    "examples/controllers/service.contract.json": "bf7919c70a91d6c287bdb5d286833f59662302846ce420b12ae16a4c1ff9eb53",
+    "examples/controllers/service.sha256": "8683a053f68f8ffd83ca4569babe433c2599088c103c5158727a98ecc68312be",
+    "examples/controllers/service.strategy.json": "3f49d8741d9452033058c200033a8cbd59aa9e5496b5edb9cd31f1e7c2c46a30",
+    "examples/controllers/service_starving.contract.json": "bf7919c70a91d6c287bdb5d286833f59662302846ce420b12ae16a4c1ff9eb53",
+    "examples/controllers/service_starving.sha256": "8683a053f68f8ffd83ca4569babe433c2599088c103c5158727a98ecc68312be",
+    "examples/controllers/service_starving.strategy.json": "26721c3d41c16e9e469bd4c1415acac6614923d096042d9b9cddb2d275cf82dd",
+    "examples/controllers/synthesize_tau_net_gate.py": "7bc1d91eb14c6f18b97d166a9b7e9ebf67573c9f9f3e9a37dcacb6171ab7e2bc",
+    "research/prototypes/2026-09-12-strategy-checker/CONTRACT.md": "746aacc29998074adf02b34a09dcf6351dd8eaa9ce28e7f54160072e7ab85cd1",
+    "research/prototypes/2026-09-12-strategy-checker/PROVENANCE.md": "36eb6c8657562218853d2184b5e2731bfb2b964031093438e4ae137904cc3b1f",
+    "research/prototypes/2026-09-12-strategy-checker/README.md": "69ad0f52b8a56574b6914e50139e64aa04a1465e252eff7240a6c02e1eee8b2b",
+    "research/prototypes/2026-09-12-strategy-checker/UPSTREAM_REVIEW.md": "510801ac504c7663978d8fd1aef8cdac8f273faa4817e7b6130bba55a3f28476",
+    "research/prototypes/2026-09-12-strategy-checker/baselines/producer-bridge-v1.tar.gz": "dbb1e5f589afb90560ac222b041381eb17ef636db79f46c33bdc8266cbf79efe",
+    "research/prototypes/2026-09-12-strategy-checker/baselines/standalone-v1.tar.gz": "822fcd8dcfc8a5fdc4313efde18ea2ad2c3dc3c6992f889e25ebc5fdc88f5937",
+    "research/prototypes/2026-09-12-strategy-checker/check.py": "c285c5bea9e66f9d2062165380f7b35f4a1e2a9b9dcb21e676b7032dbdcf085e",
+    "research/prototypes/2026-09-12-strategy-checker/demo.py": "8999db522849e72d78a0704f2f00feccfc00fed943333278735e17f3585f7fb1",
+    "research/prototypes/2026-09-12-strategy-checker/test_checker.py": "ef11c8e8ed4f111768fdfa58db91a95018409797c575c7ead8667e56deef0f77",
+    "research/prototypes/2026-09-12-strategy-checker/test_controller_runtime.py": "d0f3d659168a44adde40cb560ee58355da4a1bb45719234febb0cf513e846699",
+    "research/prototypes/2026-09-12-strategy-checker/test_safety_export.py": "26ec3dab72d3d7095a7c7c1b461ae0e2746a9a2050aad2171d8847e9c8ed0bb3",
+    "research/prototypes/2026-09-12-strategy-checker/upstream_receipt.json": "b4a18ccf932bb69c1cb165dca92af03d076ceaaea6e806f5c01b60b040bf22d7",
+    "scripts/check_controller.py": "4560cba4110803ec5512af292d431006d64eed38fcb3c035f1285426938561ce",
+    "scripts/run_controller.py": "778bc960171a9732f45d6e78f01c25701c726d3343029de9a3b1bd718b5852aa",
+    "src/orbitsynthesis/controller_compile.py": "7bdce9c734535fe2fb061b187a1aedad13c564871fb5b9c261df101d89f839ea",
+    "src/orbitsynthesis/controller_runtime.py": "9652a088bfd898f2673a5a2bbdbfa5d2af550a0f17702a13777967e5f253e760",
+    "src/orbitsynthesis/finite_algebra.py": "8a0f66c904783542640006f3f63faa1d9af86669d35496b268ac52f26cb076ad",
+    "src/orbitsynthesis/safety.py": "9bc959a16d5f96d5c8acae3067341c78d4c0c3061414589ce2f0b2aa61bbae00",
+    "src/orbitsynthesis/safety_export.py": "91ee38e8bbb7f9fc4103495ba8b1cc60dd268dd270cbe5bd3a3176dea0fb853a",
+    "src/orbitsynthesis/strategy_checker.py": "f2d7ac7401662840dc0b165a93baf1902328d3a950f12a13ba400332291b195a"
+  },
+  "stateful_runtime_traces_per_mode": 1280,
+  "status": "PASS",
+  "table_runtime_equivalence_verified": true,
+  "table_runtime_replay": {
+    "accepted": true,
+    "application_effects_executed": false,
+    "native_codegen_verified": false,
+    "schema": "orbitsynthesis/table-controller-replay/v1",
+    "source_sha256": {
+      "scripts/run_controller.py": "778bc960171a9732f45d6e78f01c25701c726d3343029de9a3b1bd718b5852aa",
+      "src/orbitsynthesis/controller_runtime.py": "9652a088bfd898f2673a5a2bbdbfa5d2af550a0f17702a13777967e5f253e760",
+      "src/orbitsynthesis/strategy_checker.py": "f2d7ac7401662840dc0b165a93baf1902328d3a950f12a13ba400332291b195a"
+    },
+    "table_runtime_equivalence_verified": true,
+    "tau_execution_performed": false,
+    "trace": [
+      {
+        "input": 0,
+        "memory": 0,
+        "next_memory": 0,
+        "output": 0
+      },
+      {
+        "input": 1,
+        "memory": 0,
+        "next_memory": 1,
+        "output": 1
+      },
+      {
+        "input": 2,
+        "memory": 1,
+        "next_memory": 2,
+        "output": 2
+      },
+      {
+        "input": 3,
+        "memory": 2,
+        "next_memory": 1,
+        "output": 1
+      }
+    ],
+    "verification": {
+      "checked_memory_input_pairs": 12,
+      "program_sha256": "f9070e544bed6d07fcc64f0b7a0ecc0ed2cff701dcd1d537d9f8664486ad5c91",
+      "runtime_profile": "orbitsynthesis/osmc-table-runtime/v1",
+      "strategy_verification": {
+        "checked_product_edges": 12,
+        "checked_recurrence_sets": 0,
+        "contract_sha256": "1f37493c022e0c8842087ba53c72cde58c2100d25f2f8a92829fbd996c2e5301",
+        "reachable_product_states": 3,
+        "strategy_sha256": "f22bb2cea551f7a24a845683a32d175388324f9a4fababbb678911bb910a1e03"
+      }
+    }
+  },
+  "tau_execution_performed": false
+}

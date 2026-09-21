@@ -1,0 +1,40 @@
+{
+  "schema": "orbit-synthesis/pr-qualification/v1",
+  "pull_request": 15,
+  "original_head": "5f3093a636d1523331c93bcf5224c6393a57393f",
+  "status": "LOCAL_PASS",
+  "lean": "4.34.0-rc1",
+  "mathlib": "9aa55045016ce35bb2379a8fc3d7f268995fb99a",
+  "gate": "bash research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/check.sh",
+  "checks": {
+    "lean_layers": 5,
+    "original_theorem_headers_preserved_modulo_binder_rename": 24,
+    "semantic_projection_cases": 10761678,
+    "semantic_width": 7,
+    "lower_bound_width": 5,
+    "arithmetic_width": 500,
+    "normal_optimized_stdout_identical": true,
+    "receipt_variants_per_mode": 12,
+    "independent_review_variants_per_mode": 25
+  },
+  "raw_receipt_sha256": "4f9909fd45e9590146f9de9aa3d6ef930c3513998edb77eb71e65a961482df97",
+  "rendered_receipt_sha256": "dc2170109f22d30a4c994bc76503e964c5e535c3323fe333560364afc8d76abc",
+  "semantic_sha256": "bc2378444813857cb3943fff3b45164e21a486fc588b89c9125e6fbdbc2fd83d",
+  "review_thread": "01a0c5c7-18e4-7c31-ba40-812167bcdb35",
+  "review_report_sha256": {
+    "review-final.txt": "a66d912b954832252c5cba82fa4acf0d8485a3c71253596808d2157547452f92",
+    "followup-final.txt": "356e383fa8999abe2d589013ae166007f9c9f247deb79dc9d7b28247c2089abc"
+  },
+  "source_sha256": {
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/OrderPairLedger.lean": "945158903755cf370b470b1acbdf397e45914403704b162722446f779d2068af",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/OrderPairSemantics.lean": "73e7e08edac5129ba8897b101d85e94b5dcbb9c54bfab066b819a450513a6f6d",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/REPORT.md": "7e200ac22101df1801240129619817139e44e868dc653349d49d1a3ebbd70cd5",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/audit_core.py": "4a139c65abc4492e8fd21066421da15a1198e43df74d1303d658cdcdab0f00fe",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/audit_order_pair_program_vector.py": "b2c9fce4421d2caa786fd0c41da7121de4f02d7062c67c89be1c116a35330f7d",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/check.sh": "c13bcf7af016f0b944789e61b70ffd15c8b2aa05d093ac53c76a610253f283ff",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/order_pair_model.py": "f2547ea5da80da125334a1597bcb73577148d7f015025194bfc24d2d213216eb",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/receipt.json": "4f9909fd45e9590146f9de9aa3d6ef930c3513998edb77eb71e65a961482df97",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/test_receipt.py": "ad42dcc43104a557e78f17e1410491db259891d3deb7347b37a3266b13e71bf4"
+  },
+  "scope": "Finite semantics and recurrence theorems. No generic verified DAG extractor, formal asymptotic optimality, all-arity compiler correctness, practical speedup or publication readiness claim."
+}

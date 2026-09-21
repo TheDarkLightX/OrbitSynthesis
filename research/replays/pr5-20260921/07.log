@@ -1,0 +1,6 @@
+support-level ABA ROBDD self-tests passed
+k=0: coarse cells= 1, Ext ROBDD nonterminals=  5
+k=1: coarse cells= 2, Ext ROBDD nonterminals= 10
+k=2: coarse cells= 4, Ext ROBDD nonterminals= 20
+k=3: coarse cells= 8, Ext ROBDD nonterminals= 40
+k=4: coarse cells=16, Ext ROBDD nonterminals= 80

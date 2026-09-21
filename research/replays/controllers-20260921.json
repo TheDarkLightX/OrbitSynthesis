@@ -1,0 +1,11 @@
+{
+  "schema": "orbitsynthesis-controller-qualification-v1",
+  "base": "ad75145cea460484628a8638f4bf4e051ee81735",
+  "replay_sha256": "93acd8443d352d295c6c2d2b82aceabe95f6471d99b3a4fe95a46464047efba8",
+  "reviewed_diff_sha256": "bd9014bcf70171d0d1617c0e15158a9501753412321ac75f7e3237f81add5014",
+  "review": "**Bounded no-blockers** for the final staged diff against `ad75145cea460484628a8638f4bf4e051ee81735`.\n\nIndependent checks passed in normal and optimized Python:\n\n- **171 checker cases** matched a separately written fixed-point oracle. Finite counterexamples and lassos replayed correctly, including all-input safety and universal recurrence without fairness assumptions.\n- **48 bridge cases** matched a tuple-based safety oracle; checked initial memory, missing reachable rows, independent contract pinning, and retained-data isolation.\n- **38 image negatives**, **81 traces**, and independent image encoding checked runtime equivalence, including unreachable memory rows and nonzero initial memory.\n- Canonical encoding, typed bounds, immutable retained records, and **30 forged-receipt probes** passed. No receipt-object acceptance route was found through the checker, compiler, or loader.\n- Maximum-bound checks passed: **4,096 product states / 65,536 edges** and **1,024 runtime rows / 2,124 image bytes**.\n\nThe initial staged receipt had a stale README hash. That single-line correction was staged concurrently; I verified all other 39 staged files remained unchanged and all **41 replay source hashes** now match. I inspected the supplied replay evidence without repeating the full gates. Archived producer dependencies also matched byte-for-byte.\n\nFinal staged-diff SHA-256: `bd9014bcf70171d0d1617c0e15158a9501753412321ac75f7e3237f81add5014`.\n\nThese remain pure computation results. Public Python objects are forgeable and confer no host authorization. Native Tau translation, codegen refinement, and TauFold host/proof execution remain outside this review. This is neither a formal proof of Python correctness nor deployment-readiness evidence.\n\nI made no file edits, commits, pushes, or service writes.\n\n",
+  "full_replay": "PASS in normal and optimized Python; see prototype replay.json",
+  "new_tau_translation": false,
+  "native_codegen_refinement": false,
+  "operational_authority": false
+}

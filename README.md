@@ -22,4 +22,25 @@ The repository will not assume that a Myhill-Nerode-style minimization theorem f
 
 ## Status
 
-Research program bootstrapped August 2026. See the research branch / draft pull requests for active claims and experiments.
+The finite research kernels and formal checks are on `main`. Ongoing research
+claims retain their stated hypotheses and bounded evidence.
+
+## Check and run a finite controller
+
+The [controller examples](examples/controllers/README.md) provide a callable
+checker, a finite-safety producer bridge, and the OSMC table runtime used by the
+TauFold adapter. The caller independently pins the contract; every admitted
+environment input is checked for safety and recurring progress. A rejected
+strategy comes with a finite counterexample or a repeating starvation cycle.
+
+```bash
+python3 -B research/prototypes/2026-09-12-strategy-checker/check.py
+python3 -B examples/controllers/synthesize_tau_net_gate.py --output-dir /tmp/orbit-controller-demo
+python3 -B scripts/run_controller.py /tmp/orbit-controller-demo/contract.json /tmp/orbit-controller-demo/strategy.json /tmp/orbit-controller-demo/controller.osmc --contract-pin /tmp/orbit-controller-demo/contract.sha256 --inputs 0 1 2 3 --json
+```
+
+The checker verifies the explicit finite model. The runtime compares every
+declared memory/input step with the accepted strategy before execution.
+Native Tau syntax translation, native generated-code verification, network
+activation, and host authorization remain separate integration work. This
+original MIT implementation does not distribute the Tau framework.

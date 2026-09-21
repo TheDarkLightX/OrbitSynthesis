@@ -23,6 +23,7 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
+REVIEW_SUBJECT = Path("research/replays/pr17-20260921/subject.json")
 FRONTIER = ROOT / "research/tournaments/2026-08-13-semantic-router-frontier"
 OPT_FRONTIER = ROOT / "research/tournaments/2026-08-13-program-vector-optimization"
 
@@ -34,6 +35,32 @@ def require(condition: bool, message: str) -> None:
 
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def check_review_binding(root: Path = ROOT) -> dict[str, object]:
+    """Refuse drift from the reviewed current manuscript and replay inputs.
+
+    This inventory is an integrity check, not an independent mathematical proof.
+    Changing it requires a new source review; historical receipts stay intact.
+    """
+    subject = root / REVIEW_SUBJECT
+    record = json.loads(subject.read_text(encoding="utf-8"))
+    require(record.get("schema") == "orbit-synthesis/preprint-review-subject/v1",
+            "preprint review subject schema mismatch")
+    files = record.get("sha256")
+    require(type(files) is dict and files, "missing reviewed subject files")
+    require("paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md" in files,
+            "current manuscript absent from review binding")
+    for name, digest in files.items():
+        path = Path(name)
+        require(not path.is_absolute() and ".." not in path.parts,
+                "review subject path escapes repository")
+        require(type(digest) is str and re.fullmatch(r"[0-9a-f]{64}", digest),
+                f"invalid review subject digest: {name}")
+        require(sha256(root / path) == digest, f"reviewed subject changed: {name}")
+    return {"subject_sha256": sha256(subject), "checked_files": len(files),
+            "manuscript_sha256": files["paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md"],
+            "meaning": "current source binding; mathematical coverage stays scoped"}
 
 
 def run(command: list[str], *, env: dict[str, str] | None = None) -> bytes:
@@ -228,9 +255,11 @@ def check_lean(temp_root: Path) -> dict[str, str]:
 
 
 def main() -> None:
+    reviewed_subject = check_review_binding()
     with tempfile.TemporaryDirectory(prefix="orbit-fixed-q-preprint-") as temporary:
         temp_root = Path(temporary)
         results: dict[str, object] = {}
+        results["reviewed_current_subject"] = reviewed_subject
         results["binary_threshold_regression"] = check_binary_eventual_threshold()
 
         fused = FRONTIER / "lanes/fused"
@@ -423,8 +452,12 @@ def main() -> None:
             "optimized semantic identities are formalized, while no serialized width-w DAG or "
             "integrated all-arity Lean theorem is certified. A separate no-author-import "
             "reconstruction passes both compiler branches, their legality, substitution, decoder, "
-            "glue, and ledgers; together with the manuscript proof this supports the unconditional "
-            "manuscript theorem, not an external peer-review finding. Novelty, patent/FTO, license, "
+            "glue, and ledgers on the recorded domains. Complete compiler semantics are "
+            "materialized only at arities 2-3; higher-arity sweeps check arithmetic ledgers. "
+            "The current manuscript is source-bound to a separate agent review, not converted "
+            "into an unconditional compiler verification by this executable gate. Historical "
+            "manuscript-repair audit receipts remain excluded as mismatched and unreplayable. "
+            "Novelty, patent/FTO, license, "
             "practical performance, and publication readiness are not established by this gate."
         ),
         "results": results,
