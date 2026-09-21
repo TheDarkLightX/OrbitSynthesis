@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import itertools
 import json
+from functools import cache
 
 Q=(0,1,2)
 B=(0,1)
@@ -23,70 +24,70 @@ def clog2(n: int)->int:
     need(n>=1,"clog2 domain")
     return (n-1).bit_length()
 
-def profile(r: int)->tuple[int,int]:
+def anchor_term(r: int):
+    """Materialize the original-signature DAG described by the manuscript."""
     need(r>=1,"arity")
+    x=lambda i: ("x",i)
+    unary=lambda a: ("u",a)
+    disc=lambda a,b,c: ("d",a,b,c)
     if r==1:
-        return 0,0
+        return x(0)
     if r==2:
-        return 3,3
+        return disc(x(1),unary(unary(x(1))),x(0))
+    e=unary(x(1))
+    robust=disc(x(1),unary(e),disc(x(2),x(1),e))
     total=2**clog2(r)
-    def build(start: int,span: int,retained: int):
-        if retained==0:
+    def build(start: int,span: int):
+        if start>=r:
             return None
-        if start==0 and span==2 and retained==2:
-            return 4,3
+        if start==0 and span==2:
+            return robust
         if span==1:
             if start==r-1:
-                return 0,0
+                return x(0)
             need(start>=2,"unpaired pivot")
-            return 1,2
+            return disc(x(start+1),x(1),e)
         half=span//2
-        left=build(start,half,min(retained,half))
-        right=build(start+half,half,max(0,retained-half))
+        left=build(start,half)
+        right=build(start+half,half)
         need(left is not None,"missing left")
-        if right is None:
-            return left
-        return left[0]+right[0]+1,max(left[1],right[1])+1
-    result=build(0,total,r)
+        return left if right is None else disc(left,e,right)
+    result=build(0,total)
     need(result is not None,"missing root")
     return result
 
-def merge(values: list[int],identity: int)->int:
-    while len(values)>1:
-        out=[]
-        i=0
-        while i+1<len(values):
-            out.append(d(values[i],identity,values[i+1]))
-            i+=2
-        if i<len(values):
-            out.append(values[i])
-        values=out
-    return values[0]
+def profile(term)->tuple[int,int]:
+    nodes=set()
+    @cache
+    def depth(t):
+        if t[0]=="x":return 0
+        need(t[0] in ("u","d"),"foreign operation")
+        nodes.add(t)
+        return 1+max(depth(child) for child in t[1:])
+    height=depth(term)
+    return len(nodes),height
 
-def anchor(point: tuple[int,...])->int:
-    r=len(point)
-    if r==1:
-        return point[0]
-    if r==2:
-        return d(point[1],u(u(point[1])),point[0])
-    y=point[1]
-    e=u(y)
-    values=[d(y,u(e),d(point[2],y,e))]
-    values.extend(d(point[i],y,e) for i in range(3,r))
-    values.append(point[0])
-    return merge(values,e)
+def evaluate(term,point: tuple[int,...])->int:
+    @cache
+    def run(t):
+        if t[0]=="x":return point[t[1]]
+        if t[0]=="u":return u(run(t[1]))
+        need(t[0]=="d","foreign operation")
+        return d(*(run(child) for child in t[1:]))
+    return run(term)
 
 rows=[]
 evaluations=0
 for r in range(1,9):
-    nodes,depth=profile(r)
+    term=anchor_term(r)
+    nodes,depth=profile(term)
     expected_nodes=0 if r==1 else 3 if r==2 else 2*r-1
     expected_depth=0 if r==1 else 3 if r==2 else clog2(r)+2
     need(nodes==expected_nodes,"node census")
     need(depth<=expected_depth,"depth census")
     for point in itertools.product(Q,repeat=r):
         expected=point[0] if all(v in B for v in point) else 2
-        need(anchor(point)==expected,"semantic failure")
+        need(evaluate(term,point)==expected,"semantic failure")
         evaluations+=1
     rows.append({"r":r,"nodes":nodes,"depth":depth,"depth_bound":expected_depth})
 

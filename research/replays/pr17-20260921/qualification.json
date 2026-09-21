@@ -1,0 +1,38 @@
+{
+  "schema": "orbit-synthesis/pr-qualification/v1",
+  "pull_request": 17,
+  "original_head": "b793e9ea15a579057f7baf7478c8b261ef3f8550",
+  "status": "LOCAL_PASS_FINAL_HOSTED_CI_REQUIRED",
+  "gate": "bash research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check.sh",
+  "repaired_boundary": "The semantic helper and measured materialized DAG now use the manuscript tree. Arity-4 old helper depth5 was not evidence for the intended depth4.",
+  "checks": {
+    "ordinary_optimized_original_receipt_bytes_match": true,
+    "exhaustive_anchor_evaluations": 9840,
+    "ledger_arities": [
+      64,
+      16384
+    ],
+    "independent_review_arity_profiles": 274,
+    "independent_review_evaluations": 12766,
+    "full_mutation_checked": true,
+    "integer_tail_certificates": [
+      "100^7 > 2^45",
+      "105^62 <= 3^265"
+    ],
+    "actual_cli_numeric_mutant_rejected_in_both_modes": true
+  },
+  "source_sha256": {
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/REPORT.md": "0a43e0495455cc14f514c1aa62db94447a6873323d9e75fc2452611202d6a400",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/anchor_profile_receipt.json": "b931e11453fe90f3078b8c188b97eca8b4da4a0d2c504059410896ddba13642f",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check.sh": "e28d9427721393ac7d812c7c584abfeeb90a4f90690dbd3ba956ba1d93c17070",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check_fast_anchor_profile.py": "be7b277d32dbca8a66096a2b6d3a0d73575fc62a16303bdb6abfa0bf5c6c6272",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check_fast_anchor_sharp_bounds.py": "b4f6103509d7572ebb5c126cf6dab97922ccb876d210c7a8b17e054ac4fd8903",
+    "research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/receipt.json": "8df0d86fcb603043f7452be348f4e1fc4b8f66c6bcc5c770a6ec8bee4110a55c"
+  },
+  "review_thread": "01a0c5ee-5982-75c1-b0db-15b1f69b9a66",
+  "review_report_sha256": {
+    "review-final.txt": "13dc16a52f2192c188d9b04c0c43b43725c36a7d08f3827c89898796602fc285",
+    "followup-final.txt": "7e811f6df596f11c79f85b48e7a28f8129a6863d1dc6f54995bf4b6b320a5837"
+  },
+  "scope": "Repair and stronger evidence for an existing manuscript bound, not a new bound. No all-arity Lean compiler theorem, novelty or measured zkVM speedup."
+}

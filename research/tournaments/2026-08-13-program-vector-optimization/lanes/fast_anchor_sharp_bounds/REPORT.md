@@ -104,7 +104,7 @@ anchor semantics, a load-bearing mutation, all component inequalities, exact
 united-DAG ledgers through arity 16,384, and normal/optimized equality.
 
 ```text
-check_fast_anchor_sharp_bounds.py
+original check_fast_anchor_sharp_bounds.py (before integration repair)
   07a7fa06b222c178c32359bebee6f52a22b98f59026fb174f6afb7dcc11e2039
 receipt.json / generated stdout
   8df0d86fcb603043f7452be348f4e1fc4b8f66c6bcc5c770a6ec8bee4110a55c
@@ -115,6 +115,14 @@ semantic
 The replayed exact ratio is maximal at `r=93`, with value
 `14.925925925925929447...`; this bounded maximum is not an all-arity
 optimality statement.
+
+The 2026-09-21 integration repair makes the semantic helper use the manuscript's
+pruned conceptual tree, and makes the structural audit evaluate and measure one
+materialized original-signature DAG. Previously the semantic helper rebalanced
+the already-collapsed robust pair as an ordinary leaf. At arity four that different
+tree has depth five, whereas the manuscript tree has depth four. The original
+semantic values and both receipt byte strings remain unchanged after the repair.
+This closes a connection between the executable checks; it is not a new bound.
 
 ## Boundary
 

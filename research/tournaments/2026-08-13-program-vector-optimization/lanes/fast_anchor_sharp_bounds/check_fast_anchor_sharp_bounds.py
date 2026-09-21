@@ -63,24 +63,6 @@ def ratio(numerator: int, denominator: int, digits: int = 18) -> str:
     return f"{whole}." + "".join(tail)
 
 
-def merge_status(left: int, identity: int, right: int) -> int:
-    return d(left, identity, right)
-
-
-def balanced_merge(values: list[int], identity: int) -> int:
-    require(values, "empty status list")
-    while len(values) > 1:
-        next_values = []
-        index = 0
-        while index + 1 < len(values):
-            next_values.append(merge_status(values[index], identity, values[index + 1]))
-            index += 2
-        if index < len(values):
-            next_values.append(values[index])
-        values = next_values
-    return values[0]
-
-
 def fast_anchor(point: tuple[int, ...]) -> int:
     arity = len(point)
     require(arity >= 1, "empty point")
@@ -93,10 +75,25 @@ def fast_anchor(point: tuple[int, ...]) -> int:
     pivot = point[1]
     identity = u(pivot)
     robust = d(pivot, u(identity), d(point[2], pivot, identity))
-    statuses = [robust]
-    statuses.extend(d(point[index], pivot, identity) for index in range(3, arity))
-    statuses.append(point[0])
-    return balanced_merge(statuses, identity)
+    # The robust pair occupies an internal position of the ORIGINAL r-leaf
+    # tree. Rebalancing r-1 values after collapsing it adds an extra level.
+    def build(start: int, span: int):
+        if start >= arity:
+            return None
+        if start == 0 and span == 2:
+            return robust
+        if span == 1:
+            if start == arity - 1:
+                return point[0]
+            require(start >= 2, "unpaired pivot")
+            return d(point[start + 1], pivot, identity)
+        half = span // 2
+        left = build(start, half)
+        right = build(start + half, half)
+        require(left is not None, "missing left subtree")
+        return left if right is None else d(left, identity, right)
+
+    return build(0, 1 << clog2(arity))
 
 
 def anchor_reference(point: tuple[int, ...]) -> int:
@@ -118,7 +115,8 @@ def anchor_audit() -> dict[str, object]:
     for point in itertools.product(Q, repeat=3):
         x0, pivot, witness = point
         identity = u(pivot)
-        bad = d(pivot, identity, d(witness, pivot, identity))
+        bad_robust = d(pivot, identity, d(witness, pivot, identity))
+        bad = d(bad_robust, identity, x0)
         if bad != anchor_reference(point):
             mutation = {
                 "point": list(point),
@@ -266,17 +264,18 @@ def analytic_bases() -> dict[str, object]:
     power_rows = []
     log_rows = []
     for c in range(6, 11):
-        left_power = 6 * 3 ** (math.floor(3 * c / 5) - 2)
+        left_power = 6 * 3 ** ((3 * c) // 5 - 2)
         right_power = 2 ** (c - 1)
         require(left_power <= right_power, "five-step power base")
         power_rows.append([c, left_power, right_power])
         left_log = c - 1
-        right_log = 2 ** math.ceil(2 * c / 5)
+        right_log = 2 ** ((2 * c + 4) // 5)
         require(left_log <= right_log, "five-step log base")
         log_rows.append([c, left_log, right_log])
     require(9 * 93 == 31 * 27, "schedule equality")
-    require(5 + 2 * math.log(105, 3) <= 4 * 105 / 31, "schedule tail base")
-    require(4 / 31 - 2 / (105 * math.log(3)) > 0, "schedule derivative")
+    require(105**62 <= 3**265, "schedule tail base (exact certificate)")
+    # ln(3)>1, so the derivative is larger than 4/31 - 2/105.
+    require(4 * 105 > 2 * 31, "schedule derivative (exact lower bound)")
     return {
         "power_rows": power_rows,
         "log_rows": log_rows,
@@ -313,9 +312,9 @@ def ledger_audit() -> dict[str, object]:
 
         c = row["C"]
         require(row["b"] < c, "b<C")
-        require(row["b"] >= c - math.ceil(2 * c / 5) - 1, "b lower")
-        require(clog2(row["b"]) <= math.ceil(2 * c / 5), "log b")
-        depth_bound = r + math.ceil(7 * c / 5) + 11
+        require(row["b"] >= c - (2 * c + 4) // 5 - 1, "b lower")
+        require(clog2(row["b"]) <= (2 * c + 4) // 5, "log b")
+        depth_bound = r + (7 * c + 4) // 5 + 11
         require(row["final_depth"] <= depth_bound, "depth bound")
         slack = depth_bound - row["final_depth"]
         if slack < minimum_slack[0]:
@@ -344,7 +343,7 @@ def ledger_audit() -> dict[str, object]:
         row = exact_row(r)
         require(
             row["binary_depth"] + 2
-            <= r + math.ceil(7 * row["C"] / 5) + 11,
+            <= r + (7 * row["C"] + 4) // 5 + 11,
             "small binary depth",
         )
     tail = (
@@ -353,8 +352,10 @@ def ledger_audit() -> dict[str, object]:
         + (7 / 5) * math.log2(100)
         + 19 / 3
     )
-    require(tail > 0, "binary tail base")
-    require(1 / 3 - 73 / (30 * math.sqrt(100)) > 0, "binary tail derivative")
+    # G(100) = -9 + (7/5) log2(100); the display below is not a proof test.
+    require(100**7 > 2**45, "binary tail base (exact certificate)")
+    # The omitted positive logarithmic derivative only strengthens this bound.
+    require(100 > 73, "binary tail derivative (exact numerator over 300)")
     return {
         "arity_range": [64, 16384],
         "size_bound": "total<15*3^r/r",
@@ -397,7 +398,7 @@ def main() -> int:
     result = make_receipt()
     rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if expected is not None:
-        require(result == json.loads(expected.read_text()), "receipt drift")
+        require(rendered.encode("utf-8") == expected.read_bytes(), "receipt drift")
     if output is not None:
         output.write_text(rendered)
     print(rendered, end="")

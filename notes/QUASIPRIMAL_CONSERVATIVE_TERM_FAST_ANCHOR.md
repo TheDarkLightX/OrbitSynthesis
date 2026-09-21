@@ -343,25 +343,36 @@ The last inequality is exact because `4/1000<1/27`.
 
 ## 5. Deterministic evidence
 
-Standalone checker:
+Standalone semantic and ledger checker:
 
 `research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check_fast_anchor_sharp_bounds.py`
 
 It independently performs:
 
 - all `9,840` anchor evaluations through arity eight;
-- exact operation-node and depth checks for those materializations;
-- an effective mutation of the robust witness;
+- an effective robust-witness mutation tested in the complete anchor;
 - exact schedule and union ledgers for every `64<=r<=16384`;
 - each analytic component inequality separately;
 - the `r/M<=31/9` schedule lemma and both depth-parameter inequalities;
 - exact small binary-depth intervals and the analytic tail base; and
 - byte-identical normal and optimized replay against the committed receipt.
 
+The separate `check_fast_anchor_profile.py` materializes an original-signature
+DAG and uses that same DAG for semantic evaluation, shared-operation counting,
+and depth measurement. Its receipt is `anchor_profile_receipt.json`. The main
+ledger's node/depth rows state the formulas being checked; they are not themselves
+measurements of a constructed DAG. The integration repair preserves both
+original receipt byte strings and corrects the earlier collapsed-tree helper.
+
+The two logarithmic tail bases are checked with exact integer certificates:
+`100^7 > 2^45` and `105^62 <= 3^265`. Derivative lower bounds use the positive
+rational numerators `100-73` and `4*105-2*31` (with `ln(3)>1`). Floating-point
+formatting remains only for displaying the already-certified binary-tail margin.
+
 Recorded hashes:
 
 ```text
-checker SHA-256:
+original checker SHA-256 (before the 2026-09-21 integration repair):
   07a7fa06b222c178c32359bebee6f52a22b98f59026fb174f6afb7dcc11e2039
 receipt/stdout SHA-256:
   8df0d86fcb603043f7452be348f4e1fc4b8f66c6bcc5c770a6ec8bee4110a55c
