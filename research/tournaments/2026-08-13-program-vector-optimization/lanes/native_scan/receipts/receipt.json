@@ -1,0 +1,391 @@
+{
+  "arithmetic": {
+    "all_width_envelope": "3*S(w) <= 4*3^w + 15*3^ceil(w/2)",
+    "asymptotic": "S(w) <= (4/3+o(1))*3^w",
+    "max_ratio": {
+      "denominator": 9,
+      "numerator": 21,
+      "width": 2
+    },
+    "rows": [
+      {
+        "envelope_slack": 42,
+        "nodes": 5,
+        "q": 3,
+        "root_sign": 0,
+        "scaled_lower_gap": 3,
+        "width": 1
+      },
+      {
+        "envelope_slack": 39,
+        "nodes": 6,
+        "q": 3,
+        "root_sign": 1,
+        "scaled_lower_gap": 6,
+        "width": 1
+      },
+      {
+        "envelope_slack": 21,
+        "nodes": 20,
+        "q": 9,
+        "root_sign": 0,
+        "scaled_lower_gap": 24,
+        "width": 2
+      },
+      {
+        "envelope_slack": 18,
+        "nodes": 21,
+        "q": 9,
+        "root_sign": 1,
+        "scaled_lower_gap": 27,
+        "width": 2
+      },
+      {
+        "envelope_slack": 72,
+        "nodes": 57,
+        "q": 27,
+        "root_sign": 0,
+        "scaled_lower_gap": 63,
+        "width": 3
+      },
+      {
+        "envelope_slack": 69,
+        "nodes": 58,
+        "q": 27,
+        "root_sign": 1,
+        "scaled_lower_gap": 66,
+        "width": 3
+      },
+      {
+        "envelope_slack": 6,
+        "nodes": 151,
+        "q": 81,
+        "root_sign": 0,
+        "scaled_lower_gap": 129,
+        "width": 4
+      },
+      {
+        "envelope_slack": 3,
+        "nodes": 152,
+        "q": 81,
+        "root_sign": 1,
+        "scaled_lower_gap": 132,
+        "width": 4
+      },
+      {
+        "envelope_slack": 183,
+        "nodes": 398,
+        "q": 243,
+        "root_sign": 0,
+        "scaled_lower_gap": 222,
+        "width": 5
+      },
+      {
+        "envelope_slack": 180,
+        "nodes": 399,
+        "q": 243,
+        "root_sign": 1,
+        "scaled_lower_gap": 225,
+        "width": 5
+      },
+      {
+        "envelope_slack": 27,
+        "nodes": 1098,
+        "q": 729,
+        "root_sign": 0,
+        "scaled_lower_gap": 378,
+        "width": 6
+      },
+      {
+        "envelope_slack": 24,
+        "nodes": 1099,
+        "q": 729,
+        "root_sign": 1,
+        "scaled_lower_gap": 381,
+        "width": 6
+      },
+      {
+        "envelope_slack": 627,
+        "nodes": 3112,
+        "q": 2187,
+        "root_sign": 0,
+        "scaled_lower_gap": 588,
+        "width": 7
+      },
+      {
+        "envelope_slack": 624,
+        "nodes": 3113,
+        "q": 2187,
+        "root_sign": 1,
+        "scaled_lower_gap": 591,
+        "width": 7
+      },
+      {
+        "envelope_slack": 210,
+        "nodes": 9083,
+        "q": 6561,
+        "root_sign": 0,
+        "scaled_lower_gap": 1005,
+        "width": 8
+      },
+      {
+        "envelope_slack": 207,
+        "nodes": 9084,
+        "q": 6561,
+        "root_sign": 1,
+        "scaled_lower_gap": 1008,
+        "width": 8
+      },
+      {
+        "envelope_slack": 2061,
+        "nodes": 26772,
+        "q": 19683,
+        "root_sign": 0,
+        "scaled_lower_gap": 1584,
+        "width": 9
+      },
+      {
+        "envelope_slack": 2058,
+        "nodes": 26773,
+        "q": 19683,
+        "root_sign": 1,
+        "scaled_lower_gap": 1587,
+        "width": 9
+      },
+      {
+        "envelope_slack": 915,
+        "nodes": 79642,
+        "q": 59049,
+        "root_sign": 0,
+        "scaled_lower_gap": 2730,
+        "width": 10
+      },
+      {
+        "envelope_slack": 912,
+        "nodes": 79643,
+        "q": 59049,
+        "root_sign": 1,
+        "scaled_lower_gap": 2733,
+        "width": 10
+      },
+      {
+        "envelope_slack": 6627,
+        "nodes": 237632,
+        "q": 177147,
+        "root_sign": 0,
+        "scaled_lower_gap": 4308,
+        "width": 11
+      },
+      {
+        "envelope_slack": 6624,
+        "nodes": 237633,
+        "q": 177147,
+        "root_sign": 1,
+        "scaled_lower_gap": 4311,
+        "width": 11
+      },
+      {
+        "envelope_slack": 3312,
+        "nodes": 711129,
+        "q": 531441,
+        "root_sign": 0,
+        "scaled_lower_gap": 7623,
+        "width": 12
+      },
+      {
+        "envelope_slack": 3309,
+        "nodes": 711130,
+        "q": 531441,
+        "root_sign": 1,
+        "scaled_lower_gap": 7626,
+        "width": 12
+      },
+      {
+        "envelope_slack": 20598,
+        "nodes": 2129833,
+        "q": 1594323,
+        "root_sign": 0,
+        "scaled_lower_gap": 12207,
+        "width": 13
+      },
+      {
+        "envelope_slack": 20595,
+        "nodes": 2129834,
+        "q": 1594323,
+        "root_sign": 1,
+        "scaled_lower_gap": 12210,
+        "width": 13
+      },
+      {
+        "envelope_slack": 10911,
+        "nodes": 6384590,
+        "q": 4782969,
+        "root_sign": 0,
+        "scaled_lower_gap": 21894,
+        "width": 14
+      },
+      {
+        "envelope_slack": 10908,
+        "nodes": 6384591,
+        "q": 4782969,
+        "root_sign": 1,
+        "scaled_lower_gap": 21897,
+        "width": 14
+      },
+      {
+        "envelope_slack": 63108,
+        "nodes": 19143645,
+        "q": 14348907,
+        "root_sign": 0,
+        "scaled_lower_gap": 35307,
+        "width": 15
+      },
+      {
+        "envelope_slack": 63105,
+        "nodes": 19143646,
+        "q": 14348907,
+        "root_sign": 1,
+        "scaled_lower_gap": 35310,
+        "width": 15
+      },
+      {
+        "envelope_slack": 34260,
+        "nodes": 57417013,
+        "q": 43046721,
+        "root_sign": 0,
+        "scaled_lower_gap": 64155,
+        "width": 16
+      },
+      {
+        "envelope_slack": 34257,
+        "nodes": 57417014,
+        "q": 43046721,
+        "root_sign": 1,
+        "scaled_lower_gap": 64158,
+        "width": 16
+      }
+    ],
+    "widths": 4096,
+    "worst_envelope_slack": 3
+  },
+  "claim": {
+    "depth": "D(w) <= 3+ceil(log2 w)",
+    "leading": "limsup S(w)/q <= 4/3",
+    "scope": "one fixed root sign, A=2, scalar same-DAG/free-fanout original d/u signature",
+    "upper": "S(w) <= 4q/3 + 5*3^ceil(w/2)"
+  },
+  "exact": {
+    "comparisons": 1195740,
+    "max_width": 6,
+    "rows": [
+      {
+        "actual_nodes": 5,
+        "depth": 3,
+        "q": 3,
+        "root_sign": 0,
+        "upper_nodes": 5,
+        "width": 1
+      },
+      {
+        "actual_nodes": 6,
+        "depth": 3,
+        "q": 3,
+        "root_sign": 1,
+        "upper_nodes": 6,
+        "width": 1
+      },
+      {
+        "actual_nodes": 20,
+        "depth": 4,
+        "q": 9,
+        "root_sign": 0,
+        "upper_nodes": 20,
+        "width": 2
+      },
+      {
+        "actual_nodes": 21,
+        "depth": 4,
+        "q": 9,
+        "root_sign": 1,
+        "upper_nodes": 21,
+        "width": 2
+      },
+      {
+        "actual_nodes": 57,
+        "depth": 5,
+        "q": 27,
+        "root_sign": 0,
+        "upper_nodes": 57,
+        "width": 3
+      },
+      {
+        "actual_nodes": 58,
+        "depth": 5,
+        "q": 27,
+        "root_sign": 1,
+        "upper_nodes": 58,
+        "width": 3
+      },
+      {
+        "actual_nodes": 151,
+        "depth": 5,
+        "q": 81,
+        "root_sign": 0,
+        "upper_nodes": 151,
+        "width": 4
+      },
+      {
+        "actual_nodes": 152,
+        "depth": 5,
+        "q": 81,
+        "root_sign": 1,
+        "upper_nodes": 152,
+        "width": 4
+      },
+      {
+        "actual_nodes": 398,
+        "depth": 6,
+        "q": 243,
+        "root_sign": 0,
+        "upper_nodes": 398,
+        "width": 5
+      },
+      {
+        "actual_nodes": 399,
+        "depth": 6,
+        "q": 243,
+        "root_sign": 1,
+        "upper_nodes": 399,
+        "width": 5
+      },
+      {
+        "actual_nodes": 1098,
+        "depth": 6,
+        "q": 729,
+        "root_sign": 0,
+        "upper_nodes": 1098,
+        "width": 6
+      },
+      {
+        "actual_nodes": 1099,
+        "depth": 6,
+        "q": 729,
+        "root_sign": 1,
+        "upper_nodes": 1099,
+        "width": 6
+      }
+    ]
+  },
+  "nonclaims": [
+    "No second independent audit yet.",
+    "No Lean proof yet.",
+    "No exact finite-width optimum beyond the established small bases.",
+    "No formula or bounded-fanout transfer.",
+    "No integrated compiler, novelty, or FTO promotion."
+  ],
+  "schema": "orbit-synthesis/sibling-shared-program-vector/v1",
+  "semantic_sha256": "3b30a1ad6de10d39705d65edc3b27b8fd22acf361d2f7bd68f47d4d459e6d2ac",
+  "state_sha256": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6",
+  "status": "PROVISIONAL_EXACT_UPPER_MATCHES_LEADING_OUTPUT_LOWER",
+  "subject_sha256": "a41114a8f7bf21bd34d32b9fcc4b46e4558110de1aeb76817a071168c6d501e0"
+}

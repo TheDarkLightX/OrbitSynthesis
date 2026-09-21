@@ -1,0 +1,8 @@
+{
+  "checker_sha256": "375f922cf91a7878d634faa4eceb648b89a907d8596c822346b2faee890445f6",
+  "frozen_state_sha256": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6",
+  "schema": "orbit.program-vector.compiler-bridge-independent-audit.receipt.v1",
+  "semantic_sha256": "73a43b1e4292b56824e82a471833e69252c52f212463f182a90df63703eec23e",
+  "status": "PASS_I2_TO_I6__I1_AND_FINITE_FALLBACK_NOT_RECONSTRUCTED",
+  "stdout_sha256": "ad2cba605d978f3e9e6c78608253a1db9b01da9366b75f70fcdc664f2df72dc1"
+}

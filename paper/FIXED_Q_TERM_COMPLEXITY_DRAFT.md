@@ -2,11 +2,39 @@
 
 **Living manuscript draft — 2026-08-13**
 
-**Status.** The statements below are manuscript theorems supported by human-checkable proofs and deterministic bounded checks. The recursive signed-router family and the exact parallel address-program vector have independent no-author-import audits and Lean proofs, including the latter's complete `7q` shared-DAG cost and logarithmic-depth ledger. The integrated `r+O(log r)` arithmetic has an independent conditional pass, but the all-arity compiler remains explicitly conditional on the named selector, anchor, representation, binary-branch, decoder, finite-fallback, and glue lemmas. The manuscript has not been peer reviewed or cleared by a complete prior-art search. Mathematical novelty and patent freedom to operate are **UNKNOWN**. The local-coding and Shannon-counting methods are classical and are credited accordingly.
+**Status.** The statements below are manuscript theorems supported by
+human-checkable proofs and deterministic bounded checks. The recursive
+signed-router family and the exact sibling-shared address-program vector have
+independent no-author-import audits. Lean proves the local vector's semantic
+rail algebra, sharing identities, exact arithmetic recurrences, all-width
+`3S<=4q+15*3^ceil(w/2)` envelope, uniform `7q/3` bound, and sharp local
+depth. This is a recurrence-level
+certificate linked to the executable construction and independent audit, not
+yet a serialized hash-consed DAG theorem. A separate no-author-import audit
+reconstructs the nonbinary and binary branches, their original-signature
+legality, one-shot substitution, decoder, glue, and same-DAG ledgers. The
+integrated `r+O(log r)` compiler is therefore an unconditional manuscript
+theorem, although it is not yet formalized end to end in Lean. The manuscript
+has not been externally peer reviewed or cleared
+by a complete prior-art search. Mathematical novelty and patent freedom to
+operate are **UNKNOWN**. The local-coding, parallel-prefix, and
+Shannon-counting methods are classical and are credited accordingly.
 
 **Authorship gate.** Creator names, order, affiliations, and ORCIDs have not yet
 been fixed by the human collaborators. This working draft must not be deposited
 as an archival preprint until that metadata is supplied and approved.
+
+### Claim-status table
+
+| Object | Status in this draft | What is not claimed |
+|---|---|---|
+| Exact census, given the stated Pixley specialization | unconditional manuscript theorem | new discriminator interpolation theory |
+| `L_r(Q)=Theta(3^r/r)` for shared `{d,u}` DAGs | unconditional manuscript theorem | an exact leading size constant or an ordinary-tree theorem |
+| `Delta_r(Q)=Theta(r)` and leading depth coefficient one | unconditional manuscript theorem | an optimal additive-depth term |
+| d-only signed family `P_h,N_h` | unconditional exact local theorem | an optimal router in every grammar |
+| sibling-shared program vector, Theorem 6.9 | unconditional exact local theorem in its declared `A=2`, scalar-output, free-fanout model | simultaneous P/N cost, formula cost, or an integrated compiler lower bound |
+| `O(3^r/r)` size together with `r+O(log r)` depth | unconditional manuscript theorem; independently reconstructed, not end-to-end Lean-formalized | an optimal additive-depth theorem, formula bound, or bounded-fanout bound |
+| novelty, FTO, patents, Tau/license relationship, practical speed | **UNKNOWN / not claimed** | legal or commercial clearance |
 
 ## Abstract
 
@@ -22,7 +50,23 @@ For an operation `f`, let `C_r(f)` be the minimum number of original-signature o
 
 `max_(f in CT_r(Q)) C_r(f) = Theta(3^r/r)`.
 
-The lower bound holds for almost every uniformly selected member of `CT_r(Q)`. A sequence of depth refinements now includes an exact recursive signed-router family and an exact parallel program-vector construction. Conditional on the named upstream compiler lemmas, they culminate in one and the same DAG having
+The lower bound holds for almost every uniformly selected member of `CT_r(Q)`.
+A sequence of depth refinements includes an exact recursive signed-router
+family and an exact sibling-shared program-vector construction. For
+`q=3^w`, either fixed signed-router vector has local size `S(w)` and depth
+`D(w)` satisfying
+
+`3*S(w) <= 4q+15*3^ceil(w/2)`
+
+and
+
+`D(w) <= 3+ceil(log_2 w)`.
+
+Its leading size `(4/3+o(1))q` matches a `4q/3` scalar-output lower bound in
+the declared address-only model. This is an exact local theorem, not a global
+compiler lower bound. An explicit two-plane construction and a
+complement-relative binary construction culminate in one and the same DAG
+having
 
 `size=O(3^r/r)`
 
@@ -30,16 +74,30 @@ and
 
 `depth <= r+O(log r)`.
 
+More explicitly, for `r>=64` the construction has size below
+`34*3^r/r` and depth at most `r+4*ceil(log_2 r)+9`.
+
 Writing `Delta_r(Q)=max_(f in CT_r(Q)) D_r(f)`, syntax counting also gives the almost-all lower bound
 
 `D_r(f) >= r-log_3(log r)-O(1)`,
 
-and therefore, **conditional on the compiler interface clauses (I1)--(I7) in
-Section 6.9**, the worst-case interval
+and therefore the worst-case interval
 
-`r-log_3(log r)-O(1) <= Delta_r(Q) <= r+O(log r)  (conditional upper bound)`.
+`r-log_3(log r)-O(1) <= Delta_r(Q) <= r+O(log r)`.
 
-The displayed upper bound and hence the leading-coefficient-one conclusion are conditional in exactly that sense; the independently audited growing-router schedule already supports the weaker conditional bound `r+O(sqrt(r))` after a required residual-first repair. Historical R6/R7 and R9 bounds remain visible as prior compiler stages. The construction combines an exact conservative-clone census, dynamic value names, classical local coding, recursive subcube libraries, a balanced absorbing anchor, signed discriminator routers, and parallel address programs. Deterministic experiments check finite semantics, compiler schedules, mutations, and structural arithmetic. They are validation evidence, not substitutes for the generic proofs. No publication novelty, legal conclusion, practical performance, or relationship to private Tau work is claimed.
+The displayed upper bound is a manuscript theorem with an explicit generic
+proof and a separate no-author-import executable reconstruction. It remains
+unformalized as an integrated Lean DAG theorem and does not settle the optimal
+additive term. The independently audited growing-router schedule supplied the
+earlier `r+O(sqrt(r))` stage after a required residual-first repair. Historical R6/R7 and
+R9 bounds remain visible as prior compiler stages. The construction combines
+an exact conservative-clone census, dynamic value names, classical local
+coding, recursive subcube libraries, a balanced absorbing anchor, signed
+discriminator routers, and parallel address programs. Deterministic
+experiments check finite semantics, compiler schedules, mutations, and
+structural arithmetic. They are validation evidence, not substitutes for the
+generic proofs. No publication novelty, legal conclusion, practical
+performance, or relationship to private Tau work is claimed.
 
 **Keywords:** finite algebra; conservative operation; discriminator; term DAG; Shannon complexity; local coding; multivalued logic; circuit depth.
 
@@ -59,11 +117,15 @@ The contribution stack established in this draft is:
 3. worst-case and almost-all operation-node lower bounds of order `3^r/r`;
 4. a matching parameter-free shared-DAG compiler obtained by specializing classical Lupanov local coding;
 5. worst-case and almost-all depth lower bounds of order `r`;
-6. an explicit compiler progression from exponential Gray dependency depth to linear depth, then to `4r`, `3r+O(log r)`, the historical R9 bound `(3/2)r+O(r/log r)`, an independently audited conditional signed-router bound `r+O(sqrt(r))`, and finally the conditional parallel-program bound `r+O(log r)`, always preserving `O(3^r/r)` size on the same DAG;
+6. an explicit compiler progression from exponential Gray dependency depth to linear depth, then to `4r`, `3r+O(log r)`, the historical R9 bound `(3/2)r+O(r/log r)`, the signed-router bound `r+O(sqrt(r))`, and finally the integrated parallel-program bound `r+O(log r)`, always preserving `O(3^r/r)` size on the same DAG;
 7. exact six-way ternary, seven-way Boolean, and nine-way Boolean projection gadgets, retained as historical stages;
 8. an exact d-only signed family `P_h,N_h` with `3^(h-1)` programmable branches at dependency depth h, independently audited and Lean-checked;
-9. an exact balanced `E/G` address summary that materializes all controls for a capacity-q signed router in `O(q)` shared-DAG nodes and `O(log log q)` preprocessing depth, with both semantics and the full cost/depth recurrence Lean-checked; and
-10. source-auditable bounded checks with mutation controls, replay hashes, two independent program-vector specifications, and explicit conditional boundaries.
+9. an exact sibling-shared absorbing-rail address summary that, for either
+   fixed sign, materializes all controls for a capacity-q signed router in
+   `(4/3+o(1))q` shared-DAG nodes and `O(log log q)` preprocessing depth,
+   with a matching leading scalar-output lower bound in the declared local
+   model; and
+10. source-auditable bounded checks with mutation controls, replay hashes, two independent program-vector specifications, and an independent reconstruction of the integrated compiler.
 
 The local-coding principle, recursive Shannon expansion, discriminator interpolation, and general Shannon-counting methodology are not contributions of this work. The paper-worthy candidate, subject to full prior-art review, is their exact specialization and simultaneous realization for this fixed parameter-free incomplete clone.
 
@@ -108,7 +170,12 @@ Fan-out is free. Input nodes are not charged. For `f in CT_r(Q)`, define:
 - `L_r(Q)=max_(f in CT_r(Q)) C_r(f)`; and
 - `Delta_r(Q)=max_(f in CT_r(Q)) D_r(f)`.
 
-The executable compiler reports all distinct reachable nodes, including the `r` inputs, and puts inputs at depth one. Its node count differs from `C_r` by at most `r`, and its depth differs from `D_r` by exactly one. All asymptotic theorems and displayed analytic depth bounds use the operation-node convention.
+The executable compiler reports all distinct reachable nodes, including the
+`r` inputs, and puts inputs at depth one. For any fixed emitted DAG, its total
+node count is its operation-node count plus at most `r`, and its reported depth
+is its analytic operation depth plus one. The emitted values therefore upper
+bound, rather than equal, the minima `C_r(f)` and `D_r(f)`. All asymptotic
+theorems and displayed analytic depth bounds use the operation-node convention.
 
 Ordinary unshared term trees are not the main cost model. The baseline compiler also has an expanded-tree analysis, but no order-optimal ordinary-tree theorem is claimed here.
 
@@ -124,7 +191,27 @@ Pixley's internal-isomorphism characterization of quasi-primal term operations [
 
 for every `x in B^r`.
 
-**Proof sketch.** Conservativity already preserves each generated subalgebra relevant to a tuple. A nonbinary tuple generates `Q`, while the only nontrivial internal automorphism on the proper binary subalgebra is complement. Pixley's criterion therefore leaves precisely the displayed binary equivariance condition. For `r=1`, the only conservative operation is the identity projection. This is an application of classical theory, not a new interpolation theorem. `square`
+**Proof.** We spell out the internal-isomorphism catalog needed from Pixley's
+criterion. The only nonempty proper subalgebra is `B={0,1}`: it is closed
+under `d` and `u`; a set containing `2` and closed under `u` also contains
+`1` and then `0`, so it generates `Q`; and neither singleton is closed under
+`u`. Because `d` is the discriminator, every permutation preserves `d`.
+On `B`, the permutations preserving `u` are the identity and complement. On
+`Q`, the identity is the only permutation preserving `u`: the unique element
+`2` outside the two-cycle `{0,1}` must be fixed, after which complement would
+send `u(2)=1` to `0` while `u(2)` remains `1`. There is no isomorphism between
+`B` and `Q` because their cardinalities differ.
+
+Thus the only nonidentity internal isomorphism that can constrain a term
+operation is simultaneous complement on `B^r`. Pixley's characterization says
+that an operation preserving the relevant subalgebras and internal
+isomorphisms is a term operation. Conservativity supplies preservation of each
+tuple's value set and hence of both `B` and `Q`; on the binary cube the
+remaining condition is exactly the displayed equivariance. Conversely every
+term operation preserves subalgebras and commutes with their automorphisms, so
+the condition is necessary. For `r=1`, conservativity forces the identity
+projection. This is a concrete application of classical theory, not a new
+interpolation theorem. `square`
 
 ### 3.2 Exact census
 
@@ -258,13 +345,26 @@ The corresponding fully expanded emitted term has recorded syntax size
 
 and depth `4r+1` in the executable convention. These are properties of that compiler, not exact minima.
 
+The constant-size equality selector used below is explicit:
+
+```text
+EqSel(x,y;p,q)=d(d(x,y,p),d(x,y,q),q).
+```
+
+If `x=y`, the outer discriminator returns `p`; if `x!=y`, both inner
+discriminators return `x` and the outer one returns `q`. Thus `EqSel` has
+three operation nodes and two dependency levels.
+
 ### 5.2 Mixed-domain local-coding lemma
 
 **Lemma 5.1 (mixed binary/ternary local coding).** Let
 
 `D=A_1 x ... x A_n`,
 
-where each `|A_i|` is two or three, and set `N=|D|`. In a circuit language with names for `0,1,2` and a constant-size conditional selector, every table `F:D->Q` has a shared circuit of size `O(N/n)`, uniformly over the mixture of coordinate alphabets.
+where each `|A_i|` is two or three, and set `N=|D|`. In a circuit language
+with names for `0,1,2` and the displayed `EqSel`, every table `F:D->Q` has a
+shared circuit of size `O(N/n)`, uniformly over the mixture of coordinate
+alphabets.
 
 **Construction.** For sufficiently large `n`, put `H=floor(log_3(N/n))`; the finitely many smaller cases are absorbed into the uniform constant. Choose a block of coordinates whose number `M` of assignments is maximal subject to `M<=H`. Maximality gives `H/3<M<=H`, while `N>=2^n` implies `M=Theta(n)`. Only `O(log M)` block coordinates are needed.
 
@@ -278,7 +378,12 @@ This is a concrete specialization of Lupanov's classical local-coding principle 
 
 ### 5.3 Size-optimal parameter-free compilation
 
-Apply Lemma 5.1 separately on every first-`2` slice, using the anchor-derived value names. The total nonbinary cost is
+Apply Lemma 5.1 separately on every first-`2` slice, using the slice-local
+names `u(u(x_a)),u(x_a),x_a` from Section 5.1. No global anchor has been
+constructed or needed at this stage. On slice `a`, apply the lemma to its
+`n=r-1` varying coordinates; the `r=1` identity is the separate finite base
+case. Uniformly absorbing the finitely many small `n`, the total nonbinary cost
+is
 
 `sum_(a=0)^(r-1) O(N_a/r) = O(3^r/r)`.
 
@@ -312,7 +417,9 @@ The layered construction is sharpened by recursively indexing the library by its
 
 `M_j=product_(i=j)^b q_i`.
 
-At a binary level, one normal selector combines each pair of suffix functions. At a ternary level, two nested normal selectors combine each triple. The exact number of normal-selector calls is
+At a binary level, one `EqSel` combines each pair of suffix functions. At a
+ternary level, two nested `EqSel` terms combine each triple. The exact number
+of selector calls is
 
 `S(q_1,...,q_b)=sum_(j=1)^b (q_j-1)*3^(M_j) < 3*3^M`.
 
@@ -322,7 +429,9 @@ The explicit depth accounting on first-`2` slice `a` is
 
 `2 + 2a + 4(r-a-1) + 2(a+1) = 4r`.
 
-The four terms are, respectively, the deepest anchor-derived name, binary and ternary coordinate routing inside the slice, and the first-`2` dispatcher. The all-binary branch has depth at most `4r-2`.
+The four terms are, respectively, the deepest slice-local dynamic name,
+binary and ternary coordinate routing inside the slice, and the first-`2`
+dispatcher. The all-binary branch has depth at most `4r-2`.
 
 **Theorem 6.1 (same-DAG `4r` construction).** Every `f in CT_r(Q)` has one parameter-free original-signature DAG with
 
@@ -336,7 +445,11 @@ Define
 
 **Lemma 6.2.** For all `x,y in Q`, `h(x,y)=2` exactly when `x=2` or `y=2`; otherwise `h(x,y)=x`.
 
-Balanced-fold `h` over all input variables and call the result `A`. Then
+Use an ordered balanced binary tree whose leaves, from left to right, are
+`x_0,...,x_(r-1)`, and label every internal node by `h`; call its root `A`.
+The leaf order is part of the construction. On the binary cube each `h`
+returns its left argument, so the tree returns its distinguished leftmost leaf
+`x_0`; an arbitrary reassociation with `x_0` elsewhere is not asserted. Then
 
 ```text
 A=2 exactly on nonbinary tuples,
@@ -366,7 +479,14 @@ mux(x,b0,b1,b2)
 
 `mux(x,b0,b1,b2)=b_x`.
 
-Every branch argument lies exactly three discriminator nodes below the root. Direct substitution for `x=0,1,2` proves the identity. With `0=u(u(A))`, `1=u(A)`, and `2=A`, the materialized router has operation depth five relative to an input anchor and fifteen distinct nodes including its five terminals.
+Every branch argument lies exactly three discriminator nodes below the root.
+Direct substitution for `x=0,1,2` proves the identity. With `0=u(u(A))`,
+`1=u(A)`, and `2=A`, the displayed shared materialization has seven `d`
+nodes and the two shared `u` name nodes. It therefore has nine operation nodes,
+or fourteen total nodes if its five distinct raw terminals are also counted.
+Its operation depth is five relative to an input anchor. An older executable
+reported fifteen because it constructed `u(A)` twice; that is an emitter
+artifact, not the shared-DAG census used here.
 
 A finite Z3 `QF_BV` search reports `UNSAT` for branch depth at most two in a deliberately generous selector-only grammar: all 27 unary functions of the selector are admitted as free terminals; `b0,b1,b2` are branch terminals; internal nodes are `u` or `d`; and all 81 valuations are imposed on the complete depth-two syntax tree. Together with the displayed term, this makes depth three optimal only for that finite branch-scoped grammar. It is not a global depth lower bound and currently has no separately checked proof certificate.
 
@@ -384,9 +504,29 @@ M=Theta(r),
 3^r/M=O(3^r/r).
 ```
 
-Build every `Q`-valued function on the local block recursively, using the router of Lemma 6.3 at each coordinate. The library costs `O(3^M)`. Route the remaining prefix coordinates with the same router; the prefix tree costs `O(3^r/M)`. Add the `O(r)` global anchor and the lower-order `O(2^r)` complement-orbit classifier for the binary branch. A final normal selector chooses that binary classifier exactly when `u(u(A))=A` and otherwise chooses the global nonbinary library.
+Build every `Q`-valued function on the local block recursively, using the
+router of Lemma 6.3 at each coordinate. The library costs `O(3^M)`. Route the
+remaining prefix coordinates with the same router; the prefix tree costs
+`O(3^r/M)`. Add the `O(r)` global anchor and the lower-order `O(2^r)`
+complement-orbit classifier for the binary branch. A final `EqSel` chooses that
+binary classifier exactly when `u(u(A))=A` and otherwise chooses the global
+nonbinary library.
 
-The block and prefix partition the `r` routed coordinates. Each routed coordinate adds three branch-dependency levels. The deepest dynamic name has depth `3*ceil(log_2 r)+2`, and the final binary/nonbinary selector adds two levels. Hence:
+The block and prefix partition the `r` routed coordinates. Each routed
+coordinate adds three branch-dependency levels. Put
+`alpha=3*ceil(log_2 r)`. The deepest dynamic name has depth `alpha+2`, and the
+nonbinary routed output before the final choice has depth at most
+`3r+alpha+2`. The binary complement-orbit classifier uses at most `r-1`
+sequential equality decisions, each one `EqSel` of branch-dependency depth two,
+so its depth is at most `2(r-1)`. The final `EqSel` adds two levels. Therefore
+the second compiler has depth
+
+```text
+2+max(alpha+2, 2(r-1), 3r+alpha+2)
+  =3r+3*ceil(log_2 r)+4.
+```
+
+Taking the better of this construction and Theorem 6.1 gives:
 
 **Theorem 6.4 (simultaneous Shannon size and explicit depth).** Every `f in CT_r(Q)` has one parameter-free original-signature term DAG with
 
@@ -405,180 +545,57 @@ and in particular
 `r-log_3(log r)-O(1) <= Delta_r(Q) <= 3r+O(log r)`.
 
 Thus this historical compiler already proves `Delta_r(Q)=Theta(r)` with
-leading-coefficient interval `[1,3]`. Theorem 6.5 below strictly narrows the
-current upper endpoint. Neither endpoint is claimed optimal.
+leading-coefficient interval `[1,3]`. The historical fixed-router stages below
+strictly narrowed that upper endpoint before the signed-family construction.
+Neither endpoint is claimed optimal.
 
-### 6.6 Historical R6/R7 programmable projection routing
+### 6.6--6.7 Historical fixed-router stages
 
-The coordinate-by-coordinate compiler spends three branch-dependency levels
-to expose three projections. A fixed router can amortize those levels over
-more branches, provided its program controls are compiled and shared without
-destroying the Shannon-size bound.
+Two fixed depth-three routers preceded the recursive signed family. They are
+retained for provenance and comparison, not because the optimized theorem
+depends on them.
 
-There are two exact original-signature gadgets:
+- `R6` has 13 discriminator nodes and six ternary branches. Its six fixed
+  18-slot programs realize all branch projections.
+- `R7` has 12 discriminator nodes and seven Boolean branches. Its programs use
+  the complement-relative binary names `x_0,u(x_0)`, not absolute constants.
+- `R9` is a full 13-node depth-three discriminator tree with nine Boolean
+  branches and 18 program slots. Nine programs realize all nine projections.
 
-- `R6`, with 13 discriminator nodes and dependency depth three, realizes each
-  of six ternary branch projections from one of six fixed 18-slot programs;
-  and
-- `R7`, with 12 discriminator nodes and dependency depth three, realizes each
-  of seven Boolean branch projections from one of seven fixed 16-slot
-  programs.
+Balanced six-way routing gave the historical nonbinary ceiling
 
-The complete skeletons and program words appear in
-`notes/QUASIPRIMAL_CONSERVATIVE_TERM_PROGRAMMABLE_DEPTH.md`. The `R6` identity
-is checked on all `6*3^6` target/branch cases. On the binary cube, `R7` is
-interpreted relative to `x_0`: program bits are represented by `x_0` and
-`u(x_0)`. Since `d` commutes with simultaneous Boolean complement, the same
-selected coordinate is returned on both members of a complement pair. No
-global Boolean constants are assumed.
+`(3*log_6(3))r+O(r/log r)=1.839441578296...r+O(r/log r)`.
 
-For `N` points and fan-out `q`, recursively split every nonsingleton node into
-`min(q,N)` nonempty balanced parts. The code tree has height at most
-`ceil(log_q N)` and at most `N-1` internal nodes. At each level, the active
-nodes partition the points, so their local child labels combine into one total
-digit function. This permits one shared family of program controls per level.
-For sequential chunks, with `P_j=product_(i<=j)N_i`, the router count
-telescopes exactly:
+For R9, encode the dynamic values by `0->00,1->01,2->10`, run two copies in
+parallel, and decode once with
 
-`sum_j P_(j-1)(N_j-1)=P_m-1`.
+`Dec(high,low)=d(d(high,one,two),zero,low)`.
 
-Use the global anchor from Lemma 6.2. Put
+This gave the later historical ceiling
 
-```text
-H=max(1,floor(log_3(3^r/r))),
-M=3^b, the largest power of 3 not exceeding H,
-P=3^(r-b).
-```
+`(3/2)r+O(r/log r)`.
 
-On the nonbinary branch, a balanced six-way library contains all `3^M`
-functions on the block. If `G(t)` counts its discriminator nodes, balanced
-splitting gives
+At every route level one shared address-control family serves all active
+routers (and both R9 planes), so the fixed-router schedules preserve
+`O(3^r/r)` size on the same DAG. The exact telescoping router census,
+balanced-library recurrences, residual schedules, and all fixed programs are
+in
+`notes/QUASIPRIMAL_CONSERVATIVE_TERM_PROGRAMMABLE_DEPTH.md` and
+`notes/QUASIPRIMAL_CONSERVATIVE_TERM_BOOLEAN_R9_DEPTH.md`.
+Deterministic replay covers 4,374 R6 cases, 896 R7 cases, 4,608 R9 projection
+cases, 9,216 complement-relative cases, and 177,147 two-plane cases. These
+bounded checks validate the gadgets; the all-arity schedule statements remain
+manuscript proofs and historical calibration.
+
+The old bounds were, respectively,
 
 ```text
-G(0)=G(1)=0,
-G(t)=13*3^t+sum_i G(t_i),
-G(t)<=26*3^t.
+size=O(3^r/r),  depth<=(3*log_6(3))r+O(r/log r),
+size=O(3^r/r),  depth<=(3/2)r+O(r/log r).
 ```
 
-The prefix adds at most `13(P-1)` nodes. Compile ternary control functions on
-chunks of width `g_3=ceil(log_3 r)`; there are `O(r)` code levels, and each of
-the 18 controls per level costs `O(3^g_3)=O(r)`. Hence controls add only
-`O(r^2)`. The binary branch uses relative bits, width
-`g_2=ceil(log_2 r)`, seven-way routing, and `O(2^r+r^2)` nodes. These are lower
-order, so the whole shared DAG still has size `O(3^r/r)`.
-
-Let `L_6` and `L_7` be the sums of balanced-code heights over the ternary and
-binary chunks, including the local block in `L_6`. Then
-
-```text
-L_6 <= log_6(3)*r+O(r/log r),
-L_7 <= log_7(2)*r+O(r/log r).
-```
-
-All controls at a route level are precomputed in parallel, and each router
-adds at most three dependency levels. Including the anchor and outer selector,
-
-```text
-D_nonbinary <= (3*log_6(3))*r+O(r/log r),
-D_binary    <= (3*log_7(2))*r+O(r/log r).
-```
-
-The first coefficient is `1.839441578296...`; the second is
-`1.068621561324...`. The nonbinary branch dominates.
-
-**Theorem 6.5 (programmable same-DAG depth).** Every `f in CT_r(Q)` has one
-parameter-free original-signature term DAG with
-
-`size=O(3^r/r)`
-
-and
-
-`depth <= (3*log_6(3))*r+O(r/log r)`.
-
-Consequently,
-
-`r-log_3(log r)-O(1) <= Delta_r(Q) <= (3*log_6(3))*r+O(r/log r)`.
-
-The generic proof has passed one independent internal audit conditional on the
-upstream selector-existence and global-anchor lemmas. It is not Lean-checked or
-peer reviewed. The fixed routers are not claimed projection-capacity-optimal,
-and the leading depth coefficient is not claimed optimal.
-
-### 6.7 Historical Boolean-plane R9 routing
-
-The R6/R7 construction is not the current ceiling. There is an exact Boolean
-router `R9` consisting of one full depth-three `d` tree: 13 discriminator
-nodes, 18 program slots, and nine branch leaves `b0,...,b8`, each appearing
-once. Nine fixed 18-bit programs realize all nine projections. Exhaustive
-replay checks `9*2^9=4,608` Boolean cases; an independent no-solver audit also
-checks simultaneous-complement semantics and an effective mutation for every
-target.
-
-On the nonbinary branch, encode the three dynamic value names by
-
-```text
-0->00, 1->01, 2->10
-```
-
-and run the same R9 program on the two Boolean planes in parallel. Decode once
-after all route levels by
-
-```text
-Dec(high,low)=d(d(high,one,two),zero,low).
-```
-
-This is an ordinary pair of original-signature sub-DAGs followed by an
-original-signature decoder, not a new multi-output primitive. Exhaustive replay
-checks all `9*3^9=177,147` target/payload cases. On the binary branch, R9 uses
-the complement-relative names `x_0,u(x_0)` exactly as R7 did.
-
-Replace fan-out six by fan-out nine in the balanced block and prefix codes.
-Two R9 copies charge 26 discriminator nodes per code node. If `G(t)` counts
-the local encoded library, then
-
-```text
-G(1)=0,
-G(t)=26*3^t+sum_i G(t_i),
-G(t)<=78*3^t.
-```
-
-The prefix costs at most `26(P-1)` router nodes. One shared family of 18
-address-only controls per route level serves both planes; compiling those
-controls on chunks of width `ceil(log_3 r)` remains `O(r^2)`. Thus the anchor,
-encoded library, prefix, controls, decoder, binary branch, and outer selector
-still total `O(3^r/r)` nodes on one DAG.
-
-Writing `L_9^Q` and `L_9^B` for the sums of code heights gives
-
-```text
-L_9^Q <= log_9(3)*r+O(r/log r)=r/2+O(r/log r),
-L_9^B <= log_9(2)*r+O(r/log r).
-```
-
-The bit planes are parallel, each router level adds three dependency layers,
-and the decoder is applied once. Therefore the nonbinary coefficient is
-`3*log_9(3)=3/2`, while the binary coefficient is
-`3*log_9(2)=0.9463946303...`.
-
-**Theorem 6.6 (Boolean-plane R9 same-DAG depth).** Every `f in CT_r(Q)` has
-one parameter-free original-signature term DAG with
-
-```text
-size  = O(3^r/r),
-depth <= (3/2)r+O(r/log r).
-```
-
-Consequently,
-
-`r-log_3(log r)-O(1) <= Delta_r(Q) <= (3/2)r+O(r/log r)`.
-
-The complete proof ledger and frozen witness are in
-`notes/QUASIPRIMAL_CONSERVATIVE_TERM_BOOLEAN_R9_DEPTH.md`. The R9 identity and
-bounded composed compiler are computationally checked; the all-arity theorem
-is a manuscript proof awaiting formal verification and peer review. A
-radius-one search found no R10 by one-leaf insertion into the frozen R9. That
-is a bounded `NO_HIT`, not a global R10 impossibility theorem.
-
+Neither fixed router is claimed capacity-optimal. A radius-one search found no
+R10 insertion into the frozen R9, which is only a bounded `NO_HIT`.
 ### 6.8 Recursive signed discriminator routers
 
 The fixed R9 is not the final routing object. On the Boolean subalgebra define
@@ -658,6 +675,11 @@ Thus depth four already gives an exact R27 with 40 d nodes, 27 branches, and
 54 controls; depth six gives R243. At fixed h the routing coefficient is
 `h/(h-1)`, tending to one. The family theorem has been independently derived
 and replayed and has also been formalized in Lean in the exact d-only grammar.
+The grammar's lack of a constant or NOT constructor is enforced by its
+inductive constructors, not by the historical `OriginalSignature` predicate,
+which is true of every inhabitant. A later additive Lean layer re-proves the
+address/control cardinalities and `q_h=3^(h-1)` with kernel-reduced `decide`
+and induction, avoiding the predecessor file's native-evaluator checkpoints.
 
 The representation bridges must still be charged. On a nonbinary slice,
 `A=2` supplies legal names `u(A)` and `u(u(A))`; two sibling copies of the
@@ -688,215 +710,387 @@ for every `64<=r<=10000`, including all controls, both planes, padding, the
 binary branch, anchor, decoder, and glue. This is an audited conditional
 composition, not a Lean proof of the end-to-end compiler.
 
-### 6.9 Parallel program vectors and logarithmic overhead
+### 6.9 Sibling-shared program vectors and logarithmic overhead
 
 The signed family exposes a second bottleneck: compiling `2q` program slots
-one at a time would cost `Theta(q log q)` for a capacity-q router. The slots
-instead admit one balanced shared summary.
+one at a time costs `Theta(q log q)` for a capacity-q router. The slots instead
+form a classical first-nonpropagating prefix state. The balanced-prefix idea is
+standard [29,30]; the local content here is its charged constant-free `{d,u}`
+realization and exact sharing census.
 
 A **multi-output shared DAG** is an acyclic original-signature operation graph
 with a finite ordered list of distinguished roots. Its size is the number of
-operation nodes in the union of the ancestors of those roots, counted once;
-inputs are free and fan-out is unrestricted. Substituting such a vector into a
-larger DAG means adjoining this union once and wiring arbitrary references to
-its distinguished roots. Consequently, a vector shared by every local table,
-both Boolean planes, or every physical router is charged once, not once per
-consumer. The final compiler has one distinguished output root and is measured
-by the single-output convention of Section 2.
+operation nodes in the union of their ancestor subgraphs, counted once; inputs
+are free and fan-out is unrestricted. Substitution adjoins that union once and
+permits arbitrary references to its roots. The final compiler still has one
+output root and uses the single-output convention of Section 2.
 
-Write a physical branch and the requested target as ternary words
-`p,t in {0,1,2}^w`, so `q=3^w`. Define
-
-```text
-E_p(t)=[t=p],
-G_p(t)=[the first mismatch j has (t_j,p_j)=(1,2)].
-```
-
-Following the recursive mode program down branch p remains in projection mode
-while the digits agree. At the first mismatch it enters constant-one mode
-exactly in the case recorded by G and constant-zero mode otherwise. Hence the
-bottom cell projects exactly when `E=1` and otherwise returns G. If the bottom
-cell is positive, its ordered program pair is
+Write a physical branch and target as `p,t in {0,1,2}^w`, and put `q=3^w`.
+Let `B_p(t)` be one when the first mismatch exists and is not
+`(t_j,p_j)=(1,2)`, and let `G_p(t)` be one when the first mismatch is exactly
+that exceptional pair. Equality is the residual state `(B,G)=(0,0)`. The
+rails are disjoint. For consecutive word blocks `U,V`, first-mismatch
+ownership gives the associative laws
 
 ```text
-(not(E or G),G),
+B_UV=d(B_U,G_U,B_V),
+G_UV=d(G_U,B_U,G_V).
 ```
 
-while a negative cell uses
+Writing `N=not B`, the complement rail co-produces in the same layer:
 
 ```text
-(G,E or G).
+N_UV=d(G_U,B_U,N_V).
 ```
 
-The sign is the root sign xor the parity of the number of middle digits in p.
-For a requested constant c, the positive and negative pairs are respectively
-`(1-c,c)` and `(c,c)`.
-
-For consecutive word blocks A and B, first-mismatch semantics gives the
-associative composition law
+On the nonbinary branch put `one=u(A)` and `zero=u(one)`. The complete
+one-digit base uses four non-name operation nodes:
 
 ```text
-E_AB=E_A and E_B,
-G_AB=G_A or (E_A and G_B).
+physical 0: B=d(x,A,one),       G=zero,
+physical 1: B=d(one,x,zero),    G=zero,
+physical 2: B=u(d(x,A,one)),    G=d(x,A,zero).
 ```
 
-On the nonbinary branch put `two=A`, `one=u(A)`, and `zero=u(u(A))`. Exact
-one-digit indicators and Boolean connectives in the original signature are
+The final control pair is `(B,G)` in a positive cell and `(G,N)` in a negative
+cell. Cell sign is the root sign xor the parity of the middle digits of `p`.
+Constant mode `c` uses `(1-c,c)` in a positive cell and `(c,c)` in a negative
+cell. No payload wire enters this address program.
+
+Two identities create the decisive shared-DAG reduction:
 
 ```text
-delta_0(x)=u(d(x,two,one)),
-delta_1(x)=d(x,two,zero),
-delta_2(x)=u(d(x,zero,one)),
-x and y=d(x,one,y),
-x or y=d(x,zero,y),
-not x=u(x).
+G_(a s)=G_a       when the physical suffix s contains no digit 2,
+N_(a1)=G_(a2).
 ```
 
-Let `S(w)` count the shared operation nodes needed for all E/G states under a
-balanced split. Then
+The first reuses the left gain root whenever the right gain rail is zero. The
+second points every eligible not-B rail to an already materialized sibling
+gain root. Both are ordinary root reuse under free fan-out, not free gates.
+
+Put `a=ceil(w/2)`, `b=floor(w/2)`, and `A_0=3^a`. Let `R(w)` count the full
+`(B,G)` library and `E(w)` the full `(B,G,N)` suffix library, excluding the two
+names. Exact structural counting gives
 
 ```text
-S(1)=5,
-S(w)=S(floor(w/2))+S(ceil(w/2))+3*3^w,
-S(w)<=5*3^w.
+R(1)=4,
+R(w)=R(a)+R(b)+3^w+A_0*(3^b-1)/2,
+
+E(1)=4,
+E(w)=R(a)+E(b)+2*3^w-3^(w-1)+A_0*(3^b-1)/2.
 ```
 
-Forming `E or G` and the needed complements adds fewer than `2q` nodes.
-
-**Theorem 6.9 (exact parallel program vector).** Let the anchor input satisfy
-`A=2`. For either root sign and every width `w>=1`, all `2q` controls of the
-capacity-`q=3^w` signed router, in every projection or constant mode, are
-realized simultaneously by legal d/u terms depending only on that anchor and
-the target-address digits,
-with
+At the top merge, the mixed/gain overlap has size
 
 ```text
-size  <= 7q shared operation nodes including the two shared anchor names,
-depth <= 6+2*ceil(log_2 w)
+O_P(w)=(3^(w-1)+1)/2,
+O_N(w)=(3^(w-1)-1)/2.
 ```
 
-above the raw anchor and address inputs. Thus preprocessing depth is
-`O(log w)=O(log log q)`, not one decision-list depth per control.
-The width-zero base router uses only the two shared name levels.
+Thus, for `w>=2`, the exact sizes of the displayed P and N constructions are
 
-The term grammar in the construction is globally constant-free, but the
-displayed Boolean meanings of `u(A)` and `u(u(A))` are asserted only under
-`A=2`. The theorem is therefore the nonbinary program-vector interface; it
-does not supply absolute Boolean controls on the all-binary cube.
+```text
+S_P(w)=2+R(a)+E(b)+A_0*(3^b-1)/2+3^w-O_P(w),
+S_N(w)=2+R(a)+E(b)+A_0*(3^b-1)/2+3^w-O_N(w).
+```
 
-The exact E/G meaning, sign parity, ordered pair, disjointness, associative
-segment law, balanced materialization recurrence, `7q` size ledger including
-the shared names, and logarithmic-depth ledger are Lean-checked. The cost
-formalization is a recurrence-level shared-DAG certificate; it does not extract
-a serialized node-indexed graph or certify a particular hash-consing program.
+The direct bases are `S_P(1)=5` and `S_N(1)=6`.
 
-To apply this vector to the compiler, fix `C=4` and, for `r>=64`, set
+**Theorem 6.9 (sibling-shared program vector).** Let `A=2`. For either fixed
+P or N root sign and every `w>=1`, all `2q` projection controls of the
+capacity-`q=3^w` signed router have one legal address-only scalar `{d,u}`
+multi-output shared DAG satisfying
+
+```text
+3*S(w) <= 4q+15*3^ceil(w/2),
+S(w)   <= 7q/3,
+D(w)   <= 3+ceil(log_2 w),
+```
+
+including the two shared name nodes and measured above raw anchor/address
+inputs. Consequently `S(w)=(4/3+o(1))q`. Width zero uses only the two names.
+
+**Proof.** Induction on the balanced split gives
+`R(w)<=20*3^w/9` and `E(w)<=26*3^w/9`; after substituting these inequalities
+in the exact top count, the residual half-width term is at most
+`5*3^ceil(w/2)`. This proves the first display. It implies `S<=7q/3` from
+width four onward, and widths one through three are direct bases. The
+one-digit rails have depth at most three, and each balanced merge adds one
+level, proving the depth bound. `square`
+
+The bound has a matching leading lower term in this declared local model. The
+gain family has `(q+1)/2` distinct scalar functions, the sign-selected B/N
+family has `q`, and the only cross-family identities are `N_(a1)=G_(a2)`.
+Their counts are `(q/3+1)/2` for P and `(q/3-1)/2` for N. Hence the requested
+controls comprise exactly `4q/3` distinct functions for P and `4q/3+1` for N.
+Every one is Boolean-valued, whereas the free terminals are the constant
+anchor `A=2` and Q-surjective address coordinates. No requested control is a
+free terminal, and one scalar operation node can root only one new scalar
+function. Therefore the leading local size constant is exactly `4/3`.
+
+This lower bound does not apply to an arbitrary integrated router that avoids
+exposing these exact controls, to simultaneous P and N materialization, to
+formulas, or to bounded fan-out. It does not determine the finite-width exact
+minimum.
+
+Two independent no-author-import reconstructions check the semantics,
+recurrences, sharing identities, and lower census. Lean proves the rail
+algebra, one-digit bases, zero-gain reuse, sibling identity, final control
+decoding, exact arithmetic recurrences, the all-width envelope, the
+uniform upper bound, and the matched sharp depth `3+ceil(log_2 w)`. The formal cost object is still a declared recurrence
+ledger rather than a serialized hash-consed DAG; its refinement link is the
+executable construction plus independent structural audit. The distinct-output
+lower census is only partially formalized: the bad/not-bad families are
+injective, but the gain quotient and final signed inclusion-exclusion remain
+open in Lean.
+A direct one-wire three-state encoding with
+merge `d(S_U,A,S_V)` is also valid, but its per-cell decoding is strictly more
+expensive than the sibling-shared two-rail construction.
+
+To apply this vector to the compiler, fix `r>=64`, put
 
 ```text
 L=4+ceil(log_3(r^2)),
 H=r-L,
 M=3^floor(log_3 H),
 b=log_3 M,
-P=3^(r-b).
+s=r-b,
+P=3^s,
 ```
 
-The local block has M assignments. Build all `3^M` Q-valued local tables with
-two capacity-M routers per table and share one width-b program vector among
-all tables and both planes. This costs at most
+and let `C=ceil(log_2 r)`. Proposition 3.3 supplies a total coordinate
+selector `sigma:Q^r->{0,...,r-1}` that is invariant under simultaneous
+complement on the Boolean cube. Lemma 6.2 supplies the ordered balanced anchor
+`A`, with `A=2` off that cube and `A=x_0` on it.
+
+**Lemma 6.10a (nonbinary two-plane compiler).** On `A=2`, there is one legal
+original-signature shared DAG whose output is `x_(sigma(x))`. Inclusive of the
+anchor, two generated names, one decoder, and the three nodes reserved for the
+final glue, its operation-node count is at most
 
 ```text
-(3M-1)3^M+7M.
+N_NB = (3M-1)3^M+(3P-1)+S_P(b)+S_P(s)-2+4(r-1)+2+3,
 ```
 
-One capacity-P prefix router per plane, with one shared width-`r-b` vector,
-costs at most `(3P-1)+7P`. Since `M>r/6` and the two-logarithm reserve gives
+and hence is below `(32+1/27+1/2)3^r/r`. Its output before the final glue has
+depth at most `r+4C+7`.
+
+**Proof.** Write each input as `x=(p,l)` with `p in Q^s` and `l in Q^b`.
+For a fixed prefix `p`, define the local table
 
 ```text
-3M*3^M <= (1/27)*3^r/r,
-10P < 60*3^r/r,
+g_p(l)=(p,l)_(sigma(p,l)).
 ```
 
-the anchor, names, decoder, glue, and lower-order terms fit within the explicit
-nonbinary bound `62*3^r/r`. Retaining the separately audited
-complement-relative square-root binary branch gives one additional unit. The
-nonbinary depth ledger is
+Materialize the universal library of all `3^M` Q-valued tables on `Q^b`.
+Encode table values by the two legal Boolean planes
 
 ```text
-depth <= r+5*ceil(log_2 r)+12.
+0 -> (0,0),   1 -> (0,1),   2 -> (1,0).
 ```
 
-The retained binary depth is below r from the checked arity 339 and has
-asymptotic coefficient `log_3(2)<1`; finitely many smaller arities use the
-retained finite ledger when `64<=r<339`, while `r<64` uses the earlier
-compiler.
-
-The final branch glue is explicit. Put `s=u(u(A))`, let `B` be the binary
-branch result, and let `N` be the nonbinary result. Then
+Each table uses two capacity-M P routers, controlled by `l`; every table and
+both planes share the same width-b vector from Theorem 6.9. For each prefix
+`p`, take the two roots belonging to `g_p`. Two capacity-P P routers,
+controlled by `p` and sharing one width-s vector, select those roots. Decode
+once with
 
 ```text
-Glue(A,B,N)=d(d(s,A,B),d(s,A,N),N)
+Dec(high,low)=d(d(high,one,A),zero,low).
 ```
 
-has three new discriminator nodes and adds two operation levels. Since
-`s=A` exactly on the all-binary cube and `A=2,s=0` otherwise, it returns `B`
-on binary inputs and `N` on nonbinary inputs.
+Its values on `00,01,10` are respectively `0,1,2`; the unused code `11` is
+irrelevant. Thus the output is exactly `g_p(l)=x_(sigma(x))`. Every control is
+a term over the raw address and `A`; the names `one=u(A)` and
+`zero=u(one)` are charged nodes, not nullaries. Each vector is adjoined once
+and reused by every table, plane, and router that names it.
 
-For a precise conditional statement, use the following compiler interface for
-each arity `r` and every compatible selector table `sigma:Q^r->{0,...,r-1}`.
+Two capacity-M routers have `3M-1` discriminator nodes, and two capacity-P
+routers have `3P-1`. This gives the displayed exact upper ledger. Since
+`ceil(log_3(r^2))<=2log_3(r)+1` and
+`5+2log_3(r)<r/2` from `r=64` onward, `H>r/2`; together with
+`H/3<M<=H`, this gives `M>r/6`. The two-logarithm reserve also gives
 
-- **(I1) Selector representation.** Every `f in CT_r(Q)` has such a total
-  complement-invariant `sigma` with `f(x)=x_(sigma(x))`.
-- **(I2) Anchor.** One original-signature DAG supplies `A` with
-  `A=2` exactly off the binary cube and `A=x_0` on it, using at most
-  `4(r-1)` nodes and depth at most `3*ceil(log_2 r)`.
-- **(I3) Encoded nonbinary compiler and inclusive ledger.** For `r>=64`, with
-  the displayed `M,b,P`, two Boolean planes, the exact program vector of
-  Theorem 6.9, and one final two-node decoder jointly realize
-  `x_(sigma(x))` whenever `A=2`.  The union of those nodes with the anchor of
-  (I2), its two shared value-name nodes, and the three glue nodes reserved in
-  (I6) has fewer than `62*3^r/r` nodes.  Before the two glue levels, the
-  nonbinary output has depth at most `r+5*ceil(log_2 r)+10`.
-- **(I4) Binary compiler.** One complement-equivariant original-signature DAG
-  realizes `x_(sigma(x))` on the binary cube using physical relative controls
-  `x_0,u(x_0)`, size below `3^r/r` for `r>=64`, and depth
-  `log_3(2)r+O(sqrt r)`; its checked explicit ledger is below r for `r>=339`.
-- **(I5) Same-DAG substitution.** The local and prefix program vectors in
-  (I3) are each adjoined once and shared across all tables, routers, and both
-  planes according to the multi-output convention above; the two branch DAGs
-  and anchor are united once before gluing.
-- **(I6) Glue.** The displayed three-node term `Glue(A,B,N)` combines (I2)--
-  (I4) with two additional depth levels.
-- **(I7) Finite fallback.** For every `1<=r<64`, a named earlier
-  original-signature compiler from Theorems 6.4--6.8 supplies a finite
-  size/depth value.  The finitely many values of the binary ledger in (I4) for
-  `64<=r<339` are likewise absorbed into the additive depth constant. No
-  explicit `63`-constant claim is made below arity 64.
+```text
+3^M <= 3^r/(81r^2).
+```
 
-**Conditional Theorem 6.10 (parallel-program compiler).** Conditional on the
-interface propositions (I1)--(I7), every `f in CT_r(Q)` has one parameter-free
-original-signature term DAG with
+Consequently the local routers cost less than `(1/27)3^r/r`, while the prefix
+routers and width-s vector cost less than
+
+```text
+(3+7/3)P < 32*3^r/r.
+```
+
+The width-b vector and fixed overhead are below `7r` nodes. The elementary
+inequality `14r^2<3^r`, valid from `r=64`, puts them below
+`(1/2)3^r/r`.
+
+The anchor has depth `3C`. With `D_P(w)<=3+ceil(log_2 w)`, the two plane
+depths before decoding satisfy
+
+```text
+D_local  <= 3C+D_P(b)+b+1,
+D_prefix <= max(D_local,3C+D_P(s))+s+1.
+```
+
+Adding the two decoder levels and using `b+s=r` gives
+`D_NB<=r+4C+7`. `square`
+
+The binary cube cannot use the absolute names just used. Its compiler is
+instead complement-relative.
+
+**Lemma 6.10b (binary complement-relative compiler).** On the Boolean cube
+there is a legal original-signature shared DAG whose output is
+`x_(sigma(x))`. For `r>=64` its increment over the already present anchor is
+below `(1/2)3^r/r`, and its intrinsic output depth is at most `r+4C+7`.
+
+**Proof.** Put `z_i=0` when `x_i=x_0` and `z_i=1` otherwise. The word `z` and
+the selector index are invariant under simultaneous complement. Choose
+
+```text
+k=floor(sqrt r),  q=3^k,  w=floor(log_2 q).
+```
+
+Partition the `r-1` relative coordinates into chunks of width at most `w`,
+placing the short residual chunk first. At a chunk of width `c`, fix an
+injection `iota_c:{0,1}^c->{0,1,2}^k` into the first `2^c` branches of a
+capacity-q P router, and point every unused branch to the last live child.
+Each logical control table `f:{0,1}^c->{0,1}` is the corresponding Theorem 6.9
+P-control coordinate for `iota_c(z)`. It is installed as the physical,
+complement-relative wire `x_0 xor f(z)` and realized from leaves
+`x_0,u(x_0)` by the decision node
+
+```text
+Sel(x_i,x_0,E,D)=d(d(x_i,x_0,E),d(x_i,x_0,D),D),
+```
+
+which returns `E` when `x_i=x_0` and `D` otherwise. One physical control
+therefore costs at most `3(2^c-1)` nodes and depth `2c+1`. All router instances
+at a level share the same `2q` controls. On the representative orientation
+`x_0=0`, these are the ordinary program bits. At the terminal prefix `z`, use
+leaf `x_(sigma(0,z))`; the routed leaf is therefore the requested coordinate.
+Complementing the input complements every payload and
+physical control; self-duality of `d` on `{0,1}` and complement invariance of
+`sigma` then prove the other orientation. No absolute Boolean constant has
+been used.
+
+If `I` is the total number of router instances and the chunk widths are
+`c_j`, residual-first ordering gives `I<2^(r-1)`. Hence
+
+```text
+B_router  = ((3q-1)/2)I                 < (1/4)3^r/r,
+B_control = sum_j 6q(2^(c_j)-1)         < (1/4)3^r/r.
+```
+
+For completeness, the first inequality follows from
+`3rq2^r<3^r`; the second follows from
+`B_control<6rq^2` and `24r^2q^2<3^r`. Since `q<=3^sqrt(r)`, these reduce to
+positivity of
+
+```text
+F_1(r)=(1-log_3 2)r-sqrt(r)-log_3(3r),
+F_2(r)=r-2sqrt(r)-log_3(24r^2).
+```
+
+Both are positive at 64. For `r>=64`,
+
+```text
+F_1'(r)=1-log_3 2-1/(2sqrt(r))-1/(r ln 3)>0,
+F_2'(r)=1-1/sqrt(r)-2/(r ln 3)>0,
+```
+
+so the bounds hold for every real `r>=64`, hence every integer arity in
+scope. The sole `u(x_0)` leaf is an existing anchor subnode and is not charged
+twice.
+
+If `m` is the number of chunks, the intrinsic depth is at most
+
+```text
+D_B <= (k+1)m+2w+1.
+```
+
+For `k>=8`, `3k/2<=w<8k/5`. Indeed, `2^19<3^12` and
+`3^5<2^8` give `19/12<log_2(3)<8/5`, and the lower fractional margin exceeds
+one half already at `k=8`. Since
+`m<=2(r-1)/(3k)+1` and `r<(k+1)^2`, this yields
+
+```text
+D_B < 2r/3+(73/15)k+8/3
+    <= 2r/3+(73/15)sqrt(r)+8/3
+    <= r+4C+7.
+```
+
+For the last inequality, use `C>=log_2 r`. The difference is at least
+
+```text
+r/3+4log_2(r)+13/3-(73/15)sqrt(r).
+```
+
+It is positive at 64, and its derivative is at least
+`1/3-73/(30sqrt(r))>0` there and thereafter. The displayed upper ledger is
+`log_3(2)r+O(sqrt r)`, so this branch is asymptotically below `r`.
+`square`
+
+Put `zero=u(u(A))`, let `B` and `N` denote the binary and nonbinary outputs,
+and define
+
+```text
+Glue(A,B,N)=d(d(zero,A,B),d(zero,A,N),N).
+```
+
+The glue adds exactly three discriminator nodes and two levels. On the
+Boolean cube `zero=A`, so it returns `B`; off the cube `A=2,zero=0`, so it
+returns `N`.
+
+**Theorem 6.10 (integrated parallel-program compiler).** Every
+`f in CT_r(Q)` has one parameter-free original-signature term DAG with
 
 ```text
 size  = O(3^r/r),
 depth = r+O(log r).
 ```
 
-For `r>=64`, the inclusive nonbinary ledger in (I3) and the binary ledger in
-(I4) give fewer than `63*3^r/r` nodes; the nonbinary branch has depth at most
-`r+5*ceil(log_2 r)+12`, while (I4) is asymptotically smaller.
-Clause (I7) supplies the finite remainder. Together with Theorem 4.2 this
-conditionally matches the leading depth coefficient one. It does not
-establish an optimal additive term, an ordinary-tree bound, or an
-unconditional integrated theorem without (I1)--(I7). A no-author-import audit
-independently passes the exact vector and the displayed compiler ledger through
-arity 16,384, but does not re-prove every interface proposition; a fully
-integrated independent reconstruction remains open.
+For every `r>=64`, one such DAG has
+
+```text
+size  < 34*3^r/r,
+depth <= r+4*ceil(log_2 r)+9.
+```
+
+**Proof.** Apply Proposition 3.3 to obtain `sigma`, construct the common
+anchor, take the union of the two DAGs in Lemmas 6.10a and 6.10b, and adjoin
+the glue. The nonbinary ledger already reserves the unique glue. Therefore
+
+```text
+size/(3^r/r) < 32+1/27+1/2+1/4+1/4 < 34.
+```
+
+Free fan-out makes this a union of ancestors, not a formula expansion: each
+program vector, table root, and control root is installed once. The depth is
+the maximum, not the sum, of the anchor/name path, the binary path, and the
+nonbinary path, followed by two glue levels. The two lemmas give the displayed
+bound. Theorem 6.1 handles the finite range `r<64`. `square`
+
+Together with Theorem 4.2, Theorem 6.10 matches the leading depth coefficient
+one. It does not determine the optimal additive term, ordinary-tree
+complexity, a bounded-fanout bound, or an exact global size constant. A
+standalone no-author-import implementation independently reconstructs the
+anchor, signed router, sibling-shared vector, both compiler branches, decoder,
+same-DAG union, and glue; it checks effective mutations and exact integer
+ledgers through arity 16,384. The integrated construction has not yet been
+serialized and proved in Lean, and this internal audit is not external peer
+review.
 
 ## 7. Compiler progression and bounded validation
 
 ### 7.1 One common arity-nine target
 
-The compilers were compared on the same fixed arity-nine reduction selector, evaluating all `3^9=19,683` input rows. The reported node counts include variables, and reported depths put variables at depth one.
+The compilers were compared on the same fixed arity-nine reduction selector,
+evaluating all `3^9=19,683` input rows. The reported node counts include
+variables, and reported depths put variables at depth one. They describe the
+emitted DAGs under that executable convention; they are not `C_r(f)`,
+`D_r(f)`, exact minima, or lower bounds.
 
 | compiler schedule | distinct reachable DAG nodes | reported depth |
 |---|---:|---:|
@@ -917,11 +1111,10 @@ to the materialized arity-nine benchmark above:
 |---|---:|---:|---|
 | historical R6 | `O(3^r/r)` | `(3*log_6(3))r+O(r/log r)` | manuscript proof plus bounded replay and audit |
 | historical Boolean-plane R9 | `O(3^r/r)` | `(3/2)r+O(r/log r)` | manuscript proof plus bounded replay and audit |
-| recursive signed family | `O(3^r/r)` | `r+O(sqrt(r))` | exact family independently audited and Lean-checked; compiler conditional and independently audited after repair |
-| parallel E/G vector | `O(3^r/r)` | `r+O(log r)` | exact vector independently audited and Lean-checked through its full `7q` cost/depth ledger; compiler arithmetic independently conditionally passed, with frozen integration bridges still assumed |
+| recursive signed family | `O(3^r/r)` | `r+O(sqrt(r))` | exact family independently audited and Lean-checked; historical repaired compiler stage |
+| sibling-shared vector | `O(3^r/r)` | `r+O(log r)` | local `(4/3+o(1))q` vector plus matching leading scalar-output lower bound; integrated compiler independently reconstructed |
 
-R9 is therefore a preserved historical stage, not the current conditional
-ceiling.
+R9 is therefore a preserved historical stage, not the current ceiling.
 
 ### 7.2 Finite checks
 
@@ -938,8 +1131,39 @@ The deterministic checkers currently establish the following bounded facts.
 - The programmable routers are checked on all 4,374 six-way cases, 896 seven-way cases, and 896 complement-relative cases. The composed compiler covers all 128 compatible arity-two selector tables plus fixed-seed tables through arity five, and its library and structural recurrences are checked through 128 points and arity 4,096, respectively.
 - The Boolean R9 is checked on all 4,608 projections and 9,216 relative-orientation cases; the two-plane transfer is checked on all 177,147 target/payload cases. Its composed compiler covers 135 tables and 1,641 complete tuples through arity five, with the library recurrence checked through 256 points and structural depth arithmetic through arity 4,096.
 - The recursive signed family is proved by induction, independently checked through direct truth tables and discriminator ROBDDs, mutation-tested on every R27 target, and Lean-checked for every depth, sign, mode, target, and Boolean branch valuation. The independent compiler audit checks every integer arity `64..10000` after the residual-first repair.
-- The parallel E/G vector is checked on 1,200,114 target/physical/sign pairs, 18 dependency sets, 11,356 concrete router cases, 262 direct-discriminator ROBDD modes, and 232 padding cases. Its author ledger checks every integer arity `64..4096`; an independent no-author-import audit extends the arithmetic replay through arity 16,384 and independently materializes both signs through width nine. Normal and optimized receipts are byte-identical.
-- Lean proves the E/G first-mismatch meaning, disjointness, sign parity, ordered program pair, associative segment composition, balanced shared-DAG recurrence, `7q` node bound including both generated names, logarithmic depth, and nonbinary original-signature legality. It does not prove a serialized DAG extraction or the end-to-end `r+O(log r)` compiler.
+- The historical E/G vector is checked on 1,200,114 target/physical/sign pairs,
+  18 dependency sets, 11,356 concrete router cases, 262 direct-discriminator
+  ROBDD modes, and 232 padding cases. Its author ledger checks every integer
+  arity `64..4096`; an independent audit extends the arithmetic replay through
+  arity 16,384 and materializes both signs through width nine.
+- The sibling-shared vector has two independent no-author-import
+  reconstructions. The broader algebraic replay checks 5,978,710 control-pair
+  identities across five constructions through width six, exact structural
+  counts through width ten, recurrence arithmetic, ROBDD and concrete router
+  semantics, and effective mutations. Its normal and optimized receipts are
+  byte-identical. The separate referee reconstruction derives the exact
+  recurrences and scalar-output census without importing the author builder.
+- Lean proves the optimized rail algebra, disjointness, one-digit bases,
+  one-layer block composition, zero-gain reuse, sibling identity, final
+  controls, exact sibling recurrences, the all-width
+  `3S<=4q+15*3^ceil(w/2)` envelope, and uniform `S<=7q/3`. The formal cost is
+  a recurrence-level ledger rather than a serialized hash-consed DAG; the
+  independent structural implementations supply that refinement evidence.
+  Lean now proves the sharp local depth. It does not yet prove the complete
+  distinct-output lower census or the end-to-end `r+O(log r)` compiler.
+- An additive manuscript-repair Lean layer re-proves router cardinalities with
+  kernel-reduced `decide`, replaces vacuous signature predicates by exhaustive
+  no-nullary-constructor catalogs, and proves the anchor cell, outer glue, and
+  valid two-plane decoder identities. It still does not formalize the full
+  ordered anchor DAG or integrated compiler.
+- The independent compiler-bridge reconstruction imports no author
+  implementation. It checks 3,279 anchor rows, 597,870 target/physical vector
+  identities, 4,632 concrete router cases, all 128 compatible arity-two
+  selectors plus four deterministic arity-three selectors through both
+  branches and the glue, and every exact integer ledger from arity 64 through
+  16,384. Normal and optimized outputs are byte-identical. Its written
+  induction and inequalities, not that bounded sweep alone, support Theorem
+  6.10.
 - Mutation controls detect omitted complement quotienting, spurious all-`2` choices, complement asymmetry, corrupted Gray paths, invalid block caps or schedules, incorrect selector censuses, dropped depth corrections, wrong absorbers, constant swaps, incomplete tables, and binary-anchor scope errors.
 - Programmable-routing controls additionally reject effective gadget mutations, illegal absolute binary controls, omitted or per-node control accounting, sparse full-code accounting, omission of the binary depth branch, and a non-complement-invariant selector table.
 - Boolean-plane controls additionally reject serializing the planes, repeating the decoder at every level, omitting the decoder charge, and moving from per-level to per-node controls.
@@ -964,6 +1188,10 @@ Normal and optimized Python runs agree at the following semantic hashes.
 | `research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/receipt.json` | `d81d0bd6b979ec0df4270fd60f04468884de6e286aea450ba28eed9897e51870` |
 | `research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/receipt.json` | `9699a3fe058369ac22a4a4d8050d07825cc80112cbc4c601a85914100db13f88` |
 | `research/tournaments/2026-08-13-semantic-router-frontier/audits/program_vector/receipt.json` | `4922df2221b3e6195d7b1af3a3ac770ae92a8aed10843430b9cffb20959c58ea` |
+| `research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/receipts/receipt.json` | `3b30a1ad6de10d39705d65edc3b27b8fd22acf361d2f7bd68f47d4d459e6d2ac` |
+| `research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/kuhn_boolean_rail_audit/receipt.json` | `1be842ffaca9c0510834e0eac1ee38f0acc6c310d15bb954c1a76c24dcc6f342` |
+| `research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/receipt.json` | `647f91c6c85173bbcb275e43a2301a67c61a7fd4d703b4720664a1341d7277aa` |
+| `research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge/receipt.json` | `73a43b1e4292b56824e82a471833e69252c52f212463f182a90df63703eec23e` |
 
 The formal checkpoints are source- and receipt-hash bound:
 
@@ -972,6 +1200,10 @@ The formal checkpoints are source- and receipt-hash bound:
 | `lanes/formal/StrongSignedRouter.lean` | `687a77ed1f3b0bfe2a540bc670f6db942e15bddc339ccfbceffba9699766227a` | `e984f5cf50bc23489fe7bd832f08c075f61abf66885c6b0736735420eb934662` |
 | `lanes/formal_program_vector/ProgramVector.lean` | `c2f477edd110c4df96f3c30f31f02de09af93045720babfd38dd2dd79a5573dd` | `5e79e4eb49af361fbed1c8962a67583a48e532526698da584b8825d55136cffa` |
 | `lanes/formal_program_vector_cost/ProgramVectorCost.lean` | `ea516b085cdedd3f0ee70f83a9d0240df55e7e68cf0ad8ce77558efd91db55d2` | `4919835f32d8afdfc48f72979edf4ad4ef0b1f8b16271ed9858a60750d2b6211` |
+| `program-vector-optimization/lanes/formal_optimized/DirectRail.lean` | `57963dadfb40cef30d94f630126f3179c55e98bea68e5974daa8e91913c404bd` | `cd5f1a49799726c3009748b5634a30cc154dd05d28440881df07404738c4e42e` |
+| `program-vector-optimization/lanes/formal_optimized/SiblingShared.lean` | `8eb02a3e2e5a4f7531d740b704422d09724376821f83b921aec98b77a0277e77` | `cd5f1a49799726c3009748b5634a30cc154dd05d28440881df07404738c4e42e` |
+| `program-vector-optimization/lanes/formal_gap_closure/DepthAndCensus.lean` | `ea75a228cc1316f0c53cff397409d4b9f6be4202611e29be28488a81f9a7be8c` | `7dcae0bbc3b3ced6d244886be01f3090a382859a6baac44906a31bb87b526a79` |
+| `program-vector-optimization/lanes/formal_manuscript_repairs/ManuscriptRepairs.lean` | `4b082559f9bdcea0dc8518992c9c9a87960f2a33a289a0d3cf7ad55347b3ced7` | `cb9e6f0d0bbee03738e39a541e305a171e20a65fbac82b70e8f4faac59e16631` |
 
 ## 8. Relation to prior work
 
@@ -985,11 +1217,57 @@ Pixley's discriminator and quasi-primal results [1,2] supply the internal-isomor
 
 Shannon's circuit-counting method is classical [5]. Lupanov introduced the local-coding principle used in the upper bound [6]. Yablonskii's functional constructions in `k`-valued logic establish a much broader historical setting [7]. Orlov studies realization and basis-sensitive circuit and formula Shannon functions for `k`-valued bases [8,27]. Kochergin establishes linear Shannon-depth behavior for `k`-valued functions over arbitrary complete finite bases [9]. Safin studies depth versus complexity in precomplete multivalued classes [10]. Korshunov's survey maps local coding, Shannon effects, leading coefficients, formulas, and depth [13]. Gashkov's primary 1978 theorem gives Boolean formulas over `{AND,OR,NOT}` with depth `n-log_2(log_2 n)+O(1)` while retaining formula-Shannon size `Theta(2^n/log n)` [28].
 
-The present parameter-free basis is incomplete because every term preserves `B={0,1}`. Therefore the scopes are not textually identical. That difference is not novelty evidence: the present theorems, including the signed recurrence and parallel E/G vector, may still be expected specializations or consequences of older closed-class complexity, local-code decoding, switching-term, multiplexer, or universal-circuit machinery. Dual-rail or two-rail representations are also classical in logic synthesis; Ishiura gives a two-rail-input/two-rail-output BDD synthesis construction in a different basis and objective [19], and Backes uses dual-rail encodings of ternary semantic values for verification-oriented circuit transformations [20]. These do not establish or refute the fixed-`Q` theorem, but they prevent claiming the representation change itself as novel. Full-text Russian and international review is required. Tarasov's work on depth versus complexity for many-valued functional systems is another nearby line that must be compared directly before submission [17,18].
+The present parameter-free basis is incomplete because every term preserves
+`B={0,1}`. Therefore the scopes are not textually identical. That difference
+is not novelty evidence: the present theorems, including the signed recurrence
+and sibling-shared vector, may still be expected specializations or
+consequences of older closed-class complexity, local-code decoding,
+switching-term, multiplexer, or universal-circuit machinery. Dual-rail or
+two-rail representations are also classical in logic synthesis; Ishiura gives
+a two-rail-input/two-rail-output BDD synthesis construction in a different
+basis and objective [19], and Backes uses dual-rail encodings of ternary
+semantic values for verification-oriented circuit transformations [20]. These
+do not establish or refute the fixed-`Q` theorem, but they prevent claiming the
+representation change itself as novel. Full-text Russian and international
+review is required. Tarasov's work on depth versus complexity for many-valued
+functional systems is another nearby line that must be compared directly
+before submission [17,18].
+
+The first-mismatch state law in Theorem 6.9 is also a classical
+kill/propagate/generate-style prefix monoid. Ladner--Fischer parallel-prefix
+computation [29] and Brent--Kung generate/propagate networks [30] are therefore
+explicit methodological ancestry. The paper does not claim the monoid or its
+balanced evaluation as new. The potentially local contribution is the exact
+constant-free discriminator embedding, the sibling root identities, and the
+matching `4q/3` scalar-output census under this paper's cost model.
 
 ### 8.3 Simultaneous size and depth, and multiplexer depth
 
-Lozhkin gives Boolean results on formulas simultaneously approaching Shannon size and depth [11] and, more recently, exact basis-sensitive depth results for multiplexers with few selector lines [12]. McColl and Paterson give a classical leading-one depth shape for all Boolean functions in a richer basis [24]. Gashkov's source proof uses a Lupanov parallel-series representation, but a checked transfer ledger shows that dense Booleanization gives leading depth `log_2(3)r` and source-witness size `Theta(3^r/log r)`, so it does not directly supply the present same-DAG order `O(3^r/r)` or coefficient one [28]. This nontransfer is not novelty evidence: a native Q-valued Lupanov--Gashkov construction remains open, and Lupanov's separate delayed-circuit model still requires a primary-source model comparison. Valiant's universal circuits and Cook--Hoover depth-universal circuits establish programmable control and joint size/depth routing as classical themes [21,22]. Holmgren and Rothblum give modern linear-size shared multiselection circuits in a different Boolean model [23]. Those models do not immediately translate to this incomplete ternary term clone, but they make broad novelty claims about programmable controls, shared selection, simultaneous synthesis, or leading-one depth unsafe. The unresolved comparison is the exact conjunction of the fixed no-nullary signature, signed P/N counts, charged E/G materialization, and same-DAG compiler.
+Lozhkin gives Boolean results on formulas simultaneously approaching Shannon
+size and depth [11] and, more recently, exact basis-sensitive depth results for
+multiplexers with few selector lines [12]. Kochergin's finite-complete-basis
+theorem [9] already makes linear Shannon depth a classical phenomenon; the
+point here is one incomplete parameter-free basis, not the order `Theta(r)` by
+itself. McColl and Paterson give a classical leading-one depth shape for all
+Boolean functions in a richer basis [24]. Gashkov's source proof uses a
+Lupanov parallel-series representation, but a checked transfer ledger shows
+that dense Booleanization gives leading depth `log_2(3)r` and source-witness
+size `Theta(3^r/log r)`, so it does not directly supply the present same-DAG
+order `O(3^r/r)` or coefficient one [28]. This nontransfer is not novelty
+evidence: a native Q-valued Lupanov--Gashkov construction remains open, and
+Lupanov's separate delayed-circuit model still requires a primary-source model
+comparison. Valiant's universal circuits and Cook--Hoover depth-universal
+circuits establish programmable control and joint size/depth routing as
+classical themes [21,22]. Holmgren and Rothblum give modern linear-size shared
+multiselection circuits in a different Boolean model [23]. Those models do not
+immediately translate to this incomplete ternary term clone, but they make
+broad novelty claims about programmable controls, shared selection,
+simultaneous synthesis, or leading-one depth unsafe. The unresolved comparison
+is the exact conjunction of the fixed no-nullary signature, signed P/N counts,
+charged sibling-shared materialization, and same-DAG compiler. Because `d` has
+arity three on a three-element address alphabet, a leading depth coefficient
+one is the natural information rate; any eventual novelty claim must rest on
+the exact incomplete-basis realization, not surprise at that coefficient.
 
 ### 8.4 Chinese-language adjacency
 
@@ -1002,13 +1280,24 @@ reversibility conditions, and physical, empirical, or gate-cost objectives
 differ from original-signature `Q`-term DAGs, but the latter two are direct
 adjacency for shared selector structures.
 
-No direct match was verified in the bounded search for the exact fixed-`Q` census, the d-only signed `P_h/N_h` family, the charged E/G vector, or their conditional same-DAG `O(3^r/r)` and `r+O(log r)` conjunction. This is only weak negative evidence. Native CNKI/Wanfang full-text coverage, translation variance for clone-theoretic terminology, Russian citation-chain review, paywalled many-valued sources, and expert comparison remain missing.
+No direct match was verified in the bounded search for the exact fixed-`Q`
+census, the d-only signed `P_h/N_h` family, the sibling-shared `4q/3` local
+vector, or the integrated same-DAG `O(3^r/r)` and `r+O(log r)` conjunction.
+This is only weak negative evidence. Native CNKI/Wanfang full-text coverage,
+translation variance for clone-theoretic terminology, Russian citation-chain
+review, paywalled many-valued sources, and expert comparison remain missing.
 
 ### 8.5 Paper-safe positioning
 
 The strongest currently supportable positioning is:
 
-> Classical interpolation, counting, local-coding, and programmable-selection tools are specialized to one fixed parameter-free conservative term fragment. The resulting exact census, signed-router family, and parallel address summary support an explicit conditional same-DAG compiler at the counting-scale size and leading-one depth.
+> Classical interpolation, counting, local-coding, parallel-prefix, and
+> programmable-selection tools are specialized to one fixed parameter-free
+> conservative term fragment. The exact census and signed-router family are
+> joined by a scalar program-vector interface with matching `4q/3` leading
+> upper and lower terms in its declared local model;
+> an explicit two-plane and complement-relative construction then gives one
+> same-DAG compiler at counting-scale size and leading-one depth.
 
 Whether that exact specialization or conjunction is publication-novel remains **UNKNOWN**.
 
@@ -1018,15 +1307,19 @@ The mathematics in this draft concerns one public classical finite algebra and p
 
 This draft does **not** claim:
 
-- an optimal leading constant for shared-DAG size;
-- an unconditional end-to-end `r+O(log r)` theorem independent of the named upstream compiler lemmas;
-- an exact or optimal additive term beyond the conditional leading-depth coefficient one;
+- an optimal leading constant for the global Shannon-size function or the
+  integrated all-arity compiler; Theorem 6.9's `4/3` statement is only the
+  leading constant for one exact scalar-output program-vector interface;
+- an exact or optimal additive term beyond the leading-depth coefficient one;
 - that the finite Z3 result applies outside its selector-only depth-two grammar;
 - an `Omega(3^r)` size lower bound;
 - an order-optimal ordinary unshared-term-tree bound;
 - novelty of Pixley interpolation, Shannon counting, Lupanov local coding, Gray codes, recursive Shannon expansion, layered scheduling, or generic linear depth;
 - the same count or bounds for every quasi-primal algebra or every incomplete clone;
-- Lean extraction of a serialized materialized DAG or verification of the integrated compiler, a complete external independent proof review, or peer review;
+- a general `r+ceil(log_3 r)+O(1)` lower barrier for every compiler; the
+  dependency argument currently applies only to a restricted exposed-control
+  router cascade;
+- Lean extraction of a serialized materialized DAG or formal verification of the integrated compiler, a complete external independent proof review, or peer review;
 - publication novelty over Russian, Chinese, or international closed-class complexity literature;
 - use of, conclusions about, or limitations of Tau private work;
 - rights under the unsigned Tau developer license; or
@@ -1038,29 +1331,31 @@ Any commercial implementation, patent filing, categorical novelty statement, or 
 
 The mathematical next steps are:
 
-1. independently reconstruct the complete parallel-vector compiler, including
-   the selector table, global anchor, two-plane bridge, binary branch, finite
-   fallback, decoder, and outer glue, rather than importing frozen premises;
-2. extract or serialize the recurrence-certified program-vector DAG and
-   formalize the residual schedule and integrated original-signature theorem
-   in Lean;
+1. obtain external mathematical review of the independently reconstructed
+   integrated compiler and compare its exact model with the closest
+   many-valued and delayed-circuit literature;
+2. extract or serialize the sibling-shared program-vector DAG and formally
+   connect its width-indexed terms, subterm union, recurrence, and compiler
+   substitution in Lean;
 3. determine whether Lupanov's delayed-circuit model, Orlov--Lupanov,
    Kochergin, multiplexer, universal-circuit,
    or closed-class results already subsume the exact fixed-signature
    conjunction;
 4. determine the optimal additive term between the counting lower bound and
-   the conditional `r+O(log r)` upper bound;
-5. determine ordinary-tree complexity and basis-sensitive leading-size
-   constants; and
+   the `r+O(log r)` upper bound;
+5. determine ordinary-tree complexity and the global, rather than local
+   program-vector, basis-sensitive leading-size constants; and
 6. classify fixed finite clones for which parameter-free local coding gives
    the same order closure.
 
-Boolean-plane R9 remains Theorem 6.6 and a fully visible historical stage. The
-exact signed family and `7q` E/G materialization are independently audited and
-Lean-checked. The compiler ledger has an independent conditional pass, but the
-complete `r+O(log r)` composition has not been independently reconstructed
-without its frozen premises. Novelty, formal integration, practical value,
-and FTO remain quarantined.
+Boolean-plane R9 and the `7q` E/G vector remain fully visible historical
+stages. The exact signed family and sibling-shared `(4/3+o(1))q` vector are
+independently audited; the latter has a matching leading scalar-output lower
+bound in its declared local model. The complete `r+O(log r)` composition has
+an independent no-author-import reconstruction and is promoted as a
+manuscript theorem, but not as an end-to-end Lean theorem or an externally
+refereed result. Novelty, formal integration, practical value, and FTO remain
+quarantined.
 
 Negative knowledge also remains active: naive ordinary-monotone two-extreme
 reasoning is false for d's antitone middle input; residual-last growing-router
@@ -1080,8 +1375,10 @@ The mathematical source notes for this version are:
 - `notes/QUASIPRIMAL_CONSERVATIVE_TERM_SUBCUBE_DEPTH.md`;
 - `notes/QUASIPRIMAL_CONSERVATIVE_TERM_GLOBAL_ANCHOR_DEPTH.md`;
 - `notes/QUASIPRIMAL_CONSERVATIVE_TERM_PROGRAMMABLE_DEPTH.md`;
-- `notes/QUASIPRIMAL_CONSERVATIVE_TERM_BOOLEAN_R9_DEPTH.md`; and
-- `notes/QUASIPRIMAL_CONSERVATIVE_TERM_PARALLEL_PROGRAM_DEPTH.md`.
+- `notes/QUASIPRIMAL_CONSERVATIVE_TERM_BOOLEAN_R9_DEPTH.md`;
+- `notes/QUASIPRIMAL_CONSERVATIVE_TERM_PARALLEL_PROGRAM_DEPTH.md`;
+- `notes/QUASIPRIMAL_CONSERVATIVE_TERM_OPTIMAL_PROGRAM_VECTOR.md`; and
+- `notes/QUASIPRIMAL_CONSERVATIVE_TERM_INTEGRATED_COMPILER.md`.
 
 The frozen theorem, audit, and prior-art packets for the new stages are:
 
@@ -1093,9 +1390,16 @@ The frozen theorem, audit, and prior-art packets for the new stages are:
 - `research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/REPORT.md`;
 - `research/tournaments/2026-08-13-semantic-router-frontier/audits/program_vector/REPORT.md`;
 - `research/tournaments/2026-08-13-semantic-router-frontier/lanes/classical_depth_transfer/REPORT.md`;
-- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/REPORT.md`; and
-- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/REPORT.md`; and
-- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/REPORT.md`.
+- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/REPORT.md`;
+- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/REPORT.md`;
+- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/REPORT.md`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/REPORT.md`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/kuhn_boolean_rail_audit/REPORT.md`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/REPORT.md`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_optimized/REPORT.md`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_gap_closure/REPORT.md`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_manuscript_repairs/REPORT.md`; and
+- `research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge/REPORT.md`.
 
 The implementation and deterministic checkers are:
 
@@ -1105,7 +1409,7 @@ The implementation and deterministic checkers are:
 - `experiments/quasiprimal_layered_local_coding_compiler.py`;
 - `experiments/quasiprimal_subcube_local_coding_compiler.py`;
 - `experiments/quasiprimal_global_anchor_routing.py`;
-- `experiments/quasiprimal_programmable_projection_routing.py`; and
+- `experiments/quasiprimal_programmable_projection_routing.py`;
 - `experiments/quasiprimal_boolean_r9_routing.py`;
 - `research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/check_strong_router_family.py`;
 - `research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/audit_strong_family.py`;
@@ -1113,12 +1417,22 @@ The implementation and deterministic checkers are:
 - `research/tournaments/2026-08-13-semantic-router-frontier/lanes/program_vector/check_parallel_program_vector.py`;
 - `research/tournaments/2026-08-13-semantic-router-frontier/audits/program_vector/audit_program_vector.py`;
 - `research/tournaments/2026-08-13-semantic-router-frontier/lanes/classical_depth_transfer/check_transfer_barriers.py`;
-- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean`; and
-- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/ProgramVector.lean`; and
-- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.lean`.
+- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean`;
+- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/ProgramVector.lean`;
+- `research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.lean`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/check_native_scan.py`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/check_optimal_scan.py`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/native_scan/OptimalRailSemantics.lean`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/referee/kuhn_boolean_rail_audit/audit_boolean_rails.py`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/algebraic/check_algebraic_program_vector.py`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_optimized/DirectRail.lean`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_optimized/SiblingShared.lean`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_gap_closure/DepthAndCensus.lean`;
+- `research/tournaments/2026-08-13-program-vector-optimization/lanes/formal_manuscript_repairs/ManuscriptRepairs.lean`; and
+- `research/tournaments/2026-08-13-program-vector-optimization/audits/compiler_bridge/check_compiler_bridge.py`.
 
-The twelve semantic JSON receipts listed in Section 7 are the bounded-evidence
-authority for numerical claims. The three Lean checkpoint receipts bind the
+The semantic JSON receipts listed in Section 7 are the bounded-evidence
+authority for numerical claims. The Lean checkpoint receipts bind the
 formal sources and toolchain; they do not carry the asymptotic compiler claim.
 The exact program-vector replay commands and frozen hashes are in
 `lanes/program_vector/manifest.json`; the independent family commands and
@@ -1151,9 +1465,11 @@ This file is intended to evolve with the mathematics under the following contrac
 - **2026-08-13:** Initial living draft assembled from the exact-census, Shannon-size, layered-depth, recursive-subcube, and global-anchor manuscript notes and their five deterministic receipts. Current manuscript interval: `[1,3]`. Programmable-projection improvements remain quarantined.
 - **2026-08-13:** Added the independently audited R6/R7 programmable-routing manuscript theorem and sixth receipt. Its same-DAG depth ceiling is `(3*log_6(3))*r+O(r/log r)`, narrowing the then-current coefficient interval to approximately `[1,1.839441578296]`. Novelty, optimality, formal verification, practical performance, and FTO remain unresolved.
 - **2026-08-13:** Added the independently audited Boolean-R9 two-plane theorem and seventh receipt. The historical R6 ceiling remains `(3*log_6(3))*r+O(r/log r)`, while the then-current same-DAG ceiling became `(3/2)r+O(r/log r)`. The dual-rail idea is treated as classical adjacency; exact fixed-`Q` novelty, R9 optimality, formal verification, practical performance, and FTO remain unresolved.
-- **2026-08-13:** Preserved R9 as a historical stage and added the exact signed `P_h/N_h` family, its independent audit and Lean proof, the repaired conditional `r+O(sqrt(r))` compiler, and the exact balanced E/G program vector. The current `O(3^r/r)` / `r+O(log r)` same-DAG bound is explicitly conditional on the named upstream compiler lemmas and awaits independent end-to-end audit; only the E/G semantics, not the charged `7q` circuit or integrated compiler, are Lean-checked. Logical binary programs are address-only, while physical `x_0,u(x_0)` controls are correctly recorded as payload-relative. Novelty, FTO, unsigned-license rights, practical performance, and an optimal additive term remain unresolved.
-- **2026-08-13:** Added an independent no-author-import audit of the exact program vector and conditional compiler ledger, plus a trust-zero Lean proof of the balanced recurrence, original-signature legality, `7q` shared-DAG bound including both names, and logarithmic depth. A primary-source Gashkov transfer audit found that the classical Boolean formula construction does not directly preserve this paper's fixed-Q same-DAG size/depth target; native Q-valued adaptation and Lupanov's separate delayed-circuit model remain open. The all-arity compiler is still conditional on frozen integration premises, and novelty, FTO, license rights, practical performance, and an optimal additive term remain unresolved.
+- **2026-08-13:** Preserved R9 as a historical stage and added the exact signed `P_h/N_h` family, its independent audit and Lean proof, the repaired conditional `r+O(sqrt(r))` compiler, and the exact balanced E/G program vector. At this checkpoint only the E/G semantics, not the charged `7q` circuit or integrated compiler, were Lean-checked. Logical binary programs are address-only, while physical `x_0,u(x_0)` controls are correctly recorded as payload-relative. Novelty, FTO, unsigned-license rights, practical performance, and an optimal additive term remained unresolved.
+- **2026-08-13:** Added an independent no-author-import audit of the historical E/G vector and conditional compiler ledger, plus Lean arithmetic for its declared recurrence-level `7q` and depth bounds. The formal files do not serialize the width-w DAG or prove the all-arity substitution, and grammar legality follows from an inductive type with no constant constructor rather than from a nontrivial `OriginalSignature` predicate. A primary-source Gashkov transfer audit found that the classical Boolean formula construction does not directly preserve this paper's fixed-Q same-DAG size/depth target; native Q-valued adaptation and Lupanov's separate delayed-circuit model remain open.
 - **2026-08-13:** Repaired the manuscript after a fresh-room internal-agent referee pass: the abstract now labels the upper interval itself conditional; Theorem 6.9 states the `A=2` and multi-output shared-DAG scopes; the exact three-node glue is displayed; and Conditional Theorem 6.10 is an explicit implication from propositions (I1)--(I7), with an inclusive nonbinary ledger and finite fallback. The post-repair mathematical/text gate passes. Archival deposit remains forbidden until human authorship metadata is approved; this internal review is not external peer review.
+- **2026-08-13:** Replaced the historical `7q` local upper bound by the independently reconstructed sibling-shared vector: `3S<=4q+15*3^ceil(w/2)`, `S=(4/3+o(1))q`, and depth `3+ceil(log_2 w)`, with a matching `4q/3` leading scalar-output lower bound in the declared address-only model. Added classical parallel-prefix attribution, expanded the Pixley catalog, specified the ordered anchor fold, displayed `EqSel`, repaired the mux census and executable/minimum wording, and retained the all-arity `r+O(log r)` theorem as conditional pending its compiler interfaces. No broad optimality, novelty, FTO, license, or publication-readiness claim was added.
+- **2026-08-13:** Closed the remaining compiler interfaces by integrating an independently reconstructed nonbinary two-plane library, complement-relative binary branch, one-shot same-DAG substitution, decoder, and glue. Theorem 6.10 is now an unconditional manuscript theorem with explicit bounds `<34*3^r/r` and `r+4*ceil(log_2 r)+9` for `r>=64`. The integrated construction is not yet Lean-formalized or externally peer reviewed, and no optimal-additive-term, novelty, FTO, license, or publication-readiness claim was added.
 
 ## References
 
@@ -1185,3 +1501,5 @@ This file is intended to evolve with the mathematics under the following contrac
 26. 何新华, 宫云战, and 魏道政, “面向多输出电路的BDD拼接构造,” *电子与信息学报* 19(3) (1997), 356--360. <https://jeit.ac.cn/article/id/85665992-ae08-49a4-83ca-1381a6d4735f>
 27. V. A. Orlov, “Realization of k-Valued Functions by Circuits of Functional Elements,” *Mathematical Notes* 64 (1998), 371--376. <https://doi.org/10.1007/BF02314847>
 28. S. B. Gashkov, “On the Depth of Boolean Functions,” *Problemy Kibernetiki* 34 (1978), 265--268 [Russian]. <https://publ.lib.ru/ARCHIVES/P/%27%27Problemy_kibernetiki%27%27_%28seriya%29/%cf%f0%ee%e1%eb%e5%ec%fb%20%ea%e8%e1%e5%f0%ed%e5%f2%e8%ea%e8.%20%c2%fb%ef%f3%f1%ea%2034.(1978).pdf>
+29. R. E. Ladner and M. J. Fischer, “Parallel Prefix Computation,” *Journal of the ACM* 27(4) (1980), 831--838. <https://doi.org/10.1145/322217.322232>
+30. R. P. Brent and H. T. Kung, “A Regular Layout for Parallel Adders,” *IEEE Transactions on Computers* C-31(3) (1982), 260--264. <https://doi.org/10.1109/TC.1982.1675982>

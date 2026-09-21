@@ -1,0 +1,30 @@
+{
+  "checks": {
+    "check_stdout_sha256": "1deca4e8d9db960aa43ae9a20d33ff3dfc4c9bf32c90a73190467ef2acd1b5b9",
+    "custom_axiom_declarations": 0,
+    "proof_placeholders": 0,
+    "warning_as_error": true
+  },
+  "open": [
+    "gain quotient cardinality (q+1)/2",
+    "unique signed sibling-overlap classification and count",
+    "final inclusion-exclusion 4q/3 and 4q/3+1"
+  ],
+  "proved": [
+    "sibling-shared depth <=3+Nat.clog 2 width",
+    "combined exact size-envelope and sharp-depth checkpoint",
+    "injective ternary truth-table evaluation",
+    "gain/bad/not-bad tables equal frozen addressSummary semantics",
+    "bad and not-bad table families are injective all-width",
+    "bad/not-bad complementation and constant-separation witnesses"
+  ],
+  "schema": "orbit-synthesis/formal-gap-closure/v1",
+  "semantic_sha256": "dfe9e0f4f859348319a80c99e353877166e8aaebc38e4aee2463b5dba5f7b333",
+  "source_sha256": {
+    "AxiomAudit.lean": "8436d68e04b5cc25c69da1835f180b41e3bc1ffb4c68cdef53c509f107deda6e",
+    "DepthAndCensus.lean": "ea75a228cc1316f0c53cff397409d4b9f6be4202611e29be28488a81f9a7be8c",
+    "check.sh": "f45178d663bcc53f2437b4f1966b9271278e2b61d9782d4b262136e9cc06415a",
+    "make_receipt.py": "f9f79b8be039040933b163c9c7cce6fcea0cb991bbb0c71c00e81c665f36f987"
+  },
+  "status": "PASS_SHARP_DEPTH__PARTIAL_OUTPUT_CENSUS"
+}

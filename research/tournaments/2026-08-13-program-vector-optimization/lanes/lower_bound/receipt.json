@@ -1,0 +1,1113 @@
+{
+  "alternate_encodings": {
+    "chosen_encoding": {
+      "base_extra_minimum_given_names": 3,
+      "encoding": {
+        "equal": 2,
+        "one_mode": 1,
+        "zero_mode": 0
+      },
+      "negative_extractor_minimum_given_names_and_state": 2,
+      "one_gate_composition_rows": 9,
+      "positive_extractor_minimum_given_names_and_state": 2
+    },
+    "rows": [
+      {
+        "base_extra_minimum_given_names": 3,
+        "encoding": {
+          "equal": 2,
+          "one_mode": 1,
+          "zero_mode": 0
+        },
+        "negative_extractor_minimum_given_names_and_state": 2,
+        "one_gate_composition_rows": 9,
+        "positive_extractor_minimum_given_names_and_state": 2
+      },
+      {
+        "base_extra_minimum_given_names": 5,
+        "encoding": {
+          "equal": 2,
+          "one_mode": 0,
+          "zero_mode": 1
+        },
+        "negative_extractor_minimum_given_names_and_state": 2,
+        "one_gate_composition_rows": 9,
+        "positive_extractor_minimum_given_names_and_state": 2
+      },
+      {
+        "base_extra_minimum_given_names": 4,
+        "encoding": {
+          "equal": 0,
+          "one_mode": 2,
+          "zero_mode": 1
+        },
+        "negative_extractor_minimum_given_names_and_state": 3,
+        "one_gate_composition_rows": 9,
+        "positive_extractor_minimum_given_names_and_state": 3
+      },
+      {
+        "base_extra_minimum_given_names": 4,
+        "encoding": {
+          "equal": 0,
+          "one_mode": 1,
+          "zero_mode": 2
+        },
+        "negative_extractor_minimum_given_names_and_state": 2,
+        "one_gate_composition_rows": 9,
+        "positive_extractor_minimum_given_names_and_state": 3
+      },
+      {
+        "base_extra_minimum_given_names": 4,
+        "encoding": {
+          "equal": 1,
+          "one_mode": 2,
+          "zero_mode": 0
+        },
+        "negative_extractor_minimum_given_names_and_state": 2,
+        "one_gate_composition_rows": 9,
+        "positive_extractor_minimum_given_names_and_state": 3
+      },
+      {
+        "base_extra_minimum_given_names": 4,
+        "encoding": {
+          "equal": 1,
+          "one_mode": 0,
+          "zero_mode": 2
+        },
+        "negative_extractor_minimum_given_names_and_state": 3,
+        "one_gate_composition_rows": 9,
+        "positive_extractor_minimum_given_names_and_state": 3
+      }
+    ]
+  },
+  "claim_boundary": {
+    "not_proved": [
+      "global optimality of the 3q bound or asymptotic leading constant two",
+      "exact minimum for width two or larger",
+      "formula or bounded-fanout bounds",
+      "integrated compiler improvement",
+      "novelty, prior art, FTO, patent, copyright, or Tau-license rights"
+    ],
+    "proved": [
+      "explicit all-width <=4q shared-d/u-DAG construction",
+      "stronger direct-rail all-width <=3q construction with (2+o(1))q size",
+      "direct-rail depth <=4+ceil(log2 w) for w>=1",
+      "global 4q/3 and 4q/3+1 distinct-output lower bounds for P and N",
+      "exact width-zero and width-one minima in the declared unrestricted semantic DAG grammar",
+      "one-gate optimality of native segment composition in the declared local grammar",
+      "bounded distinct-output lower bounds through width three"
+    ]
+  },
+  "construction": {
+    "concrete_full_router_checks_through_width_two": 11356,
+    "constant_payload_checks": 236192,
+    "direct_rail_all_width_proof": {
+      "asymptotic_bound": "S<=2q+(7/3)(3^a+3^b)+5/2 = (2+o(1))q",
+      "depth_bound": "4+ceil(log_2 w) for w>=1; width zero has depth 2",
+      "rail_bound": "R(w)<=7*3^w/3",
+      "rail_recurrence": "R(1)=4; R(w)=R(a)+R(b)+q+3^a*(3^b-1)/2",
+      "small_bases": "w=0,1,2 checked directly; symbolic total inequality starts at w=3",
+      "total_bound": "S<=3*3^w, including names and final negative-cell complements"
+    },
+    "direct_rail_rows": [
+      {
+        "depth": 2,
+        "depth_bound": 2,
+        "final_complement_nodes": 0,
+        "name_nodes": 2,
+        "operation_nodes": 2,
+        "q": 1,
+        "rail_nodes": 0,
+        "root_sign": "P",
+        "three_q_bound": 3,
+        "width": 0
+      },
+      {
+        "depth": 2,
+        "depth_bound": 2,
+        "final_complement_nodes": 0,
+        "name_nodes": 2,
+        "operation_nodes": 2,
+        "q": 1,
+        "rail_nodes": 0,
+        "root_sign": "N",
+        "three_q_bound": 3,
+        "width": 0
+      },
+      {
+        "depth": 4,
+        "depth_bound": 4,
+        "final_complement_nodes": 1,
+        "name_nodes": 2,
+        "operation_nodes": 7,
+        "q": 3,
+        "rail_nodes": 4,
+        "root_sign": "P",
+        "three_q_bound": 9,
+        "width": 1
+      },
+      {
+        "depth": 4,
+        "depth_bound": 4,
+        "final_complement_nodes": 2,
+        "name_nodes": 2,
+        "operation_nodes": 8,
+        "q": 3,
+        "rail_nodes": 4,
+        "root_sign": "N",
+        "three_q_bound": 9,
+        "width": 1
+      },
+      {
+        "depth": 5,
+        "depth_bound": 5,
+        "final_complement_nodes": 4,
+        "name_nodes": 2,
+        "operation_nodes": 26,
+        "q": 9,
+        "rail_nodes": 20,
+        "root_sign": "P",
+        "three_q_bound": 27,
+        "width": 2
+      },
+      {
+        "depth": 5,
+        "depth_bound": 5,
+        "final_complement_nodes": 5,
+        "name_nodes": 2,
+        "operation_nodes": 27,
+        "q": 9,
+        "rail_nodes": 20,
+        "root_sign": "N",
+        "three_q_bound": 27,
+        "width": 2
+      },
+      {
+        "depth": 6,
+        "depth_bound": 6,
+        "final_complement_nodes": 13,
+        "name_nodes": 2,
+        "operation_nodes": 78,
+        "q": 27,
+        "rail_nodes": 63,
+        "root_sign": "P",
+        "three_q_bound": 81,
+        "width": 3
+      },
+      {
+        "depth": 6,
+        "depth_bound": 6,
+        "final_complement_nodes": 14,
+        "name_nodes": 2,
+        "operation_nodes": 79,
+        "q": 27,
+        "rail_nodes": 63,
+        "root_sign": "N",
+        "three_q_bound": 81,
+        "width": 3
+      },
+      {
+        "depth": 6,
+        "depth_bound": 6,
+        "final_complement_nodes": 40,
+        "name_nodes": 2,
+        "operation_nodes": 199,
+        "q": 81,
+        "rail_nodes": 157,
+        "root_sign": "P",
+        "three_q_bound": 243,
+        "width": 4
+      },
+      {
+        "depth": 6,
+        "depth_bound": 6,
+        "final_complement_nodes": 41,
+        "name_nodes": 2,
+        "operation_nodes": 200,
+        "q": 81,
+        "rail_nodes": 157,
+        "root_sign": "N",
+        "three_q_bound": 243,
+        "width": 4
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 121,
+        "name_nodes": 2,
+        "operation_nodes": 566,
+        "q": 243,
+        "rail_nodes": 443,
+        "root_sign": "P",
+        "three_q_bound": 729,
+        "width": 5
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 122,
+        "name_nodes": 2,
+        "operation_nodes": 567,
+        "q": 243,
+        "rail_nodes": 443,
+        "root_sign": "N",
+        "three_q_bound": 729,
+        "width": 5
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 364,
+        "name_nodes": 2,
+        "operation_nodes": 1572,
+        "q": 729,
+        "rail_nodes": 1206,
+        "root_sign": "P",
+        "three_q_bound": 2187,
+        "width": 6
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 365,
+        "name_nodes": 2,
+        "operation_nodes": 1573,
+        "q": 729,
+        "rail_nodes": 1206,
+        "root_sign": "N",
+        "three_q_bound": 2187,
+        "width": 6
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 1093,
+        "name_nodes": 2,
+        "operation_nodes": 4582,
+        "q": 2187,
+        "rail_nodes": 3487,
+        "root_sign": "P",
+        "three_q_bound": 6561,
+        "width": 7
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 1094,
+        "name_nodes": 2,
+        "operation_nodes": 4583,
+        "q": 2187,
+        "rail_nodes": 3487,
+        "root_sign": "N",
+        "three_q_bound": 6561,
+        "width": 7
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 3280,
+        "name_nodes": 2,
+        "operation_nodes": 13397,
+        "q": 6561,
+        "rail_nodes": 10115,
+        "root_sign": "P",
+        "three_q_bound": 19683,
+        "width": 8
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "final_complement_nodes": 3281,
+        "name_nodes": 2,
+        "operation_nodes": 13398,
+        "q": 6561,
+        "rail_nodes": 10115,
+        "root_sign": "N",
+        "three_q_bound": 19683,
+        "width": 8
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "final_complement_nodes": 9841,
+        "name_nodes": 2,
+        "operation_nodes": 39927,
+        "q": 19683,
+        "rail_nodes": 30084,
+        "root_sign": "P",
+        "three_q_bound": 59049,
+        "width": 9
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "final_complement_nodes": 9842,
+        "name_nodes": 2,
+        "operation_nodes": 39928,
+        "q": 19683,
+        "rail_nodes": 30084,
+        "root_sign": "N",
+        "three_q_bound": 59049,
+        "width": 9
+      }
+    ],
+    "native_all_width_proof": {
+      "depth_bound": "5+ceil(log_2 w) for w>=1; width zero has depth 2",
+      "state_bound": "T(w)<=5*3^w/3, with equality only at checked small bases",
+      "state_recurrence": "T(1)=3; T(w)=T(floor(w/2))+T(ceil(w/2))+3^w",
+      "total_bound": "2 names + T(w) + 2*3^w <= 4*3^w; w=0,1 are direct bases"
+    },
+    "native_state_rows": [
+      {
+        "depth": 2,
+        "depth_bound": 2,
+        "four_q_bound": 4,
+        "name_nodes": 2,
+        "operation_nodes": 2,
+        "output_nodes": 0,
+        "q": 1,
+        "root_sign": "P",
+        "state_nodes": 0,
+        "width": 0
+      },
+      {
+        "depth": 2,
+        "depth_bound": 2,
+        "four_q_bound": 4,
+        "name_nodes": 2,
+        "operation_nodes": 2,
+        "output_nodes": 0,
+        "q": 1,
+        "root_sign": "N",
+        "state_nodes": 0,
+        "width": 0
+      },
+      {
+        "depth": 5,
+        "depth_bound": 5,
+        "four_q_bound": 12,
+        "name_nodes": 2,
+        "operation_nodes": 10,
+        "output_nodes": 5,
+        "q": 3,
+        "root_sign": "P",
+        "state_nodes": 3,
+        "width": 1
+      },
+      {
+        "depth": 5,
+        "depth_bound": 5,
+        "four_q_bound": 12,
+        "name_nodes": 2,
+        "operation_nodes": 10,
+        "output_nodes": 5,
+        "q": 3,
+        "root_sign": "N",
+        "state_nodes": 3,
+        "width": 1
+      },
+      {
+        "depth": 6,
+        "depth_bound": 6,
+        "four_q_bound": 36,
+        "name_nodes": 2,
+        "operation_nodes": 35,
+        "output_nodes": 18,
+        "q": 9,
+        "root_sign": "P",
+        "state_nodes": 15,
+        "width": 2
+      },
+      {
+        "depth": 6,
+        "depth_bound": 6,
+        "four_q_bound": 36,
+        "name_nodes": 2,
+        "operation_nodes": 35,
+        "output_nodes": 18,
+        "q": 9,
+        "root_sign": "N",
+        "state_nodes": 15,
+        "width": 2
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "four_q_bound": 108,
+        "name_nodes": 2,
+        "operation_nodes": 101,
+        "output_nodes": 54,
+        "q": 27,
+        "root_sign": "P",
+        "state_nodes": 45,
+        "width": 3
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "four_q_bound": 108,
+        "name_nodes": 2,
+        "operation_nodes": 101,
+        "output_nodes": 54,
+        "q": 27,
+        "root_sign": "N",
+        "state_nodes": 45,
+        "width": 3
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "four_q_bound": 324,
+        "name_nodes": 2,
+        "operation_nodes": 275,
+        "output_nodes": 162,
+        "q": 81,
+        "root_sign": "P",
+        "state_nodes": 111,
+        "width": 4
+      },
+      {
+        "depth": 7,
+        "depth_bound": 7,
+        "four_q_bound": 324,
+        "name_nodes": 2,
+        "operation_nodes": 275,
+        "output_nodes": 162,
+        "q": 81,
+        "root_sign": "N",
+        "state_nodes": 111,
+        "width": 4
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 972,
+        "name_nodes": 2,
+        "operation_nodes": 791,
+        "output_nodes": 486,
+        "q": 243,
+        "root_sign": "P",
+        "state_nodes": 303,
+        "width": 5
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 972,
+        "name_nodes": 2,
+        "operation_nodes": 791,
+        "output_nodes": 486,
+        "q": 243,
+        "root_sign": "N",
+        "state_nodes": 303,
+        "width": 5
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 2916,
+        "name_nodes": 2,
+        "operation_nodes": 2279,
+        "output_nodes": 1458,
+        "q": 729,
+        "root_sign": "P",
+        "state_nodes": 819,
+        "width": 6
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 2916,
+        "name_nodes": 2,
+        "operation_nodes": 2279,
+        "output_nodes": 1458,
+        "q": 729,
+        "root_sign": "N",
+        "state_nodes": 819,
+        "width": 6
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 8748,
+        "name_nodes": 2,
+        "operation_nodes": 6719,
+        "output_nodes": 4374,
+        "q": 2187,
+        "root_sign": "P",
+        "state_nodes": 2343,
+        "width": 7
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 8748,
+        "name_nodes": 2,
+        "operation_nodes": 6719,
+        "output_nodes": 4374,
+        "q": 2187,
+        "root_sign": "N",
+        "state_nodes": 2343,
+        "width": 7
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 26244,
+        "name_nodes": 2,
+        "operation_nodes": 19907,
+        "output_nodes": 13122,
+        "q": 6561,
+        "root_sign": "P",
+        "state_nodes": 6783,
+        "width": 8
+      },
+      {
+        "depth": 8,
+        "depth_bound": 8,
+        "four_q_bound": 26244,
+        "name_nodes": 2,
+        "operation_nodes": 19907,
+        "output_nodes": 13122,
+        "q": 6561,
+        "root_sign": "N",
+        "state_nodes": 6783,
+        "width": 8
+      },
+      {
+        "depth": 9,
+        "depth_bound": 9,
+        "four_q_bound": 78732,
+        "name_nodes": 2,
+        "operation_nodes": 59465,
+        "output_nodes": 39366,
+        "q": 19683,
+        "root_sign": "P",
+        "state_nodes": 20097,
+        "width": 9
+      },
+      {
+        "depth": 9,
+        "depth_bound": 9,
+        "four_q_bound": 78732,
+        "name_nodes": 2,
+        "operation_nodes": 59465,
+        "output_nodes": 39366,
+        "q": 19683,
+        "root_sign": "N",
+        "state_nodes": 20097,
+        "width": 9
+      }
+    ],
+    "rail_recurrence_widths_checked": 512,
+    "recurrence_widths_checked": 512,
+    "semantic_pair_checks_through_width_six": 2391484
+  },
+  "frozen": {
+    "STATE.md": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6"
+  },
+  "gate_grammar": {
+    "cost_one_gates": [
+      "u(previous_wire)",
+      "d(previous_wire,previous_wire,previous_wire)"
+    ],
+    "cost_zero_terminals": [
+      "A",
+      "t_0",
+      "...",
+      "t_(w-1)"
+    ],
+    "depth": "longest operation path above raw terminal wires",
+    "domain": "A=2 and target digits t_i in Q={0,1,2}",
+    "forbidden": [
+      "nullary constants",
+      "payload wires",
+      "signed leaves",
+      "free NOT",
+      "free decoding"
+    ],
+    "root_sign": "P and N vectors are synthesized and costed separately",
+    "sharing": "one hash-consed scalar DAG with unrestricted fanout; outputs are wire references",
+    "size": "number of distinct operation nodes, including u(A) and u(u(A))"
+  },
+  "lower_bounds": {
+    "all_width_output_count_lower_bound": {
+      "N_distinct_controls": "4q/3+1",
+      "O_family_count": "(q+1)/2: zero plus one class for each physical prefix ending in its last digit 2",
+      "P_distinct_controls": "4q/3",
+      "gate_lower_bound": "at least the number of distinct controls, because raw A/address inputs are Q-valued rather than Boolean",
+      "mixed_Z_or_notZ_family_count": "q, by recursive three-block injectivity",
+      "overlap_N": "(q/3-1)/2, indexed by odd-parity prefixes a in O_(a2)=notZ_(a1)",
+      "overlap_P": "(q/3+1)/2, indexed by even-parity prefixes a in O_(a2)=notZ_(a1)",
+      "scope": "all widths w>=1 in the declared scalar shared-DAG grammar; this is an output-count lower bound, not an exact circuit minimum"
+    },
+    "composition_lower_bound": {
+      "minimum": 1,
+      "proof": "zero gates can return only one input/constant, but left-star-right depends on each operand; d(left,equal,right) attains one",
+      "scope": "generic three-state segment operator with independent left/right state inputs and shared code constants"
+    },
+    "distinct_output_bounds": [
+      {
+        "certified_gate_lower_bound": 5,
+        "distinct_noninput_output_functions": 4,
+        "distinct_output_functions": 4,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "P",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 1
+      },
+      {
+        "certified_gate_lower_bound": 6,
+        "distinct_noninput_output_functions": 5,
+        "distinct_output_functions": 5,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "N",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 4,
+        "width": 1
+      },
+      {
+        "certified_gate_lower_bound": 13,
+        "distinct_noninput_output_functions": 12,
+        "distinct_output_functions": 12,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "P",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 2
+      },
+      {
+        "certified_gate_lower_bound": 14,
+        "distinct_noninput_output_functions": 13,
+        "distinct_output_functions": 13,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "N",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 2
+      },
+      {
+        "certified_gate_lower_bound": 37,
+        "distinct_noninput_output_functions": 36,
+        "distinct_output_functions": 36,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "P",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 3
+      },
+      {
+        "certified_gate_lower_bound": 38,
+        "distinct_noninput_output_functions": 37,
+        "distinct_output_functions": 37,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "N",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 3
+      },
+      {
+        "certified_gate_lower_bound": 109,
+        "distinct_noninput_output_functions": 108,
+        "distinct_output_functions": 108,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "P",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 4
+      },
+      {
+        "certified_gate_lower_bound": 110,
+        "distinct_noninput_output_functions": 109,
+        "distinct_output_functions": 109,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "N",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 4
+      },
+      {
+        "certified_gate_lower_bound": 325,
+        "distinct_noninput_output_functions": 324,
+        "distinct_output_functions": 324,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "P",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 5
+      },
+      {
+        "certified_gate_lower_bound": 326,
+        "distinct_noninput_output_functions": 325,
+        "distinct_output_functions": 325,
+        "proof_scope": "scalar-gate output counting, strengthened by exhaustive no-auxiliary target-only closure",
+        "root_sign": "N",
+        "target_only_closure_complete": false,
+        "target_only_closure_count": 0,
+        "width": 5
+      }
+    ],
+    "generic_extractor_lower_bound": {
+      "minimum": 2,
+      "proof": "one scalar gate can materialize at most one missing output function; the displayed one-gate-per-output formulas attain two",
+      "scope": "one cell, generic surjective state wire, constants available, two distinct Boolean output functions, scalar gates"
+    },
+    "width_one_exact_bfs": [
+      {
+        "expanded_semantic_sets": 162,
+        "grammar": "inputs A=2,t; each new scalar wire is u(previous) or d(previous,previous,previous); free fanout; outputs point to wires",
+        "initial": [
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "minimum_gates": 5,
+        "root_sign": "P",
+        "targets": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            0
+          ]
+        ],
+        "visited_semantic_sets": 990,
+        "witness": [
+          {
+            "args": [
+              [
+                2,
+                2,
+                2
+              ]
+            ],
+            "op": "u",
+            "result": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "args": [
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "op": "u",
+            "result": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "args": [
+              [
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "op": "d",
+            "result": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "args": [
+              [
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "op": "d",
+            "result": [
+              0,
+              1,
+              1
+            ]
+          },
+          {
+            "args": [
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "op": "u",
+            "result": [
+              1,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "expanded_semantic_sets": 304,
+        "grammar": "inputs A=2,t; each new scalar wire is u(previous) or d(previous,previous,previous); free fanout; outputs point to wires",
+        "initial": [
+          [
+            2,
+            2,
+            2
+          ],
+          [
+            0,
+            1,
+            2
+          ]
+        ],
+        "minimum_gates": 6,
+        "root_sign": "N",
+        "targets": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            1,
+            1
+          ],
+          [
+            1,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            1
+          ]
+        ],
+        "visited_semantic_sets": 1750,
+        "witness": [
+          {
+            "args": [
+              [
+                0,
+                1,
+                2
+              ]
+            ],
+            "op": "u",
+            "result": [
+              1,
+              0,
+              1
+            ]
+          },
+          {
+            "args": [
+              [
+                1,
+                0,
+                1
+              ]
+            ],
+            "op": "u",
+            "result": [
+              0,
+              1,
+              0
+            ]
+          },
+          {
+            "args": [
+              [
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                2
+              ],
+              [
+                1,
+                0,
+                1
+              ]
+            ],
+            "op": "d",
+            "result": [
+              0,
+              1,
+              1
+            ]
+          },
+          {
+            "args": [
+              [
+                0,
+                1,
+                1
+              ]
+            ],
+            "op": "u",
+            "result": [
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "args": [
+              [
+                2,
+                2,
+                2
+              ]
+            ],
+            "op": "u",
+            "result": [
+              1,
+              1,
+              1
+            ]
+          },
+          {
+            "args": [
+              [
+                1,
+                1,
+                1
+              ]
+            ],
+            "op": "u",
+            "result": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "width_zero_minimum": {
+      "N": 2,
+      "P": 2,
+      "proof": "zero is not A and no one-gate d/u term over A=2 equals zero; u(A)=one and u(u(A))=zero attains two"
+    }
+  },
+  "mutations": {
+    "binary_absolute_names": [
+      {
+        "anchor": 0,
+        "attempted_two_one_zero": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "anchor": 1,
+        "attempted_two_one_zero": [
+          1,
+          0,
+          1
+        ]
+      }
+    ],
+    "omit_negative_zero_rail_complement": {
+      "cell_sign": "negative",
+      "correct_second": 1,
+      "mode": "equal",
+      "wrong_zero_rail": 0
+    },
+    "reuse_left_one_rail_with_nonzero_right": {
+      "correct_one_rail": 1,
+      "left_mode": "equal",
+      "right_mode": "one",
+      "wrong_reused_left": 0
+    },
+    "reversed_composition": {
+      "correct": 0,
+      "left": 0,
+      "mutated": 1,
+      "right": 1
+    },
+    "unlifted_middle_base_state": {
+      "correct_state": 2,
+      "target_digit": 1,
+      "unlifted_state": 1
+    },
+    "wrong_one_rail_guard": {
+      "correct": 0,
+      "left_mode": "zero",
+      "mutated_guard_zero": 1,
+      "right_mode": "one"
+    },
+    "wrong_u_extractor": {
+      "correct_not_zero": 0,
+      "state": 0,
+      "u_state": 1
+    },
+    "wrong_zero_rail_guard": {
+      "correct": 0,
+      "left_mode": "one",
+      "mutated_guard_zero": 1,
+      "right_mode": "zero"
+    }
+  },
+  "schema": "orbit.program-vector-optimization.lower-bound.v1",
+  "semantic_sha256": "a577c3b1ea343bc01781b7c46b04a902e93382bf648b70f80e959f5ac618931c",
+  "status": "EXACT_3Q_DIRECT_RAIL_CONSTRUCTION__GLOBAL_OUTPUT_LOWER_BOUND"
+}

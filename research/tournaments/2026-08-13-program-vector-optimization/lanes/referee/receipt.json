@@ -1,0 +1,726 @@
+{
+  "algebra": {
+    "carrier": [
+      0,
+      1,
+      2
+    ],
+    "composition": {
+      "gain": "d(GA,LA,GB)",
+      "loss": "d(LA,GA,LB)"
+    },
+    "negative_pair": [
+      "G",
+      "u(L)"
+    ],
+    "positive_pair": [
+      "L",
+      "G"
+    ]
+  },
+  "checker_sha256": "ba7dbc467fdc1f3c5af3470eb12997f4d9ba8d46addb195700ba58fc636d8989",
+  "frozen_subjects": {
+    "notes/QUASIPRIMAL_CONSERVATIVE_TERM_PARALLEL_PROGRAM_DEPTH.md": "570d4ef5468eb802689bfc139f28fd1f26250ec94dfeeacaa6d9c4fd30e25165",
+    "paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md": "dddeb98c31805a4a68cf7c2767e61469c252aa1710a5a56d621e13787a2dc2e4",
+    "research/tournaments/2026-08-13-program-vector-optimization/STATE.md": "6f69bf83588e2b799aec60d0df900bd749b69b4e269bdce2f29ffe6461210cf6",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/ProgramVector.lean": "c2f477edd110c4df96f3c30f31f02de09af93045720babfd38dd2dd79a5573dd",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.lean": "ea516b085cdedd3f0ee70f83a9d0240df55e7e68cf0ad8ce77558efd91db55d2"
+  },
+  "gain_loss_dag_and_semantics": {
+    "base_cell_payload_checks_through_width_five": 265720,
+    "binary_anchor_name_mutation": [
+      {
+        "A": 0,
+        "two_one_zero_attempt": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "A": 1,
+        "two_one_zero_attempt": [
+          1,
+          0,
+          1
+        ]
+      }
+    ],
+    "constant_pair_checks_through_width_five": 1456,
+    "materialized_widths": [
+      0,
+      9
+    ],
+    "projection_pair_checks_through_width_five": 132860,
+    "recurrence_widths_checked": 512,
+    "rows": [
+      {
+        "actual_depth": 2,
+        "actual_reachable_operation_nodes": 2,
+        "analytic_nodes_including_names_and_complements": 2,
+        "depth_bound": 2,
+        "four_q_bound": 4,
+        "hundred_q_over_27_numerator_bound": 100,
+        "q": 1,
+        "root_sign": "P",
+        "width": 0
+      },
+      {
+        "actual_depth": 2,
+        "actual_reachable_operation_nodes": 2,
+        "analytic_nodes_including_names_and_complements": 2,
+        "depth_bound": 2,
+        "four_q_bound": 4,
+        "hundred_q_over_27_numerator_bound": 100,
+        "q": 1,
+        "root_sign": "N",
+        "width": 0
+      },
+      {
+        "actual_depth": 3,
+        "actual_reachable_operation_nodes": 7,
+        "analytic_nodes_including_names_and_complements": 7,
+        "depth_bound": 4,
+        "four_q_bound": 12,
+        "hundred_q_over_27_numerator_bound": 300,
+        "q": 3,
+        "root_sign": "P",
+        "width": 1
+      },
+      {
+        "actual_depth": 4,
+        "actual_reachable_operation_nodes": 7,
+        "analytic_nodes_including_names_and_complements": 8,
+        "depth_bound": 4,
+        "four_q_bound": 12,
+        "hundred_q_over_27_numerator_bound": 300,
+        "q": 3,
+        "root_sign": "N",
+        "width": 1
+      },
+      {
+        "actual_depth": 5,
+        "actual_reachable_operation_nodes": 29,
+        "analytic_nodes_including_names_and_complements": 32,
+        "depth_bound": 5,
+        "four_q_bound": 36,
+        "hundred_q_over_27_numerator_bound": 900,
+        "q": 9,
+        "root_sign": "P",
+        "width": 2
+      },
+      {
+        "actual_depth": 5,
+        "actual_reachable_operation_nodes": 30,
+        "analytic_nodes_including_names_and_complements": 33,
+        "depth_bound": 5,
+        "four_q_bound": 36,
+        "hundred_q_over_27_numerator_bound": 900,
+        "q": 9,
+        "root_sign": "N",
+        "width": 2
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 87,
+        "analytic_nodes_including_names_and_complements": 99,
+        "depth_bound": 6,
+        "four_q_bound": 108,
+        "hundred_q_over_27_numerator_bound": 2700,
+        "q": 27,
+        "root_sign": "P",
+        "width": 3
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 88,
+        "analytic_nodes_including_names_and_complements": 100,
+        "depth_bound": 6,
+        "four_q_bound": 108,
+        "hundred_q_over_27_numerator_bound": 2700,
+        "q": 27,
+        "root_sign": "N",
+        "width": 3
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 223,
+        "analytic_nodes_including_names_and_complements": 256,
+        "depth_bound": 6,
+        "four_q_bound": 324,
+        "hundred_q_over_27_numerator_bound": 8100,
+        "q": 81,
+        "root_sign": "P",
+        "width": 4
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 224,
+        "analytic_nodes_including_names_and_complements": 257,
+        "depth_bound": 6,
+        "four_q_bound": 324,
+        "hundred_q_over_27_numerator_bound": 8100,
+        "q": 81,
+        "root_sign": "N",
+        "width": 4
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 623,
+        "analytic_nodes_including_names_and_complements": 719,
+        "depth_bound": 7,
+        "four_q_bound": 972,
+        "hundred_q_over_27_numerator_bound": 24300,
+        "q": 243,
+        "root_sign": "P",
+        "width": 5
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 624,
+        "analytic_nodes_including_names_and_complements": 720,
+        "depth_bound": 7,
+        "four_q_bound": 972,
+        "hundred_q_over_27_numerator_bound": 24300,
+        "q": 243,
+        "root_sign": "N",
+        "width": 5
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 1725,
+        "analytic_nodes_including_names_and_complements": 1992,
+        "depth_bound": 7,
+        "four_q_bound": 2916,
+        "hundred_q_over_27_numerator_bound": 72900,
+        "q": 729,
+        "root_sign": "P",
+        "width": 6
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 1726,
+        "analytic_nodes_including_names_and_complements": 1993,
+        "depth_bound": 7,
+        "four_q_bound": 2916,
+        "hundred_q_over_27_numerator_bound": 72900,
+        "q": 729,
+        "root_sign": "N",
+        "width": 6
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 4993,
+        "analytic_nodes_including_names_and_complements": 5767,
+        "depth_bound": 7,
+        "four_q_bound": 8748,
+        "hundred_q_over_27_numerator_bound": 218700,
+        "q": 2187,
+        "root_sign": "P",
+        "width": 7
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 4994,
+        "analytic_nodes_including_names_and_complements": 5768,
+        "depth_bound": 7,
+        "four_q_bound": 8748,
+        "hundred_q_over_27_numerator_bound": 218700,
+        "q": 2187,
+        "root_sign": "N",
+        "width": 7
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 14579,
+        "analytic_nodes_including_names_and_complements": 16832,
+        "depth_bound": 7,
+        "four_q_bound": 26244,
+        "hundred_q_over_27_numerator_bound": 656100,
+        "q": 6561,
+        "root_sign": "P",
+        "width": 8
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 14580,
+        "analytic_nodes_including_names_and_complements": 16833,
+        "depth_bound": 7,
+        "four_q_bound": 26244,
+        "hundred_q_over_27_numerator_bound": 656100,
+        "q": 6561,
+        "root_sign": "N",
+        "width": 8
+      },
+      {
+        "actual_depth": 8,
+        "actual_reachable_operation_nodes": 43329,
+        "analytic_nodes_including_names_and_complements": 50019,
+        "depth_bound": 8,
+        "four_q_bound": 78732,
+        "hundred_q_over_27_numerator_bound": 1968300,
+        "q": 19683,
+        "root_sign": "P",
+        "width": 9
+      },
+      {
+        "actual_depth": 8,
+        "actual_reachable_operation_nodes": 43330,
+        "analytic_nodes_including_names_and_complements": 50020,
+        "depth_bound": 8,
+        "four_q_bound": 78732,
+        "hundred_q_over_27_numerator_bound": 1968300,
+        "q": 19683,
+        "root_sign": "N",
+        "width": 9
+      }
+    ]
+  },
+  "mutations": {
+    "gain_loss": {
+      "drop_p2_loss": {
+        "expected_state": [
+          1,
+          0
+        ],
+        "mutated_state": [
+          0,
+          0
+        ],
+        "physical": [
+          2
+        ],
+        "root_sign": "P",
+        "target": [
+          0
+        ],
+        "width": 1
+      },
+      "omit_negative_loss_complement": {
+        "expected_pair": [
+          0,
+          0
+        ],
+        "mutated_pair": [
+          0,
+          1
+        ],
+        "physical": [
+          1
+        ],
+        "root_sign": "P",
+        "target": [
+          0
+        ],
+        "width": 1
+      },
+      "reuse_loss_as_gain": {
+        "expected_state": [
+          1,
+          0
+        ],
+        "mutated_state": [
+          1,
+          1
+        ],
+        "physical": [
+          0,
+          1
+        ],
+        "root_sign": "P",
+        "target": [
+          0,
+          0
+        ],
+        "width": 2
+      },
+      "unguarded_gain": {
+        "expected_state": [
+          1,
+          0
+        ],
+        "mutated_state": [
+          1,
+          1
+        ],
+        "physical": [
+          1,
+          2
+        ],
+        "root_sign": "P",
+        "target": [
+          0,
+          1
+        ],
+        "width": 2
+      }
+    },
+    "native": {
+      "raw_middle_branch": {
+        "expected_state": 2,
+        "mutated_state": 1,
+        "physical": [
+          1
+        ],
+        "root_sign": "P",
+        "target": [
+          1
+        ],
+        "width": 1
+      },
+      "state_as_control_pair": {
+        "expected_pair": [
+          0,
+          0
+        ],
+        "mutated_pair": [
+          2,
+          1
+        ],
+        "physical": [
+          0
+        ],
+        "root_sign": "P",
+        "target": [
+          0
+        ],
+        "width": 1
+      },
+      "wrong_equal_code": {
+        "expected_state": 0,
+        "mutated_state": 2,
+        "physical": [
+          0,
+          1
+        ],
+        "root_sign": "P",
+        "target": [
+          0,
+          0
+        ],
+        "width": 2
+      }
+    }
+  },
+  "native_dag_and_semantics": {
+    "base_cell_payload_checks_through_width_five": 265720,
+    "encoding": {
+      "equal": 2,
+      "gain": 1,
+      "loss": 0
+    },
+    "materialized_widths": [
+      0,
+      9
+    ],
+    "negative_extraction": [
+      "d(S,A,zero)",
+      "d(S,A,one)"
+    ],
+    "positive_extraction": [
+      "d(zero,S,one)",
+      "d(S,A,zero)"
+    ],
+    "projection_pair_checks_through_width_five": 132860,
+    "recurrence_widths_checked": 512,
+    "rows": [
+      {
+        "actual_depth": 2,
+        "actual_reachable_operation_nodes": 2,
+        "analytic_nodes_including_names_and_extraction": 2,
+        "depth_bound": 2,
+        "four_q_bound": 4,
+        "q": 1,
+        "root_sign": "P",
+        "width": 0
+      },
+      {
+        "actual_depth": 2,
+        "actual_reachable_operation_nodes": 2,
+        "analytic_nodes_including_names_and_extraction": 2,
+        "depth_bound": 2,
+        "four_q_bound": 4,
+        "q": 1,
+        "root_sign": "N",
+        "width": 0
+      },
+      {
+        "actual_depth": 4,
+        "actual_reachable_operation_nodes": 11,
+        "analytic_nodes_including_names_and_extraction": 11,
+        "depth_bound": 4,
+        "four_q_bound": 12,
+        "q": 3,
+        "root_sign": "P",
+        "width": 1
+      },
+      {
+        "actual_depth": 4,
+        "actual_reachable_operation_nodes": 11,
+        "analytic_nodes_including_names_and_extraction": 11,
+        "depth_bound": 4,
+        "four_q_bound": 12,
+        "q": 3,
+        "root_sign": "N",
+        "width": 1
+      },
+      {
+        "actual_depth": 5,
+        "actual_reachable_operation_nodes": 35,
+        "analytic_nodes_including_names_and_extraction": 35,
+        "depth_bound": 5,
+        "four_q_bound": 36,
+        "q": 9,
+        "root_sign": "P",
+        "width": 2
+      },
+      {
+        "actual_depth": 5,
+        "actual_reachable_operation_nodes": 35,
+        "analytic_nodes_including_names_and_extraction": 35,
+        "depth_bound": 5,
+        "four_q_bound": 36,
+        "q": 9,
+        "root_sign": "N",
+        "width": 2
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 101,
+        "analytic_nodes_including_names_and_extraction": 101,
+        "depth_bound": 6,
+        "four_q_bound": 108,
+        "q": 27,
+        "root_sign": "P",
+        "width": 3
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 101,
+        "analytic_nodes_including_names_and_extraction": 101,
+        "depth_bound": 6,
+        "four_q_bound": 108,
+        "q": 27,
+        "root_sign": "N",
+        "width": 3
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 275,
+        "analytic_nodes_including_names_and_extraction": 275,
+        "depth_bound": 6,
+        "four_q_bound": 324,
+        "q": 81,
+        "root_sign": "P",
+        "width": 4
+      },
+      {
+        "actual_depth": 6,
+        "actual_reachable_operation_nodes": 275,
+        "analytic_nodes_including_names_and_extraction": 275,
+        "depth_bound": 6,
+        "four_q_bound": 324,
+        "q": 81,
+        "root_sign": "N",
+        "width": 4
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 791,
+        "analytic_nodes_including_names_and_extraction": 791,
+        "depth_bound": 7,
+        "four_q_bound": 972,
+        "q": 243,
+        "root_sign": "P",
+        "width": 5
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 791,
+        "analytic_nodes_including_names_and_extraction": 791,
+        "depth_bound": 7,
+        "four_q_bound": 972,
+        "q": 243,
+        "root_sign": "N",
+        "width": 5
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 2279,
+        "analytic_nodes_including_names_and_extraction": 2279,
+        "depth_bound": 7,
+        "four_q_bound": 2916,
+        "q": 729,
+        "root_sign": "P",
+        "width": 6
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 2279,
+        "analytic_nodes_including_names_and_extraction": 2279,
+        "depth_bound": 7,
+        "four_q_bound": 2916,
+        "q": 729,
+        "root_sign": "N",
+        "width": 6
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 6719,
+        "analytic_nodes_including_names_and_extraction": 6719,
+        "depth_bound": 7,
+        "four_q_bound": 8748,
+        "q": 2187,
+        "root_sign": "P",
+        "width": 7
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 6719,
+        "analytic_nodes_including_names_and_extraction": 6719,
+        "depth_bound": 7,
+        "four_q_bound": 8748,
+        "q": 2187,
+        "root_sign": "N",
+        "width": 7
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 19907,
+        "analytic_nodes_including_names_and_extraction": 19907,
+        "depth_bound": 7,
+        "four_q_bound": 26244,
+        "q": 6561,
+        "root_sign": "P",
+        "width": 8
+      },
+      {
+        "actual_depth": 7,
+        "actual_reachable_operation_nodes": 19907,
+        "analytic_nodes_including_names_and_extraction": 19907,
+        "depth_bound": 7,
+        "four_q_bound": 26244,
+        "q": 6561,
+        "root_sign": "N",
+        "width": 8
+      },
+      {
+        "actual_depth": 8,
+        "actual_reachable_operation_nodes": 59465,
+        "analytic_nodes_including_names_and_extraction": 59465,
+        "depth_bound": 8,
+        "four_q_bound": 78732,
+        "q": 19683,
+        "root_sign": "P",
+        "width": 9
+      },
+      {
+        "actual_depth": 8,
+        "actual_reachable_operation_nodes": 59465,
+        "analytic_nodes_including_names_and_extraction": 59465,
+        "depth_bound": 8,
+        "four_q_bound": 78732,
+        "q": 19683,
+        "root_sign": "N",
+        "width": 9
+      }
+    ],
+    "state_composition": "d(SA,A,SB)"
+  },
+  "native_ternary": {
+    "encodings_checked": 6,
+    "qualification": "extraction minima are per state root with named constants; cross-branch sharing not lower-bounded",
+    "rows": [
+      {
+        "composition_nodes": 1,
+        "encoding": {
+          "E": 0,
+          "G": 2,
+          "L": 1
+        },
+        "minimum_negative_pair_extraction_nodes": 3,
+        "minimum_positive_pair_extraction_nodes": 3
+      },
+      {
+        "composition_nodes": 1,
+        "encoding": {
+          "E": 0,
+          "G": 1,
+          "L": 2
+        },
+        "minimum_negative_pair_extraction_nodes": 2,
+        "minimum_positive_pair_extraction_nodes": 3
+      },
+      {
+        "composition_nodes": 1,
+        "encoding": {
+          "E": 1,
+          "G": 2,
+          "L": 0
+        },
+        "minimum_negative_pair_extraction_nodes": 2,
+        "minimum_positive_pair_extraction_nodes": 3
+      },
+      {
+        "composition_nodes": 1,
+        "encoding": {
+          "E": 1,
+          "G": 0,
+          "L": 2
+        },
+        "minimum_negative_pair_extraction_nodes": 3,
+        "minimum_positive_pair_extraction_nodes": 3
+      },
+      {
+        "composition_nodes": 1,
+        "encoding": {
+          "E": 2,
+          "G": 1,
+          "L": 0
+        },
+        "minimum_negative_pair_extraction_nodes": 2,
+        "minimum_positive_pair_extraction_nodes": 2
+      },
+      {
+        "composition_nodes": 1,
+        "encoding": {
+          "E": 2,
+          "G": 0,
+          "L": 1
+        },
+        "minimum_negative_pair_extraction_nodes": 2,
+        "minimum_positive_pair_extraction_nodes": 2
+      }
+    ]
+  },
+  "schema": "orbit.program-vector-optimization.gain-loss-referee.v1",
+  "scope": {
+    "not_claimed": [
+      "global optimality or a lower bound outside the scoped one-node interface grammar",
+      "ordinary formula or bounded-fanout cost",
+      "binary-branch controls",
+      "integrated compiler constants or manuscript promotion",
+      "novelty, practicality, patent scope, or freedom to operate"
+    ],
+    "proved_by_construction_and_integer_induction": [
+      "all 2*3^w projection controls for every w and either root sign",
+      "both constant modes",
+      "constant-free d/u syntax under A=2 names",
+      "4q shared-operation-node upper bound including names and final complements",
+      "stronger 27*size <= 100q gain/loss upper bound",
+      "4+ceil(log_2 w) projection depth above raw A/address inputs"
+    ]
+  },
+  "scoped_one_operation_check": {
+    "input_state_rows": 9,
+    "one_new_node_pair_exists": false,
+    "one_node_functions_examined": 77,
+    "scope": "raw LA,GA,LB,GB and named 0,1,2; one added u/d node",
+    "two_node_witness": [
+      "d(LA,GA,LB)",
+      "d(GA,LA,GB)"
+    ]
+  },
+  "semantic_sha256": "5c25cde2692b6be004fa5e64782aea99980c654a97038650a19b2c57e3cb4018",
+  "status": "EXACT_NATIVE_AND_GAIN_LOSS_4Q_VECTOR_PASS"
+}
