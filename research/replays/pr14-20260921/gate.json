@@ -1,0 +1,24 @@
+{
+  "claim_boundary": "Exact PASS for the native first-mismatch algebra, original-signature bridge, fused signed-router semantics, recurrence-level cost bounds, and bounded/adaptive compiler arithmetic. The end-to-end compiler remains conditional on the frozen interfaces inherited from the base paper. Novelty, FTO, serialized DAG extraction, practical performance, and global optimality are not established by this gate.",
+  "results": {
+    "adaptive_block_constant": {
+      "file_sha256": "b36c9fb8d6ed1ad5816e68abbb34adc937213ea79db4d0ddf3f8c1b5836c657d",
+      "semantic_sha256": "7c37621644109f7fd7c9d08508d814b09de490adc891bc36ac27964385ffa6bd"
+    },
+    "lean": {
+      "NativeFirstMismatch.lean": "fa1a4010c18d8ad72bd0718125126730112d63da99ed2e802031479585944aba",
+      "NativeModeBridge.lean": "4fcb3fa63a7c33722837b72bada0da875cf26c91f4efc5916dfa5999e10067a6",
+      "NativeModeCost.lean": "e6478f172dc67c2847c03afb7badc641278318d735719ea23b2cc9fb9fc3fdb9"
+    },
+    "native_semantics": {
+      "file_sha256": "c943bbd5eb3627eff2f0baec8d62ef6d329bf776ef27cab47e85c57c2cd7e48f",
+      "semantic_sha256": "fec89d8b6fb71a32d2b168db1259a1851a11e3e1e8149652648d20c5c7b35ee0"
+    },
+    "sharpened_constants": {
+      "file_sha256": "effffd4d449419b49ac62411c23fee49e9623b48e78f17937e731122ebf611bf",
+      "semantic_sha256": "875173cffc0becde9f96d431d071d7007ac293efd3a90812b5395e54214a5220"
+    }
+  },
+  "schema": "orbit-synthesis/native-first-mismatch-gate/v2",
+  "status": "PASS"
+}

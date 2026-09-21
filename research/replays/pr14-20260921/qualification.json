@@ -1,0 +1,38 @@
+{
+  "schema": "orbitsynthesis-pr-qualification-v1",
+  "pr": 14,
+  "original_head": "dfa67ebf7fbe8c8ace655c3d2f90af093ad644b9",
+  "base": "5b1d6dea609dddce4d9baea6878874bbbf591c83",
+  "python": "3.12",
+  "lean": "4.34.0-rc1",
+  "mathlib": "9aa55045016ce35bb2379a8fc3d7f268995fb99a",
+  "status": "PASS_LOCAL_GATES",
+  "command": "python3 -B experiments/audit_native_router_refinement.py",
+  "scope": "Exact PASS for the native first-mismatch algebra, original-signature bridge, fused signed-router semantics, recurrence-level cost bounds, and bounded/adaptive compiler arithmetic. The end-to-end compiler remains conditional on the frozen interfaces inherited from the base paper. Novelty, FTO, serialized DAG extraction, practical performance, and global optimality are not established by this gate.",
+  "evidence_sha256": {
+    "gate.json": "80fee4fbf70c515ee912c8b40f0d137b317b1eb7470413b684d49bcd3c419018",
+    "axioms.txt": "8bac798d04ea5258ab9d855de6f03dddf0ebfb91c9357143107e8c618db44694",
+    "review.md": "1ff284c6f7129150343258867a853ac3f0237e35ae1761caf6b9661459976133"
+  },
+  "review_session": "01a0c5b8-4f11-7f71-aa9f-6411fc81e826",
+  "repairs": [
+    "Restored two malformed JSON formula strings to regenerated output; existing semantic hash was already correct. Old raw receipt SHA256 d0089de3ee8284fbc90e2a7cfb8af97fdf86dbe59731293765a19e52c3b38cab.",
+    "Recovered shifted bytes and corrupted mathematical glyphs in NativeModeCost; restored documented upper-bound directions, recursive measures and existential witnesses.",
+    "Repaired elaboration, simplifier and arithmetic proof steps in all three new Lean files. Added internally derived 3^width >= 9 for width >= 2. No weakened documented bound.",
+    "Existing three frozen router/vector/cost source pins preserved exactly."
+  ],
+  "independent_checks": {
+    "address_pairs": 66430,
+    "signed_tree_cases": 11356,
+    "recurrence_widths_through": 4096,
+    "compiler_arities": [
+      64,
+      1024
+    ]
+  },
+  "limits": [
+    "Recurrence-level costs do not certify end-to-end shared-DAG extraction.",
+    "All-arity compiler remains conditional on its frozen interfaces.",
+    "No novelty or practical performance claim."
+  ]
+}
