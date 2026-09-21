@@ -4,7 +4,7 @@
   "manuscript_review_thread": "01a0c5c3-d13c-7410-8100-ed783c8ed439",
   "scope": "Reviewed current manuscript and replay inputs. Integrity binding only; no all-arity extracted-compiler proof or external peer-review status. See qualification.json for execution evidence.",
   "sha256": {
-    ".github/workflows/fixed-q-preprint.yml": "5892b3272770cbce721e63a6e68f2c52162a3adbbbb00a7c91d4ff08ba4c50cf",
+    ".github/workflows/fixed-q-preprint.yml": "238d7c1b13719cd045be98289de76e3fc5811f2dae947990c132be5a62ffc9c1",
     "experiments/audit_fixed_q_preprint.py": "c834665b38ef73d863f972d398fd248d0d680c6eaba73c3b5d4d50ba4cf8df55",
     "experiments/test_preprint_subject.py": "1ac74246cba2b73d3c664a32cd0a41245eb3092e535cf2c3708a9581bbc5ee2e",
     "notes/QUASIPRIMAL_CONSERVATIVE_TERM_INTEGRATED_COMPILER.md": "a890003b3bea6f294a2109902ad1c3a53771406f351d800cd094176c22601584",
