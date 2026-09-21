@@ -1,0 +1,67 @@
+{
+  "bounds": {
+    "closed": "10/3",
+    "generic": "35/9",
+    "gl": "100/27",
+    "mode": "17/9",
+    "widths": 256
+  },
+  "compiler": {
+    "arities": [
+      64,
+      16384
+    ],
+    "checks": 195852,
+    "depth": "<=r+4*ceil(log2 r)+9",
+    "min_depth_slack": 4,
+    "nonbinary": "<15*3^r/r",
+    "total": "<16*3^r/r",
+    "worst_arity": 93,
+    "worst_decimal": "13.777777777777779"
+  },
+  "minimality": {
+    "gl_layers": [
+      1,
+      2,
+      9,
+      45,
+      245,
+      1444,
+      8251
+    ],
+    "gl_nodes": 6,
+    "mode_layers": [
+      1,
+      2,
+      9,
+      45,
+      245,
+      1444
+    ],
+    "mode_nodes": 5,
+    "negative_bottom_nodes": 2
+  },
+  "mutations": {
+    "missing_payload_complement": true,
+    "repeated_boolean_controls": {
+      "arity": 93,
+      "new": 34911854272350849703571498543320262078175725,
+      "old": 87279635680877124258913974794767273400414490
+    },
+    "reversed_find_first": true,
+    "swapped_gl": true
+  },
+  "routers": {
+    "exhaustive": 9268,
+    "sampled": 270
+  },
+  "semantic_sha256": "fec89d8b6fb71a32d2b168db1259a1851a11e3e1e8149652648d20c5c7b35ee0",
+  "semantics": {
+    "digit": 18,
+    "mode": 132858,
+    "pair": 132858,
+    "support": 1641
+  },
+  "status": "independent executable oracle; paper proof separate; Lean compilation pending",
+  "theorem": "native find-first mode vector and fused signed router"
+}

@@ -1,0 +1,26 @@
+{
+  "constant": "326/25",
+  "depth": "<=r+4*ceil(log2 r)+9",
+  "finite": {
+    "arities": [
+      64,
+      16384
+    ],
+    "checks": 16321,
+    "worst_arity": 88,
+    "worst_decimal": "13.037037037037122",
+    "worst_exact": "4214325344261858200281867280397789335181800/323257909929174534292273980721360271853387"
+  },
+  "semantic_sha256": "169c6f66caeac2624fff3450ae9ad7f1bc6c6583ac52fa85692aaf90ca199b06",
+  "status": "exact finite replay plus analytic-tail certificate",
+  "tail": {
+    "binary_upper": "<1/2000",
+    "case_A_main": "<=352/27",
+    "case_B_main": "strictly below case_A",
+    "checks": 15644,
+    "end": 16384,
+    "nonbinary_remainder": "<1/2000",
+    "start": 741
+  },
+  "theorem": "adaptive native-mode compiler total constant below 13.04"
+}
