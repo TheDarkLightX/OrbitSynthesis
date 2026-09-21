@@ -1,0 +1,62 @@
+{
+  "schema": "orbit-synthesis/pr-qualification/v1",
+  "pull_request": 18,
+  "original_head": "56219ecba3b23ff240979fed108c009ae94344f2",
+  "status": "LOCAL_PASS_REVIEW_PASS_FINAL_COMBINED_HOSTED_CI_REQUIRED",
+  "gate": "bash research/tournaments/2026-08-14-two-slice-compiler/check.sh",
+  "checks": {
+    "ordinary_optimized_receipt_bytes_match_original": true,
+    "slice_lookup_rows": 1728,
+    "selector_tables": 64,
+    "ledger_arity_range": [
+      64,
+      16384
+    ],
+    "full_cli_numeric_substitution_rejected_both_modes": true,
+    "guard_inversion_mutation_effectiveness_control_both_modes": true,
+    "independent_original_signature_composition": {
+      "arity": 3,
+      "target_tables": 11,
+      "padding_values": [
+        0,
+        1,
+        2
+      ],
+      "full_table_rows": 891,
+      "scope": "Small d/u composition, not the r>=64 schedule or measured universal-library DAG"
+    }
+  },
+  "source_sha256": {
+    "research/tournaments/2026-08-14-two-slice-compiler/REPORT.md": "86dad05bdadfe9cc72a240e4993f629bbe0699fba8190bb9b0c96f349a30a2bd",
+    "research/tournaments/2026-08-14-two-slice-compiler/check.sh": "dfefdbfac0d41b0f7420d4b1394167a5a58942d40c9aa73cf72b61620d5c68c1",
+    "research/tournaments/2026-08-14-two-slice-compiler/check_two_slice_compiler.py": "8561b87d5339181874e7019ec252470def4dc8da2ac39b99efd4eb96c541cd50",
+    "research/tournaments/2026-08-14-two-slice-compiler/receipt.json": "644fc56e60669e598190dc99ee213e0df75f63752cd72c433c08079389492360",
+    "notes/QUASIPRIMAL_CONSERVATIVE_TERM_TWO_SLICE_COMPILER.md": "fe8db93d84a7482c56017ef4957fef11fd90657b522cb56455d6ef7f53079562"
+  },
+  "review_thread": "01a0c605-fd79-76d0-9dc4-b64f271cc241",
+  "scope": "Standalone slice routing and charged arithmetic ledgers, not a materialized full compiler. No end-to-end Lean compiler proof, external mathematical peer review, novelty or measured zkVM speedup.",
+  "review_report_sha256": {
+    "review-final.txt": "551493db7039608ad476f1a3b15021406eb13f7f14777abd60cdea47b5ca1660",
+    "integration-review-final.txt": "1db948d75a02278f0bbfd33a112177e1698beba820bbcb72ce1f15d9cdf268be"
+  },
+  "integration": {
+    "predecessor_source_commit": "6c8fd7a3f415eabdef07e4b84b3d339e3a50ab93",
+    "reviewed_subject": {
+      "subject_sha256": "fe63a8d0e020655fde8e6a1a837add6a8a65e7aec096c28c07f9892d5c748342",
+      "checked_files": 87,
+      "manuscript_sha256": "01ddf4565212f798d0adf5c4c9b16d6de9074a317a34f2a39a80051de55a5410",
+      "meaning": "current source binding; mathematical coverage stays scoped"
+    },
+    "predecessor_subject_preserved": true,
+    "predecessor_mathematical_inputs_unchanged": true,
+    "changed_predecessor_files": [
+      ".github/workflows/fixed-q-preprint.yml",
+      "experiments/audit_fixed_q_preprint.py"
+    ],
+    "ordinary_optimized_binding_controls": "PASS",
+    "combined_hosted_ci": "REQUIRED",
+    "review_result": "NO_BLOCKERS",
+    "independent_binding_controls_rejected": 348,
+    "landed_predecessor_merge": "4f70b5d775df7a7b8a0c676199a556ec9e8172c6"
+  }
+}

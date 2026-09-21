@@ -1,0 +1,26 @@
+{
+  "schema": "orbit-synthesis/pr18-receipt-and-guard-controls/v1",
+  "source_sha256": "8561b87d5339181874e7019ec252470def4dc8da2ac39b99efd4eb96c541cd50",
+  "controls": [
+    {
+      "optimized": false,
+      "exit_code": 1,
+      "diagnostic": "RuntimeError: receipt drift"
+    },
+    {
+      "optimized": true,
+      "exit_code": 1,
+      "diagnostic": "RuntimeError: receipt drift"
+    },
+    {
+      "compile_optimization": 0,
+      "positive_rows": 1728,
+      "ignored_guard_mutation_rejected": true
+    },
+    {
+      "compile_optimization": 2,
+      "positive_rows": 1728,
+      "ignored_guard_mutation_rejected": true
+    }
+  ]
+}

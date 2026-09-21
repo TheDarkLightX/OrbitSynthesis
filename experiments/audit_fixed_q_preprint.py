@@ -23,7 +23,7 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-REVIEW_SUBJECT = Path("research/replays/pr17-20260921/subject.json")
+REVIEW_SUBJECT = Path("research/replays/pr18-20260921/subject.json")
 FRONTIER = ROOT / "research/tournaments/2026-08-13-semantic-router-frontier"
 OPT_FRONTIER = ROOT / "research/tournaments/2026-08-13-program-vector-optimization"
 
