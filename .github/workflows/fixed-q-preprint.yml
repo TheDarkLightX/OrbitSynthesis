@@ -35,3 +35,5 @@ jobs:
         run: python3 experiments/audit_fixed_q_preprint.py
       - name: Replay native router refinement evidence and Lean proofs
         run: python3 experiments/audit_native_router_refinement.py
+      - name: Replay exact order-pair vectors and Lean proofs
+        run: bash research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/check.sh
