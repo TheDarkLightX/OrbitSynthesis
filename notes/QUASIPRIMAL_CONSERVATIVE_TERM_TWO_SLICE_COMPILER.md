@@ -346,6 +346,14 @@ The replayed exact size ratio on that range is maximized at `r=65`:
 This bounded maximum is validation evidence, not an all-arity optimality
 statement.  The all-arity theorem uses the inequalities in Sections 6 and 7.
 
+This replay reconstructs slice-table lookup and evaluates charged ledger
+formulas. It does not materialize and count the complete universal-library
+compiler DAG. On 2026-09-21 the checker was tightened to use integer ceiling
+arithmetic, compare expected receipt bytes exactly, and apply the wrong-slice
+mutation to the same routing helper used by the positive tests. The original
+receipt remains byte-identical. These repairs strengthen the executable check;
+they do not extend its semantic or formalization coverage.
+
 ## 9. Boundaries
 
 This theorem does not improve the sharp local `4/3` leading constant, prove an

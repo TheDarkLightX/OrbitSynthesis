@@ -1,0 +1,41 @@
+{
+  "schema": "orbit-synthesis/pr-qualification/v1",
+  "pull_request": 18,
+  "original_head": "56219ecba3b23ff240979fed108c009ae94344f2",
+  "status": "LOCAL_LANE_PASS_INDEPENDENT_REVIEW_PASS_INTEGRATION_PENDING",
+  "gate": "bash research/tournaments/2026-08-14-two-slice-compiler/check.sh",
+  "checks": {
+    "ordinary_optimized_receipt_bytes_match_original": true,
+    "slice_lookup_rows": 1728,
+    "selector_tables": 64,
+    "ledger_arity_range": [
+      64,
+      16384
+    ],
+    "full_cli_numeric_substitution_rejected_both_modes": true,
+    "guard_inversion_mutation_effectiveness_control_both_modes": true,
+    "independent_original_signature_composition": {
+      "arity": 3,
+      "target_tables": 11,
+      "padding_values": [
+        0,
+        1,
+        2
+      ],
+      "full_table_rows": 891,
+      "scope": "Small d/u composition, not the r>=64 schedule or measured universal-library DAG"
+    }
+  },
+  "source_sha256": {
+    "research/tournaments/2026-08-14-two-slice-compiler/REPORT.md": "86dad05bdadfe9cc72a240e4993f629bbe0699fba8190bb9b0c96f349a30a2bd",
+    "research/tournaments/2026-08-14-two-slice-compiler/check.sh": "dfefdbfac0d41b0f7420d4b1394167a5a58942d40c9aa73cf72b61620d5c68c1",
+    "research/tournaments/2026-08-14-two-slice-compiler/check_two_slice_compiler.py": "8561b87d5339181874e7019ec252470def4dc8da2ac39b99efd4eb96c541cd50",
+    "research/tournaments/2026-08-14-two-slice-compiler/receipt.json": "644fc56e60669e598190dc99ee213e0df75f63752cd72c433c08079389492360",
+    "notes/QUASIPRIMAL_CONSERVATIVE_TERM_TWO_SLICE_COMPILER.md": "fe8db93d84a7482c56017ef4957fef11fd90657b522cb56455d6ef7f53079562"
+  },
+  "review_thread": "01a0c605-fd79-76d0-9dc4-b64f271cc241",
+  "scope": "Standalone slice routing and charged arithmetic ledgers, not a materialized full compiler. No end-to-end Lean compiler proof, external mathematical peer review, novelty or measured zkVM speedup.",
+  "review_report_sha256": {
+    "review-final.txt": "551493db7039608ad476f1a3b15021406eb13f7f14777abd60cdea47b5ca1660"
+  }
+}

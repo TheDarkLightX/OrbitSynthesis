@@ -69,7 +69,7 @@ clean ceiling.
 ## Depth
 
 The ordinary mode retains the fast-anchor bound with additive constant 11.
-In two-slice mode the exact final path is
+In two-slice mode the final-depth upper bound is
 
 ```text
 r+C+max(ceil(log_2(b+1))+13,ceil(log_2 s)-b+11),
@@ -111,6 +111,14 @@ The exact replay ratio is maximal at `r=65`:
 ```
 
 That bounded maximum is not used as an all-arity optimality claim.
+
+The replay executes slice-table lookup and charged arithmetic ledgers; it does
+not construct the full universal-library compiler DAG. The 2026-09-21 review
+repairs integer ceilings, exact expected-receipt byte comparison, and guard
+inversion through the same routing helper as the positive cases. The original
+receipt bytes and all printed results are unchanged. The actual CLI rejects a
+numeric-type substitution in both Python modes; a control that disables guard
+inversion is detected as an ineffective mutation.
 
 ## Boundary
 

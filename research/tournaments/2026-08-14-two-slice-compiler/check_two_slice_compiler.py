@@ -218,6 +218,30 @@ def exact_row(r: int) -> dict[str, int]:
     }
 
 
+def slice_tables(sigma):
+    wide = {}
+    narrow = {}
+    for prefix in Q:
+        # The third wide block is padding; the correct guard never selects it.
+        wide[prefix] = {
+            (digit, local): (prefix, digit, local)[sigma((prefix, digit, local))]
+            if digit in B else 0
+            for digit in Q for local in Q
+        }
+        narrow[prefix] = {
+            local: (prefix, 2, local)[sigma((prefix, 2, local))]
+            for local in Q
+        }
+    return wide, narrow
+
+
+def route_slice(wide, narrow, point, *, invert_guard=False):
+    prefix, digit, local = point
+    if (digit == 2) != invert_guard:
+        return narrow[prefix][local]
+    return wide[prefix][(digit, local)]
+
+
 def decomposition_audit() -> dict[str, object]:
     points = list(itertools.product(Q, repeat=3))
     rows = 0
@@ -233,35 +257,18 @@ def decomposition_audit() -> dict[str, object]:
         selectors.append((f"seed-{seed}", lambda point, table=table: table[point]))
 
     for label, sigma in selectors:
-        wide = {}
-        narrow = {}
-        for prefix in Q:
-            wide[prefix] = {
-                (slice_digit, local):
-                    (prefix, slice_digit, local)[sigma((prefix, slice_digit, local))]
-                for slice_digit in B
-                for local in Q
-            }
-            narrow[prefix] = {
-                local: (prefix, 2, local)[sigma((prefix, 2, local))]
-                for local in Q
-            }
+        wide, narrow = slice_tables(sigma)
         for point in points:
-            prefix, slice_digit, local = point
-            reconstructed = (
-                narrow[prefix][local]
-                if slice_digit == 2
-                else wide[prefix][(slice_digit, local)]
-            )
+            reconstructed = route_slice(wide, narrow, point)
             require(reconstructed == point[sigma(point)], "slice reconstruction")
             rows += 1
         labels.append(label)
 
     mutation = None
+    wide, narrow = slice_tables(lambda point: 1)
     for point in points:
-        prefix, slice_digit, local = point
         expected = point[1]
-        bad = local if slice_digit == 2 else 2
+        bad = route_slice(wide, narrow, point, invert_guard=True)
         if bad != expected:
             mutation = {
                 "point": list(point),
@@ -290,8 +297,8 @@ def analytic_bases() -> dict[str, object]:
 
     mode2_log_rows = []
     for c in range(6, 11):
-        left = math.ceil(2 * (c - 1) / 3)
-        right = 2 ** (math.ceil(2 * c / 5) - 1)
+        left = (2 * (c - 1) + 2) // 3
+        right = 2 ** ((2 * c + 4) // 5 - 1)
         require(left <= right, "mode-two logarithm base")
         mode2_log_rows.append([c, left, right])
     return {
@@ -347,12 +354,12 @@ def ledger_audit() -> dict[str, object]:
             c = row["C"]
             require(3 ** row["b"] < 2 ** (c - 1), "mode-two exponent")
             require(
-                clog2(row["b"] + 1) <= math.ceil(2 * c / 5) - 1,
+                clog2(row["b"] + 1) <= (2 * c + 4) // 5 - 1,
                 "mode-two log b",
             )
 
         require(1000 * r * fixed_upper < unit, "fixed group")
-        depth_bound = r + math.ceil(7 * row["C"] / 5) + 12
+        depth_bound = r + (7 * row["C"] + 4) // 5 + 12
         require(row["final_depth"] <= depth_bound, "depth bound")
         slack = depth_bound - row["final_depth"]
         if slack < minimum_slack[0]:
@@ -419,7 +426,7 @@ def main() -> int:
     result = make_receipt()
     rendered = json.dumps(result, indent=2, sort_keys=True) + "\n"
     if expected is not None:
-        require(result == json.loads(expected.read_text()), "receipt drift")
+        require(rendered.encode("utf-8") == expected.read_bytes(), "receipt drift")
     if output is not None:
         output.write_text(rendered)
     print(rendered, end="")
