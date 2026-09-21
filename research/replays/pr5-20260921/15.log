@@ -1,0 +1,5 @@
+ABA positive fixed-point calculus checks passed
+  5000 random d=e=1 games
+  reachability: every mu approximant compared
+  Buchi: every nu approximant and nested mu approximant compared
+  explicit oracle: 3 / 15 / 255 complete ABA types

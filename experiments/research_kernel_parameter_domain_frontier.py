@@ -121,7 +121,7 @@ def main()->None:
     frontier=[atoms['claim_generic'],atoms['claim_closure_obstruction'],atoms['risk_lean'],atoms['open_kernel']]
     report={
         'ok':True,'schema':'research_kernel/report/v1','run_id':run_id,
-        'counts_by_statusg:{s:sum(1 for a in atoms.values() if a['status']==s) for s in sorted(STATUSES)},
+        'counts_by_status':{s:sum(1 for a in atoms.values() if a['status']==s) for s in sorted(STATUSES)},
         'supported_claims':[atoms['claim_bounded_equiv'],atoms['claim_frontier']],
         'refuted_claims':[atoms['claim_naive']],
         'counterexamples':[atoms['cx_naive']],

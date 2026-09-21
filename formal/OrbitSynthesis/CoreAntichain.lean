@@ -40,7 +40,7 @@ theorem no_two_singleton_minimal
     ha.2 ∅ hempty (Set.empty_subset {a})
   have haSingleton : a ∈ ({a} : Set α) := by simp
   have haEmpty : a ∈ (∅ : Set α) := hback haSingleton
-  simpa using haEmpty
+  exact haEmpty
 
 /-- Equivalently, under pair collapse a minimal-core family contains at most one
 singleton core. -/
@@ -55,6 +55,6 @@ theorem singleton_minimal_unique
     a = b := by
   by_contra hne
   exact no_two_singleton_minimal Allowed target hne
-    (pairCollapse hne) ha hb
+    pairCollapse ha hb
 
 end OrbitSynthesis

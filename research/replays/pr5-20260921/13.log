@@ -1,0 +1,5 @@
+ABA LFSR compact lower-bound checks passed
+  d=2: taps=0b11, nonzero orbit/fixed-point strict steps=3
+  d=3: taps=0b011, nonzero orbit/fixed-point strict steps=7
+  d=4: taps=0b0011, nonzero orbit/fixed-point strict steps=15
+  d=5: taps=0b00101, nonzero orbit/fixed-point strict steps=31

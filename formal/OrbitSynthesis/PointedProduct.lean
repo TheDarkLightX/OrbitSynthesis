@@ -36,7 +36,9 @@ def decode (P : PointedProduct ι Obs α)
 theorem decode_at_representative
     (P : PointedProduct ι Obs α) (a : P.SeedAssignment) (i : ι) :
     P.decode a (P.representative i) = (a i).1 := by
-  simp [decode, P.representative_class, P.transport_representative]
+  change P.transport (P.representative i) (a (P.classOf (P.representative i))).1 = _
+  rw [P.transport_representative]
+  exact congrArg (fun j => (a j).1) (P.representative_class i)
 
 /-- No two distinct seed assignments decode to the same table. -/
 theorem decode_injective (P : PointedProduct ι Obs α) :
@@ -88,7 +90,10 @@ theorem exists_decoded_table_iff_classwise
   · rintro ⟨a, ha⟩ i
     refine ⟨a i, ?_⟩
     intro z hz
-    simpa [decode, hz] using ha z
+    have hvalue := congrArg (fun j => (a j).1) hz
+    change P.transport z (a i).1 ∈ allowed z
+    rw [← hvalue]
+    exact ha z
   · intro h
     classical
     let a : P.SeedAssignment := fun i => Classical.choose (h i)

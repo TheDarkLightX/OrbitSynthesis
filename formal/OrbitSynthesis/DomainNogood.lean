@@ -8,8 +8,8 @@ universe u v
 
 /-- One pointed-class seed compiled to state-domain obligations. -/
 structure DomainSeedRule (σ : Type u) where
-  unsafe : Set σ
-  requires : σ → Set σ
+  «unsafe» : Set σ
+  «requires» : σ → Set σ
 
 namespace DomainSeedRule
 
@@ -27,8 +27,8 @@ def PartialViable (rule : DomainSeedRule σ) (included excluded : Set σ) : Prop
 
 /-- The positive and negative literals defining one learned conflict cone. -/
 structure Nogood (σ : Type u) where
-  include : Set σ
-  exclude : Set σ
+  «include» : Set σ
+  «exclude» : Set σ
 
 namespace Nogood
 

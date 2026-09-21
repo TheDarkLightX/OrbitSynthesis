@@ -34,3 +34,7 @@ jobs:
           PY
       - name: Python compile gate
         run: python -m compileall -q src/orbitsynthesis experiments
+      - name: Replay boundary attacks
+        run: |
+          python -B experiments/test_core_family_replay.py
+          python -O -B experiments/test_core_family_replay.py
