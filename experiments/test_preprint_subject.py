@@ -5,12 +5,12 @@ import shutil
 import tempfile
 import unittest
 
-from audit_fixed_q_preprint import ROOT, check_review_binding
+from audit_fixed_q_preprint import ROOT, REVIEW_SUBJECT, check_review_binding
 
 
 class ReviewedSubject(unittest.TestCase):
     def test_reviewed_subject_and_changed_manuscript(self):
-        subject = Path("research/replays/pr16-20260921/subject.json")
+        subject = REVIEW_SUBJECT
         manifest = json.loads((ROOT / subject).read_text())
         with tempfile.TemporaryDirectory(prefix="preprint-subject-control-") as temp:
             root = Path(temp)

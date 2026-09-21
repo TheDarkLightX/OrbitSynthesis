@@ -1,0 +1,14 @@
+[
+  {
+    "flags": [],
+    "returncode": 1,
+    "rejected_receipt_drift": true
+  },
+  {
+    "flags": [
+      "-O"
+    ],
+    "returncode": 1,
+    "rejected_receipt_drift": true
+  }
+]

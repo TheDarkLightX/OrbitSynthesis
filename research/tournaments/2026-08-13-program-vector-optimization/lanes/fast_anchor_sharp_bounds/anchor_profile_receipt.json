@@ -1,0 +1,55 @@
+{
+  "evaluations": 9840,
+  "rows": [
+    {
+      "depth": 0,
+      "depth_bound": 0,
+      "nodes": 0,
+      "r": 1
+    },
+    {
+      "depth": 3,
+      "depth_bound": 3,
+      "nodes": 3,
+      "r": 2
+    },
+    {
+      "depth": 4,
+      "depth_bound": 4,
+      "nodes": 5,
+      "r": 3
+    },
+    {
+      "depth": 4,
+      "depth_bound": 4,
+      "nodes": 7,
+      "r": 4
+    },
+    {
+      "depth": 5,
+      "depth_bound": 5,
+      "nodes": 9,
+      "r": 5
+    },
+    {
+      "depth": 5,
+      "depth_bound": 5,
+      "nodes": 11,
+      "r": 6
+    },
+    {
+      "depth": 5,
+      "depth_bound": 5,
+      "nodes": 13,
+      "r": 7
+    },
+    {
+      "depth": 5,
+      "depth_bound": 5,
+      "nodes": 15,
+      "r": 8
+    }
+  ],
+  "schema": "orbit-synthesis/fast-anchor-profile/v1",
+  "semantic_sha256": "cd0dbb76b3c510dff22872386e286cd1711e13a71c15c076d75528227f8fb610"
+}

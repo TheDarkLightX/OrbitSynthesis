@@ -23,6 +23,7 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
+REVIEW_SUBJECT = Path("research/replays/pr17-20260921/subject.json")
 FRONTIER = ROOT / "research/tournaments/2026-08-13-semantic-router-frontier"
 OPT_FRONTIER = ROOT / "research/tournaments/2026-08-13-program-vector-optimization"
 
@@ -42,7 +43,7 @@ def check_review_binding(root: Path = ROOT) -> dict[str, object]:
     This inventory is an integrity check, not an independent mathematical proof.
     Changing it requires a new source review; historical receipts stay intact.
     """
-    subject = root / "research/replays/pr16-20260921/subject.json"
+    subject = root / REVIEW_SUBJECT
     record = json.loads(subject.read_text(encoding="utf-8"))
     require(record.get("schema") == "orbit-synthesis/preprint-review-subject/v1",
             "preprint review subject schema mismatch")

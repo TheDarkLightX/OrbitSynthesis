@@ -14,6 +14,7 @@ on:
       - 'research/tournaments/2026-08-13-semantic-router-frontier/**'
       - 'research/tournaments/2026-08-13-program-vector-optimization/**'
       - 'research/replays/pr16-20260921/**'
+      - 'research/replays/pr17-20260921/**'
       - 'research/RESEARCH_MAP_2026_08_13.md'
       - 'research/SOURCES.md'
       - 'lakefile.lean'
@@ -46,3 +47,5 @@ jobs:
         run: python3 experiments/audit_native_router_refinement.py
       - name: Replay exact order-pair vectors and Lean proofs
         run: bash research/tournaments/2026-08-13-semantic-router-frontier/lanes/order_pair_program_vector/check.sh
+      - name: Replay constructed fast-anchor semantics and sharp-bound ledgers
+        run: bash research/tournaments/2026-08-13-program-vector-optimization/lanes/fast_anchor_sharp_bounds/check.sh
