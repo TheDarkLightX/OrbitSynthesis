@@ -1,0 +1,112 @@
+{
+  "ci": [
+    {
+      "conclusion": "success",
+      "head_sha": "ad41b8688150d0f87df8ef3ec734174b2ee65fd4",
+      "status": "completed",
+      "url": "https://github.com/IDNI/tau-lang/actions/runs/34472791450"
+    }
+  ],
+  "issue": {
+    "comments": 0,
+    "html_url": "https://github.com/IDNI/tau-lang/issues/111",
+    "number": 111,
+    "state": "open",
+    "updated_at": "2026-09-09T13:53:25Z"
+  },
+  "license_identical_at_both_heads": true,
+  "license_sha256": "2b7f7abfabd69a5214781d4b1327f0c559d1d2dabfe579b84afde2a4132c4632",
+  "native_tau_build_or_test_performed": false,
+  "observed_at": "2026-09-12T09:39:07Z",
+  "patent_clearance_established": false,
+  "pull_requests": [
+    {
+      "head_sha": "ad41b8688150d0f87df8ef3ec734174b2ee65fd4",
+      "html_url": "https://github.com/IDNI/tau-lang/pull/113",
+      "merged_at": null,
+      "number": 113,
+      "state": "open"
+    },
+    {
+      "head_sha": "801da5d50c8dde451f509d67364fd13687a3b19b",
+      "html_url": "https://github.com/IDNI/tau-lang/pull/112",
+      "merged_at": null,
+      "number": 112,
+      "state": "open"
+    }
+  ],
+  "refs": {
+    "main": "43b480d4a5e6a553f1fa1b0514e1d27ab3e7da34",
+    "plugins": "b3964f6d7a3e2a7df94c18711e5523e85b3701be",
+    "pr112": "801da5d50c8dde451f509d67364fd13687a3b19b",
+    "repair": "ad41b8688150d0f87df8ef3ec734174b2ee65fd4"
+  },
+  "schema": "orbitsynthesis/tau-upstream-review/v1",
+  "source_files": [
+    {
+      "key": "plugins",
+      "path": "src/cpp_codegen.tmpl.h",
+      "sha": "b3964f6d7a3e2a7df94c18711e5523e85b3701be",
+      "sha256": "fb7196ad6bb8142ce4910f26b59d01945b54ef8f57f09966e45182880076cbbf",
+      "url": "https://github.com/IDNI/tau-lang/blob/b3964f6d7a3e2a7df94c18711e5523e85b3701be/src/cpp_codegen.tmpl.h",
+      "utf8_bytes": 57782
+    },
+    {
+      "key": "plugins",
+      "path": "src/ltl_aba_builders.tmpl.h",
+      "sha": "b3964f6d7a3e2a7df94c18711e5523e85b3701be",
+      "sha256": "02d2034940f11a80521e034b8fc4cf96fca411079d30d340ad3ce0560686abd6",
+      "url": "https://github.com/IDNI/tau-lang/blob/b3964f6d7a3e2a7df94c18711e5523e85b3701be/src/ltl_aba_builders.tmpl.h",
+      "utf8_bytes": 46383
+    },
+    {
+      "key": "plugins",
+      "path": "src/ltl_aba.h",
+      "sha": "b3964f6d7a3e2a7df94c18711e5523e85b3701be",
+      "sha256": "6cb7e707572d66ba545d3c50cc91700243d0d50ada3e3775ff9440c371880493",
+      "url": "https://github.com/IDNI/tau-lang/blob/b3964f6d7a3e2a7df94c18711e5523e85b3701be/src/ltl_aba.h",
+      "utf8_bytes": 19527
+    },
+    {
+      "key": "plugins",
+      "path": "src/boolean_algebras/ba_pack_traits.h",
+      "sha": "b3964f6d7a3e2a7df94c18711e5523e85b3701be",
+      "sha256": "02df0a5d0ab3635e67b5fd3cebc4ae31eb1cb230dad580efd0d37752fb0e5d92",
+      "url": "https://github.com/IDNI/tau-lang/blob/b3964f6d7a3e2a7df94c18711e5523e85b3701be/src/boolean_algebras/ba_pack_traits.h",
+      "utf8_bytes": 37176
+    },
+    {
+      "key": "repair",
+      "path": "src/cpp_codegen.tmpl.h",
+      "sha": "ad41b8688150d0f87df8ef3ec734174b2ee65fd4",
+      "sha256": "fb7196ad6bb8142ce4910f26b59d01945b54ef8f57f09966e45182880076cbbf",
+      "url": "https://github.com/IDNI/tau-lang/blob/ad41b8688150d0f87df8ef3ec734174b2ee65fd4/src/cpp_codegen.tmpl.h",
+      "utf8_bytes": 57782
+    },
+    {
+      "key": "repair",
+      "path": "src/ltl_aba_builders.tmpl.h",
+      "sha": "ad41b8688150d0f87df8ef3ec734174b2ee65fd4",
+      "sha256": "02d2034940f11a80521e034b8fc4cf96fca411079d30d340ad3ce0560686abd6",
+      "url": "https://github.com/IDNI/tau-lang/blob/ad41b8688150d0f87df8ef3ec734174b2ee65fd4/src/ltl_aba_builders.tmpl.h",
+      "utf8_bytes": 46383
+    },
+    {
+      "key": "repair",
+      "path": "src/ltl_aba.h",
+      "sha": "ad41b8688150d0f87df8ef3ec734174b2ee65fd4",
+      "sha256": "6cb7e707572d66ba545d3c50cc91700243d0d50ada3e3775ff9440c371880493",
+      "url": "https://github.com/IDNI/tau-lang/blob/ad41b8688150d0f87df8ef3ec734174b2ee65fd4/src/ltl_aba.h",
+      "utf8_bytes": 19527
+    },
+    {
+      "key": "repair",
+      "path": "src/boolean_algebras/ba_pack_traits.h",
+      "sha": "ad41b8688150d0f87df8ef3ec734174b2ee65fd4",
+      "sha256": "6eb2bf3ea50b0ac9fdb19838663a0be07067f47463e2b747631de980ff9fc3d3",
+      "url": "https://github.com/IDNI/tau-lang/blob/ad41b8688150d0f87df8ef3ec734174b2ee65fd4/src/boolean_algebras/ba_pack_traits.h",
+      "utf8_bytes": 36077
+    }
+  ],
+  "tau_source_in_new_orbitsynthesis_implementation": false
+}
