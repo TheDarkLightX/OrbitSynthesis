@@ -1,0 +1,48 @@
+{
+  "schema": "orbit-synthesis/quasiprimal-programmable-projection-routing-receipt/v1",
+  "recorded_on": "2026-08-13",
+  "source": {
+    "path": "experiments/quasiprimal_programmable_projection_routing.py",
+    "sha256": "c38e9c006f0109397827345c42acb24debae55a373ee6861b8eafc35e1b65265"
+  },
+  "commands": [
+    {
+      "command": "python3 experiments/quasiprimal_programmable_projection_routing.py",
+      "exit_code": 0,
+      "semantic_sha256": "e663534756cf67ffb12fd9ae3fe722c465bd70cd91b73af1fb8084af1c0706dc"
+    },
+    {
+      "command": "python3 -O experiments/quasiprimal_programmable_projection_routing.py",
+      "exit_code": 0,
+      "semantic_sha256": "e663534756cf67ffb12fd9ae3fe722c465bd70cd91b73af1fb8084af1c0706dc"
+    }
+  ],
+  "semantic_sha256": "e663534756cf67ffb12fd9ae3fe722c465bd70cd91b73af1fb8084af1c0706dc",
+  "optimized_replay_semantic_sha256": "e663534756cf67ffb12fd9ae3fe722c465bd70cd91b73af1fb8084af1c0706dc",
+  "checked_summary": {
+    "candidate_coefficient": 1.8394415782963756,
+    "r6_checks": 4374,
+    "r7_checks": 896,
+    "r7_complement_checks": 896,
+    "total_tables_checked": 138,
+    "total_tuple_evaluations": 1992,
+    "library_recurrence_points_checked": 128,
+    "mutation_checks": {
+      "absolute_binary_controls_rejected": true,
+      "balanced_router_count": 2,
+      "binary_depth_omission_rejected": true,
+      "omitted_controls_rejected": true,
+      "per_node_controls_rejected": true,
+      "sparse_full_code_rejected": true,
+      "sparse_router_count": 7
+    },
+    "noncomplement_table_mutation_rejected": true
+  },
+  "claim_boundary": "The deterministic checks validate the displayed gadgets, bounded composed compiler instances, mutations, and recurrence arithmetic. The generic O(3^r/r) same-DAG size and (3 log_6 3)r+O(r/log r) depth theorem remains a manuscript proof under independent review. This receipt is not novelty, optimality, practical-performance, patent, FTO, or Tau-capability evidence.",
+  "limitations": [
+    "The generic asymptotic theorem remains a manuscript proof under review.",
+    "The checker does not establish novelty, coefficient optimality, or practical performance.",
+    "The checker does not establish patent scope, freedom to operate, or Tau capability."
+  ]
+}
+

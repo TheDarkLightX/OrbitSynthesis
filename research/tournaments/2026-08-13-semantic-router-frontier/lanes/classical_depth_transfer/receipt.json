@@ -1,0 +1,13 @@
+{
+  "checker_sha256": "82ec9946ebb759a099923136078d58290a08eb947a8cb8483dbddbc616e85a1d",
+  "commands": [
+    "python3 research/tournaments/2026-08-13-semantic-router-frontier/lanes/classical_depth_transfer/check_transfer_barriers.py",
+    "python3 -O research/tournaments/2026-08-13-semantic-router-frontier/lanes/classical_depth_transfer/check_transfer_barriers.py"
+  ],
+  "normal_exit": 0,
+  "optimized_exit": 0,
+  "primary_scan_sha256": "164523ad836ea8ce315f60ea736be9808587ee1cdce1fc4d05d8c50301b5bfb0",
+  "schema": "orbit.classical_depth_transfer.receipt.v1",
+  "semantic_sha256": "0e2f9218bb41de563c9eec29e05a8dc8a370f7b470d87fa36bb046d2de3113ed",
+  "status": "PASS"
+}

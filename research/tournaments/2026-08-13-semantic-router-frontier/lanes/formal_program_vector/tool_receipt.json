@@ -1,0 +1,32 @@
+{
+  "generated_at_utc": "2026-08-13T17:51:33.944781+00:00",
+  "assistant": "lean",
+  "cwd": "/home/trevormoc/Downloads/OrbitSynthesis",
+  "repo_root": "/home/trevormoc/Downloads/OrbitSynthesis",
+  "git_commit": "",
+  "git_status_porcelain": [],
+  "files": [
+    "/home/trevormoc/Downloads/OrbitSynthesis/research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/ProgramVector.lean"
+  ],
+  "theorems": [
+    "OrbitSynthesis.StrongSignedRouter.ProgramVector.projection_program_pair"
+  ],
+  "checker_command": "cd /home/trevormoc/Downloads/OrbitSynthesis && research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/check.sh",
+  "checker_status": "pass",
+  "checker_exit_code": null,
+  "imports": {
+    "/home/trevormoc/Downloads/OrbitSynthesis/research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector/ProgramVector.lean": [
+      "StrongSignedRouter"
+    ]
+  },
+  "placeholders": {
+    "blocked": false,
+    "match_count": 0,
+    "matches": [],
+    "scan_exit_code": 0
+  },
+  "proof_idea": "",
+  "key_lemmas": [],
+  "risks": [],
+  "notes": []
+}

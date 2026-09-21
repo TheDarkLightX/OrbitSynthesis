@@ -1,0 +1,117 @@
+{
+  "algebra": "Quackenbush Q=({0,1,2};d,u)",
+  "arity_3_exact_count": 23887872,
+  "claim_boundary": "The finite checks validate category counts, small exhaustive semantics, compilation, and a syntax-description lower-bound calculation. The all-r count and asymptotic lower bound rest on the separate manuscript proof.",
+  "count_rows": [
+    {
+      "all_three_value_tuples": 0,
+      "arity": 1,
+      "binary_nonconstant_complement_orbits": 0,
+      "count_decimal_digits": 1,
+      "count_log2_floor": 0,
+      "dag_operation_nodes_pigeonhole_lower_bound": 0,
+      "formula_base_2_exponent": 0,
+      "formula_base_3_exponent": 0,
+      "nonbinary_two_value_tuples": 0
+    },
+    {
+      "all_three_value_tuples": 0,
+      "arity": 2,
+      "binary_nonconstant_complement_orbits": 1,
+      "count_decimal_digits": 2,
+      "count_log2_floor": 5,
+      "dag_operation_nodes_pigeonhole_lower_bound": 1,
+      "formula_base_2_exponent": 5,
+      "formula_base_3_exponent": 0,
+      "nonbinary_two_value_tuples": 4
+    },
+    {
+      "all_three_value_tuples": 6,
+      "arity": 3,
+      "binary_nonconstant_complement_orbits": 3,
+      "count_decimal_digits": 8,
+      "count_log2_floor": 24,
+      "dag_operation_nodes_pigeonhole_lower_bound": 4,
+      "formula_base_2_exponent": 15,
+      "formula_base_3_exponent": 6,
+      "nonbinary_two_value_tuples": 12
+    },
+    {
+      "all_three_value_tuples": 36,
+      "arity": 4,
+      "binary_nonconstant_complement_orbits": 7,
+      "count_decimal_digits": 28,
+      "count_log2_floor": 92,
+      "dag_operation_nodes_pigeonhole_lower_bound": 10,
+      "formula_base_2_exponent": 35,
+      "formula_base_3_exponent": 36,
+      "nonbinary_two_value_tuples": 28
+    },
+    {
+      "all_three_value_tuples": 150,
+      "arity": 5,
+      "binary_nonconstant_complement_orbits": 15,
+      "count_decimal_digits": 95,
+      "count_log2_floor": 312,
+      "dag_operation_nodes_pigeonhole_lower_bound": 26,
+      "formula_base_2_exponent": 75,
+      "formula_base_3_exponent": 150,
+      "nonbinary_two_value_tuples": 60
+    },
+    {
+      "all_three_value_tuples": 540,
+      "arity": 6,
+      "binary_nonconstant_complement_orbits": 31,
+      "count_decimal_digits": 305,
+      "count_log2_floor": 1010,
+      "dag_operation_nodes_pigeonhole_lower_bound": 67,
+      "formula_base_2_exponent": 155,
+      "formula_base_3_exponent": 540,
+      "nonbinary_two_value_tuples": 124
+    },
+    {
+      "all_three_value_tuples": 1806,
+      "arity": 7,
+      "binary_nonconstant_complement_orbits": 63,
+      "count_decimal_digits": 957,
+      "count_log2_floor": 3177,
+      "dag_operation_nodes_pigeonhole_lower_bound": 171,
+      "formula_base_2_exponent": 315,
+      "formula_base_3_exponent": 1806,
+      "nonbinary_two_value_tuples": 252
+    },
+    {
+      "all_three_value_tuples": 5796,
+      "arity": 8,
+      "binary_nonconstant_complement_orbits": 127,
+      "count_decimal_digits": 2957,
+      "count_log2_floor": 9821,
+      "dag_operation_nodes_pigeonhole_lower_bound": 439,
+      "formula_base_2_exponent": 635,
+      "formula_base_3_exponent": 5796,
+      "nonbinary_two_value_tuples": 508
+    }
+  ],
+  "exact_formula": "2^(5*2^(r-1)-5) * 3^(3^r-3*2^r+3), for r>=1",
+  "exhaustive_rows": [
+    {
+      "arity": 1,
+      "expected_functions": 1,
+      "functions_enumerated_and_compiled": 1
+    },
+    {
+      "arity": 2,
+      "expected_functions": 32,
+      "functions_enumerated_and_compiled": 32
+    }
+  ],
+  "experiment_source_sha256": "7dcd1c86ce99c1594a79f924d631957e5946f1bf8c0c08aefd815f0f43c8f5f8",
+  "manuscript_note_sha256": "0462d4d1fd4a475f0e72f51097bba81bed25c5868dffc313e0af23ecac2c8f89",
+  "mutation_checks": {
+    "forgetting_binary_orbit_quotient_changes_r3_count": true,
+    "giving_all_two_tuple_three_choices_changes_r3_count": true
+  },
+  "optimized_replay_semantic_sha256": "f7f1758972b68abd8aba60ae547cb899c5d9376cced7cba449c34a2697e001b8",
+  "schema": "orbit-synthesis/quasiprimal-conservative-term-count/v1",
+  "semantic_sha256": "f7f1758972b68abd8aba60ae547cb899c5d9376cced7cba449c34a2697e001b8"
+}

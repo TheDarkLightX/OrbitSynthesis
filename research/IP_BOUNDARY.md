@@ -132,6 +132,12 @@ A standalone engine whose input is finite algebraic/local-game data and whose ou
 
 `TAU_FINITE_BOOLEAN_POWER_ENCODING.md` is mathematically a finite-algebra-to-Boolean-skeleton encoding. Its independent implementation should target our own IR/runtime first. Tau can become an adapter only if/when appropriate.
 
+### G7. Fixed-clone Shannon complexity
+
+`QUASIPRIMAL_CONSERVATIVE_TERM_SHANNON_COMPLEXITY.md`, `QUASIPRIMAL_CONSERVATIVE_TERM_LINEAR_DEPTH.md`, `QUASIPRIMAL_CONSERVATIVE_TERM_SUBCUBE_DEPTH.md`, `QUASIPRIMAL_CONSERVATIVE_TERM_GLOBAL_ANCHOR_DEPTH.md`, `QUASIPRIMAL_CONSERVATIVE_TERM_PROGRAMMABLE_DEPTH.md`, and `QUASIPRIMAL_CONSERVATIVE_TERM_BOOLEAN_R9_DEPTH.md` study the parameter-free term DAGs of one public, classical three-element algebra. Their constructions use and credit Lupanov's public local-coding principle, classical recursive Shannon expansion, and classical two-rail representation adjacency, together with independently written ternary-Gray, layered-prefix, recursive-subcube, balanced-absorber, programmable-router, and Boolean-plane implementations. They do not use Tau source, specifications, private materials, or the unsigned developer license.
+
+This supports provenance independence, not a novelty or patent conclusion. Before publication, compare the specialization against Russian/international closed-class complexity literature and native Chinese indexes. Before product use, retain the ordinary claim/FTO review boundary above.
+
 ## 6. Capability-delta discipline
 
 We should actively seek things that the inspected **public** Tau surface does not currently document, while avoiding claims about private/internal work.

@@ -1,0 +1,90 @@
+{
+  "schema": "orbit-synthesis/strong-signed-router-lean-checkpoint/v1",
+  "status": "PASS",
+  "mode_sequence": [
+    "autoformalize",
+    "checkpoint"
+  ],
+  "environment": {
+    "lean_toolchain": "leanprover/lean4:v4.34.0-rc1",
+    "lean_version": "Lean (version 4.34.0-rc1, x86_64-unknown-linux-gnu, commit 3447a668783dbce1a8fdb97101dd067687b2b418, Release)",
+    "mathlib_revision": "9aa55045016ce35bb2379a8fc3d7f268995fb99a",
+    "git_commit": null,
+    "git_note": "The workspace contains an empty .git directory, so no repository commit was available."
+  },
+  "artifacts": {
+    "lean_file": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean",
+      "sha256": "687a77ed1f3b0bfe2a540bc670f6db942e15bddc339ccfbceffba9699766227a"
+    },
+    "skill_tool_receipt": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/tool_receipt.json",
+      "sha256": "2d0b47a0d0060ebb99a9916cfc19c1f1a8b493e1c3e02afb49bba0f2365d6fc8"
+    }
+  },
+  "frozen_subject": {
+    "state_sha256": "5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133",
+    "fused_summary_sha256": "6042127fd9f214e63bc38aa8e6367d1db7580c24b2b2e7a3aeba16625279aff0",
+    "r27_witness_sha256": "6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65",
+    "fused_report_sha256": "5ed37d98357eb03a2f6ded9f741c9fb52d8f5ad821585c81be544f201945f8c6",
+    "binding_boundary": "The Lean file formalizes the signed-router mathematical induction transcribed from the frozen artifacts. It does not parse those JSON bytes or prove extraction equality with the frozen R27 witness."
+  },
+  "commands": [
+    {
+      "command": "lake env lean research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "lake env lean -EwarningAsError=true research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "python3 /home/trevormoc/.codex/skills/proof-engineering/scripts/scan_proof_placeholders.py --flag-axiom research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal/StrongSignedRouter.lean",
+      "exit_code": 0,
+      "stdout": "No proof placeholders found."
+    }
+  ],
+  "checked_declarations": [
+    "OrbitSynthesis.StrongSignedRouter.eval_router",
+    "OrbitSynthesis.StrongSignedRouter.projects_positive",
+    "OrbitSynthesis.StrongSignedRouter.projects_negative",
+    "OrbitSynthesis.StrongSignedRouter.forces_constant",
+    "OrbitSynthesis.StrongSignedRouter.card_address",
+    "OrbitSynthesis.StrongSignedRouter.card_control",
+    "OrbitSynthesis.StrongSignedRouter.router_branchCount",
+    "OrbitSynthesis.StrongSignedRouter.router_controlCount",
+    "OrbitSynthesis.StrongSignedRouter.router_depth",
+    "OrbitSynthesis.StrongSignedRouter.router_discCount_identity",
+    "OrbitSynthesis.StrongSignedRouter.router_originalSignature",
+    "OrbitSynthesis.StrongSignedRouter.capacity_at_depth",
+    "OrbitSynthesis.StrongSignedRouter.routerAtDepth_depth",
+    "OrbitSynthesis.StrongSignedRouter.positive_realization_at_depth",
+    "OrbitSynthesis.StrongSignedRouter.negative_realization_at_depth"
+  ],
+  "axiom_audit": {
+    "eval_router": [
+      "propext",
+      "Quot.sound"
+    ],
+    "router_branchCount": [
+      "propext",
+      "Quot.sound"
+    ],
+    "router_originalSignature": [
+      "propext"
+    ],
+    "positive_realization_at_depth": [
+      "propext",
+      "Quot.sound"
+    ],
+    "note": "These are standard Lean/mathlib foundations. There is no declaration of an additional axiom and no sorry/admit placeholder."
+  },
+  "scope": {
+    "proved": "Exact Boolean discriminator semantics; recursive positive/negative projection and constant modes; q_h=3^(h-1); exact branch/control/depth and discriminator-node identity; original-signature grammar with no NOT or constant constructor; address-only control-program type.",
+    "not_proved": "Q two-plane decoding, complement-relative compiler integration, residual-first prefix lemma, asymptotic O(3^r/r) size, r+O(sqrt(r)) depth, equality to the frozen generated R27 JSON, novelty, patents, FTO, license, or practical performance."
+  }
+}

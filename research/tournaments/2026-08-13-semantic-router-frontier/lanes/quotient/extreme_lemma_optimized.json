@@ -1,0 +1,69 @@
+{
+  "actual_boolean_identity": "d(x,y,z)=majority(x,1-y,z)",
+  "claim_boundary": "The frozen arbitrary-leaf quotient is refuted. The corrected theorem applies only when every branch occurrence has positive path polarity; negative-polarity leaves may be fixed controls.",
+  "claimed_majority_identity_mismatch_count": 4,
+  "complement_equivariance_checks": 8,
+  "corrected_theorem": "If F is monotone nondecreasing in every branch variable, then F=x_i iff F(x_i=0,others=1)=0 and F(x_i=1,others=0)=1.",
+  "depth3_negative_polarity_leaves": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
+    21,
+    23,
+    25
+  ],
+  "depth3_positive_polarity_leaves": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26
+  ],
+  "first_claimed_identity_counterexample": {
+    "d": 1,
+    "input": [
+      0,
+      0,
+      1
+    ],
+    "majority_x_noty_z": 1,
+    "majority_xyz": 0
+  },
+  "monotone_target_checks": 60,
+  "monotone_ternary_functions_checked": 20,
+  "schema": "orbitsynthesis/extreme-lemma-audit/v1",
+  "semantic_sha256": "27dcd1fa91ee227fee28942b84f51cea862949fb5d45f03988c2956a9d7f3ed4",
+  "twisted_majority_checks": 8,
+  "two_extreme_counterexample": {
+    "f_1_1": 0,
+    "proposed_extremes": [
+      0,
+      1
+    ],
+    "table_order_00_01_10_11": [
+      0,
+      0,
+      1,
+      0
+    ],
+    "target": "x0",
+    "term": "d(x0,x1,0)",
+    "x0_at_1_1": 1
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "schema": "orbit-synthesis/direct-q-packed-semantic-receipt/v1",
+  "status": "PASS_BOUNDED_NO_HIT",
+  "checker": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/direct_q/search_direct_q_bitparallel.py",
+  "checker_sha256": "46ef0c3037912c698f8a6327720b2469f73b37e8472860caa53e4cf7f6bf2c20",
+  "commands": [
+    "python3 research/tournaments/2026-08-13-semantic-router-frontier/lanes/direct_q/search_direct_q_bitparallel.py",
+    "python3 -O research/tournaments/2026-08-13-semantic-router-frontier/lanes/direct_q/search_direct_q_bitparallel.py"
+  ],
+  "outputs_byte_identical": true,
+  "semantic_sha256": "3711f2d9370537c9bf9b587385f4a540e38006d3f52d99937a19139d4b39b029",
+  "baseline": {
+    "source_sha256": "c38e9c006f0109397827345c42acb24debae55a373ee6861b8eafc35e1b65265",
+    "projection_checks": 4374,
+    "effective_mutation_mismatches": 162
+  },
+  "bounded_candidate_counts": {
+    "r7_control_insertions_radii_1_to_4": 4047,
+    "r7_frozen_branch_slot_partitions": 462,
+    "r8_minimal_insertions": 153,
+    "r9_minimal_insertions": 816,
+    "r10_minimal_insertions": 3060,
+    "total": 8538
+  },
+  "result": "No full direct-Q R7, R8, R9, or R10 router exists in the explicitly enumerated frozen-R6 neighborhoods.",
+  "claim_boundary": "Bounded NO_HIT only. This is not global direct-Q R7-R10 UNSAT, a lower bound for arbitrary Q terms, novelty, optimality, patent, FTO, practical-performance, or Tau evidence."
+}

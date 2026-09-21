@@ -1,0 +1,246 @@
+{
+  "algebra": "Quackenbush Q=({0,1,2};d,u)",
+  "bounded_random_tuples_checked": 3279,
+  "bounded_rows": [
+    {
+      "arity": 1,
+      "depth_saved_vs_layered": 0,
+      "layered_cap": 1,
+      "layered_dag_nodes": 6,
+      "layered_depth": 5,
+      "nodes_saved_vs_layered": 0,
+      "subcube_cap": 1,
+      "subcube_dag_nodes": 6,
+      "subcube_depth": 5,
+      "tuples_checked": 3
+    },
+    {
+      "arity": 2,
+      "depth_saved_vs_layered": 0,
+      "layered_cap": 1,
+      "layered_dag_nodes": 29,
+      "layered_depth": 9,
+      "nodes_saved_vs_layered": 0,
+      "subcube_cap": 1,
+      "subcube_dag_nodes": 29,
+      "subcube_depth": 9,
+      "tuples_checked": 9
+    },
+    {
+      "arity": 3,
+      "depth_saved_vs_layered": 0,
+      "layered_cap": 1,
+      "layered_dag_nodes": 84,
+      "layered_depth": 13,
+      "nodes_saved_vs_layered": 3,
+      "subcube_cap": 2,
+      "subcube_dag_nodes": 81,
+      "subcube_depth": 13,
+      "tuples_checked": 27
+    },
+    {
+      "arity": 4,
+      "depth_saved_vs_layered": 0,
+      "layered_cap": 1,
+      "layered_dag_nodes": 240,
+      "layered_depth": 17,
+      "nodes_saved_vs_layered": 15,
+      "subcube_cap": 2,
+      "subcube_dag_nodes": 225,
+      "subcube_depth": 17,
+      "tuples_checked": 81
+    },
+    {
+      "arity": 5,
+      "depth_saved_vs_layered": 4,
+      "layered_cap": 3,
+      "layered_dag_nodes": 525,
+      "layered_depth": 25,
+      "nodes_saved_vs_layered": -3,
+      "subcube_cap": 4,
+      "subcube_dag_nodes": 528,
+      "subcube_depth": 21,
+      "tuples_checked": 243
+    },
+    {
+      "arity": 6,
+      "depth_saved_vs_layered": 4,
+      "layered_cap": 3,
+      "layered_dag_nodes": 1176,
+      "layered_depth": 29,
+      "nodes_saved_vs_layered": -63,
+      "subcube_cap": 4,
+      "subcube_dag_nodes": 1239,
+      "subcube_depth": 25,
+      "tuples_checked": 729
+    },
+    {
+      "arity": 7,
+      "depth_saved_vs_layered": 4,
+      "layered_cap": 3,
+      "layered_dag_nodes": 2826,
+      "layered_depth": 33,
+      "nodes_saved_vs_layered": -153,
+      "subcube_cap": 4,
+      "subcube_dag_nodes": 2979,
+      "subcube_depth": 29,
+      "tuples_checked": 2187
+    }
+  ],
+  "claim_boundary": "Finite compiler and arithmetic calibration only. The generic same-DAG O(3^r/r) size and operation-depth at most 4r theorem rests on the separate manuscript proof. Recursive Shannon expansion, local coding, and linear finite-basis depth theory are prior art.",
+  "compiler_module_sha256": "d1f9035d2764b0de8fa2dd51a44ec31e7f517d0b84e8ad96afbba1efa5f7e2fb",
+  "construction": "recursive mixed-radix subcube library over first-2 dynamic constants",
+  "exhaustive_arity_two_selector_tables": 128,
+  "experiment_source_sha256": "fd399bdd27a1b75f57d61032ee5cfea9adc0896aed7e2c9c5acc7879f311d90a",
+  "manuscript_note_sha256": "669a2b0fb80bb00a68fb0d170d7920cab86c344d1810a7399ffdf85ce9825a98",
+  "mutation_checks": {
+    "invalid_schedule_rejected": true,
+    "layered_selector_census_rejected": true,
+    "sequential_point_depth_penalty_detected": true,
+    "top_level_only_census_rejected": true
+  },
+  "optimized_replay_semantic_sha256": "f9d89ec9829c3abef05d1cdc17ef811330674bd056d90c3579a8f32b0b2eb7b8",
+  "plan_rows": [
+    {
+      "arity": 8,
+      "executable_depth_bound": 33,
+      "max_floor_r_times_size_proxy_over_slice_domain": 14,
+      "max_library_ratio_denominator": 192,
+      "max_library_ratio_numerator": 216,
+      "slice_count": 8
+    },
+    {
+      "arity": 12,
+      "executable_depth_bound": 49,
+      "max_floor_r_times_size_proxy_over_slice_domain": 12,
+      "max_library_ratio_denominator": 10368,
+      "max_library_ratio_numerator": 8748,
+      "slice_count": 12
+    },
+    {
+      "arity": 16,
+      "executable_depth_bound": 65,
+      "max_floor_r_times_size_proxy_over_slice_domain": 12,
+      "max_library_ratio_denominator": 110592,
+      "max_library_ratio_numerator": 104976,
+      "slice_count": 16
+    },
+    {
+      "arity": 24,
+      "executable_depth_bound": 97,
+      "max_floor_r_times_size_proxy_over_slice_domain": 9,
+      "max_library_ratio_denominator": 12582912,
+      "max_library_ratio_numerator": 12754584,
+      "slice_count": 24
+    },
+    {
+      "arity": 32,
+      "executable_depth_bound": 129,
+      "max_floor_r_times_size_proxy_over_slice_domain": 8,
+      "max_library_ratio_denominator": 274521509459532,
+      "max_library_ratio_numerator": 244019119519584,
+      "slice_count": 32
+    },
+    {
+      "arity": 48,
+      "executable_depth_bound": 193,
+      "max_floor_r_times_size_proxy_over_slice_domain": 9,
+      "max_library_ratio_denominator": 92442129447518208,
+      "max_library_ratio_numerator": 88944969064888368,
+      "slice_count": 48
+    },
+    {
+      "arity": 64,
+      "executable_depth_bound": 257,
+      "max_floor_r_times_size_proxy_over_slice_domain": 7,
+      "max_library_ratio_denominator": 3920680210114437604803919872,
+      "max_library_ratio_numerator": 3721583168194563820184970816,
+      "slice_count": 64
+    }
+  ],
+  "reduction_row": {
+    "arity": 9,
+    "depth_saved_vs_layered": 8,
+    "layered_cap": 4,
+    "layered_dag_nodes": 18327,
+    "layered_depth": 45,
+    "nodes_saved_vs_layered": 192,
+    "subcube_cap": 4,
+    "subcube_dag_nodes": 18135,
+    "subcube_depth": 37,
+    "tuples_checked": 19683
+  },
+  "schema": "orbit-synthesis/quasiprimal-subcube-local-coding/v1",
+  "selector_census_rows": [
+    {
+      "alphabet_sizes": [
+        2
+      ],
+      "block_assignments": 2,
+      "library_functions": 9,
+      "normal_selector_calls": 9,
+      "selector_depth_levels": 2
+    },
+    {
+      "alphabet_sizes": [
+        3
+      ],
+      "block_assignments": 3,
+      "library_functions": 27,
+      "normal_selector_calls": 54,
+      "selector_depth_levels": 4
+    },
+    {
+      "alphabet_sizes": [
+        2,
+        2
+      ],
+      "block_assignments": 4,
+      "library_functions": 81,
+      "normal_selector_calls": 90,
+      "selector_depth_levels": 4
+    },
+    {
+      "alphabet_sizes": [
+        2,
+        3
+      ],
+      "block_assignments": 6,
+      "library_functions": 729,
+      "normal_selector_calls": 783,
+      "selector_depth_levels": 6
+    },
+    {
+      "alphabet_sizes": [
+        3,
+        2
+      ],
+      "block_assignments": 6,
+      "library_functions": 729,
+      "normal_selector_calls": 1467,
+      "selector_depth_levels": 6
+    },
+    {
+      "alphabet_sizes": [
+        3,
+        3
+      ],
+      "block_assignments": 9,
+      "library_functions": 19683,
+      "normal_selector_calls": 39420,
+      "selector_depth_levels": 8
+    },
+    {
+      "alphabet_sizes": [
+        2,
+        2,
+        3
+      ],
+      "block_assignments": 12,
+      "library_functions": 531441,
+      "normal_selector_calls": 532224,
+      "selector_depth_levels": 8
+    }
+  ],
+  "semantic_sha256": "f9d89ec9829c3abef05d1cdc17ef811330674bd056d90c3579a8f32b0b2eb7b8"
+}
