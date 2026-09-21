@@ -1,0 +1,188 @@
+{
+  "algebra": "Quackenbush Q=({0,1,2};d,u)",
+  "claim_boundary": "Finite semantics, bounded composed compilers, recurrence arithmetic, and mutations only. The all-arity O(3^r/r) size and (3/2)r+O(r/log r) depth result remains a manuscript proof pending formal verification and complete prior-art review. No novelty, optimality, practical-performance, patent, FTO, license, or Tau-capability claim is made.",
+  "compiler_checks": {
+    "noncomplement_table_mutation_rejected": true,
+    "rows": [
+      {
+        "arity": 1,
+        "operation_depth": 0,
+        "operation_nodes": 0,
+        "tables": 1,
+        "tuples_checked": 3
+      },
+      {
+        "arity": 2,
+        "max_operation_depth": 18,
+        "max_operation_nodes": 435,
+        "tables": 128,
+        "tuples_checked": 1152
+      },
+      {
+        "arity": 3,
+        "max_operation_depth": 23,
+        "max_operation_nodes": 907,
+        "tables": 3,
+        "tuples_checked": 81
+      },
+      {
+        "arity": 4,
+        "max_operation_depth": 24,
+        "max_operation_nodes": 1569,
+        "tables": 2,
+        "tuples_checked": 162
+      },
+      {
+        "arity": 5,
+        "max_operation_depth": 25,
+        "max_operation_nodes": 2669,
+        "tables": 1,
+        "tuples_checked": 243
+      }
+    ],
+    "total_tables_checked": 135,
+    "total_tuple_evaluations": 1641
+  },
+  "dependency_sha256": {
+    "experiments/quasiprimal_orbit_term_compiler.py": "ca57871b802620dd87eeb3907def88719f5e511c94f766f35a6f7897e16b71e8",
+    "experiments/quasiprimal_programmable_projection_routing.py": "c38e9c006f0109397827345c42acb24debae55a373ee6861b8eafc35e1b65265",
+    "src/orbitsynthesis/orbit_term_compile.py": "631a07c4e476b162e53540341799cf2e33341097ec162afe6848cf4534d9e973",
+    "src/orbitsynthesis/orbit_term_compile_local.py": "d1f9035d2764b0de8fa2dd51a44ec31e7f517d0b84e8ad96afbba1efa5f7e2fb"
+  },
+  "independent_audit_sha256": "33a88fd65044cb19b1ae948fb83e8bef8bb2d57ff49cafa65c59005b6e513c62",
+  "model": "parameter-free original-signature shared DAG; operation nodes; variables depth zero",
+  "primitive_checks": {
+    "boolean_checks": 4608,
+    "code": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        0
+      ]
+    ],
+    "complement_relative_checks": 9216,
+    "decoder": "d(d(high,one,two),zero,low)",
+    "decoder_checks": 3,
+    "effective_mutation_failures": 256,
+    "effective_mutation_slot": 10,
+    "q_plane_checks": 177147,
+    "r9_dependency_depth": 3,
+    "r9_discriminator_nodes": 13
+  },
+  "recurrence_checks": {
+    "candidate_coefficient": 1.5,
+    "candidate_coefficient_exact": "3*log_9(3)=3/2",
+    "library_points_checked": 256,
+    "mutation_checks": {
+      "decoder_omission_rejected": true,
+      "per_node_controls_rejected": true,
+      "redecode_each_level_rejected": true,
+      "serial_planes_rejected": true
+    },
+    "serial_router_rates": [
+      {
+        "depth": 3,
+        "log_capacity_per_depth": 0.5972531564093516,
+        "q": 6
+      },
+      {
+        "depth": 3,
+        "log_capacity_per_depth": 0.6486367163517711,
+        "q": 7
+      },
+      {
+        "depth": 3,
+        "log_capacity_per_depth": 0.6931471805599453,
+        "q": 8
+      },
+      {
+        "depth": 3,
+        "log_capacity_per_depth": 0.7324081924454066,
+        "q": 9
+      }
+    ],
+    "structural_rows": [
+      {
+        "L9_binary": 7,
+        "L9_nonbinary": 10,
+        "M": 9,
+        "arity": 16,
+        "depth_bound": 57,
+        "depth_per_arity": 3.5625
+      },
+      {
+        "L9_binary": 13,
+        "L9_nonbinary": 17,
+        "M": 27,
+        "arity": 32,
+        "depth_bound": 84,
+        "depth_per_arity": 2.625
+      },
+      {
+        "L9_binary": 21,
+        "L9_nonbinary": 33,
+        "M": 27,
+        "arity": 64,
+        "depth_bound": 135,
+        "depth_per_arity": 2.109375
+      },
+      {
+        "L9_binary": 55,
+        "L9_nonbinary": 76,
+        "M": 81,
+        "arity": 128,
+        "depth_bound": 270,
+        "depth_per_arity": 2.109375
+      },
+      {
+        "L9_binary": 96,
+        "L9_nonbinary": 129,
+        "M": 243,
+        "arity": 256,
+        "depth_bound": 435,
+        "depth_per_arity": 1.69921875
+      },
+      {
+        "L9_binary": 171,
+        "L9_nonbinary": 257,
+        "M": 243,
+        "arity": 512,
+        "depth_bound": 822,
+        "depth_per_arity": 1.60546875
+      },
+      {
+        "L9_binary": 409,
+        "L9_nonbinary": 585,
+        "M": 729,
+        "arity": 1024,
+        "depth_bound": 1812,
+        "depth_per_arity": 1.76953125
+      },
+      {
+        "L9_binary": 1365,
+        "L9_nonbinary": 2049,
+        "M": 2187,
+        "arity": 4096,
+        "depth_bound": 6213,
+        "depth_per_arity": 1.516845703125
+      }
+    ]
+  },
+  "replay": {
+    "normal": "python3 experiments/quasiprimal_boolean_r9_routing.py --out runs/quasiprimal_boolean_r9_routing/summary.json",
+    "optimized": "python3 -O experiments/quasiprimal_boolean_r9_routing.py",
+    "required_relation": "normal and optimized stdout byte-identical; --out regenerates the committed JSON receipt exactly"
+  },
+  "schema": "orbit-synthesis/q-via-boolean-r9-routing/v2",
+  "semantic_sha256": "e4a09ef72986c1221c28e80d8227879a9e0aa0f93679e49e9f750f7e65977fce",
+  "source_sha256": "a586337ed15a31c90ab6051dc1c12c319e0a972ee321075711870a5913a2af4b",
+  "witness_semantic_sha256": "ae7f2fae8d16e64fc207b997c17424264d03c193d474f1ea6954a89f0c0bdb25",
+  "witness_sha256": "d3c25e47ce671d8a5d484d6c50cc0b3fccf7f6bb5507097ef8bff6bcbbbe529c"
+}

@@ -1,0 +1,40 @@
+{
+  "boundary": "Not arbitrary-leaf d-only, signed/u, non-full-tree, DAG, or depth>3 UNSAT without the separately stated transfers.",
+  "depth": 3,
+  "negative_polarity_leaves": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15,
+    17,
+    19,
+    21,
+    23,
+    25
+  ],
+  "positive_polarity_leaves": [
+    0,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+    14,
+    16,
+    18,
+    20,
+    22,
+    24,
+    26
+  ],
+  "q": 10,
+  "reason": "complete pair instance UNSAT",
+  "schema": "orbitsynthesis/positive-pair-r10/v1",
+  "scope": "complete full depth-3 d-tree grammar with arbitrary repeated branch labels confined to positive-polarity leaves; all other leaves private controls",
+  "status": "UNSAT"
+}

@@ -1,0 +1,682 @@
+{
+  "binary_relative_branch": {
+    "complement_equivariance_rows": 8,
+    "logical_zero_physical_values_by_orientation": [
+      0,
+      1
+    ],
+    "qualification": "logical programs are address-only; physical wires depend on payload orientation x0",
+    "relative_control_rows": 4
+  },
+  "compiler": {
+    "analytic_inequality_rows": 16321,
+    "analytic_size_base_witnesses": {
+      "Q_less_than_N": true,
+      "control_quarter_unit": true,
+      "fixed_quarter_unit": true,
+      "lower_order_ratio_decreases": true,
+      "lower_order_unit": true,
+      "r": 64,
+      "router_quarter_unit": true,
+      "square_boundary": true
+    },
+    "arity_count": 16321,
+    "binary_depth_below_r_from": 339,
+    "binary_tail_polynomial": [
+      {
+        "k": 30,
+        "polynomial": 2139
+      },
+      {
+        "k": 31,
+        "polynomial": 3264
+      },
+      {
+        "k": 40,
+        "polynomial": 20049
+      },
+      {
+        "k": 64,
+        "polynomial": 150345
+      },
+      {
+        "k": 128,
+        "polynomial": 1652361
+      }
+    ],
+    "binary_tail_polynomial_increment_at_30": 1125,
+    "exact_arity_interval": [
+      64,
+      16384
+    ],
+    "maximum_nonbinary_normalized": {
+      "decimal": "25.833333333333",
+      "r": 93
+    },
+    "mutations": {
+      "ceil_power_rounding": {
+        "H": 52,
+        "ceiling_M": 81,
+        "floor_M": 27,
+        "r": 64
+      },
+      "decoder_per_local_table_at_r93_extra_nodes": 15251194969972,
+      "sequential_q_times_w": {
+        "cost_times_r_gt_100_times_3r": true,
+        "q": 79519958157567551874296579102961238911117143051865549589236780365853772618993979423942137571135923269094989009442741232531495922227707575654724446414521150380907613719042796225424124783569433490210055142667663689678154340160435732490833072187,
+        "r": 512,
+        "w": 507
+      },
+      "single_log_reserve": {
+        "M": 6561,
+        "local_alone_gt_62_times_3r_over_r": true,
+        "r": 6574
+      }
+    },
+    "power_or_reserve_jump_checks": 15,
+    "selected_rows": [
+      {
+        "H": 52,
+        "M": 27,
+        "b": 3,
+        "binary_depth": 104,
+        "binary_normalized": "0.000000000413",
+        "nonbinary_depth": 102,
+        "nonbinary_normalized": "17.777777777778",
+        "prefix_coordinates": 61,
+        "r": 64,
+        "reserve": 12
+      },
+      {
+        "H": 77,
+        "M": 27,
+        "b": 3,
+        "binary_depth": 127,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 133,
+        "nonbinary_normalized": "25.000000000000",
+        "prefix_coordinates": 87,
+        "r": 90,
+        "reserve": 13
+      },
+      {
+        "H": 80,
+        "M": 27,
+        "b": 3,
+        "binary_depth": 127,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 136,
+        "nonbinary_normalized": "25.833333333333",
+        "prefix_coordinates": 90,
+        "r": 93,
+        "reserve": 13
+      },
+      {
+        "H": 81,
+        "M": 81,
+        "b": 4,
+        "binary_depth": 127,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 136,
+        "nonbinary_normalized": "8.717971828795",
+        "prefix_coordinates": 90,
+        "r": 94,
+        "reserve": 13
+      },
+      {
+        "H": 115,
+        "M": 81,
+        "b": 4,
+        "binary_depth": 159,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 170,
+        "nonbinary_normalized": "11.851851851852",
+        "prefix_coordinates": 124,
+        "r": 128,
+        "reserve": 13
+      },
+      {
+        "H": 241,
+        "M": 81,
+        "b": 4,
+        "binary_depth": 269,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 303,
+        "nonbinary_normalized": "23.703703703704",
+        "prefix_coordinates": 252,
+        "r": 256,
+        "reserve": 15
+      },
+      {
+        "H": 323,
+        "M": 243,
+        "b": 5,
+        "binary_depth": 338,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 389,
+        "nonbinary_normalized": "10.432098765432",
+        "prefix_coordinates": 333,
+        "r": 338,
+        "reserve": 15
+      },
+      {
+        "H": 324,
+        "M": 243,
+        "b": 5,
+        "binary_depth": 338,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 390,
+        "nonbinary_normalized": "10.462962962963",
+        "prefix_coordinates": 334,
+        "r": 339,
+        "reserve": 15
+      },
+      {
+        "H": 496,
+        "M": 243,
+        "b": 5,
+        "binary_depth": 471,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 563,
+        "nonbinary_normalized": "15.802469135802",
+        "prefix_coordinates": 507,
+        "r": 512,
+        "reserve": 16
+      },
+      {
+        "H": 883,
+        "M": 729,
+        "b": 6,
+        "binary_depth": 752,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 955,
+        "nonbinary_normalized": "9.259259259259",
+        "prefix_coordinates": 894,
+        "r": 900,
+        "reserve": 17
+      },
+      {
+        "H": 1007,
+        "M": 729,
+        "b": 6,
+        "binary_depth": 831,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 1079,
+        "nonbinary_normalized": "10.534979423868",
+        "prefix_coordinates": 1018,
+        "r": 1024,
+        "reserve": 17
+      },
+      {
+        "H": 4076,
+        "M": 2187,
+        "b": 7,
+        "binary_depth": 2911,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 4160,
+        "nonbinary_normalized": "14.046639231824",
+        "prefix_coordinates": 4089,
+        "r": 4096,
+        "reserve": 20
+      },
+      {
+        "H": 6553,
+        "M": 2187,
+        "b": 7,
+        "binary_depth": 4567,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 6643,
+        "nonbinary_normalized": "22.544581618656",
+        "prefix_coordinates": 6567,
+        "r": 6574,
+        "reserve": 21
+      },
+      {
+        "H": 8171,
+        "M": 6561,
+        "b": 8,
+        "binary_depth": 5609,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 8260,
+        "nonbinary_normalized": "9.364426154550",
+        "prefix_coordinates": 8184,
+        "r": 8192,
+        "reserve": 21
+      },
+      {
+        "H": 16362,
+        "M": 6561,
+        "b": 8,
+        "binary_depth": 11032,
+        "binary_normalized": "0.000000000000",
+        "nonbinary_depth": 16457,
+        "nonbinary_normalized": "18.728852309099",
+        "prefix_coordinates": 16376,
+        "r": 16384,
+        "reserve": 22
+      }
+    ],
+    "small_arity_scope": {
+      "fallback_is_a_named_frozen_compiler_premise": true,
+      "giant_schedule_claimed": false,
+      "r_1_through_63_with_nonempty_budget": 55
+    }
+  },
+  "frozen_subject": {
+    "STATE.md": "5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133",
+    "audits/variable_compiler/REPORT.md": "174a8fdf32e47fcce650298df5554a9f7c101fc67cc7be4ab4d2acb14bc5c661",
+    "lanes/fused/REPORT.md": "5ed37d98357eb03a2f6ded9f741c9fb52d8f5ad821585c81be544f201945f8c6",
+    "lanes/fused/check_strong_router_family.py": "07fb1d8d322e57a7af666bae5b699c072805ff1d15eef1f1e7c2d87208729ef8",
+    "lanes/fused/r27_witness.json": "6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65",
+    "lanes/fused/summary.json": "6042127fd9f214e63bc38aa8e6367d1db7580c24b2b2e7a3aeba16625279aff0",
+    "lanes/program_vector/REPORT.md": "d4a4a6e8c512b915c35129b7158da5a841456c26acc569e677fda8a965f30834",
+    "lanes/program_vector/check_parallel_program_vector.py": "2ba586a1ef97822aebbbcf692d29cd5bd3f8bbc8e785ddce43aff2180df3c350",
+    "lanes/program_vector/manifest.json": "9d470da6b6f5559bc7e5b461255ce6d3bc3bfab10025d6ab48a99f41a34c694e",
+    "lanes/program_vector/receipt.json": "c9e8b1ad9c57f4ef55ea458b2573f20578a137a6c7b5fb1a66707bb7ee68b632",
+    "lanes/program_vector/receipt_optimized.json": "c9e8b1ad9c57f4ef55ea458b2573f20578a137a6c7b5fb1a66707bb7ee68b632"
+  },
+  "router_and_padding": {
+    "all_live_count_padding_checks_through_width_four": 7500,
+    "constant_mode_checks_through_width_four": 20,
+    "last_mode_robdd_nodes": 164,
+    "projection_or_complement_checks_through_width_four": 242
+  },
+  "schema": "orbit.semantic-router.program-vector-independent-audit.v1",
+  "scope": {
+    "conditional": [
+      "end-to-end compiler composition uses frozen anchor, decoder, glue, selector-library, and finite-tail premises",
+      "binary branch size/depth ledger uses the frozen complement-relative schedule"
+    ],
+    "exact": [
+      "E/G first-mismatch law and recursive P/N program equivalence",
+      "associative guarded segment composition",
+      "original-signature A=2 formulas",
+      "same-DAG 7q size and logarithmic control depth",
+      "projection, complement, constants, and duplicate-last padding",
+      "integer compiler ledger on the stated interval"
+    ],
+    "not_claimed": [
+      "ordinary formula size",
+      "bounded fanout",
+      "nullary constants in the original signature",
+      "novelty or prior-art clearance",
+      "patent freedom to operate or copyright clearance",
+      "unsigned Tau license rights",
+      "Lean verification, practicality, publication readiness, or optimal constants"
+    ]
+  },
+  "semantic_sha256": "4922df2221b3e6195d7b1af3a3ac770ae92a8aed10843430b9cffb20959c58ea",
+  "semantics": {
+    "associativity_rows": 64,
+    "binary_absolute_name_mutation": [
+      {
+        "anchor": 0,
+        "two_one_zero_attempt": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "anchor": 1,
+        "two_one_zero_attempt": [
+          1,
+          0,
+          1
+        ]
+      }
+    ],
+    "boolean_connective_rows": 4,
+    "delta_rows": 3,
+    "first_mismatch_disjoint_rows": 597871,
+    "pair_and_constant_evaluations": 7174452,
+    "primitive_d_rows": 27,
+    "segment_composition_rows": 4110364,
+    "two_plane_decoder_d_nodes": 2,
+    "two_plane_decoder_rows": 3,
+    "unguarded_G_witness": {
+      "correct_G": 0,
+      "physical": [
+        1,
+        2
+      ],
+      "target": [
+        0,
+        1
+      ],
+      "unguarded_G": 1
+    }
+  },
+  "shared_dag": {
+    "exact_pair_value_checks_through_width_five": 132860,
+    "interpretation": "same hash-consed DAG with unrestricted fanout; not an unshared formula bound",
+    "materialized_widths": [
+      0,
+      9
+    ],
+    "recurrence_widths_checked": 512,
+    "rows": [
+      {
+        "depth": 2,
+        "depth_upper": 2,
+        "final_pair_nodes": 0,
+        "maximum_fanout": 2,
+        "operation_nodes_excluding_names": 0,
+        "operation_nodes_including_names": 2,
+        "q": 1,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 0,
+        "state_recurrence_upper": 0,
+        "unshared_formula_forest_operations": 4,
+        "vector_logic_upper": 0,
+        "width": 0
+      },
+      {
+        "depth": 2,
+        "depth_upper": 2,
+        "final_pair_nodes": 0,
+        "maximum_fanout": 2,
+        "operation_nodes_excluding_names": 0,
+        "operation_nodes_including_names": 2,
+        "q": 1,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 0,
+        "state_recurrence_upper": 0,
+        "unshared_formula_forest_operations": 3,
+        "vector_logic_upper": 0,
+        "width": 0
+      },
+      {
+        "depth": 6,
+        "depth_upper": 6,
+        "final_pair_nodes": 5,
+        "maximum_fanout": 9,
+        "operation_nodes_excluding_names": 10,
+        "operation_nodes_including_names": 12,
+        "q": 3,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 5,
+        "state_recurrence_upper": 5,
+        "unshared_formula_forest_operations": 36,
+        "vector_logic_upper": 10,
+        "width": 1
+      },
+      {
+        "depth": 5,
+        "depth_upper": 6,
+        "final_pair_nodes": 4,
+        "maximum_fanout": 9,
+        "operation_nodes_excluding_names": 9,
+        "operation_nodes_including_names": 11,
+        "q": 3,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 5,
+        "state_recurrence_upper": 5,
+        "unshared_formula_forest_operations": 35,
+        "vector_logic_upper": 10,
+        "width": 1
+      },
+      {
+        "depth": 8,
+        "depth_upper": 8,
+        "final_pair_nodes": 14,
+        "maximum_fanout": 26,
+        "operation_nodes_excluding_names": 42,
+        "operation_nodes_including_names": 44,
+        "q": 9,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 28,
+        "state_recurrence_upper": 37,
+        "unshared_formula_forest_operations": 356,
+        "vector_logic_upper": 51,
+        "width": 2
+      },
+      {
+        "depth": 8,
+        "depth_upper": 8,
+        "final_pair_nodes": 13,
+        "maximum_fanout": 26,
+        "operation_nodes_excluding_names": 41,
+        "operation_nodes_including_names": 43,
+        "q": 9,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 28,
+        "state_recurrence_upper": 37,
+        "unshared_formula_forest_operations": 355,
+        "vector_logic_upper": 51,
+        "width": 2
+      },
+      {
+        "depth": 10,
+        "depth_upper": 10,
+        "final_pair_nodes": 41,
+        "maximum_fanout": 76,
+        "operation_nodes_excluding_names": 137,
+        "operation_nodes_including_names": 139,
+        "q": 27,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 96,
+        "state_recurrence_upper": 123,
+        "unshared_formula_forest_operations": 1814,
+        "vector_logic_upper": 164,
+        "width": 3
+      },
+      {
+        "depth": 10,
+        "depth_upper": 10,
+        "final_pair_nodes": 40,
+        "maximum_fanout": 76,
+        "operation_nodes_excluding_names": 136,
+        "operation_nodes_including_names": 138,
+        "q": 27,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 96,
+        "state_recurrence_upper": 123,
+        "unshared_formula_forest_operations": 1813,
+        "vector_logic_upper": 164,
+        "width": 3
+      },
+      {
+        "depth": 10,
+        "depth_upper": 10,
+        "final_pair_nodes": 122,
+        "maximum_fanout": 169,
+        "operation_nodes_excluding_names": 367,
+        "operation_nodes_including_names": 369,
+        "q": 81,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 245,
+        "state_recurrence_upper": 317,
+        "unshared_formula_forest_operations": 8600,
+        "vector_logic_upper": 439,
+        "width": 4
+      },
+      {
+        "depth": 10,
+        "depth_upper": 10,
+        "final_pair_nodes": 121,
+        "maximum_fanout": 169,
+        "operation_nodes_excluding_names": 366,
+        "operation_nodes_including_names": 368,
+        "q": 81,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 245,
+        "state_recurrence_upper": 317,
+        "unshared_formula_forest_operations": 8599,
+        "vector_logic_upper": 439,
+        "width": 4
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 365,
+        "maximum_fanout": 485,
+        "operation_nodes_excluding_names": 1056,
+        "operation_nodes_including_names": 1058,
+        "q": 243,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 691,
+        "state_recurrence_upper": 889,
+        "unshared_formula_forest_operations": 32522,
+        "vector_logic_upper": 1254,
+        "width": 5
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 364,
+        "maximum_fanout": 485,
+        "operation_nodes_excluding_names": 1055,
+        "operation_nodes_including_names": 1057,
+        "q": 243,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 691,
+        "state_recurrence_upper": 889,
+        "unshared_formula_forest_operations": 32521,
+        "vector_logic_upper": 1254,
+        "width": 5
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 1094,
+        "maximum_fanout": 1342,
+        "operation_nodes_excluding_names": 2987,
+        "operation_nodes_including_names": 2989,
+        "q": 729,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 1893,
+        "state_recurrence_upper": 2433,
+        "unshared_formula_forest_operations": 125996,
+        "vector_logic_upper": 3527,
+        "width": 6
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 1093,
+        "maximum_fanout": 1342,
+        "operation_nodes_excluding_names": 2986,
+        "operation_nodes_including_names": 2988,
+        "q": 729,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 1893,
+        "state_recurrence_upper": 2433,
+        "unshared_formula_forest_operations": 125995,
+        "vector_logic_upper": 3527,
+        "width": 6
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 3281,
+        "maximum_fanout": 3876,
+        "operation_nodes_excluding_names": 8725,
+        "operation_nodes_including_names": 8727,
+        "q": 2187,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 5444,
+        "state_recurrence_upper": 7001,
+        "unshared_formula_forest_operations": 463280,
+        "vector_logic_upper": 10282,
+        "width": 7
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 3280,
+        "maximum_fanout": 3876,
+        "operation_nodes_excluding_names": 8724,
+        "operation_nodes_including_names": 8726,
+        "q": 2187,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 5444,
+        "state_recurrence_upper": 7001,
+        "unshared_formula_forest_operations": 463279,
+        "vector_logic_upper": 10282,
+        "width": 7
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 9842,
+        "maximum_fanout": 11270,
+        "operation_nodes_excluding_names": 25641,
+        "operation_nodes_including_names": 25643,
+        "q": 6561,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 15799,
+        "state_recurrence_upper": 20317,
+        "unshared_formula_forest_operations": 1720076,
+        "vector_logic_upper": 30159,
+        "width": 8
+      },
+      {
+        "depth": 12,
+        "depth_upper": 12,
+        "final_pair_nodes": 9841,
+        "maximum_fanout": 11270,
+        "operation_nodes_excluding_names": 25640,
+        "operation_nodes_including_names": 25642,
+        "q": 6561,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 15799,
+        "state_recurrence_upper": 20317,
+        "unshared_formula_forest_operations": 1720075,
+        "vector_logic_upper": 30159,
+        "width": 8
+      },
+      {
+        "depth": 14,
+        "depth_upper": 14,
+        "final_pair_nodes": 29525,
+        "maximum_fanout": 33457,
+        "operation_nodes_excluding_names": 76388,
+        "operation_nodes_including_names": 76390,
+        "q": 19683,
+        "root_sign": "P",
+        "shared_name_nodes": 2,
+        "state_nodes": 46863,
+        "state_recurrence_upper": 60255,
+        "unshared_formula_forest_operations": 5704790,
+        "vector_logic_upper": 89780,
+        "width": 9
+      },
+      {
+        "depth": 14,
+        "depth_upper": 14,
+        "final_pair_nodes": 29524,
+        "maximum_fanout": 33457,
+        "operation_nodes_excluding_names": 76387,
+        "operation_nodes_including_names": 76389,
+        "q": 19683,
+        "root_sign": "N",
+        "shared_name_nodes": 2,
+        "state_nodes": 46863,
+        "state_recurrence_upper": 60255,
+        "unshared_formula_forest_operations": 5704789,
+        "vector_logic_upper": 89780,
+        "width": 9
+      }
+    ]
+  },
+  "status": "EXACT_PROGRAM_VECTOR_PASS__CONDITIONAL_COMPILER_LEDGER_PASS"
+}

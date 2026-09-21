@@ -1,0 +1,405 @@
+{
+  "claim_boundary": "Research-only. No novelty, optimality beyond the displayed construction, practical speedup, unshared-formula bound, Lean proof, patent/FTO, license, Tau, or publication claim follows.",
+  "compiler_boundary": "The program-vector theorem and its giant nonbinary local/prefix ledger are proved here. The full parameter-free compiler still composes frozen anchor, selector-table, binary-branch, decoder, and glue lemmas; it is not a new standalone semantic characterization of conservative Q terms.",
+  "compiler_checks": {
+    "C": 4,
+    "analytic_nonbinary_depth_bound": "nonbinary_depth <= r+5*ceil(log_2 r)+12",
+    "analytic_nonbinary_size_bound": "nonbinary_nodes <= 62*3^r/r for r>=64",
+    "analytic_size_base_witness": {
+      "Q_less_than_N": true,
+      "arity": 64,
+      "controls_normalized_below_6_over_r_squared": true,
+      "fixed_overhead_normalized_below_one_quarter": true,
+      "nonbinary_lower_order_normalized_below_one": true,
+      "router_normalized_below_one_quarter": true
+    },
+    "arities_checked": 4033,
+    "arity_range": [
+      64,
+      4096
+    ],
+    "binary_below_r_from_checked_arity": 339,
+    "binary_tail_proof_threshold": "k=floor(sqrt(r))>=30, hence r>=900",
+    "maximum_checked_nonbinary_normalized_size": {
+      "arity": 93,
+      "ratio": "25.833333333333"
+    },
+    "selected_rows": [
+      {
+        "H": 52,
+        "M": 27,
+        "arity": 64,
+        "binary_depth": 104,
+        "block_coordinates": 3,
+        "certified_depth_bound": 106,
+        "nonbinary_depth": 102,
+        "nonbinary_size_over_3r_over_r": "17.777777777778",
+        "prefix_coordinates": 61
+      },
+      {
+        "H": 77,
+        "M": 27,
+        "arity": 90,
+        "binary_depth": 127,
+        "block_coordinates": 3,
+        "certified_depth_bound": 137,
+        "nonbinary_depth": 133,
+        "nonbinary_size_over_3r_over_r": "25.000000000000",
+        "prefix_coordinates": 87
+      },
+      {
+        "H": 80,
+        "M": 27,
+        "arity": 93,
+        "binary_depth": 127,
+        "block_coordinates": 3,
+        "certified_depth_bound": 140,
+        "nonbinary_depth": 136,
+        "nonbinary_size_over_3r_over_r": "25.833333333333",
+        "prefix_coordinates": 90
+      },
+      {
+        "H": 81,
+        "M": 81,
+        "arity": 94,
+        "binary_depth": 127,
+        "block_coordinates": 4,
+        "certified_depth_bound": 141,
+        "nonbinary_depth": 136,
+        "nonbinary_size_over_3r_over_r": "8.717971828795",
+        "prefix_coordinates": 90
+      },
+      {
+        "H": 115,
+        "M": 81,
+        "arity": 128,
+        "binary_depth": 159,
+        "block_coordinates": 4,
+        "certified_depth_bound": 175,
+        "nonbinary_depth": 170,
+        "nonbinary_size_over_3r_over_r": "11.851851851852",
+        "prefix_coordinates": 124
+      },
+      {
+        "H": 241,
+        "M": 81,
+        "arity": 256,
+        "binary_depth": 269,
+        "block_coordinates": 4,
+        "certified_depth_bound": 308,
+        "nonbinary_depth": 303,
+        "nonbinary_size_over_3r_over_r": "23.703703703704",
+        "prefix_coordinates": 252
+      },
+      {
+        "H": 323,
+        "M": 243,
+        "arity": 338,
+        "binary_depth": 338,
+        "block_coordinates": 5,
+        "certified_depth_bound": 395,
+        "nonbinary_depth": 389,
+        "nonbinary_size_over_3r_over_r": "10.432098765432",
+        "prefix_coordinates": 333
+      },
+      {
+        "H": 324,
+        "M": 243,
+        "arity": 339,
+        "binary_depth": 338,
+        "block_coordinates": 5,
+        "certified_depth_bound": 396,
+        "nonbinary_depth": 390,
+        "nonbinary_size_over_3r_over_r": "10.462962962963",
+        "prefix_coordinates": 334
+      },
+      {
+        "H": 496,
+        "M": 243,
+        "arity": 512,
+        "binary_depth": 471,
+        "block_coordinates": 5,
+        "certified_depth_bound": 569,
+        "nonbinary_depth": 563,
+        "nonbinary_size_over_3r_over_r": "15.802469135802",
+        "prefix_coordinates": 507
+      },
+      {
+        "H": 883,
+        "M": 729,
+        "arity": 900,
+        "binary_depth": 752,
+        "block_coordinates": 6,
+        "certified_depth_bound": 962,
+        "nonbinary_depth": 955,
+        "nonbinary_size_over_3r_over_r": "9.259259259259",
+        "prefix_coordinates": 894
+      },
+      {
+        "H": 1007,
+        "M": 729,
+        "arity": 1024,
+        "binary_depth": 831,
+        "block_coordinates": 6,
+        "certified_depth_bound": 1086,
+        "nonbinary_depth": 1079,
+        "nonbinary_size_over_3r_over_r": "10.534979423868",
+        "prefix_coordinates": 1018
+      },
+      {
+        "H": 2030,
+        "M": 729,
+        "arity": 2048,
+        "binary_depth": 1517,
+        "block_coordinates": 6,
+        "certified_depth_bound": 2115,
+        "nonbinary_depth": 2108,
+        "nonbinary_size_over_3r_over_r": "21.069958847737",
+        "prefix_coordinates": 2042
+      },
+      {
+        "H": 4076,
+        "M": 2187,
+        "arity": 4096,
+        "binary_depth": 2911,
+        "block_coordinates": 7,
+        "certified_depth_bound": 4168,
+        "nonbinary_depth": 4160,
+        "nonbinary_size_over_3r_over_r": "14.046639231824",
+        "prefix_coordinates": 4089
+      }
+    ],
+    "sequential_vector_mutation": {
+      "arity": 512,
+      "verdict": "REJECTED_PREFIX_PROGRAM_COST_EXCEEDS_100_TIMES_TARGET"
+    },
+    "single_log_reserve_mutation": {
+      "H": 6561,
+      "M": 6561,
+      "arity": 6574,
+      "verdict": "REJECTED_LOCAL_LIBRARY_EXCEEDS_62_TIMES_TARGET"
+    }
+  },
+  "falsifier_checks": {
+    "binary_absolute_constants_rejected": true,
+    "boolean_primitive_rows": 4,
+    "swapped_sign_counterexample": {
+      "outputs_at_x_0_1": [
+        1,
+        1
+      ],
+      "term": "P1 with N1 projection pair (0,1)"
+    },
+    "unguarded_G_counterexample": {
+      "correct_E_G": [
+        0,
+        0
+      ],
+      "physical": [
+        1,
+        2
+      ],
+      "target": [
+        0,
+        1
+      ],
+      "wrong_G": 1
+    }
+  },
+  "frozen_inputs": {
+    "research/tournaments/2026-08-13-semantic-router-frontier/STATE.md": "5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133",
+    "research/tournaments/2026-08-13-semantic-router-frontier/audits/variable_compiler/REPORT.md": "174a8fdf32e47fcce650298df5554a9f7c101fc67cc7be4ab4d2acb14bc5c661",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/REPORT.md": "5ed37d98357eb03a2f6ded9f741c9fb52d8f5ad821585c81be544f201945f8c6",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/check_strong_router_family.py": "07fb1d8d322e57a7af666bae5b699c072805ff1d15eef1f1e7c2d87208729ef8",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/r27_witness.json": "6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65",
+    "research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/summary.json": "6042127fd9f214e63bc38aa8e6367d1db7580c24b2b2e7a3aeba16625279aff0"
+  },
+  "original_signature_boundary": "On the nonbinary branch A=2 legally supplies one=u(A), zero=u(u(A)), and two=A. Equality indicators, AND, OR, and NOT are explicit d/u terms. On the binary branch these are not absolute constants; the compiler retains the separately audited complement-relative x0/u(x0) construction.",
+  "router_checks": {
+    "concrete_router_checks_through_width_two": 11356,
+    "direct_ternary_robdd_mode_checks_through_width_four": 262,
+    "last_robdd_node_count": 164,
+    "padding_robdd_checks": 232
+  },
+  "schema": "orbit-synthesis/parallel-program-vector/v1",
+  "semantic_sha256": "9699a3fe058369ac22a4a4d8050d07825cc80112cbc4c601a85914100db13f88",
+  "status": "PASS_EXACT_VECTOR_CONDITIONAL_COMPILER",
+  "theorem": {
+    "composition": "E_AB=E_A and E_B; G_AB=G_A or (E_A and G_B)",
+    "constant_negative_pair": "(c,c)",
+    "constant_positive_pair": "(1-c,c)",
+    "depth": "at most 6+2*ceil(log_2 w) above the raw anchor and address digits",
+    "negative_cell_pair": "(G, E or G)",
+    "positive_cell_pair": "(not(E or G), G)",
+    "size": "at most 7*3^w d/u nodes beyond the two shared anchor names",
+    "state": "E_p=[t=p], G_p=[the first mismatch has (t_j,p_j)=(1,2)]"
+  },
+  "vector_checks": {
+    "dependency_checks": 18,
+    "rows": [
+      {
+        "capacity": 1,
+        "certified_depth_upper": 2,
+        "certified_node_upper": 0,
+        "generated_operation_nodes_excluding_shared_names": 0,
+        "program_depth_above_raw_anchor": 2,
+        "root_sign": "P",
+        "width": 0
+      },
+      {
+        "capacity": 1,
+        "certified_depth_upper": 2,
+        "certified_node_upper": 0,
+        "generated_operation_nodes_excluding_shared_names": 0,
+        "program_depth_above_raw_anchor": 2,
+        "root_sign": "N",
+        "width": 0
+      },
+      {
+        "capacity": 3,
+        "certified_depth_upper": 6,
+        "certified_node_upper": 10,
+        "generated_operation_nodes_excluding_shared_names": 10,
+        "program_depth_above_raw_anchor": 6,
+        "root_sign": "P",
+        "width": 1
+      },
+      {
+        "capacity": 3,
+        "certified_depth_upper": 6,
+        "certified_node_upper": 10,
+        "generated_operation_nodes_excluding_shared_names": 9,
+        "program_depth_above_raw_anchor": 5,
+        "root_sign": "N",
+        "width": 1
+      },
+      {
+        "capacity": 9,
+        "certified_depth_upper": 8,
+        "certified_node_upper": 51,
+        "generated_operation_nodes_excluding_shared_names": 42,
+        "program_depth_above_raw_anchor": 8,
+        "root_sign": "P",
+        "width": 2
+      },
+      {
+        "capacity": 9,
+        "certified_depth_upper": 8,
+        "certified_node_upper": 51,
+        "generated_operation_nodes_excluding_shared_names": 41,
+        "program_depth_above_raw_anchor": 8,
+        "root_sign": "N",
+        "width": 2
+      },
+      {
+        "capacity": 27,
+        "certified_depth_upper": 10,
+        "certified_node_upper": 164,
+        "generated_operation_nodes_excluding_shared_names": 137,
+        "program_depth_above_raw_anchor": 10,
+        "root_sign": "P",
+        "width": 3
+      },
+      {
+        "capacity": 27,
+        "certified_depth_upper": 10,
+        "certified_node_upper": 164,
+        "generated_operation_nodes_excluding_shared_names": 136,
+        "program_depth_above_raw_anchor": 10,
+        "root_sign": "N",
+        "width": 3
+      },
+      {
+        "capacity": 81,
+        "certified_depth_upper": 10,
+        "certified_node_upper": 439,
+        "generated_operation_nodes_excluding_shared_names": 367,
+        "program_depth_above_raw_anchor": 10,
+        "root_sign": "P",
+        "width": 4
+      },
+      {
+        "capacity": 81,
+        "certified_depth_upper": 10,
+        "certified_node_upper": 439,
+        "generated_operation_nodes_excluding_shared_names": 366,
+        "program_depth_above_raw_anchor": 10,
+        "root_sign": "N",
+        "width": 4
+      },
+      {
+        "capacity": 243,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 1254,
+        "generated_operation_nodes_excluding_shared_names": 1056,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "P",
+        "width": 5
+      },
+      {
+        "capacity": 243,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 1254,
+        "generated_operation_nodes_excluding_shared_names": 1055,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "N",
+        "width": 5
+      },
+      {
+        "capacity": 729,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 3527,
+        "generated_operation_nodes_excluding_shared_names": 2987,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "P",
+        "width": 6
+      },
+      {
+        "capacity": 729,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 3527,
+        "generated_operation_nodes_excluding_shared_names": 2986,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "N",
+        "width": 6
+      },
+      {
+        "capacity": 2187,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 10282,
+        "generated_operation_nodes_excluding_shared_names": 8725,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "P",
+        "width": 7
+      },
+      {
+        "capacity": 2187,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 10282,
+        "generated_operation_nodes_excluding_shared_names": 8724,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "N",
+        "width": 7
+      },
+      {
+        "capacity": 6561,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 30159,
+        "generated_operation_nodes_excluding_shared_names": 25641,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "P",
+        "width": 8
+      },
+      {
+        "capacity": 6561,
+        "certified_depth_upper": 12,
+        "certified_node_upper": 30159,
+        "generated_operation_nodes_excluding_shared_names": 25640,
+        "program_depth_above_raw_anchor": 12,
+        "root_sign": "N",
+        "width": 8
+      }
+    ],
+    "semantic_pair_checks": 1200114
+  }
+}

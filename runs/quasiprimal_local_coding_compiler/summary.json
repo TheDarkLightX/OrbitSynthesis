@@ -1,0 +1,179 @@
+{
+  "algebra": "Quackenbush Q=({0,1,2};d,u)",
+  "asymptotic_plan_rows": [
+    {
+      "arity": 8,
+      "library_functions": 306,
+      "library_scaled_by_arity_minus_one": 2142,
+      "maximum_block_assignments": 4,
+      "minimum_block_assignments": 2,
+      "nonbinary_slice_rows": 6305,
+      "prefix_assignments": 1988,
+      "prefix_scaled_by_arity": 15904
+    },
+    {
+      "arity": 12,
+      "library_functions": 5454,
+      "library_scaled_by_arity_minus_one": 59994,
+      "maximum_block_assignments": 6,
+      "minimum_block_assignments": 3,
+      "nonbinary_slice_rows": 527345,
+      "prefix_assignments": 118802,
+      "prefix_scaled_by_arity": 1425624
+    },
+    {
+      "arity": 16,
+      "library_functions": 218052,
+      "library_scaled_by_arity_minus_one": 3270780,
+      "maximum_block_assignments": 9,
+      "minimum_block_assignments": 4,
+      "nonbinary_slice_rows": 42981185,
+      "prefix_assignments": 4794361,
+      "prefix_scaled_by_arity": 76709776
+    },
+    {
+      "arity": 24,
+      "library_functions": 2201254866,
+      "library_scaled_by_arity_minus_one": 50628861918,
+      "maximum_block_assignments": 18,
+      "minimum_block_assignments": 8,
+      "nonbinary_slice_rows": 282412759265,
+      "prefix_assignments": 21137194346,
+      "prefix_scaled_by_arity": 507292664304
+    },
+    {
+      "arity": 32,
+      "library_functions": 25142642708238,
+      "library_scaled_by_arity_minus_one": 779421923955378,
+      "maximum_block_assignments": 27,
+      "minimum_block_assignments": 16,
+      "nonbinary_slice_rows": 1853015893884545,
+      "prefix_assignments": 71469740185724,
+      "prefix_scaled_by_arity": 2287031685943168
+    },
+    {
+      "arity": 48,
+      "library_functions": 2872296241584748038,
+      "library_scaled_by_arity_minus_one": 134997923354483157786,
+      "maximum_block_assignments": 36,
+      "minimum_block_assignments": 16,
+      "nonbinary_slice_rows": 79766442795397533152705,
+      "prefix_assignments": 2626112332596612357080,
+      "prefix_scaled_by_arity": 126053391964637393139840
+    },
+    {
+      "arity": 64,
+      "library_functions": 815372585788438156005437562,
+      "library_scaled_by_arity_minus_one": 51368472904671603828342566406,
+      "maximum_block_assignments": 54,
+      "minimum_block_assignments": 27,
+      "nonbinary_slice_rows": 3433683820274065740584139537665,
+      "prefix_assignments": 84800550749989005061614973794,
+      "prefix_scaled_by_arity": 5427235247999296323943358322816
+    }
+  ],
+  "bounded_random_tuples_checked": 3279,
+  "bounded_rows": [
+    {
+      "arity": 1,
+      "baseline_dag_nodes": 6,
+      "block_assignments": [1],
+      "dag_nodes_saved": 0,
+      "local_coding_dag_nodes": 6,
+      "local_coding_depth": 5,
+      "selected_block_assignment_cap": 1,
+      "tuples_checked": 3
+    },
+    {
+      "arity": 2,
+      "baseline_dag_nodes": 29,
+      "block_assignments": [1, 1],
+      "dag_nodes_saved": 0,
+      "local_coding_dag_nodes": 29,
+      "local_coding_depth": 9,
+      "selected_block_assignment_cap": 1,
+      "tuples_checked": 9
+    },
+    {
+      "arity": 3,
+      "baseline_dag_nodes": 83,
+      "block_assignments": [1, 1, 1],
+      "dag_nodes_saved": -1,
+      "local_coding_dag_nodes": 84,
+      "local_coding_depth": 13,
+      "selected_block_assignment_cap": 1,
+      "tuples_checked": 27
+    },
+    {
+      "arity": 4,
+      "baseline_dag_nodes": 239,
+      "block_assignments": [1, 1, 1, 1],
+      "dag_nodes_saved": -1,
+      "local_coding_dag_nodes": 240,
+      "local_coding_depth": 17,
+      "selected_block_assignment_cap": 1,
+      "tuples_checked": 81
+    },
+    {
+      "arity": 5,
+      "baseline_dag_nodes": 707,
+      "block_assignments": [1, 2, 2, 2, 2],
+      "dag_nodes_saved": 77,
+      "local_coding_dag_nodes": 630,
+      "local_coding_depth": 37,
+      "selected_block_assignment_cap": 2,
+      "tuples_checked": 243
+    },
+    {
+      "arity": 6,
+      "baseline_dag_nodes": 2123,
+      "block_assignments": [3, 3, 3, 3, 3, 2],
+      "dag_nodes_saved": 872,
+      "local_coding_dag_nodes": 1251,
+      "local_coding_depth": 75,
+      "selected_block_assignment_cap": 3,
+      "tuples_checked": 729
+    },
+    {
+      "arity": 7,
+      "baseline_dag_nodes": 6407,
+      "block_assignments": [3, 3, 3, 3, 3, 3, 2],
+      "dag_nodes_saved": 3539,
+      "local_coding_dag_nodes": 2868,
+      "local_coding_depth": 79,
+      "selected_block_assignment_cap": 3,
+      "tuples_checked": 2187
+    }
+  ],
+  "claim_boundary": "Finite construction and plan-arithmetic calibration only. The generic Theta(3^r/r) Shannon-complexity theorem rests on the separate manuscript proof and classical Lupanov-style local coding; novelty is unknown.",
+  "compiler_module_sha256": "d1f9035d2764b0de8fa2dd51a44ec31e7f517d0b84e8ad96afbba1efa5f7e2fb",
+  "construction": "first-2 dynamic constants plus ternary-Gray local function library",
+  "exhaustive_arity_two_selector_tables": 128,
+  "experiment_source_sha256": "dc2f8dc84c017d4473752bf8c9ee6f60c3573a331deb22db7da88fd58469c90d",
+  "gray_rows": [
+    {"length": 0, "words": 1},
+    {"length": 1, "words": 3},
+    {"length": 2, "words": 9},
+    {"length": 3, "words": 27},
+    {"length": 4, "words": 81}
+  ],
+  "manuscript_note_sha256": "b045355da628623ad88f4e5bd4a22b7efbbceb836fd9c1f6f06e7e780c98233b",
+  "mutation_checks": {
+    "complement_asymmetry_rejected": true,
+    "corrupted_gray_path_rejected": true,
+    "nonpositive_block_cap_rejected": true
+  },
+  "optimized_replay_semantic_sha256": "4aaf27d678847aa0455ae8be552a165c3e9ec08c007031878f6aa40b0794ed89",
+  "reduction_row": {
+    "arity": 9,
+    "baseline_dag_nodes": 58331,
+    "block_assignments": [3, 3, 4, 4, 4, 4, 4, 4, 4],
+    "dag_nodes_saved": 39002,
+    "local_coding_dag_nodes": 19329,
+    "local_coding_depth": 179,
+    "selected_block_assignment_cap": 4,
+    "tuples_checked": 19683
+  },
+  "schema": "orbit-synthesis/quasiprimal-local-coding-compiler/v1",
+  "semantic_sha256": "4aaf27d678847aa0455ae8be552a165c3e9ec08c007031878f6aa40b0794ed89"
+}

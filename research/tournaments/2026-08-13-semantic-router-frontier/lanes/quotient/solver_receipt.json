@@ -1,0 +1,88 @@
+{
+  "boundary": "Exact evidence only for the declared Boolean positive-polarity depth-at-most-3 d-only tree/DAG grammar after the proved padding and unsharing transfers. Mixed-polarity d-only terms, signed or u leaves, depth greater than 3, novelty, patents, FTO, Tau, and publication claims are excluded.",
+  "checks": {
+    "cvc5": {
+      "command": "cvc5 --lang smt2 positive_pair_r10.smt2",
+      "exit_code": 0,
+      "result": "unsat",
+      "version": "1.1.2"
+    },
+    "cvc5_internal_proof_check": {
+      "command": "cvc5 --lang smt2 --produce-proofs --check-proofs --tlimit-per=120000 positive_pair_r10.smt2",
+      "exit_code": 0,
+      "proof_object_saved": false,
+      "result": "unsat",
+      "version": "1.1.2"
+    },
+    "extreme_lemma_normal": {
+      "command": "python3 check_extreme_lemma.py --out extreme_lemma.json",
+      "exit_code": 0,
+      "result": "PASS",
+      "semantic_sha256": "27dcd1fa91ee227fee28942b84f51cea862949fb5d45f03988c2956a9d7f3ed4"
+    },
+    "extreme_lemma_optimized": {
+      "command": "python3 -O check_extreme_lemma.py --out extreme_lemma_optimized.json",
+      "exit_code": 0,
+      "result": "PASS",
+      "semantic_sha256": "27dcd1fa91ee227fee28942b84f51cea862949fb5d45f03988c2956a9d7f3ed4"
+    },
+    "positive_r9_lower_normal": {
+      "command": "python3 check_positive_r9_lower.py --out positive_r9_lower.json",
+      "exact_boolean_checks": 4608,
+      "exit_code": 0,
+      "mutations_effective_for_all_targets": true,
+      "result": "PASS",
+      "semantic_sha256": "b9a29db8cbc4eed66514f4f1b1d3c0eeb75d6560167aa148556eb2e0ce563453"
+    },
+    "positive_r9_lower_optimized": {
+      "command": "python3 -O check_positive_r9_lower.py --out positive_r9_lower_optimized.json",
+      "exact_boolean_checks": 4608,
+      "exit_code": 0,
+      "mutations_effective_for_all_targets": true,
+      "result": "PASS",
+      "semantic_sha256": "b9a29db8cbc4eed66514f4f1b1d3c0eeb75d6560167aa148556eb2e0ce563453"
+    },
+    "q9_solver_sanity_control": {
+      "command": "python3 solve_positive_pair_r10.py --q 9 --timeout-ms 120000 --out positive_pair_q9_solver_control.json",
+      "exact_boolean_checks": 4608,
+      "exit_code": 0,
+      "mutations_effective_for_all_targets": true,
+      "result": "SAT_EXACT",
+      "semantic_sha256": "7b9babf75b0fcee819c0d38ce9875b48d437cd8692729ab0c56dfeb85c000e2a"
+    },
+    "z3_r10_normal": {
+      "command": "python3 solve_positive_pair_r10.py --q 10 --timeout-ms 120000 --out positive_pair_r10.json --dump-smt2 positive_pair_r10.smt2",
+      "exit_code": 2,
+      "result": "UNSAT",
+      "version": "4.15.4"
+    },
+    "z3_r10_optimized": {
+      "command": "python3 -O solve_positive_pair_r10.py --q 10 --timeout-ms 120000 --out positive_pair_r10_optimized.json",
+      "exit_code": 2,
+      "result": "UNSAT",
+      "version": "4.15.4"
+    }
+  },
+  "environment": {
+    "cvc5": "1.1.2",
+    "python": "3.12.3",
+    "z3": "4.15.4"
+  },
+  "hashes": {
+    "check_extreme_lemma.py": "777a3fb3e670ef218337a261889513ebf30011d56ae898b6f8b67207a2dc5b66",
+    "check_positive_r9_lower.py": "203663dddab5a2e6df5a86e0dcc81120d1baf6803b183b1a6d76b0369e9b8926",
+    "extreme_lemma.json": "017b7d48b8bbc55659e80eed859be1f2be26f8fa15319590e42381ba88100123",
+    "extreme_lemma_optimized.json": "017b7d48b8bbc55659e80eed859be1f2be26f8fa15319590e42381ba88100123",
+    "frozen_r9_witness": "d3c25e47ce671d8a5d484d6c50cc0b3fccf7f6bb5507097ef8bff6bcbbbe529c",
+    "positive_pair_q9_solver_control.json": "fee909dd243fcee076fc1e909d0a5dcc4343c3eaff779d48a4592a4318e842db",
+    "positive_pair_r10.json": "04c0e817c9ae78924de9314e85c46b8c3d4c99a19b26ce192d855ef0a3dfbefc",
+    "positive_pair_r10.smt2": "48c81acb99af1644c5bcaacd3477ce2cc94b602501900754d55be28ddc72ff65",
+    "positive_pair_r10_optimized.json": "04c0e817c9ae78924de9314e85c46b8c3d4c99a19b26ce192d855ef0a3dfbefc",
+    "positive_r9_lower.json": "9cab21119cc04e71f357773a675ff2fb2d700cb994784df724c43e8d87efa4df",
+    "positive_r9_lower_optimized.json": "9cab21119cc04e71f357773a675ff2fb2d700cb994784df724c43e8d87efa4df",
+    "solve_positive_pair_r10.py": "9a683867cc8365a862c5887f6e549d3d2d89fb13a2809620caf0a59b93148d1e",
+    "state_at_replay": "5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133"
+  },
+  "result": "P_pos_d(3)=9",
+  "schema": "orbitsynthesis/positive-pair-capacity-receipt/v1"
+}

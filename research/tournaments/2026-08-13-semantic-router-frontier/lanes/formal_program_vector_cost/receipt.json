@@ -1,0 +1,103 @@
+{
+  "schema": "orbit-synthesis/strong-router-program-vector-cost-lean/v1",
+  "status": "PASS",
+  "mode_sequence": [
+    "autoformalize",
+    "checkpoint"
+  ],
+  "environment": {
+    "lean_toolchain": "leanprover/lean4:v4.34.0-rc1",
+    "lean_version": "Lean (version 4.34.0-rc1, x86_64-unknown-linux-gnu, commit 3447a668783dbce1a8fdb97101dd067687b2b418, Release)",
+    "mathlib_revision": "9aa55045016ce35bb2379a8fc3d7f268995fb99a",
+    "git_commit": null,
+    "git_note": "The workspace contains an empty .git directory, so no repository commit was available."
+  },
+  "artifacts": {
+    "lean_source": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.lean",
+      "sha256": "ea516b085cdedd3f0ee70f83a9d0240df55e7e68cf0ad8ce77558efd91db55d2"
+    },
+    "checker": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/check.sh",
+      "sha256": "df1b7fdf0fcb73df331efd85cd94520a19ae70293b7cdef1a967d9adf296e928"
+    },
+    "generated_router_olean": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/StrongSignedRouter.olean",
+      "sha256": "18830428c6e488e61c490b0ee38e297efc2c2829c91e9a03043f10ebbe9f2c16"
+    },
+    "generated_vector_olean": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVector.olean",
+      "sha256": "880d7eda2d4bd787fa0d13eb7703fc69217ae1f15f302f2a18095a97803ab429"
+    },
+    "generated_cost_olean": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.olean",
+      "sha256": "608a350fa8953de19cfeb3364f00d3c849d76e8f888d004ec0928b4513fdf89c"
+    },
+    "skill_tool_receipt": {
+      "path": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/tool_receipt.json",
+      "sha256": "721c3ba036f3743de24adad52730ad7844a6435592aaacf9d4d917d3282735ed"
+    }
+  },
+  "frozen_dependencies": {
+    "state_sha256": "5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133",
+    "strong_router_source_sha256": "687a77ed1f3b0bfe2a540bc670f6db942e15bddc339ccfbceffba9699766227a",
+    "program_vector_source_sha256": "c2f477edd110c4df96f3c30f31f02de09af93045720babfd38dd2dd79a5573dd",
+    "program_vector_checker_sha256": "73f61cfd038ea9269766bfa9336da42ce3ccc318a46f6cddfcfa07fcce9ff67a",
+    "program_vector_receipt_sha256": "5e79e4eb49af361fbed1c8962a67583a48e532526698da584b8825d55136cffa",
+    "program_vector_report_sha256": "86c4e754e0c335010fefe0daee6c6d8531784f9d49c18deac402043122f2b8df",
+    "program_vector_tool_receipt_sha256": "15ee954c97e494012795be9743503f82d1b0923e0563ebf6b46f16592c93fab1",
+    "import_method": "The checker verifies both frozen Lean source hashes and recompiles them into this new lane before checking the cost file. It never writes into the frozen lanes."
+  },
+  "commands": [
+    {
+      "command": "research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/check.sh",
+      "exit_code": 0,
+      "stdout": "No proof placeholders found.",
+      "stderr": ""
+    },
+    {
+      "command": "LEAN_PATH=research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost lake env lean -t 0 -EwarningAsError=true research/tournaments/2026-08-13-semantic-router-frontier/lanes/formal_program_vector_cost/ProgramVectorCost.lean",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "checked_declarations": [
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.anchor_names_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.deltaZero_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.deltaOne_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.deltaTwo_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.andTerm_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.orTerm_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.notTerm_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.composeTerms_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.digitStateTerms_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.finalPairTerms_correct",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.finalPairTerms_match_frozen_program",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.parityCounts_even_closed",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.positiveCellCount_le",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.ternary_cross_product",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.stateNodes_recurrence",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.stateNodes_le_five_mul_pow",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.totalSharedDAGNodes_le_seven_mul_pow",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.stateDepth_recurrence",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.vectorDepth_le_six_add_two_mul_clog",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.balanced_materialization_bounds",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.anchor_one_mutation",
+    "OrbitSynthesis.StrongSignedRouter.ProgramVectorCost.unguarded_gain_counterexample"
+  ],
+  "formalized": {
+    "original_signature": "A constant-free term datatype with only variables, unary u, and ternary discriminator d; all constructed digit, composition, and final-pair terms carry its structural certificate.",
+    "nonbinary_anchor": "Under A=2, two=A, one=u(A), and zero=u(u(A)); all three ternary equality indicators and Boolean AND, OR, and NOT identities are proved by exact evaluation.",
+    "semantic_bridge": "Digit terms realize the frozen one-digit summaries; guarded composition preserves SegmentSummary.comp; final pair terms equal the frozen projection-program slots whenever the state realizes addressSummary.",
+    "balanced_recurrence": "S(1)=5 and S(w)=S(floor(w/2))+S(ceil(w/2))+3*3^w for w>=2; the cross-product identity for the two halves is proved.",
+    "shared_dag_size": "The sign-specific ledger reuses both child vectors once, adds one active node per physical word, the exact number of sign-dependent complements, and the two shared anchor-name nodes. Lean proves totalSharedDAGNodes(root,w)<=7*3^w for every w.",
+    "depth": "Leaf states have depth at most 4, composition adds at most 2, final pair formation adds at most 2, and the balanced recurrence is proved <=6+2*Nat.clog 2 w for w>=1.",
+    "falsifiers": "Lean records a counterexample to unguarded G composition and proves that the A=1 mutation swaps the shared zero/one names."
+  },
+  "scope": {
+    "proved": "The exact nonbinary A=2 d/u primitives, their semantic bridge to the frozen program vector, and a recurrence-level complete shared-DAG size/depth certificate including both shared name nodes.",
+    "not_proved": "A serialized node-indexed DAG extraction or hash-cons implementation, the binary complement-relative branch, Q two-plane decoding, selector tables, padding, gluing, an end-to-end compiler, any r+O(log r) theorem, novelty, patents, FTO, license terms, or performance."
+  },
+  "unclosed_requested_theorems": []
+}

@@ -1,0 +1,37 @@
+{
+  "author_replay": {
+    "normal_and_optimized_r27_equal": true,
+    "normal_and_optimized_summary_equal": true,
+    "r27_sha256": "6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65",
+    "summary_sha256": "6042127fd9f214e63bc38aa8e6367d1db7580c24b2b2e7a3aeba16625279aff0"
+  },
+  "auditor": {
+    "normal_command": "python3 research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/audit_strong_family.py --witness research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/r27_witness.json --expected-witness-sha 6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65 --expected-author-sha 07fb1d8d322e57a7af666bae5b699c072805ff1d15eef1f1e7c2d87208729ef8 --expected-state-sha 5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133 --out research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/receipt.json",
+    "normal_optimized_bytes_equal": true,
+    "optimized_command": "python3 -O research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/audit_strong_family.py --witness research/tournaments/2026-08-13-semantic-router-frontier/lanes/fused/r27_witness.json --expected-witness-sha 6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65 --expected-author-sha 07fb1d8d322e57a7af666bae5b699c072805ff1d15eef1f1e7c2d87208729ef8 --expected-state-sha 5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133 --out research/tournaments/2026-08-13-semantic-router-frontier/audits/strong_family/receipt_optimized.json",
+    "receipt_semantic_sha256": "ac566d0b716575ff693bc3a1f125283c764ef608a04c183a17293fe66adc4cb2",
+    "receipt_sha256": "41ebde43fb3dee99b995224670d607bba331aa498cb49fca477802b4aea632a8",
+    "source_sha256": "efcd43d8038b46d897611dac8414b380602b7114a7e4db138ae729bf6ad12f19",
+    "wrong_witness_hash_rejected": true
+  },
+  "boundary": "Exact PASS for the recursive parameterized Boolean d-only family and frozen R27. Local original-signature representation identities pass with the binary controls explicitly classified as complement-relative physical wires. The all-arity compiler is a separate conditional theorem; novelty, patents, FTO, license, Tau, and practical claims are excluded.",
+  "environment": {
+    "python": "3.12.3"
+  },
+  "schema": "orbit-synthesis/strong-family-audit-manifest/v1",
+  "subject": {
+    "author_report_sha256": "5ed37d98357eb03a2f6ded9f741c9fb52d8f5ad821585c81be544f201945f8c6",
+    "author_source_sha256": "07fb1d8d322e57a7af666bae5b699c072805ff1d15eef1f1e7c2d87208729ef8",
+    "author_summary_sha256": "6042127fd9f214e63bc38aa8e6367d1db7580c24b2b2e7a3aeba16625279aff0",
+    "r27_semantic_sha256": "5ca70c36b38668cee125e5d8b7778e3d1d7d5df5fdb9ad7e753c687ab2dbaea3",
+    "r27_witness_sha256": "6dd402fd32bb560b341ee75805bd71c90e2fa2bd3c9274c982f908ef21c15e65",
+    "state_sha256": "5304ad459b25928e14197dfb989af7dfae4d9df6b632eb79020e9f1cef812133"
+  },
+  "verdicts": {
+    "all_arity_compiler": "CONDITIONAL_SEPARATE_AUDIT",
+    "frozen_r27": "EXACT_PASS",
+    "original_signature_local_bridges": "PASS_WITH_COMPLEMENT_RELATIVE_QUALIFICATION",
+    "prior_art_novelty": "UNKNOWN",
+    "recursive_boolean_family": "EXACT_PASS"
+  }
+}
