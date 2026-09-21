@@ -1,0 +1,56 @@
+{
+  "status": "REPRODUCED_DIFFERENT_TREE",
+  "source_sha256": "07a7fa06b222c178c32359bebee6f52a22b98f59026fb174f6afb7dcc11e2039",
+  "scope": "Symbolic execution of the actual semantic helper. This does not refute the differently shaped pruned tree described in the manuscript.",
+  "rows": [
+    {
+      "arity": 3,
+      "nodes": 5,
+      "executed_fold_depth": 4,
+      "claimed_anchor_depth_bound": 4,
+      "within_bound": true
+    },
+    {
+      "arity": 4,
+      "nodes": 7,
+      "executed_fold_depth": 5,
+      "claimed_anchor_depth_bound": 4,
+      "within_bound": false
+    },
+    {
+      "arity": 5,
+      "nodes": 9,
+      "executed_fold_depth": 5,
+      "claimed_anchor_depth_bound": 5,
+      "within_bound": true
+    },
+    {
+      "arity": 6,
+      "nodes": 11,
+      "executed_fold_depth": 6,
+      "claimed_anchor_depth_bound": 5,
+      "within_bound": false
+    },
+    {
+      "arity": 7,
+      "nodes": 13,
+      "executed_fold_depth": 6,
+      "claimed_anchor_depth_bound": 5,
+      "within_bound": false
+    },
+    {
+      "arity": 8,
+      "nodes": 15,
+      "executed_fold_depth": 6,
+      "claimed_anchor_depth_bound": 5,
+      "within_bound": false
+    },
+    {
+      "arity": 9,
+      "nodes": 17,
+      "executed_fold_depth": 6,
+      "claimed_anchor_depth_bound": 6,
+      "within_bound": true
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+ABA complete-type counts
+  |T_1| = 3
+  |T_2| = 15
+  |T_3| = 255
+  |T_4| = 65535
+sample Delta: realized truth signatures = 5
+sample Delta: generated Boolean algebra size = 32
+sample Delta: ocLTL-style feature signatures = 63 / 255

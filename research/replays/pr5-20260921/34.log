@@ -1,0 +1,4 @@
+quasi-primal strict-separation regression passed
+demi-semi-primal orbit/full-groupoid agreement passed: 30 games
+controller-semantics monotonicity smoke check passed
+standalone OrbitSynthesis kernel: all semantic smoke tests passed

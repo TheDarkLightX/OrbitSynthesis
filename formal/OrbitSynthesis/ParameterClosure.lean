@@ -59,7 +59,9 @@ theorem subset_closed_iff_closure_subset
   constructor
   · intro hSF
     have h := K.monotone hSF
-    simpa [Closed, hF] using h
+    change K.cl F = F at hF
+    rw [hF] at h
+    exact h
   · intro hKS x hx
     exact hKS (K.extensive S hx)
 
@@ -135,14 +137,14 @@ theorem query_full_abstraction
   · intro h
     apply hseparate (K.closed_cl S) (K.closed_cl T)
     calc
-      query (K.cl S) = query S := (hfactor S).sym
+      query (K.cl S) = query S := (hfactor S).symm
       _ = query T := h
       _ = query (K.cl T) := hfactor T
   · intro h
     calc
       query S = query (K.cl S) := hfactor S
       _ = query (K.cl T) := congrArg query h
-      _ = query T := (hfactor T).sym
+      _ = query T := (hfactor T).symm
 
 end SemanticClosure
 

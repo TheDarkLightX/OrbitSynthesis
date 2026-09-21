@@ -1,0 +1,29 @@
+{
+  "schema": "orbit-synthesis/pr-qualification/v1",
+  "pull_request": 16,
+  "original_head": "6151d502c2a002aa48e08085bdaaffc62134699c",
+  "status": "LOCAL_PASS_FINAL_HOSTED_CI_REQUIRED",
+  "lean": "4.34.0-rc1",
+  "mathlib": "9aa55045016ce35bb2379a8fc3d7f268995fb99a",
+  "gate": "python3 -B experiments/audit_fixed_q_preprint.py",
+  "local_gate_sha256": "31bd6e33252f7d1eb670656fb18e0dd1b7d5fa0c7ddc19c298f9c3115fda2b02",
+  "local_gate_subject_sha256": "30c31e9c5837a74a5f71885fcd7d9971ecce134d8550f1d6c7b963f325ae821b",
+  "current_binding_changes_since_local_gate": [
+    ".github/workflows/fixed-q-preprint.yml"
+  ],
+  "checks": {
+    "compiled_lean_modules": 8,
+    "axiom_audits": 3,
+    "normal_optimized_replays_match": true,
+    "independent_subject_mutants_per_mode": 156,
+    "current_subject_changed_missing_manuscript_rejects": true
+  },
+  "review_thread": "01a0c5c3-d13c-7410-8100-ed783c8ed439",
+  "review_report_sha256": {
+    "review-final.txt": "1da6bbfe7988fd8e2a3f18a8c11139da4e3591d56e02d844ad9ccf7b86526a05",
+    "followup-final.txt": "49b5a07ab3fce41fc422106a5dced29ca5791e23f1760fca1163c9241e460567",
+    "ci-coverage-final.txt": "99c5b08b0c8aac21cfe91914b662d538a0dd0ffae016fbf3450378534730c7f8"
+  },
+  "historical_failed_audit": "research/tournaments/2026-08-13-program-vector-optimization/audits/manuscript_repairs",
+  "scope": "Source-bound current manuscript and scoped computation/formal replay. Complete compiler semantic materialization at arities 2-3 only; larger arities check ledgers. No all-arity Lean compiler theorem, novelty, practical speedup or external peer-review finding."
+}

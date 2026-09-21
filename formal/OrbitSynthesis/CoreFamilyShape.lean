@@ -34,7 +34,7 @@ theorem pairwiseCover_iff_complementBlocksDisjoint
     have hinter : leftᶜ ∩ rightᶜ = (∅ : Set α) :=
       hdisjoint left hleft right hright hne
     have hcomplement := congrArg (fun S : Set α => Sᶜ) hinter
-    simpa using hcomplement
+    simpa only [Set.compl_inter, compl_compl, Set.compl_empty] using hcomplement
 
 /-- The abstract meet-collapse theorem gives the partial-partition shape. -/
 theorem minimalCore_family_complementBlocksDisjoint

@@ -24,3 +24,18 @@ The arithmetic sweep is bounded through arity 16,384. There is no full compiler
 materialization, end-to-end Lean theorem, external mathematical peer review,
 novelty finding or measured zkVM speedup. Source integration and combined hosted
 CI remain required before merge.
+
+The integration includes the repaired PR17 source at 6c8fd7a. Its 82-file
+inventory is preserved byte-for-byte. The successor has 87 inputs; only the
+workflow and selected inventory path changed among predecessor inputs. All
+predecessor mathematical source and receipts are identical. The workflow retains
+all preceding gates and adds the two-slice lane, with source/evidence path filters.
+Both modes of the actual binding mutation test pass. Combined hosted CI and the
+final integration review remain required before merge.
+
+The final independent integration review found no blockers. It verified all 87
+hashes, all inherited gates and complete path-filter coverage, and rejected 348
+changed/missing input controls in normal and optimized execution of the actual
+binding checker. All 80 unchanged predecessor inputs match exactly. PR17 passed
+all six hosted checks and landed as 4f70b5d; its tree is identical to the reviewed
+6c8fd7a predecessor. The combined PR18 hosted gate remains required before merge.

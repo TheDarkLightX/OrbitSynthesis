@@ -1,0 +1,4 @@
+ABA safety clause-game differential checks passed
+  200 random d=e=1 games
+  3 state types / 15 partial types / 255 full types
+  every CPre and fixed-point approximant compared

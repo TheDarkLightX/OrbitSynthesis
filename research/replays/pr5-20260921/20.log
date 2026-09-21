@@ -1,0 +1,144 @@
+{
+  "artifacts": {
+    "experiments/quasiprimal_parameter_domain_frontier.py": "sha256:8bc369f052e2b7f88b6d570f32b04a1a6ea20664d187f55c6c408ef33804c862",
+    "formal/OrbitSynthesis/ParameterClosure.lean": "sha256:bb4289e061bbb5b1d8b04f979e9e46ef35817d7b268e770dedeab9105e68fb23",
+    "runs/zag_parameter_domain_frontier/summary.json": "sha256:3825659988d75d9568975811ccb81bd6bdd0834d6e787b0eace0aae6dd3213fb",
+    "src/orbitsynthesis/parameter_closure.py": "sha256:d09e4be3d1166ecc421ed165a6aa58868391a93714495495e8d2e87e7e652886",
+    "src/orbitsynthesis/parameter_core.py": "sha256:dabc18396f617dfc54f724394f31a9a32eaa73a6e696a975fad84db0da9ddb7f",
+    "src/orbitsynthesis/parameter_frontier.py": "sha256:fc666ea33494958827535b2bd79beee7b1a98473e505cd539a159b3a3f51ff4e",
+    "src/orbitsynthesis/pointed_kernel.py": "sha256:cfe4f381ee484d2317e336d23e5dfc836ed1ad7270eaeded44322d8ee957dad4"
+  },
+  "counterexamples": [
+    {
+      "content": "At core empty and W={00,01,11}, every observation has a locally admissible output, but the pointed class 000<->111 forces the empty seed intersection {01}∩{10}.",
+      "id": "cx_naive",
+      "parents": [
+        "claim_naive"
+      ],
+      "status": "REFUTED",
+      "tags": [
+        "minimized",
+        "counterexample"
+      ],
+      "type": "COUNTEREXAMPLE"
+    }
+  ],
+  "counts_by_status": {
+    "CANDIDATE": 0,
+    "DRAFT": 0,
+    "REFUTED": 2,
+    "STALE": 0,
+    "SUPERSEDED": 0,
+    "SUPPORTED": 4,
+    "TESTABLE": 1,
+    "UNDER_TEST": 3,
+    "UNKNOWN": 1
+  },
+  "frontier": [
+    {
+      "content": "For every finite quasi-primal algebra and closed parameter core, fixed-domain polynomial-controller synthesis factorizes into independent pointed-class seed intersections.",
+      "id": "claim_generic",
+      "parents": [
+        "r_minimum"
+      ],
+      "status": "UNDER_TEST",
+      "tags": [
+        "generic",
+        "lean-pending"
+      ],
+      "type": "CLAIM"
+    },
+    {
+      "content": "For any closure operator and closed obstruction family, hitting every complement is equivalent to the abstract closure avoiding every obstruction core.",
+      "id": "claim_closure_obstruction",
+      "parents": [
+        "r_minimum"
+      ],
+      "status": "UNDER_TEST",
+      "tags": [
+        "generic",
+        "lean",
+        "formalization"
+      ],
+      "type": "CLAIM"
+    },
+    {
+      "content": "Lean source has no sorry/admit/axiom, but the pinned Lean toolchain could not be executed locally and GitHub Actions is billing-blocked; do not label the formal theorem PROVED.",
+      "id": "risk_lean",
+      "parents": [
+        "claim_closure_obstruction"
+      ],
+      "status": "UNDER_TEST",
+      "tags": [
+        "lean",
+        "infrastructure"
+      ],
+      "type": "RISK"
+    },
+    {
+      "content": "Decide whether the public free-function parameter APIs should become FiniteSafetyGame convenience methods, and prove the compiled pointed solver equivalent to raw preservation constraints in Lean.",
+      "id": "open_kernel",
+      "parents": [
+        "claim_generic"
+      ],
+      "status": "UNKNOWN",
+      "tags": [
+        "next-action",
+        "kernel"
+      ],
+      "type": "OPEN_PROBLEM"
+    }
+  ],
+  "non_claims": [
+    "Offline adapter uses the public Research Kernel schema because the configured MCP transport was unavailable.",
+    "SUPPORTED is restricted to the exact bounded benchmark claims.",
+    "The generic pointed theorem and Lean theorem remain UNDER_TEST."
+  ],
+  "ok": true,
+  "refuted_claims": [
+    {
+      "content": "Generated-subalgebra-local feasibility without pointed transport is exact for quasi-primal fixed-domain synthesis.",
+      "id": "claim_naive",
+      "parents": [
+        "q_frontier"
+      ],
+      "status": "REFUTED",
+      "tags": [
+        "rejected-candidate"
+      ],
+      "type": "HYPOTHESIS"
+    }
+  ],
+  "run_id": "run_orbitsynthesis_parameter_domain_frontier_20260812",
+  "schema": "research_kernel/report/v1",
+  "supported_claims": [
+    {
+      "content": "On all 1536 core/domain instances of the Quackenbush benchmark, raw groupoid, rebuilt pointed, and compiled pointed-core solvers agree; raw and compiled also agree on 24576 deterministic random instances.",
+      "id": "claim_bounded_equiv",
+      "parents": [
+        "r_minimum"
+      ],
+      "status": "SUPPORTED",
+      "tags": [
+        "bounded",
+        "differential",
+        "zag"
+      ],
+      "type": "CLAIM"
+    },
+    {
+      "content": "The exact nondominated benchmark frontier consists of the two incomparable rank-0 seven-state domains and the rank-1 core {0,1} controlling every state except the dead state (1,0).",
+      "id": "claim_frontier",
+      "parents": [
+        "claim_bounded_equiv",
+        "r_optimization"
+      ],
+      "status": "SUPPORTED",
+      "tags": [
+        "bounded",
+        "frontier"
+      ],
+      "type": "CLAIM"
+    }
+  ]
+}

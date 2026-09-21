@@ -1,0 +1,394 @@
+{
+  "schema": "orbitsynthesis-pr-qualification-v1",
+  "pr": 5,
+  "base_head": "9fba17ebb85dbe10be7102388e6859cbb8e6ceb9",
+  "scope": "Local workflow replay and targeted independent review of repairs; not a complete research-program or deployment audit",
+  "python": "3.12",
+  "lean": "4.34.0-rc1",
+  "mathlib": "9aa55045016ce35bb2379a8fc3d7f268995fb99a",
+  "hosted_ci": "DID_NOT_START: GitHub account billing/spending-limit annotation",
+  "workflow_commands": [
+    {
+      "workflow": "discriminator-core-family.yml",
+      "job": "exact-constructor",
+      "name": "Exact constructor campaign",
+      "command": "python experiments/discriminator_core_family_realizability.py --exact-max-carrier 6 --out-root runs/zag_discriminator_core_family",
+      "exit_code": 0,
+      "seconds": 2.221,
+      "log": "00.log"
+    },
+    {
+      "workflow": "discriminator-core-family.yml",
+      "job": "exact-constructor",
+      "name": "Research Kernel replay",
+      "command": "python experiments/research_kernel_discriminator_core_family.py --repo-root . --out-root /tmp/research_kernel_discriminator_core_family",
+      "exit_code": 0,
+      "seconds": 2.322,
+      "log": "01.log"
+    },
+    {
+      "workflow": "discriminator-core-family.yml",
+      "job": "exact-constructor",
+      "name": "Optimized semantic replay",
+      "command": "python experiments/discriminator_core_family_realizability.py --exact-max-carrier 6 > /tmp/family.normal.json\npython -O experiments/discriminator_core_family_realizability.py --exact-max-carrier 6 > /tmp/family.optimized.json\npython - <<'PY'\nimport json\nnormal = json.load(open('/tmp/family.normal.json'))\noptimized = json.load(open('/tmp/family.optimized.json'))\nassert normal['semantic_sha256'] == optimized['semantic_sha256']\nPY\n",
+      "exit_code": 0,
+      "seconds": 4.879,
+      "log": "02.log"
+    },
+    {
+      "workflow": "discriminator-core-family.yml",
+      "job": "exact-constructor",
+      "name": "Python compile gate",
+      "command": "python -m compileall -q src/orbitsynthesis experiments",
+      "exit_code": 0,
+      "seconds": 0.116,
+      "log": "03.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA type-space oracle",
+      "command": "python experiments/aba_types.py",
+      "exit_code": 0,
+      "seconds": 0.065,
+      "log": "04.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA ocLTL projection fibers",
+      "command": "python experiments/aba_ocltl_fibers.py",
+      "exit_code": 0,
+      "seconds": 0.065,
+      "log": "05.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA atomic group testing",
+      "command": "python experiments/aba_group_testing.py",
+      "exit_code": 0,
+      "seconds": 0.033,
+      "log": "06.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA support ROBDD projection",
+      "command": "python experiments/aba_support_bdd.py",
+      "exit_code": 0,
+      "seconds": 0.216,
+      "log": "07.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA ocLTL feasibility ROBDD",
+      "command": "python experiments/aba_ocltl_feasibility_bdd.py",
+      "exit_code": 0,
+      "seconds": 3.876,
+      "log": "08.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA closed-form clause projection",
+      "command": "python experiments/aba_clause_projection.py",
+      "exit_code": 0,
+      "seconds": 4.476,
+      "log": "09.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA alternating clause quantifier elimination",
+      "command": "python experiments/aba_alternating_clause_qe.py",
+      "exit_code": 0,
+      "seconds": 0.065,
+      "log": "10.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA safety clause game",
+      "command": "python experiments/aba_safety_clause_game.py",
+      "exit_code": 0,
+      "seconds": 0.366,
+      "log": "11.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA Beki\u0107 safety decomposition",
+      "command": "python experiments/aba_safety_bekic.py",
+      "exit_code": 0,
+      "seconds": 1.569,
+      "log": "12.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA compact LFSR lower bound",
+      "command": "python experiments/aba_lfsr_lower_bound.py",
+      "exit_code": 0,
+      "seconds": 0.867,
+      "log": "13.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA symmetric histogram quotient",
+      "command": "python experiments/aba_symmetry_quotient.py",
+      "exit_code": 0,
+      "seconds": 0.567,
+      "log": "14.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "ABA positive reachability and Buchi calculus",
+      "command": "python experiments/aba_positive_mu_calculus.py",
+      "exit_code": 0,
+      "seconds": 12.099,
+      "log": "15.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Dyadic ABA constructive witnesses",
+      "command": "python experiments/dyadic_aba_witness.py",
+      "exit_code": 0,
+      "seconds": 0.165,
+      "log": "16.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Quasi-primal pointed-orbit factorization",
+      "command": "python experiments/quasiprimal_pointed_orbit_factorization.py",
+      "exit_code": 0,
+      "seconds": 19.718,
+      "log": "17.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Quasi-primal parameter-closure abstraction",
+      "command": "python experiments/quasiprimal_parameter_closure.py",
+      "exit_code": 0,
+      "seconds": 1.368,
+      "log": "18.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Parameter-core and winning-domain frontier",
+      "command": "python experiments/quasiprimal_parameter_domain_frontier.py --out-root /tmp/zag_parameter_domain_frontier --repeats 3",
+      "exit_code": 0,
+      "seconds": 14.751,
+      "log": "19.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Research Kernel replay packet",
+      "command": "python experiments/research_kernel_parameter_domain_frontier.py --repo-root . --out-root /tmp/research_kernel_parameter_domain_frontier",
+      "exit_code": 0,
+      "seconds": 0.215,
+      "log": "20.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Optimized semantic replay",
+      "command": "python experiments/quasiprimal_parameter_domain_frontier.py --repeats 0 > /tmp/frontier.normal.json\npython -O experiments/quasiprimal_parameter_domain_frontier.py --repeats 0 > /tmp/frontier.optimized.json\npython - <<'PY'\nimport json\nnormal = json.load(open('/tmp/frontier.normal.json'))\noptimized = json.load(open('/tmp/frontier.optimized.json'))\nassert normal['semantic_sha256'] == optimized['semantic_sha256']\nPY\n",
+      "exit_code": 0,
+      "seconds": 10.99,
+      "log": "21.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Pointed domain-nogood ZAG campaign",
+      "command": "python experiments/quasiprimal_nogood_domain_search.py --out-root runs/zag_nogood_domain_search --repeats 3 --random-games 8",
+      "exit_code": 0,
+      "seconds": 3.372,
+      "log": "22.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Pointed domain-nogood Research Kernel replay",
+      "command": "python experiments/research_kernel_nogood_domain_search.py --repo-root . --out-root /tmp/research_kernel_nogood_domain_search",
+      "exit_code": 0,
+      "seconds": 0.065,
+      "log": "23.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Pointed domain-nogood optimized replay",
+      "command": "python experiments/quasiprimal_nogood_domain_search.py --repeats 0 --random-games 8 > /tmp/nogood.normal.json\npython -O experiments/quasiprimal_nogood_domain_search.py --repeats 0 --random-games 8 > /tmp/nogood.optimized.json\npython - <<'PY'\nimport json\nnormal = json.load(open('/tmp/nogood.normal.json'))\noptimized = json.load(open('/tmp/nogood.optimized.json'))\nassert normal['semantic_sha256'] == optimized['semantic_sha256']\nPY\n",
+      "exit_code": 0,
+      "seconds": 3.876,
+      "log": "24.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Fixed-domain minimum-core antichain campaign",
+      "command": "python experiments/quasiprimal_fixed_domain_core_antichain.py --out-root runs/zag_fixed_domain_core_antichain",
+      "exit_code": 0,
+      "seconds": 0.266,
+      "log": "25.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Fixed-domain antichain Research Kernel replay",
+      "command": "python experiments/research_kernel_fixed_domain_core_antichain.py --repo-root . --out-root /tmp/research_kernel_fixed_domain_core_antichain",
+      "exit_code": 0,
+      "seconds": 0.065,
+      "log": "26.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Fixed-domain antichain optimized replay",
+      "command": "python experiments/quasiprimal_fixed_domain_core_antichain.py > /tmp/core-antichain.normal.json\npython -O experiments/quasiprimal_fixed_domain_core_antichain.py > /tmp/core-antichain.optimized.json\npython - <<'PY'\nimport json\nnormal = json.load(open('/tmp/core-antichain.normal.json'))\noptimized = json.load(open('/tmp/core-antichain.optimized.json'))\nassert normal['semantic_sha256'] == optimized['semantic_sha256']\nPY\n",
+      "exit_code": 0,
+      "seconds": 1.218,
+      "log": "27.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Discriminator minimal-core antichain classification",
+      "command": "python experiments/discriminator_minimal_core_antichains.py --out-root runs/zag_discriminator_minimal_core_antichains",
+      "exit_code": 0,
+      "seconds": 0.315,
+      "log": "28.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Discriminator antichain Research Kernel replay",
+      "command": "python experiments/research_kernel_discriminator_minimal_core_antichains.py --repo-root . --out-root /tmp/research_kernel_discriminator_minimal_core_antichains",
+      "exit_code": 0,
+      "seconds": 0.065,
+      "log": "29.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Discriminator antichain optimized replay",
+      "command": "python experiments/discriminator_minimal_core_antichains.py > /tmp/discriminator-antichain.normal.json\npython -O experiments/discriminator_minimal_core_antichains.py > /tmp/discriminator-antichain.optimized.json\npython - <<'PY'\nimport json\nnormal = json.load(open('/tmp/discriminator-antichain.normal.json'))\noptimized = json.load(open('/tmp/discriminator-antichain.optimized.json'))\nassert normal['semantic_sha256'] == optimized['semantic_sha256']\nPY\n",
+      "exit_code": 0,
+      "seconds": 0.817,
+      "log": "30.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Patchability residual automaton",
+      "command": "python experiments/patchability_residual_automaton.py > /tmp/patchability-residual.normal.txt\npython -O experiments/patchability_residual_automaton.py > /tmp/patchability-residual.optimized.txt\ndiff -u /tmp/patchability-residual.normal.txt /tmp/patchability-residual.optimized.txt\n",
+      "exit_code": 0,
+      "seconds": 0.917,
+      "log": "31.log"
+    },
+    {
+      "workflow": "research-checks.yml",
+      "job": "python-oracles",
+      "name": "Python compile gate",
+      "command": "python -m compileall -q src/orbitsynthesis experiments",
+      "exit_code": 0,
+      "seconds": 0.065,
+      "log": "32.log"
+    },
+    {
+      "workflow": "standalone-kernel.yml",
+      "job": "semantic-smoke",
+      "name": "Compile standalone kernel",
+      "command": "python -m compileall -q src/orbitsynthesis experiments/standalone_kernel_smoke.py",
+      "exit_code": 0,
+      "seconds": 0.066,
+      "log": "33.log"
+    },
+    {
+      "workflow": "standalone-kernel.yml",
+      "job": "semantic-smoke",
+      "name": "Run theorem-shaped smoke tests",
+      "command": "python experiments/standalone_kernel_smoke.py",
+      "exit_code": 0,
+      "seconds": 0.967,
+      "log": "34.log"
+    }
+  ],
+  "strict_lean_jobs": 443,
+  "ordinary_and_optimized_replay_tests": "PASS",
+  "peer_review": "Both replay-integrity blockers and omitted Lean module resolved; no remaining blockers in the bounded follow-up review",
+  "existing_theorem_headers_preserved": 24,
+  "source_sha256": {
+    ".github/workflows/discriminator-core-family.yml": "bfb58a7d49c60f3f7f1c2c08af610c4cb35dfa45202c3026fdf7e77724dcc012",
+    ".gitignore": "ea60935e998371b7710a8c72091f6ef3769363593468d8d46cc5bab59e3d5395",
+    "experiments/research_kernel_discriminator_core_family.py": "d31c5e315c43506c260a486ac3f6d2214752f1d579e08fc44e01f9ae117dfad1",
+    "experiments/research_kernel_parameter_domain_frontier.py": "1c98b8e0fa8cc56f6bec50180c5504f0e848e5bacbbaff1ee3c82634be84934e",
+    "experiments/test_core_family_replay.py": "339791f73647827550a1149d4d0256eb75cbd982b4a24de80b0270ae827f5b69",
+    "formal/OrbitSynthesis/CoreAntichain.lean": "fafc5fd2510a28387ebbdc4eb7b7fa199733d501db1f82a8fc202649691edc18",
+    "formal/OrbitSynthesis/CoreFamilyShape.lean": "91718f8f528b8bf1a93d9e6f274c39d9adeaa2a1b9331354639b870e02975a36",
+    "formal/OrbitSynthesis/CoreIntersection.lean": "f008697bc408d4f67c1e97034ef332dc4a316944b4fd3f38263cbefc7284aea4",
+    "formal/OrbitSynthesis/DomainNogood.lean": "e4a757cfe7f33d3ba549e5ac763b4a3ba61259f0c2afc2c47aa3996bd68eb195",
+    "formal/OrbitSynthesis/ParameterClosure.lean": "e5864b731b227d41c18c0cf22e0fe88eaa4e5c338a85d1e88d338dff65c3dab8",
+    "formal/OrbitSynthesis/PointedProduct.lean": "a71914df643bf79e622510587737fc063535fcf931fecfa98d32fc119699f7d5",
+    "formal/OrbitSynthesis/TableSafetyReduction.lean": "c24c185d73ff32155ec7b2b7baf114676ec2c67fffc1ac2ecefc52685879275d",
+    "lake-manifest.json": "997703712fe99df20af36865459fdc3c9c70ca1461c6dedbe5c7669472adbc30",
+    "lakefile.lean": "5ab56796106ec49b0a41e42348d989725b538166c71bf3a3348ac6763132311b",
+    "src/orbitsynthesis/parameter_closure.py": "d09e4be3d1166ecc421ed165a6aa58868391a93714495495e8d2e87e7e652886"
+  },
+  "log_sha256": {
+    "00.log": "a5104034619343300d8fae8774bef840f5d59c668982bfd809abf1e26759184a",
+    "01.log": "e192b1823e871d4fe16e7bbfbd8a0d600244bdc4ac7a26851cb288c23b072910",
+    "02.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "03.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "04.log": "972f23827eae5025e36b81e6e1d2edb21e7d9353a43cb3d14d9e28c535f932ca",
+    "05.log": "ad64dcf73d95566b961fbc7b772ab6383bcba83989724fbb5aea0ff1e977b8a7",
+    "06.log": "25b0109fcce9e5edc4ff0af99b97203c1fec90eaf83f6dc430443f7f04071961",
+    "07.log": "6ed177708915c1dd51d0661499a6ccf034080633c1ba68cd5f86b672f879ad0c",
+    "08.log": "0dd0611ebb15e194795bd23049aa819391a5ccbf6b8a2e45a6ea44023f57dadb",
+    "09.log": "7d5bf65ec95f33d2391b7ee3e364c052fadb5b7ca304933030e4f5008e5636f2",
+    "10.log": "264508979e6775ee4f4e06aed65b2b4e1b97fe023ae51f9fa5948f8b77d269be",
+    "11.log": "c3c1675dbe6535ad7514eacd75121b5176cdcef84a7eb3b1ccfeff1199124acf",
+    "12.log": "151548126e307463e609c8ebf939ced16e3a1135f2832ea96f5386324f897bc3",
+    "13.log": "797f3e73587e05b7e5d7d2726c350bf8483fee1cd01c09fa999df8fd90dfc743",
+    "14.log": "76bee3f6b057b7b206da946bde3e87cb786c60f09bd8450af2151a4125d3696e",
+    "15.log": "04eae9e2db19011b20c234b5f82c44c76f4730a89f7e82100b0ee0c6cd117642",
+    "16.log": "15cf43210b02a4d843719a29cc3eaa94cd650b24ece92a3ef87570c78bf4a5b4",
+    "17.log": "eb087525f3eedd943103825b16aba2b4f2429bc8d743056206eb282fc1a295a6",
+    "18.log": "a8c16cbfd6e84ea81a7beceadda3bc959446db9e5b61381ba0c0953d40b12fd1",
+    "19.log": "cd8814dd8cff51e1ccc8556becf787aa70857a3ab8982faf5de4892c81a1e2e6",
+    "20.log": "c156a2864037ffb52a0de30171b3f0d3e2e18f17da1e44192978113f8a59932f",
+    "21.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "22.log": "04d14a48113ef4cefc0287f2917682dc081ccf897c9a5056ffa1e3077035ac4b",
+    "23.log": "7e6ba5105098853d4c6f290594c6d61dea2e2eae53a48e683048104f859f00db",
+    "24.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "25.log": "cab82ba80a4b30e825729a9ffdb5ce014e94b2bd224b29974078d4c6dad14a21",
+    "26.log": "02926351c70c3d032cdd5577de1392a19c3c7a7eb1640e52b6428333102a4b01",
+    "27.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "28.log": "2bc2bf48604387d92a00cded5b252e9db7edc74549944360b11c9bcddd083c68",
+    "29.log": "61417c6d32d44375b9a96b78674fb2cad9bef7ecaf648a1dbb7fc7a9f36c9cea",
+    "30.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "31.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "32.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "33.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "34.log": "db87e0714d3f9aadbfdc8bf20256a2ff8b6d09da2f2bf2925c406f376be93995",
+    "final-replay.log": "780d3616f229344160560e79a49c86389ec0796a90193914d22150ef4407caf8",
+    "lean-06.log": "0d1f2caa9377e27379663487002be3cf8d29d7d47db80fbdf5e13554b2765e93",
+    "replay-attacks-optimized.log": "8d555c65a101337c95fc4d169bcf0d1d99c219cd6583bcb5e4fc26128c98467c",
+    "replay-attacks.log": "5329c2481d2f42f46006e42adf61fd3b68387c01bf59219bdeb9a1b3b0619b10"
+  },
+  "non_claims": [
+    "No general implementation refinement follows from the abstract meet-collapse hypothesis.",
+    "No controller deployment, production readiness or mathematical novelty inferred.",
+    "Hosted CI was unavailable, not passed."
+  ]
+}

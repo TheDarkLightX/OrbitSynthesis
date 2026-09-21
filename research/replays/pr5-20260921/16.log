@@ -1,0 +1,6 @@
+dyadic ABA constructive witness checks passed
+  k=1..3 existing coordinates
+  r=1..2 added coordinates
+  initial dyadic depths 1..3
+  100 random extensions per (k,r,depth)
+  maximal-support strategy targets also exercised

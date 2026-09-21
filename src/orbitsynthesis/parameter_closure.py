@@ -137,6 +137,6 @@ def eligible_core_isomorphisms(
 def generated_at_observation(
     algebra: Any,
     core: Iterable[Value],
-    observation: Sequence[Value\],
-) -> frozenset[Value\]:
+    observation: Sequence[Value],
+) -> frozenset[Value]:
     return closure_with_parameters(algebra, tuple(core) + tuple(observation))

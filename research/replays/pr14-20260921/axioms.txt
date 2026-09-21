@@ -1,0 +1,6 @@
+'OrbitSynthesis.NativeFirstMismatch.Outcome.encode_comp' does not depend on any axioms
+'OrbitSynthesis.NativeFirstMismatch.roots_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OrbitSynthesis.StrongSignedRouter.NativeModeBridge.evalNative_correct' depends on axioms: [propext]
+'OrbitSynthesis.StrongSignedRouter.NativeModeCost.native_mode_cost_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -1,0 +1,32 @@
+{
+  "author": "Dana Edwards",
+  "build_inputs": {
+    "lua_filter_sha256": "cd02ed594de2d040a82ac79706ff7d84eaa201209e313b07a753af4e0666e6aa",
+    "preamble_sha256": "234baed76d7cb5d9be319a016f9f565cdcdc2e7eb5ef1181efdaa4876e048cc4",
+    "script_sha256": "d204019cb567e9a7a750ed2eb4cff2f2e50d17b930e24643b7f4d95683905f06"
+  },
+  "outputs": {
+    "pdf": {
+      "path": "FIXED_Q_TERM_COMPLEXITY_PREPRINT.pdf",
+      "sha256": "939f4fbb014478c56bc17006ad7bd0a128b10d9b7df269c8eca6771895597970"
+    },
+    "tex": {
+      "path": "FIXED_Q_TERM_COMPLEXITY_PREPRINT.tex",
+      "sha256": "928203b2c5a739b87ce1c6d3b715b2798bb93ce439e3277a1e0429bf40884287"
+    }
+  },
+  "review_status": "NON_ARCHIVAL_REVIEW_COPY",
+  "schema": "orbitsynthesis.academic_preprint_build.v1",
+  "source": {
+    "path": "paper/FIXED_Q_TERM_COMPLEXITY_DRAFT.md",
+    "repository_commit": "ab20b9df50f331e430c1a43a9d8c3af9c1e8556c",
+    "sha256": "01ddf4565212f798d0adf5c4c9b16d6de9074a317a34f2a39a80051de55a5410"
+  },
+  "status": "PASS",
+  "toolchain": {
+    "latexmk": "Latexmk, John Collins, 31 Jan. 2024. Version 4.83",
+    "pandoc": "pandoc 3.1.3",
+    "source_date_epoch": "1786579200",
+    "xelatex": "XeTeX 3.141592653-2.6-0.999995 (TeX Live 2023/Debian)"
+  }
+}

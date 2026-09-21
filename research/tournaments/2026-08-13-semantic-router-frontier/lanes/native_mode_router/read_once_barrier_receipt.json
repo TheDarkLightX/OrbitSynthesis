@@ -1,0 +1,16 @@
+{
+  "bad_path_functions": 21,
+  "bad_path_surjections": 0,
+  "capacity_consequence": "q<=2^h for depth-h read-once direct-Q routers",
+  "closure_layers": [
+    1,
+    19,
+    37,
+    43
+  ],
+  "fixed_point_states": 43,
+  "outer_only_functions": 22,
+  "semantic_sha256": "0eb102fb89343bb7ff561f7563fb9de5ea2fd8e74c700ebf31fc1693efb0cc56",
+  "status": "exact finite unary-function closure",
+  "theorem": "direct-Q read-once payload paths with unary/middle edges are nonsurjective"
+}

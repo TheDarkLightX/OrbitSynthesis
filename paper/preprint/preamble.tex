@@ -1,0 +1,79 @@
+\usepackage{amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\usepackage{lineno}
+\usepackage{draftwatermark}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+\usepackage{xurl}
+\usepackage{seqsplit}
+\usepackage{enumitem}
+
+\definecolor{OrbitBlue}{HTML}{163A5F}
+\definecolor{OrbitLight}{HTML}{EDF4FA}
+\definecolor{OrbitRule}{HTML}{8AA9C2}
+\definecolor{OrbitCode}{HTML}{F6F7F9}
+\definecolor{OrbitRed}{HTML}{9B2335}
+
+\AtBeginDocument{\hypersetup{
+  linkcolor=OrbitBlue,
+  citecolor=OrbitBlue,
+  urlcolor=OrbitBlue,
+  pdfsubject={Finite algebra and circuit complexity review preprint},
+  pdfkeywords={finite algebra, conservative operation, discriminator, term DAG, Shannon complexity, circuit depth}
+}}
+
+\SetWatermarkText{REVIEW DRAFT}
+\SetWatermarkScale{0.55}
+\SetWatermarkColor[gray]{0.95}
+\SetWatermarkAngle{55}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Fixed-$Q$ conservative term complexity}
+\fancyhead[R]{\small Review draft}
+\fancyfoot[C]{\thepage}
+\setlength{\headheight}{14pt}
+
+\newtcolorbox{reviewnotice}{
+  colback=OrbitLight,
+  colframe=OrbitRule,
+  boxrule=0.6pt,
+  arc=1.5pt,
+  left=8pt,
+  right=8pt,
+  top=6pt,
+  bottom=6pt
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{OrbitCode},
+  frame=single,
+  rulecolor=\color{OrbitRule},
+  breaklines=true,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  aboveskip=0.8em,
+  belowskip=0.8em
+}
+
+\renewcommand{\arraystretch}{1.12}
+\setlength{\emergencystretch}{1.5em}
+\setlist{nosep, leftmargin=1.8em}
+\modulolinenumbers[5]
+\linenumbers

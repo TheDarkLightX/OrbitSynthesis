@@ -20,7 +20,7 @@ theorem wins_graphSafe_iff
     funext s i
     exact h s i
   · intro h s i
-    simpa [graphSafe, h]
+    simp [graphSafe, h]
 
 /-- Parameter-core feasibility of the graph game is exactly membership of the
 target operation in the corresponding controller language. -/
