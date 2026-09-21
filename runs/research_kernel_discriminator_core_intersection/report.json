@@ -1,0 +1,40 @@
+{
+  "schema": "research_kernel/report/v1",
+  "semantic_sha256": "3f2fd8392938d4ee828bd3595ff4c5c684811f18525880d358369102a981bbfb",
+  "supported_claims": [
+    {
+      "id": "claim_bounded_boundary",
+      "status": "SUPPORTED",
+      "content": "All 87,376 bounded core-pair checks agree with the support-connectivity boundary, and all 8,828 exceptional cover pairs have verified strict witnesses."
+    }
+  ],
+  "refuted_claims": [
+    {
+      "id": "hyp_universal_meet_collapse",
+      "status": "REFUTED",
+      "content": "Meet collapse does not hold for incomparable core pairs covering the carrier."
+    }
+  ],
+  "frontier": [
+    {
+      "id": "claim_exact_law",
+      "status": "UNDER_TEST",
+      "content": "For arity greater than one, meet collapse fails exactly for incomparable full-cover pairs."
+    },
+    {
+      "id": "claim_minimal_family_bound",
+      "status": "UNDER_TEST",
+      "content": "Distinct minimal cores pairwise cover the carrier, so their multiplicity is at most the carrier size."
+    },
+    {
+      "id": "open_realizability",
+      "status": "UNKNOWN",
+      "content": "Determine which pairwise-cover families are realizable at fixed arity."
+    }
+  ],
+  "non_claims": [
+    "The generic theorem is a paper derivation, not promoted from the finite campaign.",
+    "The Lean source is present without placeholders but has not passed a compiler replay in this tranche.",
+    "Publication novelty is unresolved."
+  ]
+}

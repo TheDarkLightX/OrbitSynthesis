@@ -1,0 +1,4 @@
+{"candidate_id": "raw_groupoid_reference", "notes": "Exact independent reference; exhaustive bounded agreement.", "status": "TESTED_ONLY"}
+{"candidate_id": "pointed_rebuild_each_domain", "notes": "Exact minimum abstraction, but rejected as a performance generation because it recompiles classes for every domain.", "status": "TESTED_ONLY"}
+{"candidate_id": "compiled_pointed_core_seed", "notes": "Minimum abstraction; exhaustive bounded agreement; Lean pending.", "status": "TESTED_ONLY"}
+{"candidate_id": "naive_local", "notes": "Accepts the minimized no-greatest union incorrectly.", "status": "FAILED"}

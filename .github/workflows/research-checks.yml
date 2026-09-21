@@ -6,7 +6,7 @@ on:
 jobs:
   python-oracles:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,6 +38,96 @@ jobs:
         run: python experiments/aba_positive_mu_calculus.py
       - name: Dyadic ABA constructive witnesses
         run: python experiments/dyadic_aba_witness.py
+      - name: Quasi-primal pointed-orbit factorization
+        run: python experiments/quasiprimal_pointed_orbit_factorization.py
+      - name: Quasi-primal parameter-closure abstraction
+        run: python experiments/quasiprimal_parameter_closure.py
+      - name: Parameter-core and winning-domain frontier
+        run: >-
+          python experiments/quasiprimal_parameter_domain_frontier.py
+          --out-root /tmp/zag_parameter_domain_frontier
+          --repeats 3
+      - name: Research Kernel replay packet
+        run: >-
+          python experiments/research_kernel_parameter_domain_frontier.py
+          --repo-root .
+          --out-root /tmp/research_kernel_parameter_domain_frontier
+      - name: Optimized semantic replay
+        run: |
+          python experiments/quasiprimal_parameter_domain_frontier.py --repeats 0 > /tmp/frontier.normal.json
+          python -O experiments/quasiprimal_parameter_domain_frontier.py --repeats 0 > /tmp/frontier.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/frontier.normal.json'))
+          optimized = json.load(open('/tmp/frontier.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Pointed domain-nogood ZAG campaign
+        run: >-
+          python experiments/quasiprimal_nogood_domain_search.py
+          --out-root runs/zag_nogood_domain_search
+          --repeats 3
+          --random-games 8
+      - name: Pointed domain-nogood Research Kernel replay
+        run: >-
+          python experiments/research_kernel_nogood_domain_search.py
+          --repo-root .
+          --out-root /tmp/research_kernel_nogood_domain_search
+      - name: Pointed domain-nogood optimized replay
+        run: |
+          python experiments/quasiprimal_nogood_domain_search.py --repeats 0 --random-games 8 > /tmp/nogood.normal.json
+          python -O experiments/quasiprimal_nogood_domain_search.py --repeats 0 --random-games 8 > /tmp/nogood.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/nogood.normal.json'))
+          optimized = json.load(open('/tmp/nogood.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Fixed-domain minimum-core antichain campaign
+        run: >-
+          python experiments/quasiprimal_fixed_domain_core_antichain.py
+          --out-root runs/zag_fixed_domain_core_antichain
+      - name: Fixed-domain antichain Research Kernel replay
+        run: >-
+          python experiments/research_kernel_fixed_domain_core_antichain.py
+          --repo-root .
+          --out-root /tmp/research_kernel_fixed_domain_core_antichain
+      - name: Fixed-domain antichain optimized replay
+        run: |
+          python experiments/quasiprimal_fixed_domain_core_antichain.py > /tmp/core-antichain.normal.json
+          python -O experiments/quasiprimal_fixed_domain_core_antichain.py > /tmp/core-antichain.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/core-antichain.normal.json'))
+          optimized = json.load(open('/tmp/core-antichain.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Discriminator minimal-core antichain classification
+        run: >-
+          python experiments/discriminator_minimal_core_antichains.py
+          --out-root runs/zag_discriminator_minimal_core_antichains
+      - name: Discriminator antichain Research Kernel replay
+        run: >-
+          python experiments/research_kernel_discriminator_minimal_core_antichains.py
+          --repo-root .
+          --out-root /tmp/research_kernel_discriminator_minimal_core_antichains
+      - name: Discriminator antichain optimized replay
+        run: |
+          python experiments/discriminator_minimal_core_antichains.py > /tmp/discriminator-antichain.normal.json
+          python -O experiments/discriminator_minimal_core_antichains.py > /tmp/discriminator-antichain.optimized.json
+          python - <<'PY'
+          import json
+          normal = json.load(open('/tmp/discriminator-antichain.normal.json'))
+          optimized = json.load(open('/tmp/discriminator-antichain.optimized.json'))
+          assert normal['semantic_sha256'] == optimized['semantic_sha256']
+          PY
+      - name: Patchability residual automaton
+        run: |
+          python experiments/patchability_residual_automaton.py > /tmp/patchability-residual.normal.txt
+          python -O experiments/patchability_residual_automaton.py > /tmp/patchability-residual.optimized.txt
+          diff -u /tmp/patchability-residual.normal.txt /tmp/patchability-residual.optimized.txt
+      - name: Python compile gate
+        run: python -m compileall -q src/orbitsynthesis experiments
 
   lean:
     runs-on: ubuntu-latest

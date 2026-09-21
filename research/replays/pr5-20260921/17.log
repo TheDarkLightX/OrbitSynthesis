@@ -1,0 +1,10 @@
+PASS quasi-primal pointed-orbit factorization
+Quackenbush Q arity-2 raw entries / pointed classes: 9 7
+Quackenbush Q arity-2 term operations: 972
+restricted evaluation subpowers exhausted: 512
+sparse singleton interpolation instances exhausted: 262144
+list interpolation instances checked: 27205
+Morph false merges / false splits: 0 / 0
+pure discriminator arity-3 pointed classes / term operations: 5 24
+stabilizer-redundancy element checks: 282
+existing no-greatest-region obstruction: empty one-orbit seed intersection

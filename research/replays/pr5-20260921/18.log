@@ -1,0 +1,12 @@
+PASS quasi-primal parameter-closure abstraction
+Quackenbush binary operation counts by closed core: {(): 972, (0, 1): 3888, (0, 1, 2): 19683}
+Quackenbush semantic strata: {'original': 972, 'binary_only': 2916, 'full_only': 15795}
+Quackenbush minimum parameter budget distribution: {0: 972, 1: 18711}
+pure discriminator counts by core size: {0: 2, 1: 24, 2: 3888, 3: 19683}
+pure discriminator minimum parameter budget distribution: {0: 2, 1: 66, 2: 9932, 3: 9683}
+pure discriminator minimum-set multiplicities: {1: 18151, 2: 1488, 3: 44}
+no-least-core witness minimum cores: ((0, 1), (0, 2))
+Morph false merges / false splits: 0 / 0 on both calibrations
+patchability closure/obstruction-descent mismatches: 0 on both calibrations
+Quackenbush maximal closed obstruction cores: ((),)
+pure discriminator maximal closed obstruction cores: ()

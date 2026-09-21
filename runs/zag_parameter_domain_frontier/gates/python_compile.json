@@ -1,0 +1,15 @@
+{
+  "commands": [
+    "python -m compileall -q src/orbitsynthesis experiments"
+  ],
+  "files": [
+    "src/orbitsynthesis/parameter_closure.py",
+    "src/orbitsynthesis/pointed_kernel.py",
+    "src/orbitsynthesis/parameter_frontier.py",
+    "src/orbitsynthesis/parameter_core.py",
+    "experiments/quasiprimal_parameter_domain_frontier.py",
+    "experiments/research_kernel_parameter_domain_frontier.py"
+  ],
+  "schema": "zag/python-compile/v1",
+  "status": "PASS"
+}

@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    "raw_groupoid_reference",
+    "pointed_rebuild_each_domain",
+    "compiled_pointed_core_seed",
+    "naive_local"
+  ],
+  "commands": [
+    "python experiments/quasiprimal_parameter_domain_frontier.py --out-root runs/zag_parameter_domain_frontier --repeats 30",
+    "python -O experiments/quasiprimal_parameter_domain_frontier.py"
+  ],
+  "correctness_labels": {
+    "compiled_pointed_core_seed": "TESTED_ONLY",
+    "naive_local": "FAILED",
+    "pointed_rebuild_each_domain": "TESTED_ONLY",
+    "raw_groupoid_reference": "TESTED_ONLY"
+  },
+  "proof_requirement": "No candidate labeled PROVED without a Lean theorem.",
+  "run_id": "zag_parameter_domain_frontier",
+  "schema": "zag/run-manifest/v1",
+  "seed": 1
+}

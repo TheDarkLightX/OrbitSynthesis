@@ -1,0 +1,4 @@
+.lake/
+__pycache__/
+*.py[cod]
+.codex_peer_review/

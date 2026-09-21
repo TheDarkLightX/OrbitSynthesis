@@ -1,0 +1,157 @@
+{
+  "api_conformance_instances": 270,
+  "artifacts": {
+    "experiments/quasiprimal_nogood_domain_search.py": "sha256:a983030ff90f12e2250769c23be824da770f8c48742bf0578839ae89d2c4db0b",
+    "experiments/research_kernel_nogood_domain_search.py": "sha256:1e6af46b713b7350d3bc7f5c9c8fda4e74926ad6eb09f51569d2450d9598fb05",
+    "formal/OrbitSynthesis/DomainNogood.lean": "sha256:2b0526d6c33c380bf7cd911101814ce504a8cfa2bf80ae2138b0c18c1b14f121",
+    "formal/OrbitSynthesis/PointedProduct.lean": "sha256:bee32fec4775b7c92f8e22dcfc8ee106b1d18671efee73469a54266ae3b1295b",
+    "notes/POINTED_NOGOOD_DOMAIN_SEARCH.md": "sha256:66c00ab5db29dec7abff657360e14534a3e5bffc182ebf210dfca3f0db3b4354",
+    "research/MORPH_POINTED_NOGOOD_CERTIFICATE.md": "sha256:b89ed7f1b952359f3450482c45b8b3c07e118823b39e393428015b64cea3cae8",
+    "research/NOGOOD_DOMAIN_SEARCH_UPDATE_2026_08_13.md": "sha256:8c4b79462d7ce322e88f577b646015fb3435a3ff868876bbc937606460ec0ef3",
+    "runs/research_kernel_nogood_domain_search/report.json": "sha256:67f859646cf2b9c44471e97b22d1c596ea5220787e02412716c248e6980a2995",
+    "runs/research_kernel_nogood_domain_search/research_kernel.sqlite3.gz": "sha256:75595ffc01be221b9f542016fe2994372ad5e1bdc459bf18d41a68af4b5229c2",
+    "runs/zag_nogood_domain_search/run_manifest.json": "sha256:4a5ef21098e65d6c2973ab755698e2f0878b9d546d93050e466feed428d37f47",
+    "runs/zag_nogood_domain_search/summary.json": "sha256:0c20931a1c0336e9fdb1ebdca4d20d07fd1902158db533c993346d2ddf4f0922",
+    "src/orbitsynthesis/domain_api.py": "sha256:1fe08ebd79c6d6dd0710aad76db871878edf8eff704766aaea3376867b50b268",
+    "src/orbitsynthesis/domain_search.py": "sha256:492b62614e76545023a881622e2df46f03fb0b9b527809eeea002da809c02da5",
+    "src/orbitsynthesis/domain_search_bitset.py": "sha256:8ec705d6589f6752b55e9ad129fa4b0242bede7f8b66d79811b5fd8c250a2664",
+    "src/orbitsynthesis/domain_search_object.py": "sha256:e3b7fed9a6ec9280693c92a34f47ec68dc08db78d70762dffc5a144ae43b8be5",
+    "src/orbitsynthesis/domain_search_rules.py": "sha256:f178a7441a89fb6fc09e666a3086068385c5da1fe762f6af07574db5b79b8dac",
+    "src/orbitsynthesis/domain_search_types.py": "sha256:80151f2419452c22fc5f80b5a47987015e8667509166e167de7df69898c0b32c"
+  },
+  "closure_api_instances": 6,
+  "exact_domain_instances": 1536,
+  "frontier_api_instances": 7,
+  "lean_source_gate": {
+    "compiler_status": "PENDING_PINNED_LEAN_BUILD",
+    "files": {
+      "formal/OrbitSynthesis/DomainNogood.lean": "2b0526d6c33c380bf7cd911101814ce504a8cfa2bf80ae2138b0c18c1b14f121",
+      "formal/OrbitSynthesis/PointedProduct.lean": "bee32fec4775b7c92f8e22dcfc8ee106b1d18671efee73469a54266ae3b1295b"
+    },
+    "forbidden_tokens": {},
+    "status": "PASS_SOURCE_ONLY",
+    "theorem_counts": {
+      "formal/OrbitSynthesis/DomainNogood.lean": 5,
+      "formal/OrbitSynthesis/PointedProduct.lean": 3
+    }
+  },
+  "learned_nogood_count": 8,
+  "learned_nogood_covered_domains": 1088,
+  "lifted_nonexhaustive_receipt": [
+    {
+      "core": [],
+      "learned_nogoods": 3,
+      "maximal_domain_size": 24,
+      "search_stats": {
+        "class_conflicts": 0,
+        "complete_leaves": 1,
+        "dominance_prunes": 24,
+        "feasible_leaves": 1,
+        "learned_nogood_hits": 0,
+        "learned_nogoods": 3,
+        "max_depth": 24,
+        "nodes": 49,
+        "propagated_excludes": 3,
+        "propagated_includes": 0
+      },
+      "state_count": 27,
+      "theoretical_domain_count": 134217728
+    },
+    {
+      "core": [
+        0,
+        1
+      ],
+      "learned_nogoods": 3,
+      "maximal_domain_size": 24,
+      "search_stats": {
+        "class_conflicts": 0,
+        "complete_leaves": 1,
+        "dominance_prunes": 24,
+        "feasible_leaves": 1,
+        "learned_nogood_hits": 0,
+        "learned_nogoods": 3,
+        "max_depth": 24,
+        "nodes": 49,
+        "propagated_excludes": 3,
+        "propagated_includes": 0
+      },
+      "state_count": 27,
+      "theoretical_domain_count": 134217728
+    },
+    {
+      "core": [
+        0,
+        1,
+        2
+      ],
+      "learned_nogoods": 3,
+      "maximal_domain_size": 24,
+      "search_stats": {
+        "class_conflicts": 0,
+        "complete_leaves": 1,
+        "dominance_prunes": 24,
+        "feasible_leaves": 1,
+        "learned_nogood_hits": 0,
+        "learned_nogoods": 3,
+        "max_depth": 24,
+        "nodes": 49,
+        "propagated_excludes": 3,
+        "propagated_includes": 0
+      },
+      "state_count": 27,
+      "theoretical_domain_count": 134217728
+    }
+  ],
+  "mismatch_counts": {
+    "api_conformance_mismatches": 0,
+    "bitset_maximal_mismatches": 0,
+    "closure_api_mismatches": 0,
+    "exact_minimality_mismatches": 0,
+    "frontier_api_mismatches": 0,
+    "learned_nogood_unsound": 0,
+    "object_maximal_mismatches": 0,
+    "random_feasibility_mismatches": 0,
+    "random_maximal_mismatches": 0
+  },
+  "nonclaims": [
+    "The 27-state state-domain lattice was not exhaustively enumerated.",
+    "Lean source passed a no-sorry/admit/axiom source gate but was not compiled in this runtime.",
+    "All implementation candidates remain TESTED_ONLY until the corresponding refinement theorem is compiled.",
+    "Performance numbers are environment-specific samples, not asymptotic guarantees.",
+    "The Research Kernel packet was produced by the offline contract adapter because direct MCP transport was unavailable."
+  ],
+  "random_domain_instances": 24576,
+  "replay_commands": [
+    "python -m compileall -q src/orbitsynthesis experiments",
+    "python experiments/quasiprimal_parameter_domain_frontier.py --repeats 0",
+    "python experiments/quasiprimal_nogood_domain_search.py --out-root runs/zag_nogood_domain_search --repeats 30 --random-games 16",
+    "python -O experiments/quasiprimal_nogood_domain_search.py --repeats 0 --random-games 16",
+    "python experiments/research_kernel_nogood_domain_search.py --repo-root . --out-root runs/research_kernel_nogood_domain_search"
+  ],
+  "research_kernel": {
+    "packet_database": {
+      "compressed_size": 9023,
+      "encoding": "gzip",
+      "path": "research_kernel.sqlite3.gz",
+      "sha256": "sha256:75595ffc01be221b9f542016fe2994372ad5e1bdc459bf18d41a68af4b5229c2",
+      "uncompressed_name": "research_kernel.sqlite3"
+    },
+    "refuted": [
+      "hyp_smaller_faster"
+    ],
+    "supported": [
+      "claim_equivalence",
+      "claim_nogoods",
+      "claim_scale",
+      "claim_api"
+    ],
+    "under_test": [
+      "claim_generic_reduction",
+      "claim_generic_search",
+      "risk_lean"
+    ]
+  },
+  "schema": "orbit-synthesis/pointed-nogood-validation-receipt/v2",
+  "semantic_sha256": "5ce7108b4d67003e80d374bd8a2f758dff3751fb9fe682afff69751d1203d32f"
+}

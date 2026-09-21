@@ -1,0 +1,4 @@
+alternating ABA clause-QE exhaustive checks passed
+  all E/A quantifier patterns for k=1,2,3
+  80 randomized clauses per prefix
+  0..3 disequation obligations

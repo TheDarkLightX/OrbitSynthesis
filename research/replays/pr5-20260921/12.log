@@ -1,0 +1,4 @@
+ABA Bekić/orbit safety decomposition checks passed
+  whole-clause fixed point == zero+orbit solver
+  randomized d/e suites up through d=3
+  deterministic nontrivial obligation 2-cycle pinned

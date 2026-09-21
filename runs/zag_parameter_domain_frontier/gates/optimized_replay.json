@@ -1,0 +1,7 @@
+{
+  "normal_semantic_sha256": "97f0a4d729bdd551e9efb7511ff5b5a5e08cd05f31dc364f706e0596051a6370",
+  "optimized_semantic_sha256": "97f0a4d729bdd551e9efb7511ff5b5a5e08cd05f31dc364f706e0596051a6370",
+  "schema": "zag/optimized-replay/v1",
+  "semantic_match": true,
+  "status": "PASS"
+}
