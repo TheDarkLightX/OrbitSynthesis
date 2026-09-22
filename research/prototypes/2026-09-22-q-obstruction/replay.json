@@ -1,0 +1,91 @@
+{
+  "SAT_reduction": {
+    "all_safety_relations_complement_checked": true,
+    "formulas": 917,
+    "parameter_equals_variable_count_checked": true,
+    "satisfiable": 459,
+    "separator_flattened_rows": 40149,
+    "unsatisfiable": 458
+  },
+  "exhaustive_kernel": {
+    "games": 2048,
+    "optimization_requests": 4096,
+    "possible_domains_per_game": 8
+  },
+  "mutations_rejected": [
+    "game pin",
+    "objective binding",
+    "required binding",
+    "forbidden binding",
+    "status",
+    "score",
+    "domain",
+    "strategy bounds",
+    "inactive symmetry",
+    "node count",
+    "false local envelope",
+    "omitted branch",
+    "false obstruction",
+    "missing deletions",
+    "unknown field"
+  ],
+  "negative_knowledge": {
+    "nonhereditary_domain": [
+      [
+        0,
+        1
+      ],
+      [
+        0
+      ]
+    ],
+    "scope_of_conflicts": "valid only inside the recorded viability envelope"
+  },
+  "negative_weight_guard": true,
+  "random_differential": {
+    "games_by_arity": {
+      "1": 160,
+      "2": 300,
+      "3": 200
+    },
+    "includes_nonsymmetric_relations": true,
+    "optimization_requests": 1320
+  },
+  "scaled_case": {
+    "clauses": 64,
+    "environment_values": 3,
+    "exhaustive_domain_search_run": false,
+    "game_sha256": "d56b59a6d66e6a0baf5b21b829826b93d80ffe974b0771560d7e98dec7f6a58f",
+    "literal_variables": 6,
+    "not_a_3_CNF_instance": true,
+    "proof_sha256": "89695892eda026b1e1e97c822d53a53cbe39f59ceea92d923a3ba914d46e4d9e",
+    "safe_edges": 7202,
+    "state_arity": 7,
+    "states": 2187,
+    "stats": {
+      "feasible_leaves": 0,
+      "initial_pairs": 6,
+      "max_depth": 6,
+      "nodes": 127,
+      "required_rejections": 64,
+      "root_envelope_size": 2072,
+      "splits": 63
+    },
+    "verdict": "infeasible"
+  },
+  "schema": "orbit-synthesis/q-frontier-replay/v1",
+  "scope": {
+    "Tau_dependency": false,
+    "formal_prover": "not available; not run",
+    "full_repository_tests": "not run; additive isolated prototype",
+    "novelty": "unverified outside targeted search",
+    "original_signature_DAG_emitted": false
+  },
+  "seed": 20260922,
+  "total_table_oracle": {
+    "complete_Q_compatible_tables": 972,
+    "domain_checks": 512,
+    "games": 64
+  },
+  "transcript_sha256": "81ef790fc49bc44f4230778e79167002dd99080c93fd272b5425d52cf8d7f162"
+}

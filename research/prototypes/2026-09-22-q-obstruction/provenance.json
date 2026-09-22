@@ -1,0 +1,57 @@
+{
+  "base_commit": "0ab3648a724370786ac9ea573bf81ac7ef7db7fb",
+  "commands_executed": [
+    "python -B campaign.py",
+    "python -B -O campaign.py",
+    "cmp campaign.stdout campaign.optimized.stdout"
+  ],
+  "date": "2026-09-22",
+  "files": {
+    "QUACKENBUSH_INITIAL_SAFETY_COMPLEXITY.md": {
+      "bytes": 19775,
+      "git_blob_sha1": "d547ccc7e3a68eee2a964998a1a41b7aa862b6ab",
+      "sha256": "995efaf911e78098e48c9613bc7da497ff70bf661de50dda791bfb8dea69e237"
+    },
+    "README.md": {
+      "bytes": 5256,
+      "git_blob_sha1": "fd8003f1feb5e9064c01393b175668a4def9c419",
+      "sha256": "c287602529263ed2c52239cfe33f211fdfc043bcd0d0edbe53be82c7791e072b"
+    },
+    "campaign.py": {
+      "bytes": 11121,
+      "git_blob_sha1": "2b07c4228ce6954745a5c1c786710f6d3c8b1497",
+      "sha256": "f980746ec51f01ec7920db576bb3f0b05f3446dd0e9c560474396b36abcbc3be"
+    },
+    "example_certificate.json": {
+      "bytes": 5608,
+      "git_blob_sha1": "647f937df7691df7c744619f312614cabffcce2f",
+      "sha256": "38af3c92b47b0bd6d24d9527be777ac988e5924f60b52ec8de79ef76747d319f"
+    },
+    "independent_check.py": {
+      "bytes": 9950,
+      "git_blob_sha1": "21da7e47dca525600545225d7ab44f8d3abd5281",
+      "sha256": "d17b0f6c7a1db975cc7e6de8ecfa5aabeaf336bde9eda36efcea36f9c614a88b"
+    },
+    "q_obstruction.py": {
+      "bytes": 10418,
+      "git_blob_sha1": "15ac2b36da1287c99e81bc5885da33edcc631a8b",
+      "sha256": "f6821a67dae13032be183babc6a2307baa589a8da5d2e6b4f108395ca53cb39a"
+    },
+    "replay.json": {
+      "bytes": 2330,
+      "git_blob_sha1": "cb06268b60cde29884cb6107e4d32fc3ba2ce019",
+      "sha256": "957a4eb79f0d066eeb161e4681f5fb7097e3ec51d7bc7f085c717683dc4a688e"
+    }
+  },
+  "limitations": [
+    "No full repository test run",
+    "No Lean compilation",
+    "No original-signature DAG emission",
+    "No external peer review or established publication novelty",
+    "No performance comparison with existing backends"
+  ],
+  "normal_optimized_byte_equal": true,
+  "python": "3.13.5",
+  "schema": "orbit-synthesis/q-frontier-provenance/v1",
+  "source_independence": "Original implementation from mathematical specification; no Tau source or dependency."
+}
