@@ -1,0 +1,132 @@
+{
+  "base_commit": "0ab3648a724370786ac9ea573bf81ac7ef7db7fb",
+  "cli_roundtrip": true,
+  "date": "2026-09-22",
+  "normal_optimized_equal": true,
+  "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+  "sha256": {
+    ".github/workflows/affine-trellis.yml": "15a69ad7ae7b0ec4606891c81b4f79524a5435a4dc8157c8cebbc9ec313a0390",
+    "experiments/affine_trellis_replay.py": "9c3842721131c5cd4e4aecfa329358071b23bb5e9ee1f5d6250270d03ae1716c",
+    "notes/AFFINE_TRELLIS_CERTIFICATES.md": "ffb68dbd471a979319439a0e515520c2a547b810f2a8c1b91ec3df00d57a5e30",
+    "src/orbitsynthesis/affine_row_lists.py": "bddad1d102234573e37d9ab0c7bc087a0cb9c1fbefd5efbd7fd20a1f5c97701f",
+    "src/orbitsynthesis/affine_trellis.py": "13557248748265898354f2d22bcb6ac131d5c6a9b0167994970ac1e79694ebd8",
+    "src/orbitsynthesis/affine_trellis_check.py": "da606268be63c83c3574d4f99214792900b050660161d9f710fe7607f5a0abec",
+    "tools/affine_trellis.py": "109704c53b9bab6324ec26a70921d65137a236f44fef1d19a3c829546023b7ab"
+  },
+  "status": "executed locally; GitHub CI and Lean not claimed",
+  "suites": {
+    "adversarial": {
+      "rejected_mutations_and_limits": 147
+    },
+    "cycles": {
+      "cycles": [
+        {
+          "affine_dimension": 6,
+          "certificate_cells": 9,
+          "exception_dimension": 4,
+          "max_cut_rank": 2,
+          "peak_live_states": 4,
+          "prior_image_points": "16",
+          "solution_count": 24,
+          "status": "sat",
+          "transition_checks": 24,
+          "verified": true,
+          "vertices": 3
+        },
+        {
+          "affine_dimension": 8,
+          "certificate_cells": 13,
+          "exception_dimension": 6,
+          "max_cut_rank": 2,
+          "peak_live_states": 4,
+          "prior_image_points": "64",
+          "solution_count": 84,
+          "status": "sat",
+          "transition_checks": 36,
+          "verified": true,
+          "vertices": 4
+        },
+        {
+          "affine_dimension": 16,
+          "certificate_cells": 29,
+          "exception_dimension": 14,
+          "max_cut_rank": 2,
+          "peak_live_states": 4,
+          "prior_image_points": "16384",
+          "solution_count": 6564,
+          "status": "sat",
+          "transition_checks": 84,
+          "verified": true,
+          "vertices": 8
+        },
+        {
+          "affine_dimension": 64,
+          "certificate_cells": 125,
+          "exception_dimension": 62,
+          "max_cut_rank": 2,
+          "peak_live_states": 4,
+          "prior_image_points": "4611686018427387904",
+          "solution_count": 1853020188851844,
+          "status": "sat",
+          "transition_checks": 372,
+          "verified": true,
+          "vertices": 32
+        },
+        {
+          "affine_dimension": 256,
+          "certificate_cells": 509,
+          "exception_dimension": 254,
+          "max_cut_rank": 2,
+          "peak_live_states": 4,
+          "prior_image_points": "28948022309329048855892746252171976963317496166410141009864396001978282409984",
+          "solution_count": 11790184577738583171520872861412518665678211592275841109096964,
+          "status": "sat",
+          "transition_checks": 1524,
+          "verified": true,
+          "vertices": 128
+        },
+        {
+          "affine_dimension": 512,
+          "certificate_cells": 1021,
+          "exception_dimension": 510,
+          "max_cut_rank": 2,
+          "peak_live_states": 4,
+          "prior_image_points": "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024",
+          "solution_count": 139008452377144732764939786789661303114218850808529137991604824430036072629766435941001769154109609521811665540548899435524,
+          "status": "sat",
+          "transition_checks": 3060,
+          "verified": true,
+          "vertices": 256
+        }
+      ],
+      "k4_fixed_domain_safety": {
+        "affine_dimension": 12,
+        "certificate_cells": 36,
+        "exception_dimension": 6,
+        "max_cut_rank": 4,
+        "peak_live_states": 12,
+        "solution_count": 384,
+        "status": "sat",
+        "transition_checks": 105,
+        "verified": true
+      }
+    },
+    "graphs": {
+      "certificates": 2198,
+      "graphs": 1099,
+      "semantic_sha256": "24be1832ecb96064bd0ac56a4ed2b0ef5a107b8bf9418b28fd9e86628aa96494"
+    },
+    "random": {
+      "cut_profile_calibrations_attempted": 200,
+      "instances": 1200,
+      "semantic_sha256": "31e7629699fafbcfa4f02c16debd63f20c2aa8b18d1f265b860c2caf4a6b12fa"
+    },
+    "tables": {
+      "certified_trellises": 27891,
+      "instances": 65536,
+      "sat": 24408,
+      "semantic_sha256": "ec3f0c2cbc7aa43524c275c27f7bfdaba0e92e5bab47946c90cd412fa3577eb6",
+      "unsat": 41128
+    }
+  }
+}
