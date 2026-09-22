@@ -1,0 +1,33 @@
+name: Affine trellis certificates
+on:
+  pull_request:
+    paths:
+      - 'src/orbitsynthesis/affine*.py'
+      - 'experiments/affine_trellis_replay.py'
+      - 'tools/affine_trellis.py'
+      - 'notes/AFFINE_TRELLIS_CERTIFICATES.md'
+      - '.github/workflows/affine-trellis.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Exhaustive, independent, adversarial and optimized checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          for suite in tables graphs random adversarial cycles; do
+            python -B experiments/affine_trellis_replay.py --suite "$suite" > "/tmp/$suite.json"
+            python -B -O experiments/affine_trellis_replay.py --suite "$suite" > "/tmp/$suite-opt.json"
+            cmp "/tmp/$suite.json" "/tmp/$suite-opt.json"
+          done
+          python -B tools/affine_trellis.py demo --vertices 256 --directory /tmp/affine-demo > /tmp/demo.json
+          python -B tools/affine_trellis.py verify --problem /tmp/affine-demo/problem.json --certificate /tmp/affine-demo/certificate.json > /tmp/verified.json
+          cmp /tmp/demo.json /tmp/verified.json
